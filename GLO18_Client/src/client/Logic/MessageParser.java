@@ -11,6 +11,7 @@ package client.Logic;
  */
 public class MessageParser {
     public void fromProtocol(String message) {
+        LogicFacade logic = new LogicFacade();
         String code = message.substring(0, 1); //Seperate the OPcode
         String[] Data = message.split(";");
         switch (code) {
@@ -18,7 +19,10 @@ public class MessageParser {
             case "01":
             case "02": 
             case "03":
+                logic.startConnection();
                 //String s = Encrypter.encrypt("02;"+Data[0]);
+                //logic.sendMessage(s);
+                //s = Encrypter.decrypt(logic.receiveMessage());
                 //return s;
             case "04":
             case "05":

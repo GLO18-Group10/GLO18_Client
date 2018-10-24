@@ -23,18 +23,18 @@ public class ServerConnection {
     private Socket socket;
     private Scanner scanner;
 
-    private ServerConnection(String serverAddress, int serverPort) throws Exception {
+    public ServerConnection(String serverAddress, int serverPort) throws Exception {
         this.socket = new Socket(serverAddress, serverPort);
         this.scanner = new Scanner(System.in);
     }
 
-    private void sendMessage(String message) throws IOException {
+    public void sendMessage(String message) throws IOException {
         PrintWriter out = new PrintWriter(this.socket.getOutputStream(), true);
         out.println(message);
         out.flush();
     }
     
-    private String receiveMessage() throws IOException{
+    public String receiveMessage() throws IOException{
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(this.socket.getInputStream()));
         return in.readLine();
