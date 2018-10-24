@@ -13,9 +13,26 @@ import client.Acquaintance.iLogic;
  * @author Jeppe Enevold
  */
 public class LogicFacade implements iLogic {
+
     private static iLink Link;
-    
-    public void injectLink(iLink LinkLayer){
+
+    public void injectLink(iLink LinkLayer) {
         Link = LinkLayer;
+    }
+
+    @Override
+    public void startConnection() {
+        Link.startConnection();
+    }
+
+    @Override
+    public void sendMessage(String message) {
+        Link.sendMessage(message);
+    }
+
+    @Override
+    public String receiveMessage() {
+        return Link.receiveMessage();
+
     }
 }
