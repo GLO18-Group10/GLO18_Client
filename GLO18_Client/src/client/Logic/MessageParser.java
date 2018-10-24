@@ -17,6 +17,7 @@ public class MessageParser {
         fromProtocol01(logic.receiveMessage());
     }
     private void fromProtocol01(String message){
+        //Split the received data into the different parts
         String[] data = message.split(";");
         
     }

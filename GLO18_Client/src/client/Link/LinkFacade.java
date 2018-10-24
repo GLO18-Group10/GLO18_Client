@@ -42,7 +42,7 @@ public class LinkFacade implements iLink {
         return serverConnection.receiveMessage();
         }
         catch(Exception e){
-            
+        return "error";  
         }
    }
     
