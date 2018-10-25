@@ -45,4 +45,9 @@ public class GUIrun extends Application implements iGUI {
         guiRun = this;
         launch(args);
     }
+    
+    public String login(String ID, String password){
+        
+        return Logic.login(ID, password);
+    }
 }

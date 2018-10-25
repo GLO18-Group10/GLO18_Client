@@ -14,4 +14,5 @@ public interface iLogic {
     void startConnection();
     void sendMessage(String message);
     String receiveMessage();
+    String login(String ID, String password);
 }

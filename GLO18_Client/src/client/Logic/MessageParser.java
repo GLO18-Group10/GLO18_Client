@@ -12,6 +12,19 @@ package client.Logic;
 public class MessageParser {
     LogicFacade logic = new LogicFacade();
     
+    public String toProtocol00(String ID, String password){
+        String message = "00" + ";" + ID + ";" + password;
+        logic.sendMessage(message);
+        return fromProtocol00(logic.receiveMessage());
+    
+    }
+    private String fromProtocol00(String message){
+     String data = message;
+     return data;
+    }
+    
+    
+    
     public void toProtocol01(){
         logic.sendMessage("01");
         fromProtocol01(logic.receiveMessage());
