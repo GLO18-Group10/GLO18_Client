@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="Anchorpane" prefHeight="562.0" prefWidth="981.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.LoginController">
+   <children>
+      <AnchorPane fx:id="anchorpane1" prefHeight="562.0" prefWidth="445.0" style="-fx-background-color: #3f2B63;">
+         <children>
+            <ImageView fitHeight="199.0" fitWidth="199.0" layoutX="109.0" layoutY="136.0">
+               <image>
+                  <Image url="@../../../../../../Desktop/Elena.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <PasswordField fx:id="passwordField" layoutX="613.0" layoutY="250.0" prefHeight="31.0" prefWidth="161.0" promptText="Password" />
+      <TextField fx:id="UsernameField" floatText="Username " layoutX="622.0" layoutY="199.0" />
+      <Button fx:id="LoginButton" layoutX="720.0" layoutY="341.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-color: #3f2B63;" text="Login" />
+      <Button fx:id="ExitButton" layoutX="521.0" layoutY="341.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-color: #3f2B63;" text="Exit" />
+   </children>
+</AnchorPane>

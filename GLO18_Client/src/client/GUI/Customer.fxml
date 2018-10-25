@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.MainController">
+   <children>
+      <VBox layoutX="-2.0" prefHeight="608.0" prefWidth="165.0" style="-fx-background-color: #3f2B63;">
+         <children>
+            <VBox fx:id="Vbox" />
+            <AnchorPane fx:id="Anchorpane1" />
+            <Pane fx:id="Pane" prefHeight="321.0" prefWidth="172.0">
+               <children>
+                  <ImageView fitHeight="178.0" fitWidth="169.0" layoutX="-6.0" layoutY="1.0">
+                     <image>
+                        <Image url="@../../../../../../Desktop/Elena.png" />
+                     </image>
+                  </ImageView>
+                  <TextArea layoutX="-4.0" layoutY="178.0" prefHeight="149.0" prefWidth="169.0" style="-fx-background-color: #3f2B63;" text="A golden bank with&#10;opportunity, safety &#10;and Elena">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </Pane>
+            <Button fx:id="AccountsButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="183.0" style="-fx-background-color: #3f2B63;" text="Accounts" textFill="WHITE" />
+            <Button fx:id="TransferButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Transferring" textFill="WHITE" />
+            <Button fx:id="OptionsButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Options" textFill="WHITE" />
+            <Button fx:id="LogoutButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Logout" textFill="WHITE" />
+         </children>
+      </VBox>
+      <GridPane fx:id="GridPane" layoutX="163.0" prefHeight="608.0" prefWidth="717.0" AnchorPane.leftAnchor="163.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>
