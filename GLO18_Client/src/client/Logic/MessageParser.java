@@ -17,6 +17,11 @@ public class MessageParser {
         fromProtocol01(logic.receiveMessage());
     }
     
+    public String toProtocol07(String ID, String password){
+        logic.sendMessage("07;" + ID + ";" + password);
+        return 
+    }
+    
     private void fromProtocol01(String message){
         //Split the received data into the different parts
         String[] data = message.split(";");
