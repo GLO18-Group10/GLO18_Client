@@ -5,6 +5,7 @@
  */
 package client.GUI;
 
+import client.Logic.LogicFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -20,13 +21,12 @@ public class GUIController implements Initializable {
 
     @FXML
     private Button test;
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        GUIrun.getInstance().toProtocol07("123456", "Kimse", "19-08-95", "23232323", "OdenseBy", "TestMail", "kode");
     }    
     
 }

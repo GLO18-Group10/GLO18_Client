@@ -18,12 +18,12 @@ import javafx.stage.Stage;
  * @author Jeppe Enevold
  */
 public class GUIrun extends Application implements iGUI {
-    private static iLogic Logic;
+    private static iLogic logic;
     private static GUIrun guiRun;
     
     @Override
     public void injectLogic(iLogic LogicLayer){
-        Logic = LogicLayer;
+        logic = LogicLayer;
     }
     
     public static GUIrun getInstance(){
@@ -44,5 +44,9 @@ public class GUIrun extends Application implements iGUI {
     public void startApplication(String[] args) {
         guiRun = this;
         launch(args);
+    }
+    
+    public void toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
+        logic.toProtocol07(ID, name, birthday, phonenumber, address, email, password);
     }
 }
