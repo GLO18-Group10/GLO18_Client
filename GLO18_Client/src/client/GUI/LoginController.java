@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -23,13 +24,17 @@ public class LoginController implements Initializable {
     @FXML 
     private AnchorPane Anchorpane;    
     @FXML 
-    private PasswordField passwordfield;
-    @FXML 
     private Button ExitButton;
     @FXML 
     private Button LoginButton;
     @FXML 
-    private Button UsernameField;
+    private TextField UsernameField;
+    @FXML
+    private AnchorPane anchorpane1;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private TextField alertField;
     
     
     
