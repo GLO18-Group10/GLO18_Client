@@ -18,8 +18,8 @@
             </ImageView>
          </children></AnchorPane>
       <PasswordField fx:id="passwordField" layoutX="613.0" layoutY="250.0" prefHeight="31.0" prefWidth="161.0" promptText="Password" />
-      <Button fx:id="LoginButton" layoutX="720.0" layoutY="341.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-color: #3f2B63;" text="Login" />
-      <Button fx:id="ExitButton" layoutX="521.0" layoutY="341.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-color: #3f2B63;" text="Exit" />
+      <Button fx:id="LoginButton" layoutX="720.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="47.0" prefWidth="182.0" style="-fx-background-color: #3f2B63;" text="Login" textFill="WHITE" />
+      <Button fx:id="ExitButton" layoutX="521.0" layoutY="341.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-color: #3f2B63;" text="Exit" textFill="WHITE" />
       <TextField fx:id="UsernameField" layoutX="618.0" layoutY="199.0" promptText="Username" />
       <TextField fx:id="alertField" layoutX="571.0" layoutY="199.0" prefHeight="81.0" prefWidth="240.0" visible="false" />
    </children>
