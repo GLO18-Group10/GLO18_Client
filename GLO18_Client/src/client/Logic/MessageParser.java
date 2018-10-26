@@ -10,16 +10,23 @@ package client.Logic;
  * @author Peterzxcvbnm
  */
 public class MessageParser {
-    LogicFacade logic = new LogicFacade();
-    
-    public void toProtocol01(){
+
+    LogicFacade logic;
+
+    public MessageParser(LogicFacade logic) {
+        this.logic = logic;
+    }
+/**
+ * Method to send 
+ */
+    public void toProtocol01() {
         logic.sendMessage("01");
         fromProtocol01(logic.receiveMessage());
     }
-    
-    private void fromProtocol01(String message){
+
+    private void fromProtocol01(String message) {
         //Split the received data into the different parts
         String[] data = message.split(";");
-        
+
     }
 }

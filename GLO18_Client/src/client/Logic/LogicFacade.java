@@ -15,6 +15,7 @@ import client.Acquaintance.iLogic;
 public class LogicFacade implements iLogic {
 
     private static iLink Link;
+    private MessageParser messageParser = new MessageParser(this);
 
     public void injectLink(iLink LinkLayer) {
         Link = LinkLayer;
@@ -34,5 +35,10 @@ public class LogicFacade implements iLogic {
     public String receiveMessage() {
         return Link.receiveMessage();
 
+    }
+
+    @Override
+    public void toProtocol01() {
+        messageParser.toProtocol01();
     }
 }
