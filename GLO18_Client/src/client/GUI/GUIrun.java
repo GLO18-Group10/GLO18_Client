@@ -56,27 +56,27 @@ public class GUIrun extends Application implements iGUI {
 
     @Override
     public String getName() {
-        Logic.getName();
+        return Logic.getName();
     }
 
     @Override
     public String getBirthday() {
-        Logic.getBirthday();
+        return Logic.getBirthday();
     }
 
     @Override
     public String getPhoneNo() {
-        Logic.getPhoneNo();
+        return Logic.getPhoneNo();
     }
 
     @Override
     public String getAddress() {
-        Logic.getAddress();
+        return Logic.getAddress();
     }
 
     @Override
     public String getEmail() {
-        Logic.getEmail();
+        return Logic.getEmail();
     }
 
 }

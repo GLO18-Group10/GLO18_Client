@@ -29,12 +29,11 @@ public class MessageParser {
         return data;
     }
 
-    public String[] toProtocol01() {
-        logic.sendMessage("01");
-        return fromProtocol(logic.receiveMessage());
+    public String toProtocol01() {
+        return "01";
     }
 
-    private String[] fromProtocol(String message) {
+    public String[] fromProtocol(String message) {
         //Split the received data into the different parts
         String[] data = message.split(";");
         return data;

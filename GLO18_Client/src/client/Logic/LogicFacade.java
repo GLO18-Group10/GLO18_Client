@@ -15,7 +15,9 @@ import client.Acquaintance.iLogic;
 public class LogicFacade implements iLogic {
 
     private static iLink Link;
-    private MessageParser messageParser = new MessageParser(this);
+
+    private Customer customer;
+    private Admin admin;
 
     public void injectLink(iLink LinkLayer) {
         Link = LinkLayer;
@@ -34,41 +36,47 @@ public class LogicFacade implements iLogic {
     @Override
     public String receiveMessage() {
         return Link.receiveMessage();
-
-    }
-
-    public String[] toProtocol01() {
-        return messageParser.toProtocol01();
     }
 
     public String login(String ID, String password) {
-
-        return messageParser.toProtocol00(ID, password);
-
+        String message = messageParser.toProtocol00(ID, password);
+        if (message.equalsIgnoreCase("true")) {
+            initializeUser(ID);
+        }
+        return message;
     }
 
     @Override
     public String getName() {
-   
+        return customer.getName();
     }
 
     @Override
     public String getBirthday() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return customer.getBirthday();
     }
 
     @Override
     public String getPhoneNo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return customer.getBirthday();
     }
 
     @Override
     public String getAddress() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return customer.getAddress();
     }
 
     @Override
     public String getEmail() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return customer.getEmail();
+    }
+
+    public void initializeUser(String ID) {
+        if (ID.startsWith("A")) {
+            admin = new Admin(ID, this);
+
+        } else if (ID.startsWith("C")) {
+            customer = new Customer(ID, this);
+        }
     }
 }

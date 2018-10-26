@@ -19,8 +19,6 @@ public interface iLogic {
 
     String receiveMessage();
 
-    String[] toProtocol01();
-
     String login(String ID, String password);
 
     String getName();

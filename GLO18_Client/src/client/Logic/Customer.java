@@ -11,6 +11,7 @@ package client.Logic;
  */
 public class Customer extends User {
 
+    private MessageParser messageParser = new MessageParser(logic);
     private String birthday;
     private String name;
     private String address;
@@ -22,7 +23,8 @@ public class Customer extends User {
     public String getBirthday() {
         //If birthday is null, get the birthday from the server
         if (birthday == null) {
-            String data[] = logic.toProtocol01();
+            logic.sendMessage(messageParser.toProtocol01());
+            String data[] = messageParser.fromProtocol(logic.receiveMessage());
             setBirthday(data[1]);
         }
         return birthday;
@@ -35,7 +37,8 @@ public class Customer extends User {
     public String getName() {
         //If name is null, get the name from the server
         if (name == null) {
-            String data[] = logic.toProtocol01();
+            logic.sendMessage(messageParser.toProtocol01());
+            String data[] = messageParser.fromProtocol(logic.receiveMessage());
             setName(data[0]);
         }
         return name;
@@ -48,7 +51,8 @@ public class Customer extends User {
     public String getAddress() {
         //If address is null, get the address from the server
         if (address == null) {
-            String data[] = logic.toProtocol01();
+            logic.sendMessage(messageParser.toProtocol01());
+            String data[] = messageParser.fromProtocol(logic.receiveMessage());
             setAddress(data[3]);
         }
         return address;
