@@ -14,9 +14,9 @@
       <ListView fx:id="Listview" layoutX="67.0" layoutY="201.0" prefHeight="363.0" prefWidth="297.0" />
       <Pane fx:id="PaneBar" layoutY="-6.0" prefHeight="138.0" prefWidth="1161.0" style="-fx-background-color: #3f2B63;">
          <children>
-            <ImageView fitHeight="129.0" fitWidth="140.0" layoutX="1021.0">
+            <ImageView fitHeight="138.0" fitWidth="161.0" layoutX="1000.0">
                <image>
-                  <Image url="@../../../../../../Desktop/Elena.png" />
+                  <Image url="@../../Img/Elena.png" />
                </image>
             </ImageView>
          </children>
