@@ -16,21 +16,49 @@ public class LogicFacade implements iLogic {
 
     private static iLink Link;
 
+    MessageParser messageParser = new MessageParser(this);
+    private static User user;
+    
     @Override
     public void injectLink(iLink LinkLayer) {
         Link = LinkLayer;
     }
 
+    @Override
     public void startConnection() {
         Link.startConnection();
     }
 
+    @Override
     public void sendMessage(String message) {
         Link.sendMessage(message);
     }
 
+    @Override
     public String receiveMessage() {
         return Link.receiveMessage();
 
+    }
+
+    @Override
+    public String login(String ID, String password) {
+        String message = messageParser.toProtocol00(ID, password);
+        if (message.equalsIgnoreCase("true")) {
+            initializeUser(ID);
+            
+        }
+        
+        return message;
+    }
+    
+    public void initializeUser(String ID) {
+        
+        if (ID.startsWith("A")) {
+            user = new Adminstrator(ID);
+        
+        } 
+        else if (ID.startsWith("C")) {
+            user = new Customer(ID);
+        }
     }
 }

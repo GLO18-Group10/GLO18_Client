@@ -11,4 +11,8 @@ package client.Acquaintance;
  */
 public interface iLogic {
     public void injectLink(iLink LinkLayer);
+    void startConnection();
+    void sendMessage(String message);
+    String receiveMessage();
+    String login(String ID, String password);
 }

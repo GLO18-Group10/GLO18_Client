@@ -10,32 +10,39 @@ package client.Logic;
  * @author Peterzxcvbnm
  */
 public class MessageParser {
-    public void fromProtocol(String message) {
-        LogicFacade logic = new LogicFacade();
-        String code = message.substring(0, 1); //Seperate the OPcode
-        String[] Data = message.split(";");
-        switch (code) {
-            case "00":
-            case "01":
-            case "02": 
-            case "03":
-                logic.startConnection();
-                //String s = Encrypter.encrypt("02;"+Data[0]);
-                //logic.sendMessage(s);
-                //s = Encrypter.decrypt(logic.receiveMessage());
-                //return s;
-            case "04":
-            case "05":
-            case "06":
-            case "07":
-            case "08":
-            case "09":
-            case "10":
-            case "11":
-            case "12":
-            case "18":
-            case "19":
-            default:
-        }
+    LogicFacade logic;
+    
+    public MessageParser(LogicFacade logic){
+        this.logic = logic;
+    }
+    
+    public String toProtocol00(String ID, String password){
+        String message = "00" + ";" + ID + ";" + password;
+        logic.sendMessage(message);
+        return fromProtocol00(logic.receiveMessage());
+    }
+    
+    private String fromProtocol00(String message){
+     String data = message;
+     return data;
+    }
+    
+    public void toProtocol01(){
+        logic.sendMessage("01");
+        fromProtocol01(logic.receiveMessage());
+    }
+    
+    private void fromProtocol01(String message){
+        //Split the received data into the different parts
+        String[] data = message.split(";");
+    }
+    
+    public String toProtocol02(String accountID){
+        logic.sendMessage("02;"+ accountID);
+        return fromProtocol02(logic.receiveMessage()); 
+    }
+    
+    private String fromProtocol02(String message){
+        return message;
     }
 }

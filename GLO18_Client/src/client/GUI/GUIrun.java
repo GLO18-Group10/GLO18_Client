@@ -48,4 +48,11 @@ public class GUIrun extends Application implements iGUI {
         guiRun = this;
         launch(args);
     }
+    
+    public void login(){
+        String ID = "A1234567";
+        String password = "passwordwut?";
+        System.out.println(Logic.login(ID, password));
+        //return Logic.login(ID, password);
+    }
 }
