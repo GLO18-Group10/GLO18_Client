@@ -5,6 +5,7 @@
  */
 package client.GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -31,6 +32,8 @@ public class CostumerController implements Initializable {
     private AnchorPane AnchorPane;
     @FXML
     private AnchorPane AnchorPane1;
+    @FXML
+    private MenuButton MenuButton1;
     @FXML
     private HBox HBox;
     @FXML
@@ -74,13 +77,26 @@ public class CostumerController implements Initializable {
     @FXML
     private Button CleanButton;
     @FXML
-    private MenuButton MenuButton1;
-    @FXML
     private MenuButton MenuButtonAccounts;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+    @FXML
+    private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
+    if (event.getSource() == TransferButton) {
+            AnchorPane2.toFront();
+            AnchorPane2.setVisible(true);
+            
+        } else if (event.getSource() == AccountsButton) {
+            AnchorPane3.toFront();
+            AnchorPane3.setVisible(true);
+        } else if (event.getSource() == OptionsButton) {
+            AnchorPane1.toFront();
+            AnchorPane1.setVisible(true);
+            
+            
+        } 
+    }
 }
