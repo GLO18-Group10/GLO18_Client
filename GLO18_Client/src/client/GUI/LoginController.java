@@ -28,6 +28,9 @@ public class LoginController implements Initializable {
     private Button ExitButton;
     @FXML 
     private Button LoginButton;
+    @FXML 
+    private Button UsernameField;
+    
     
     
     @Override

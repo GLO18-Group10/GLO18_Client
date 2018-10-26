@@ -11,10 +11,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -23,17 +27,56 @@ import javafx.scene.layout.VBox;
  * @author antonio
  */
 public class CostumerController implements Initializable {
-    @FXML private AnchorPane AnchorPane;
-    @FXML private AnchorPane AnchorPane1;   
-    @FXML private GridPane GridPane;    
-    @FXML private VBox Vbox;
-    @FXML private ListView Listview;  
-    @FXML private Button Accounts;
-    @FXML private TextArea TextArea;
-    @FXML private Button TransferButton;
-    @FXML private Button OptionsButton;
-    @FXML private Button LogoutButton;
-
+   @FXML
+    private AnchorPane AnchorPane;
+    @FXML
+    private AnchorPane AnchorPane1;
+    @FXML
+    private HBox HBox;
+    @FXML
+    private ScrollPane ScrollPane;
+    @FXML
+    private AnchorPane AnchorPane3;
+    @FXML
+    private GridPane GridPane;
+    @FXML
+    private VBox VBox;
+    @FXML
+    private Pane Pane;
+    @FXML
+    private TextArea TextArea;
+    @FXML
+    private Button AccountsButton;
+    @FXML
+    private Button TransferButton;
+    @FXML
+    private Button OptionsButton;
+    @FXML
+    private Button LogoutButton;
+    @FXML
+    private AnchorPane AnchorPane2;
+    @FXML
+    private TextField TransferField;
+    @FXML
+    private TextField AmountField;
+    @FXML
+    private TextField DateField;
+    @FXML
+    private TextField RegField;
+    @FXML
+    private TextField ContoField;
+    @FXML
+    private TextField TextRecipientField;
+    @FXML
+    private TextArea MessageArea;
+    @FXML
+    private Button ProccedButton;
+    @FXML
+    private Button CleanButton;
+    @FXML
+    private MenuButton MenuButton1;
+    @FXML
+    private MenuButton MenuButtonAccounts;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
