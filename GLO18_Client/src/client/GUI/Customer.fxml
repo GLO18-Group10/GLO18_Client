@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.DropdownButton?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
@@ -14,10 +19,74 @@
 
 <AnchorPane id="AnchorPane" fx:id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.MainController">
    <children>
+      <AnchorPane layoutX="164.0" prefHeight="608.0" prefWidth="583.0">
+         <children>
+            <GridPane fx:id="GridPane" layoutX="15.0" prefHeight="608.0" prefWidth="717.0" AnchorPane.leftAnchor="15.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane id="AnchorPane" fx:id="AnchorPane1" layoutX="160.0" layoutY="-8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="740.0" style="-fx-background-color: #FFFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
+         <children>
+            <ScrollPane layoutX="6.0" layoutY="237.0" prefHeight="371.0" prefWidth="733.0" />
+            <HBox layoutX="5.0" layoutY="183.0" prefHeight="55.0" prefWidth="726.0">
+               <children>
+                  <Label prefHeight="56.0" prefWidth="74.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="52.0" prefWidth="129.0" text="Date">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="55.0" prefWidth="163.0" text="Text">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="61.0" prefWidth="147.0" text="Amount">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="64.0" prefWidth="129.0" text="Balance ">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="72.0" prefWidth="57.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="70.0" prefWidth="105.0" text="Category">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <DropdownButton layoutX="43.0" layoutY="124.0" prefHeight="2.0" prefWidth="169.0">
+                <items>
+                    <MenuItem text="Choice 1" />
+                    <MenuItem text="Choice 2" />
+                    <MenuItem text="Choice 3" />
+                </items>
+            </DropdownButton>
+         </children>
+      </AnchorPane>
       <VBox layoutX="-2.0" prefHeight="608.0" prefWidth="165.0" style="-fx-background-color: #3f2B63;">
          <children>
             <VBox fx:id="Vbox" />
-            <AnchorPane fx:id="Anchorpane1" />
             <Pane fx:id="Pane" prefHeight="321.0" prefWidth="172.0">
                <children>
                   <ImageView fitHeight="178.0" fitWidth="169.0" layoutX="-6.0" layoutY="1.0">
@@ -25,7 +94,7 @@
                         <Image url="@../../../../../../Desktop/Elena.png" />
                      </image>
                   </ImageView>
-                  <TextArea layoutX="-4.0" layoutY="178.0" prefHeight="149.0" prefWidth="169.0" style="-fx-background-color: #3f2B63;" text="A golden bank with&#10;opportunity, safety &#10;and Elena">
+                  <TextArea fx:id="TextArea" layoutX="-4.0" layoutY="178.0" prefHeight="149.0" prefWidth="169.0" style="-fx-background-color: #3f2B63;" text="A golden bank with&#10;opportunity, safety &#10;and Elena">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -38,15 +107,24 @@
             <Button fx:id="LogoutButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Logout" textFill="WHITE" />
          </children>
       </VBox>
-      <GridPane fx:id="GridPane" layoutX="163.0" prefHeight="608.0" prefWidth="717.0" AnchorPane.leftAnchor="163.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
+      <AnchorPane fx:id="AnchorPane2" layoutX="160.0" layoutY="-8.0" prefHeight="608.0" prefWidth="740.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
+         <children>
+            <Label layoutX="33.0" layoutY="83.0" text="Choose Account" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <DropdownButton id="Accounts" fx:id="Accounts" accessibleRoleDescription="Accounts" layoutX="198.0" layoutY="79.0">
+                <items>
+                    <MenuItem text="Account 1" />
+                    <MenuItem text="Account 2" />
+                </items>
+            </DropdownButton>
+            <Label layoutX="33.0" layoutY="49.0" prefHeight="27.0" prefWidth="94.0" text="From" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
    </children>
 </AnchorPane>
