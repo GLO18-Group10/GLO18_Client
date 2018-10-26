@@ -14,5 +14,5 @@ public interface iLogic {
     void startConnection();
     void sendMessage(String message);
     String receiveMessage();
-    public void toProtocol07(String ID, String name, String	birthday, String phonenumber, String address, String email, String password);
+    public String toProtocol07(String ID, String name, String	birthday, String phonenumber, String address, String email, String password);
 }

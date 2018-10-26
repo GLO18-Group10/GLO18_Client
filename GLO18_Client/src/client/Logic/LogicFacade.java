@@ -37,7 +37,10 @@ public class LogicFacade implements iLogic {
     
     @Override
     //This method could also be renamed to an appropriate name since the arcitecture has changed. For instance createCustomer(). This is preffered.
-    public void toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
         sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email,  password));
+        return receiveMessage();
     }
+    
+    
 }
