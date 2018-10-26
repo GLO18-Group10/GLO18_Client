@@ -91,7 +91,7 @@ public class CostumerController implements Initializable {
     @FXML
     private TextField EmailField;
     @FXML
-    private Button AccountsButton1;
+    private Button ProfileButton;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -109,7 +109,19 @@ public class CostumerController implements Initializable {
         } else if (event.getSource() == OptionsButton) {
             AnchorPane1.toFront();
             AnchorPane1.setVisible(true);
-            
+        } else if (event.getSource() == ProfileButton) {
+            EmailField.setEditable(false);
+            EmailField.setText(GUIrun.getInstance().getName());
+            AddressField.setEditable(false);
+            AddressField.setText(GUIrun.getInstance().getName());
+            PhoneNoField.setEditable(false);
+            PhoneNoField.setText(GUIrun.getInstance().getName());
+            BirthdayField.setEditable(false);
+            BirthdayField.setText(GUIrun.getInstance().getName());
+            NameField.setEditable(false);
+            NameField.setText(GUIrun.getInstance().getName());
+            ProfileAnchor.toFront();
+            ProfileAnchor.setVisible(true);    
             
         } 
     }
