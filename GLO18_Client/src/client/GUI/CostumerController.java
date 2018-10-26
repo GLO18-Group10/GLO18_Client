@@ -110,6 +110,7 @@ public class CostumerController implements Initializable {
             AnchorPane1.toFront();
             AnchorPane1.setVisible(true);
         } else if (event.getSource() == ProfileButton) {
+            //Get all the information and update the text fields
             EmailField.setEditable(false);
             EmailField.setText(GUIrun.getInstance().getName());
             AddressField.setEditable(false);
@@ -120,6 +121,7 @@ public class CostumerController implements Initializable {
             BirthdayField.setText(GUIrun.getInstance().getName());
             NameField.setEditable(false);
             NameField.setText(GUIrun.getInstance().getName());
+            //Display to the user
             ProfileAnchor.toFront();
             ProfileAnchor.setVisible(true);    
             
