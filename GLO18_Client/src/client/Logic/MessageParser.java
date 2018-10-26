@@ -16,10 +16,19 @@ public class MessageParser {
     public MessageParser(LogicFacade logic) {
         this.logic = logic;
     }
-/**
- * Method to send 
-     * @return The message from the server already split into an array
- */
+
+    public String toProtocol00(String ID, String password) {
+        String message = "00" + ";" + ID + ";" + password;
+        logic.sendMessage(message);
+        return fromProtocol00(logic.receiveMessage());
+
+    }
+
+    private String fromProtocol00(String message) {
+        String data = message;
+        return data;
+    }
+
     public String[] toProtocol01() {
         logic.sendMessage("01");
         return fromProtocol(logic.receiveMessage());
