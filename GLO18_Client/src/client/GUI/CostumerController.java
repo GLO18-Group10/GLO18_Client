@@ -78,6 +78,20 @@ public class CostumerController implements Initializable {
     private Button CleanButton;
     @FXML
     private MenuButton MenuButtonAccounts;
+    @FXML
+    private AnchorPane ProfileAnchor;
+    @FXML
+    private TextField NameField;
+    @FXML
+    private TextField BirthdayField;
+    @FXML
+    private TextField PhoneNoField;
+    @FXML
+    private TextField AddressField;
+    @FXML
+    private TextField EmailField;
+    @FXML
+    private Button AccountsButton1;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
