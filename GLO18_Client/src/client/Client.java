@@ -21,5 +21,6 @@ public class Client {
         Logic.injectLink(Link);
         GUI.injectLogic(Logic);
         GUI.startApplication(args);
+        GUI.startConnection();
     }
 }

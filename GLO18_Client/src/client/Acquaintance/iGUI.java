@@ -12,6 +12,7 @@ package client.Acquaintance;
 public interface iGUI {
     public void injectLogic(iLogic LogicLayer);
     public void startApplication(String[] args);
+    void startConnection();
     String getName();
     String getBirthday();
     String getPhoneNo();

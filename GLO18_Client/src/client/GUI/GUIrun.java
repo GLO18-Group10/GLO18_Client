@@ -22,6 +22,8 @@ public class GUIrun extends Application implements iGUI {
     private static iLogic Logic;
     private static GUIrun guiRun;
 
+    private Stage stage;
+
     @Override
     public void injectLogic(iLogic LogicLayer) {
         Logic = LogicLayer;
@@ -33,10 +35,12 @@ public class GUIrun extends Application implements iGUI {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 
         Scene scene = new Scene(root);
+        this.stage = stage;
 
+        stage.setResizable(true);
         stage.setScene(scene);
         stage.show();
     }
@@ -53,7 +57,6 @@ public class GUIrun extends Application implements iGUI {
 //        System.out.println(Logic.login(ID, password));
 //        //return Logic.login(ID, password);
 //    }
-
     @Override
     public String getName() {
         return Logic.getName();
@@ -77,6 +80,11 @@ public class GUIrun extends Application implements iGUI {
     @Override
     public String getEmail() {
         return Logic.getEmail();
+    }
+
+    @Override
+    public void startConnection() {
+        Logic.startConnection();
     }
 
 }
