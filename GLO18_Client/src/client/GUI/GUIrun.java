@@ -33,7 +33,7 @@ public class GUIrun extends Application implements iGUI {
 
     @Override
     public void start(Stage stage) throws Exception {
-       Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 
         Scene scene = new Scene(root);
         this.stage = stage;
@@ -50,7 +50,7 @@ public class GUIrun extends Application implements iGUI {
     }
     
     public String login(String ID, String password){
-        
+        System.out.println("test in guirun");
        return Logic.login(ID, password);
     }
 }

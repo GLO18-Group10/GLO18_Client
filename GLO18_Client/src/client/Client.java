@@ -20,6 +20,7 @@ public class Client {
         
         Logic.injectLink(Link);
         GUI.injectLogic(Logic);
+        Logic.startConnection();
         GUI.startApplication(args);
     }
 }

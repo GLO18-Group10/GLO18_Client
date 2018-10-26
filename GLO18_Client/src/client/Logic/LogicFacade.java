@@ -40,7 +40,9 @@ public class LogicFacade implements iLogic {
 
     @Override
     public String login(String ID, String password) {
+        System.out.println("test i logic 1");
         String message = messageParser.toProtocol00(ID, password);
+        System.out.println("test in logic 2");
         if (message.equalsIgnoreCase("true")) {
             initializeUser(ID);
             
