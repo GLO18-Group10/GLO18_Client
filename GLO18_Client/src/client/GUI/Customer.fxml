@@ -126,6 +126,20 @@
             <ScrollPane fx:id="ScrollPane" layoutX="6.0" layoutY="237.0" prefHeight="371.0" prefWidth="733.0" />
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="ProfileAnchor" layoutX="164.0" layoutY="-2.0" prefHeight="620.0" prefWidth="593.0" visible="false">
+         <children>
+            <TextField fx:id="NameField" />
+            <TextField fx:id="BirthdayField" />
+            <TextField fx:id="PhoneNoField" />
+            <TextField fx:id="AddressField" />
+            <TextField fx:id="EmailField" />
+            <Label text="Email" />
+            <Label text="Address" />
+            <Label text="Phone Number" />
+            <Label text="Birthday" />
+            <Label text="Name" />
+         </children>
+      </AnchorPane>
       <VBox fx:id="VBox" layoutX="-2.0" prefHeight="608.0" prefWidth="165.0" style="-fx-background-color: #3f2B63;">
          <children>
             <Pane fx:id="Pane" prefHeight="321.0" prefWidth="172.0">
@@ -144,6 +158,7 @@
             </Pane>
             <Button fx:id="AccountsButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="183.0" style="-fx-background-color: #3f2B63;" text="Accounts" textFill="WHITE" />
             <Button fx:id="TransferButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Transferring" textFill="WHITE" />
+            <Button fx:id="AccountsButton1" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="183.0" style="-fx-background-color: #3f2B63;" text="Profile" textFill="WHITE" />
             <Button fx:id="OptionsButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Options" textFill="WHITE" />
             <Button fx:id="LogoutButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Logout" textFill="WHITE" />
          </children>
