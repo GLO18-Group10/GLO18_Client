@@ -10,10 +10,26 @@ package client.Acquaintance;
  * @author Jeppe Enevold
  */
 public interface iLogic {
+
     public void injectLink(iLink LinkLayer);
+
     void startConnection();
+
     void sendMessage(String message);
+
     String receiveMessage();
+
     String[] toProtocol01();
+
     String login(String ID, String password);
+
+    String getName();
+
+    String getBirthday();
+
+    String getPhoneNo();
+
+    String getAddress();
+
+    String getEmail();
 }

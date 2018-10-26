@@ -10,10 +10,14 @@ package client.Logic;
  * @author Nick
  */
 public class User {
-    String ID;
-
-    public User(String ID) {
+    public LogicFacade logic;
+    private String ID;
+    private String email;
+    private String phoneNo;
+    
+    public User(String ID, LogicFacade logic) {
         this.ID = ID;
+        this.logic = logic;
     }
     
 }
