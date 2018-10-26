@@ -45,8 +45,8 @@ public class LogicFacade implements iLogic {
             initializeUser(ID);
             
         }
-        //return messageParser.toProtocol00(ID, password);
-        return "";
+        
+        return message;
     }
     
     
