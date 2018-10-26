@@ -38,13 +38,13 @@ public class LogicFacade implements iLogic {
         return Link.receiveMessage();
     }
 
-    public String login(String ID, String password) {
-        String message = messageParser.toProtocol00(ID, password);
-        if (message.equalsIgnoreCase("true")) {
-            initializeUser(ID);
-        }
-        return message;
-    }
+//    public String login(String ID, String password) {
+//        String message = messageParser.toProtocol00(ID, password);
+//        if (message.equalsIgnoreCase("true")) {
+//            initializeUser(ID);
+//        }
+//        return message;
+//    }
 
     @Override
     public String getName() {

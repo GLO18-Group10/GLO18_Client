@@ -19,7 +19,7 @@ public interface iLogic {
 
     String receiveMessage();
 
-    String login(String ID, String password);
+    //String login(String ID, String password);
 
     String getName();
 
