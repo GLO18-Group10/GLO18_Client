@@ -28,11 +28,18 @@ public class MessageParser {
         String data = message;
         return data;
     }
-
+/**
+ * Protocol 01: get customer info
+ * @return 01
+ */
     public String toProtocol01() {
         return "01";
     }
-
+/**
+ * Message to split the response from the server into an array
+ * @param message Message from the server
+ * @return An array of the different parameters from the server
+ */
     public String[] fromProtocol(String message) {
         //Split the received data into the different parts
         String[] data = message.split(";");
