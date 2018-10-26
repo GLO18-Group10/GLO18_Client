@@ -14,5 +14,6 @@ public interface iLogic {
     void startConnection();
     void sendMessage(String message);
     String receiveMessage();
-    void toProtocol01();
+    String[] toProtocol01();
+    String[] getCustomerInfo();
 }

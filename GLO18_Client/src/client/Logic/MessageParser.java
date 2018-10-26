@@ -18,15 +18,16 @@ public class MessageParser {
     }
 /**
  * Method to send 
+     * @return The message from the server already split into an array
  */
-    public void toProtocol01() {
+    public String[] toProtocol01() {
         logic.sendMessage("01");
-        fromProtocol01(logic.receiveMessage());
+        return fromProtocol(logic.receiveMessage());
     }
 
-    private void fromProtocol01(String message) {
+    private String[] fromProtocol(String message) {
         //Split the received data into the different parts
         String[] data = message.split(";");
-
+        return data;
     }
 }

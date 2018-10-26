@@ -38,7 +38,30 @@ public class LogicFacade implements iLogic {
     }
 
     @Override
-    public void toProtocol01() {
-        messageParser.toProtocol01();
+    public String[] toProtocol01() {
+        return messageParser.toProtocol01();
+    }
+
+    @Override
+    public String[] getCustomerInfo() {
+        //Check if the information is missing from the client
+        if (Customer.getName().equals("")
+                || Customer.getBirthday().equals("")
+                || Customer.getPhoneNo().equals("")
+                || Customer.getAddress().equals("")
+                || Customer.getEmail().equals("")) {
+            //Get the information from the server
+            return toProtocol01();
+        }
+        //Else just return the data already saved in the client
+        else{
+            String[] data = new String[5];
+            data[0] = Customer.getName();
+            data[1] = Customer.getBirthday();
+            data[2] = Customer.getPhoneNo();
+            data[3] = Customer.getAddress();
+            data[4] = Customer.getEmail();
+            return data;
+        }
     }
 }
