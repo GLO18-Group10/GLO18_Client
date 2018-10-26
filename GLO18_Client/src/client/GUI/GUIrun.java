@@ -47,12 +47,12 @@ public class GUIrun extends Application implements iGUI {
         launch(args);
     }
 
-    public void login() {
-        String ID = "A1234567";
-        String password = "passwordwut?";
-        System.out.println(Logic.login(ID, password));
-        //return Logic.login(ID, password);
-    }
+//    public void login() {
+//        String ID = "A1234567";
+//        String password = "passwordwut?";
+//        System.out.println(Logic.login(ID, password));
+//        //return Logic.login(ID, password);
+//    }
 
     @Override
     public String getName() {
