@@ -16,6 +16,8 @@ public class LogicFacade implements iLogic {
 
     private static iLink Link;
     MessageParser messageParser = new MessageParser();
+    private static User user;
+    
     public void injectLink(iLink LinkLayer) {
         Link = LinkLayer;
     }
@@ -38,8 +40,24 @@ public class LogicFacade implements iLogic {
 
     @Override
     public String login(String ID, String password) {
+        String message = messageParser.toProtocol00(ID, password);
+        if (message.equalsIgnoreCase("true")) {
+            initializeUser(ID);
+            
+        }
+        //return messageParser.toProtocol00(ID, password);
+        return "";
+    }
+    
+    
+    public void initializeUser(String ID) {
         
-        return messageParser.toProtocol00(ID, password);
+        if (ID.startsWith("A")) {
+            user = new Adminstrator(ID);
         
+        } 
+        else if (ID.startsWith("C")) {
+            user = new Customer(ID);
+        }
     }
 }
