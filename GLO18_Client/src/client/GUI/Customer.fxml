@@ -19,9 +19,64 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.MainController">
+<AnchorPane id="AnchorPane" fx:id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CostumerController">
    <children>
-      <AnchorPane id="AnchorPane" fx:id="AnchorPane1" layoutX="160.0" layoutY="-8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="740.0" style="-fx-background-color: #FFFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
+      <AnchorPane fx:id="AnchorPane3" layoutX="164.0" prefHeight="608.0" prefWidth="583.0" visible="false">
+         <children>
+            <GridPane fx:id="GridPane" layoutX="15.0" prefHeight="608.0" prefWidth="717.0" AnchorPane.leftAnchor="15.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPane2" layoutX="160.0" layoutY="-8.0" prefHeight="608.0" prefWidth="740.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
+         <children>
+            <Label layoutX="27.0" layoutY="93.0" text="Choose Account">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="33.0" layoutY="60.0" prefHeight="27.0" prefWidth="94.0" text="From" wrapText="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="194.0" text="Text on transfer" />
+            <Label layoutX="32.0" layoutY="232.0" text="Amount" />
+            <TextField fx:id="TransferField" layoutX="171.0" layoutY="189.0" />
+            <TextField fx:id="AmountField" layoutX="171.0" layoutY="227.0" />
+            <Label layoutX="33.0" layoutY="272.0" text="Date" />
+            <TextField fx:id="DateField" layoutX="171.0" layoutY="267.0" />
+            <Label layoutX="34.0" layoutY="319.0" prefHeight="27.0" prefWidth="94.0" text="To" wrapText="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="31.0" layoutY="361.0" text="reg and conto number" />
+            <Label layoutX="35.0" layoutY="410.0" text="Text to recipient " />
+            <TextField fx:id="RegField" layoutX="171.0" layoutY="356.0" prefHeight="18.0" prefWidth="75.0" />
+            <TextField fx:id="ContoField" layoutX="253.0" layoutY="356.0" />
+            <TextField fx:id="TextRecipientField" layoutX="171.0" layoutY="405.0" />
+            <TextArea fx:id="MessageArea" layoutX="171.0" layoutY="445.0" prefHeight="115.0" prefWidth="176.0" />
+            <Label layoutX="35.0" layoutY="445.0" text="Message to recipient" />
+            <Button fx:id="ProccedButton" layoutX="41.0" layoutY="568.0" mnemonicParsing="false" style="-fx-background-color: #3f2B63;" text="Procced" textFill="WHITE" />
+            <Button fx:id="CleanButton" layoutX="125.0" layoutY="568.0" mnemonicParsing="false" style="-fx-background-color: #3f2B63;" text="Clean " textFill="WHITE" />
+            <Separator layoutX="5.0" layoutY="301.0" prefHeight="5.0" prefWidth="726.0" />
+            <MenuButton fx:id="MenuButtonAccounts" layoutX="199.0" layoutY="80.0" mnemonicParsing="false" text="Accounts">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane id="AnchorPane" fx:id="AnchorPane1" layoutX="160.0" layoutY="-8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="740.0" style="-fx-background-color: #FFFFFFF;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
          <children>
             <MenuButton fx:id="MenuButton1" layoutX="43.0" layoutY="40.0" mnemonicParsing="false" text="Accounts">
               <items>
@@ -71,20 +126,6 @@
             <ScrollPane fx:id="ScrollPane" layoutX="6.0" layoutY="237.0" prefHeight="371.0" prefWidth="733.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="AnchorPane3" layoutX="164.0" prefHeight="608.0" prefWidth="583.0" visible="false">
-         <children>
-            <GridPane fx:id="GridPane" layoutX="15.0" prefHeight="608.0" prefWidth="717.0" AnchorPane.leftAnchor="15.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-         </children>
-      </AnchorPane>
       <VBox fx:id="VBox" layoutX="-2.0" prefHeight="608.0" prefWidth="165.0" style="-fx-background-color: #3f2B63;">
          <children>
             <Pane fx:id="Pane" prefHeight="321.0" prefWidth="172.0">
@@ -101,52 +142,11 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button fx:id="AccountsButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="183.0" style="-fx-background-color: #3f2B63;" text="Accounts" textFill="WHITE" />
-            <Button fx:id="TransferButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Transferring" textFill="WHITE" />
-            <Button fx:id="OptionsButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Options" textFill="WHITE" />
+            <Button fx:id="AccountsButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="183.0" style="-fx-background-color: #3f2B63;" text="Accounts" textFill="WHITE" />
+            <Button fx:id="TransferButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Transferring" textFill="WHITE" />
+            <Button fx:id="OptionsButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Options" textFill="WHITE" />
             <Button fx:id="LogoutButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Logout" textFill="WHITE" />
          </children>
       </VBox>
-      <AnchorPane fx:id="AnchorPane2" layoutX="160.0" layoutY="-8.0" prefHeight="608.0" prefWidth="740.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
-         <children>
-            <Label layoutX="27.0" layoutY="93.0" text="Choose Account">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="33.0" layoutY="60.0" prefHeight="27.0" prefWidth="94.0" text="From" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="28.0" layoutY="194.0" text="Text on transfer" />
-            <Label layoutX="32.0" layoutY="232.0" text="Amount" />
-            <TextField fx:id="TransferField" layoutX="171.0" layoutY="189.0" />
-            <TextField fx:id="AmountField" layoutX="171.0" layoutY="227.0" />
-            <Label layoutX="33.0" layoutY="272.0" text="Date" />
-            <TextField fx:id="DateField" layoutX="171.0" layoutY="267.0" />
-            <Label layoutX="34.0" layoutY="319.0" prefHeight="27.0" prefWidth="94.0" text="To" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="31.0" layoutY="361.0" text="reg and conto number" />
-            <Label layoutX="35.0" layoutY="410.0" text="Text to recipient " />
-            <TextField fx:id="RegField" layoutX="171.0" layoutY="356.0" prefHeight="18.0" prefWidth="75.0" />
-            <TextField fx:id="ContoField" layoutX="253.0" layoutY="356.0" />
-            <TextField fx:id="TextRecipientField" layoutX="171.0" layoutY="405.0" />
-            <TextArea fx:id="MessageArea" layoutX="171.0" layoutY="445.0" prefHeight="115.0" prefWidth="176.0" />
-            <Label layoutX="35.0" layoutY="445.0" text="Message to recipient" />
-            <Button fx:id="ProccedButton" layoutX="41.0" layoutY="568.0" mnemonicParsing="false" style="-fx-background-color: #3f2B63;" text="Procced" textFill="WHITE" />
-            <Button fx:id="CleanButton" layoutX="125.0" layoutY="568.0" mnemonicParsing="false" style="-fx-background-color: #3f2B63;" text="Clean " textFill="WHITE" />
-            <Separator layoutX="5.0" layoutY="301.0" prefHeight="5.0" prefWidth="726.0" />
-            <MenuButton fx:id="MenuButtonAccounts" layoutX="199.0" layoutY="80.0" mnemonicParsing="false" text="Accounts">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-            </MenuButton>
-         </children>
-      </AnchorPane>
    </children>
 </AnchorPane>
