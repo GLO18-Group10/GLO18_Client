@@ -19,7 +19,6 @@ public class Client {
         iLink Link = new LinkFacade();
         Logic.injectLink(Link);
         GUI.injectLogic(Logic);
-        Logic.startConnection();
         GUI.startApplication(args);
     }
 }

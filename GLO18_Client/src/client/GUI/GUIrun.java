@@ -45,6 +45,7 @@ public class GUIrun extends Application implements iGUI {
     
     @Override
     public void startApplication(String[] args) {
+        logic.startConnection();
         guiRun = this;
         launch(args);
     }
