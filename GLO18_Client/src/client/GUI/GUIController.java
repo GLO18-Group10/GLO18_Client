@@ -8,6 +8,7 @@ package client.GUI;
 
 import java.awt.event.ActionEvent;
 import client.Logic.LogicFacade;
+import client.Logic.LogicFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

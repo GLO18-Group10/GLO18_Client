@@ -12,6 +12,8 @@ import java.io.IOException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,7 +36,8 @@ import javafx.stage.Stage;
 public class LoginController implements Initializable {
     private double xOffset;
     private double yOffset;
-
+    GUIrun guiRun;
+    
     @FXML 
     private AnchorPane Anchorpane;    
     @FXML 
@@ -55,56 +58,94 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    } 
+    
+
     @FXML
-    private void login(ActionEvent event){
+    private void Login(javafx.event.ActionEvent event) {
         String ID = UsernameField.getText();
         String password = passwordField.getText();
+        System.out.println(ID);
+        System.out.println(password);
         if (ID.trim().isEmpty() || password.trim().isEmpty()) {
             alertField.setText("Log in is wrong");
+            //virker hertil
         }
         else{
-           String check = GUIrun.getInstance().login(ID, password); 
+           
              if (ID.startsWith("A")) {
-            
+                 System.out.println("test2");
+                 
+                String check = guiRun.getInstance().login(ID, password);
+                 
                 if (check.equalsIgnoreCase("true")) {
-                //Skifter scene her, login er sandt
+                    System.out.println(check);
+                    try {
+                        Parent nextView = FXMLLoader.load(getClass().getResource("admin.fxml"));
+                        Scene newScene = new Scene(nextView);
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        stage.setScene(newScene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 else if (check.equalsIgnoreCase("false")) {
                 alertField.setText("Log in is wrong");
-                }
+                
     
             
             }
+             }
+                 
             else {
+                       
                 String correctedID = "C" + ID;
+                
+                String check = guiRun.getInstance().login(correctedID, password);
+                 
                  if (check.equalsIgnoreCase("true")) {
-                     //shifts scene to customer scene here
+                    try {
+                        Parent nextView = FXMLLoader.load(getClass().getResource("Customer.fxml"));
+                        Scene newScene = new Scene(nextView);
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        stage.setScene(newScene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                  }
                  else if (check.equalsIgnoreCase("false")) {
                      alertField.setText("Log in is wrong");
+                     
                  }
             
             }
+        
+        
+        
         }
     }
-
-    @FXML
-    private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
-        Parent nextView = FXMLLoader.load(getClass().getResource("Customer.fxml"));
-            Scene newScene = new Scene(nextView);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(newScene);
-            stage.show();
-            nextView.setOnMousePressed((javafx.scene.input.MouseEvent event1) -> {
-            xOffset = event1.getSceneX();
-            yOffset = event1.getSceneY();
-        });
-        nextView.setOnMouseDragged((javafx.scene.input.MouseEvent event1) -> {
-            stage.setX(event1.getScreenX() - xOffset);
-            stage.setY(event1.getScreenY() - yOffset);
-        });
-            
-    }
 }
+//    @FXML
+//    private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
+//        Parent nextView = FXMLLoader.load(getClass().getResource("Customer.fxml"));
+//            Scene newScene = new Scene(nextView);
+//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            stage.setScene(newScene);
+//            stage.show();
+//            nextView.setOnMousePressed((javafx.scene.input.MouseEvent event1) -> {
+//            xOffset = event1.getSceneX();
+//            yOffset = event1.getSceneY();
+//        });
+//        nextView.setOnMouseDragged((javafx.scene.input.MouseEvent event1) -> {
+//            stage.setX(event1.getScreenX() - xOffset);
+//            stage.setY(event1.getScreenY() - yOffset);
+//        });
+//            
+//    }
+
+    
+    
+
 

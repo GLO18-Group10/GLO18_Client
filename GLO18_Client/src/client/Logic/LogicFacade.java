@@ -39,7 +39,9 @@ public class LogicFacade implements iLogic {
 
     @Override
     public String login(String ID, String password) {
+        
         String message = messageParser.toProtocol00(ID, password);
+       
         if (message.equalsIgnoreCase("true")) {
             initializeUser(ID);
             
@@ -63,7 +65,7 @@ public class LogicFacade implements iLogic {
             user = new Customer(ID);
         }
     }
-    
+
     @Override
     //This method could also be renamed to an appropriate name since the arcitecture has changed. For instance createCustomer(). This is preffered.
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){

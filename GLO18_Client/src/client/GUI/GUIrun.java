@@ -34,7 +34,8 @@ public class GUIrun extends Application implements iGUI {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("admin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+
         Scene scene = new Scene(root);
         this.stage = stage;
 
@@ -45,6 +46,7 @@ public class GUIrun extends Application implements iGUI {
     
     @Override
     public void startApplication(String[] args) {
+        logic.startConnection();
         guiRun = this;
         launch(args);
     }

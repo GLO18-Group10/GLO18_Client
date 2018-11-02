@@ -5,12 +5,14 @@
  */
 package client.GUI;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
@@ -27,13 +29,12 @@ import javafx.scene.layout.VBox;
  *
  * @author antonio
  */
-public class CustumerController implements Initializable {
-   @FXML
+public class CustomerController implements Initializable {
+    private GUIrun guiRun;
+    @FXML
     private AnchorPane AnchorPane;
     @FXML
     private AnchorPane AnchorPane1;
-    @FXML
-    private MenuButton MenuButton1;
     @FXML
     private HBox HBox;
     @FXML
@@ -92,6 +93,10 @@ public class CustumerController implements Initializable {
     private TextField EmailField;
     @FXML
     private Button AccountsButton1;
+    @FXML
+    private MenuButton AccountsDropdown;
+    @FXML
+    private Label AccountBalanceLabel;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -104,13 +109,19 @@ public class CustumerController implements Initializable {
             AnchorPane2.setVisible(true);
             
         } else if (event.getSource() == AccountsButton) {
-            AnchorPane3.toFront();
-            AnchorPane3.setVisible(true);
-        } else if (event.getSource() == OptionsButton) {
             AnchorPane1.toFront();
             AnchorPane1.setVisible(true);
+        } else if (event.getSource() == OptionsButton) {
+            AnchorPane3.toFront();
+            AnchorPane3.setVisible(true);
             
             
         } 
     }
+    
+    @FXML
+    private void getAccountBalance(ActionEvent event){
+       AccountBalanceLabel.setText(guiRun.getInstance().getAccountBalance(AccountsDropdown.getText())+" DKK");
+    }
+    
 }
