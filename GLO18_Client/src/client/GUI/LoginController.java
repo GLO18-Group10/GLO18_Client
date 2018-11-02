@@ -36,7 +36,8 @@ import javafx.stage.Stage;
 public class LoginController implements Initializable {
     private double xOffset;
     private double yOffset;
-
+    GUIrun guiRun;
+    
     @FXML 
     private AnchorPane Anchorpane;    
     @FXML 
@@ -74,20 +75,20 @@ public class LoginController implements Initializable {
            
              if (ID.startsWith("A")) {
                  System.out.println("test2");
-                String check = GUIrun.getInstance().login(ID, password); 
-                 System.out.println("test3");
-                 System.out.println(check);
+                 
+                String check = guiRun.getInstance().login(ID, password);
+                 
                 if (check.equalsIgnoreCase("true")) {
-                    System.out.println(check + "for true");
-//                    try {
-////                        Parent nextView = FXMLLoader.load(getClass().getResource("Customer.fxml"));
-////                        Scene newScene = new Scene(nextView);
-////                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-////                        stage.setScene(newScene);
-////                        stage.show();
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
+                    System.out.println(check);
+                    try {
+                        Parent nextView = FXMLLoader.load(getClass().getResource("admin.fxml"));
+                        Scene newScene = new Scene(nextView);
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        stage.setScene(newScene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 else if (check.equalsIgnoreCase("false")) {
                 alertField.setText("Log in is wrong");
@@ -98,12 +99,11 @@ public class LoginController implements Initializable {
              }
                  
             else {
-                    System.out.println("test3");    
+                       
                 String correctedID = "C" + ID;
-                    System.out.println(correctedID);
-                String check = GUIrun.getInstance().login(correctedID, password);
-                 System.out.println(check);
-                 System.out.println("test 4");
+                
+                String check = guiRun.getInstance().login(correctedID, password);
+                 
                  if (check.equalsIgnoreCase("true")) {
                     try {
                         Parent nextView = FXMLLoader.load(getClass().getResource("Customer.fxml"));

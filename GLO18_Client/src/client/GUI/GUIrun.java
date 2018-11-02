@@ -51,9 +51,10 @@ public class GUIrun extends Application implements iGUI {
     }
     
     public String login(String ID, String password){
-        System.out.println("test in guirun");
+        
        return logic.login(ID, password);
     }
+    
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
         return logic.toProtocol07(ID, name, birthday, phonenumber, address, email, password);
 
