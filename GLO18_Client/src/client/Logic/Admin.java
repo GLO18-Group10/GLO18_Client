@@ -9,11 +9,12 @@ package client.Logic;
  *
  * @author Nick
  */
-public class Adminstrator extends User{
+public class Admin extends User {
 
-    public Adminstrator(String ID) {
-        super(ID);
+    private LogicFacade logic;
+
+    public Admin(String ID, LogicFacade logic) {
+        super(ID, logic);
     }
-    
-    
+
 }

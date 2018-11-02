@@ -127,23 +127,6 @@ public class LoginController implements Initializable {
         }
     }
 }
-//    @FXML
-//    private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
-//        Parent nextView = FXMLLoader.load(getClass().getResource("Customer.fxml"));
-//            Scene newScene = new Scene(nextView);
-//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//            stage.setScene(newScene);
-//            stage.show();
-//            nextView.setOnMousePressed((javafx.scene.input.MouseEvent event1) -> {
-//            xOffset = event1.getSceneX();
-//            yOffset = event1.getSceneY();
-//        });
-//        nextView.setOnMouseDragged((javafx.scene.input.MouseEvent event1) -> {
-//            stage.setX(event1.getScreenX() - xOffset);
-//            stage.setY(event1.getScreenY() - yOffset);
-//        });
-//            
-//    }
 
     
     
