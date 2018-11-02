@@ -53,7 +53,7 @@ public class LogicFacade implements iLogic {
 
     @Override
     public String getPhoneNo() {
-        return customer.getBirthday();
+        return customer.getPhoneNo();
     }
     
     public String login(String ID, String password) {
