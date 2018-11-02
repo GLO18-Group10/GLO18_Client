@@ -109,22 +109,22 @@ public class CustomerController implements Initializable {
             AnchorPane2.setVisible(true);
         } else if (event.getSource() == AccountsButton) {
             clearPanes();
-            AnchorPane3.toFront();
-            AnchorPane3.setVisible(true);
+            AnchorPane.toFront();
+            AnchorPane.setVisible(true);
         } else if (event.getSource() == OptionsButton) {
             clearPanes();
-            AnchorPane1.toFront();
-            AnchorPane1.setVisible(true);
+            AnchorPane3.toFront();
+            AnchorPane3.setVisible(true);
         } else if (event.getSource() == ProfileButton) {
             //Get all the information and update the text fields
             EmailField.setEditable(false);
-            EmailField.setText(guiRun.getName());
+            EmailField.setText(guiRun.getEmail());
             AddressField.setEditable(false);
-            AddressField.setText(guiRun.getName());
+            AddressField.setText(guiRun.getAddress());
             PhoneNoField.setEditable(false);
-            PhoneNoField.setText(guiRun.getName());
+            PhoneNoField.setText(guiRun.getPhoneNo());
             BirthdayField.setEditable(false);
-            BirthdayField.setText(guiRun.getName());
+            BirthdayField.setText(guiRun.getBirthday());
             NameField.setEditable(false);
             NameField.setText(guiRun.getName());
             //Clear current pane and display to the user

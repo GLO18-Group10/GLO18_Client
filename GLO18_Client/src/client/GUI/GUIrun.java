@@ -19,14 +19,15 @@ import javafx.stage.Stage;
  */
 public class GUIrun extends Application implements iGUI {
 
-    private static iLogic Logic;
+    private static iLogic logic;
+
     private static GUIrun guiRun;
 
     private Stage stage;
 
     @Override
     public void injectLogic(iLogic LogicLayer) {
-        Logic = LogicLayer;
+        logic = LogicLayer;
     }
 
     public static GUIrun getInstance() {
@@ -47,44 +48,48 @@ public class GUIrun extends Application implements iGUI {
 
     @Override
     public void startApplication(String[] args) {
+        logic.startConnection();
         guiRun = this;
         launch(args);
     }
 
-//    public void login() {
-//        String ID = "A1234567";
-//        String password = "passwordwut?";
-//        System.out.println(Logic.login(ID, password));
-//        //return Logic.login(ID, password);
-//    }
     @Override
     public String getName() {
-        return Logic.getName();
+        return logic.getName();
     }
 
     @Override
     public String getBirthday() {
-        return Logic.getBirthday();
+        return logic.getBirthday();
+    }
+    
+    public String login(String ID, String password){      
+       return logic.login(ID, password);
+    }
+    
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
+        return logic.toProtocol07(ID, name, birthday, phonenumber, address, email, password);
+
     }
 
     @Override
     public String getPhoneNo() {
-        return Logic.getPhoneNo();
+        return logic.getPhoneNo();
     }
 
     @Override
     public String getAddress() {
-        return Logic.getAddress();
+        return logic.getAddress();
     }
 
     @Override
     public String getEmail() {
-        return Logic.getEmail();
+        return logic.getEmail();
     }
 
     @Override
     public void startConnection() {
-        Logic.startConnection();
+        logic.startConnection();
     }
 
 }

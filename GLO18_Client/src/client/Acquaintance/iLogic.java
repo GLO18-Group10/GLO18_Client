@@ -19,8 +19,6 @@ public interface iLogic {
 
     String receiveMessage();
 
-    //String login(String ID, String password);
-
     String getName();
 
     String getBirthday();
@@ -30,4 +28,9 @@ public interface iLogic {
     String getAddress();
 
     String getEmail();
+
+    String login(String ID, String password);
+
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password);
+
 }

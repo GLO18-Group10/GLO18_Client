@@ -14,42 +14,36 @@ import client.Acquaintance.iLogic;
  */
 public class LogicFacade implements iLogic {
 
-    private static iLink Link;
-
+    private static iLink link;
     private Customer customer;
     private Admin admin;
 
+    private MessageParser messageParser = new MessageParser(this);
+
     public void injectLink(iLink LinkLayer) {
-        Link = LinkLayer;
+        link = LinkLayer;
     }
 
     @Override
     public void startConnection() {
-        Link.startConnection();
+        link.startConnection();
     }
 
     @Override
     public void sendMessage(String message) {
-        Link.sendMessage(message);
+        link.sendMessage(message);
     }
 
     @Override
     public String receiveMessage() {
-        return Link.receiveMessage();
+        return link.receiveMessage();
     }
-
-//    public String login(String ID, String password) {
-//        String message = messageParser.toProtocol00(ID, password);
-//        if (message.equalsIgnoreCase("true")) {
-//            initializeUser(ID);
-//        }
-//        return message;
-//    }
 
     @Override
     public String getName() {
         return customer.getName();
     }
+
 
     @Override
     public String getBirthday() {
@@ -59,6 +53,18 @@ public class LogicFacade implements iLogic {
     @Override
     public String getPhoneNo() {
         return customer.getBirthday();
+    }
+    
+    public String login(String ID, String password) {
+        
+        String message = messageParser.toProtocol00(ID, password);
+       
+        if (message.equalsIgnoreCase("true")) {
+            initializeUser(ID);
+            
+        }
+        
+        return message;
     }
 
     @Override
@@ -79,4 +85,15 @@ public class LogicFacade implements iLogic {
             customer = new Customer(ID, this);
         }
     }
+
+    
+    @Override
+    //This method could also be renamed to an appropriate name since the arcitecture has changed. For instance createCustomer(). This is preffered.
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
+        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email,  password));
+        return receiveMessage();
+    }
+    
+    
+
 }

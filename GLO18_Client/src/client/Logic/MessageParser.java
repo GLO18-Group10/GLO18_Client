@@ -28,21 +28,36 @@ public class MessageParser {
         String data = message;
         return data;
     }
-/**
- * Protocol 01: get customer info
- * @return 01
- */
+
+    /**
+     * Protocol 01: get customer info
+     *
+     * @return 01
+     */
     public String toProtocol01() {
         return "01";
     }
-/**
- * Message to split the response from the server into an array
- * @param message Message from the server
- * @return An array of the different parameters from the server
- */
+
+    /**
+     * Message to split the response from the server into an array
+     *
+     * @param message Message from the server
+     * @return An array of the different parameters from the server
+     */
     public String[] fromProtocol(String message) {
         //Split the received data into the different parts
         String[] data = message.split(";");
         return data;
+    }
+
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
+        return ("07;" + ID + ";" + name + ";" + birthday + ";" + phonenumber + ";" + address + ";" + email + ";" + password);
+        //return fromProtocol01(logic.receiveMessage());
+    }
+
+    private String[] fromProtocol01(String message) {
+        //Split the received data into the different parts
+        return message.split(";");
+
     }
 }

@@ -22,17 +22,19 @@ public class LinkFacade implements iLink {
                     Integer.parseInt("2345"));
         }
         catch(Exception ioException){
-            
+            System.out.println("Connection error");
         }
     }
 
     @Override
     public void sendMessage(String message) {
         try{
+            System.out.println(message);
         serverConnection.sendMessage(message);
         }
         catch(Exception e){
-            
+            System.out.println("Send message error - is the client connection running?");
+            System.out.println(e.toString());
         }
  }
 
