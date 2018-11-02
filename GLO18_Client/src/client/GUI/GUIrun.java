@@ -18,16 +18,17 @@ import javafx.stage.Stage;
  * @author Jeppe Enevold
  */
 public class GUIrun extends Application implements iGUI {
+
     private static iLogic logic;
+
     private static GUIrun guiRun;
-    private Stage stage;
-    
+
     @Override
-    public void injectLogic(iLogic LogicLayer){
+    public void injectLogic(iLogic LogicLayer) {
         logic = LogicLayer;
     }
-    
-    public static GUIrun getInstance(){
+
+    public static GUIrun getInstance() {
         return guiRun;
     }
 
@@ -36,28 +37,61 @@ public class GUIrun extends Application implements iGUI {
 
         Parent root = FXMLLoader.load(getClass().getResource("admin.fxml"));
 
+
         Scene scene = new Scene(root);
-        this.stage = stage;
 
         stage.setResizable(true);
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @Override
     public void startApplication(String[] args) {
-        logic.startConnection();
+        this.startConnection();
         guiRun = this;
         launch(args);
     }
+
+    @Override
+    public String getName() {
+        return logic.getName();
+    }
+
+    @Override
+    public String getBirthday() {
+        return logic.getBirthday();
+    }
     
-    public String login(String ID, String password){
-        
+    public String login(String ID, String password){      
        return logic.login(ID, password);
+    }
+    
+    public int getAccountBalance(String accountID){
+        return logic.getAccountBalance(accountID);
     }
     
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
         return logic.toProtocol07(ID, name, birthday, phonenumber, address, email, password);
-
     }
+
+    @Override
+    public String getPhoneNo() {
+        return logic.getPhoneNo();
+    }
+
+    @Override
+    public String getAddress() {
+        return logic.getAddress();
+    }
+
+    @Override
+    public String getEmail() {
+        return logic.getEmail();
+    }
+
+    @Override
+    public void startConnection() {
+        logic.startConnection();
+    }
+
 }

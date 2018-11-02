@@ -5,12 +5,14 @@
  */
 package client.GUI;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
@@ -28,12 +30,10 @@ import javafx.scene.layout.VBox;
  * @author antonio
  */
 public class CustomerController implements Initializable {
-   @FXML
+    @FXML
     private AnchorPane AnchorPane;
     @FXML
     private AnchorPane AnchorPane1;
-    @FXML
-    private MenuButton MenuButton1;
     @FXML
     private HBox HBox;
     @FXML
@@ -78,25 +78,76 @@ public class CustomerController implements Initializable {
     private Button CleanButton;
     @FXML
     private MenuButton MenuButtonAccounts;
+    @FXML
+    private AnchorPane ProfileAnchor;
+    @FXML
+    private TextField NameField;
+    @FXML
+    private TextField BirthdayField;
+    @FXML
+    private TextField PhoneNoField;
+    @FXML
+    private TextField AddressField;
+    @FXML
+    private TextField EmailField;
+    @FXML
+    private MenuButton AccountsDropdown;
+    @FXML
+    private Label AccountBalanceLabel;
+    @FXML
+    private Button ProfileButton;
     
+    GUIrun guiRun = GUIrun.getInstance();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+
     @FXML
     private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
-    if (event.getSource() == TransferButton) {
+        if (event.getSource() == TransferButton) {
+            clearPanes();
             AnchorPane2.toFront();
             AnchorPane2.setVisible(true);
-            
         } else if (event.getSource() == AccountsButton) {
-            AnchorPane3.toFront();
-            AnchorPane3.setVisible(true);
-        } else if (event.getSource() == OptionsButton) {
+            clearPanes();
             AnchorPane1.toFront();
             AnchorPane1.setVisible(true);
-            
-            
-        } 
+        } else if (event.getSource() == OptionsButton) {
+            clearPanes();
+            AnchorPane3.toFront();
+            AnchorPane3.setVisible(true);
+        } else if (event.getSource() == ProfileButton) {
+            //Get all the information and update the text fields
+            EmailField.setEditable(false);
+            EmailField.setText(guiRun.getEmail());
+            AddressField.setEditable(false);
+            AddressField.setText(guiRun.getAddress());
+            PhoneNoField.setEditable(false);
+            PhoneNoField.setText(guiRun.getPhoneNo());
+            BirthdayField.setEditable(false);
+            BirthdayField.setText(guiRun.getBirthday());
+            NameField.setEditable(false);
+            NameField.setText(guiRun.getName());
+            //Clear current pane and display to the user
+            clearPanes();
+            ProfileAnchor.toFront();
+            ProfileAnchor.setVisible(true);
+        }
     }
+
+    @FXML
+    private void setAccountBalance(javafx.event.ActionEvent event) {
+        AccountBalanceLabel.setText(guiRun.getAccountBalance(AccountsDropdown.getText())+" DKK");
+    }
+    
+    private void clearPanes() {
+        AnchorPane1.setVisible(false);
+        AnchorPane2.setVisible(false);
+        AnchorPane3.setVisible(false);
+        ProfileAnchor.setVisible(false);
+    }
+
+ 
 }

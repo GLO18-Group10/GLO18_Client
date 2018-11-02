@@ -41,10 +41,10 @@ public class LinkFacade implements iLink {
     @Override
     public String receiveMessage() {
         try{
-        return serverConnection.receiveMessage();
+            return serverConnection.receiveMessage();
         }
         catch(Exception e){
-        return "error";  
+            return "error";  
         }
    }
     
