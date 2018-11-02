@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 public class GUIrun extends Application implements iGUI {
     private static iLogic logic;
     private static GUIrun guiRun;
-    private Stage stage;
     
     @Override
     public void injectLogic(iLogic LogicLayer){
@@ -37,7 +36,6 @@ public class GUIrun extends Application implements iGUI {
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 
         Scene scene = new Scene(root);
-        this.stage = stage;
 
         stage.setResizable(true);
         stage.setScene(scene);
