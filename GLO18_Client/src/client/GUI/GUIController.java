@@ -5,7 +5,9 @@
  */
 package client.GUI;
 
+
 import java.awt.event.ActionEvent;
+import client.Logic.LogicFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -18,16 +20,16 @@ import javafx.scene.control.Button;
  * @author Jeppe Enevold
  */
 public class GUIController implements Initializable {
-
+    GUIrun guiRun;
     @FXML
     private Button test;
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        System.out.println(guiRun.getInstance().getAccountBalance("7331"));
+        
     }    
    
 }

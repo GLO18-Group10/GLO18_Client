@@ -15,5 +15,6 @@ public interface iLogic {
     void sendMessage(String message);
     String receiveMessage();
     String login(String ID, String password);
+    public String toProtocol07(String ID, String name, String	birthday, String phonenumber, String address, String email, String password);
     public int getAccountBalance(String accountID);
 }

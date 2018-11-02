@@ -17,9 +17,9 @@ public class Client {
         iGUI GUI = new GUIrun();
         iLogic Logic = new LogicFacade();
         iLink Link = new LinkFacade();
-        
         Logic.injectLink(Link);
         GUI.injectLogic(Logic);
+        Logic.startConnection();
         GUI.startApplication(args);
     }
 }

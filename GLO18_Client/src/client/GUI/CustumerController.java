@@ -27,7 +27,7 @@ import javafx.scene.layout.VBox;
  *
  * @author antonio
  */
-public class CostumerController implements Initializable {
+public class CustumerController implements Initializable {
    @FXML
     private AnchorPane AnchorPane;
     @FXML
