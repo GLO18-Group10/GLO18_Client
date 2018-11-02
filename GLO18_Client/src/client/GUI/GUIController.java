@@ -5,6 +5,7 @@
  */
 package client.GUI;
 
+import client.Logic.LogicFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -17,16 +18,16 @@ import javafx.scene.control.Button;
  * @author Jeppe Enevold
  */
 public class GUIController implements Initializable {
-
+    GUIrun guiRun;
     @FXML
     private Button test;
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        System.out.println(guiRun.getInstance().toProtocol07("C1234567", "Kimse", "19-08-95", "23232323", "OdenseBy", "TestMail", "kode"));
+        
     }    
     
 }
