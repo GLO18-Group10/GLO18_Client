@@ -5,7 +5,11 @@
  */
 package client.GUI;
 
+
+import java.awt.event.ActionEvent;
+
 import client.Logic.LogicFacade;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -29,5 +33,5 @@ public class GUIController implements Initializable {
         System.out.println(guiRun.getInstance().toProtocol07("C1234567", "Kimse", "19-08-95", "23232323", "OdenseBy", "TestMail", "kode"));
         
     }    
-    
+   
 }

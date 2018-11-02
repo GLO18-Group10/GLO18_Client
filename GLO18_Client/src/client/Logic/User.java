@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package client.Acquaintance;
+package client.Logic;
 
 /**
  *
- * @author Jeppe Enevold
+ * @author Nick
  */
-public interface iGUI {
-    public void injectLogic(iLogic LogicLayer);
-    public void startApplication(String[] args);
-  
+public class User {
+    String ID;
+
+    public User(String ID) {
+        this.ID = ID;
+    }
+    
 }
