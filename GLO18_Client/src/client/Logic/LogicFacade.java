@@ -15,9 +15,12 @@ import client.Acquaintance.iLogic;
 public class LogicFacade implements iLogic {
 
     private static iLink Link;
-    MessageParser messageParser = new MessageParser();
+
     private static User user;
     
+
+    private MessageParser messageParser = new MessageParser(this);
+
     public void injectLink(iLink LinkLayer) {
         Link = LinkLayer;
     }
@@ -35,8 +38,8 @@ public class LogicFacade implements iLogic {
     @Override
     public String receiveMessage() {
         return Link.receiveMessage();
-
     }
+
 
     @Override
     public String login(String ID, String password) {
@@ -62,4 +65,15 @@ public class LogicFacade implements iLogic {
             user = new Customer(ID);
         }
     }
+
+    
+    @Override
+    //This method could also be renamed to an appropriate name since the arcitecture has changed. For instance createCustomer(). This is preffered.
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
+        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email,  password));
+        return receiveMessage();
+    }
+    
+    
+
 }

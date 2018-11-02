@@ -18,13 +18,13 @@ import javafx.stage.Stage;
  * @author Jeppe Enevold
  */
 public class GUIrun extends Application implements iGUI {
-    private static iLogic Logic;
+    private static iLogic logic;
     private static GUIrun guiRun;
     private Stage stage;
     
     @Override
     public void injectLogic(iLogic LogicLayer){
-        Logic = LogicLayer;
+        logic = LogicLayer;
     }
     
     public static GUIrun getInstance(){
@@ -33,6 +33,7 @@ public class GUIrun extends Application implements iGUI {
 
     @Override
     public void start(Stage stage) throws Exception {
+
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 
         Scene scene = new Scene(root);
@@ -51,6 +52,10 @@ public class GUIrun extends Application implements iGUI {
     
     public String login(String ID, String password){
         System.out.println("test in guirun");
-       return Logic.login(ID, password);
+       return logic.login(ID, password);
+    }
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
+        return logic.toProtocol07(ID, name, birthday, phonenumber, address, email, password);
+
     }
 }
