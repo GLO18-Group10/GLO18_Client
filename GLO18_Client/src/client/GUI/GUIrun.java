@@ -18,22 +18,24 @@ import javafx.stage.Stage;
  * @author Jeppe Enevold
  */
 public class GUIrun extends Application implements iGUI {
+
     private static iLogic logic;
+
     private static GUIrun guiRun;
+
     private Stage stage;
-    
+
     @Override
-    public void injectLogic(iLogic LogicLayer){
+    public void injectLogic(iLogic LogicLayer) {
         logic = LogicLayer;
     }
-    
-    public static GUIrun getInstance(){
+
+    public static GUIrun getInstance() {
         return guiRun;
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 
         Scene scene = new Scene(root);
@@ -43,16 +45,25 @@ public class GUIrun extends Application implements iGUI {
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @Override
     public void startApplication(String[] args) {
         logic.startConnection();
         guiRun = this;
         launch(args);
     }
+
+    @Override
+    public String getName() {
+        return logic.getName();
+    }
+
+    @Override
+    public String getBirthday() {
+        return logic.getBirthday();
+    }
     
-    public String login(String ID, String password){
-        
+    public String login(String ID, String password){      
        return logic.login(ID, password);
     }
     
@@ -60,4 +71,25 @@ public class GUIrun extends Application implements iGUI {
         return logic.toProtocol07(ID, name, birthday, phonenumber, address, email, password);
 
     }
+
+    @Override
+    public String getPhoneNo() {
+        return logic.getPhoneNo();
+    }
+
+    @Override
+    public String getAddress() {
+        return logic.getAddress();
+    }
+
+    @Override
+    public String getEmail() {
+        return logic.getEmail();
+    }
+
+    @Override
+    public void startConnection() {
+        logic.startConnection();
+    }
+
 }
