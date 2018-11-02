@@ -18,7 +18,7 @@ public class LinkFacade implements iLink {
     @Override
     public void startConnection() {
         try {
-            serverConnection = new ServerConnection("10.126.98.185",
+            serverConnection = new ServerConnection("10.126.7.229",
                     Integer.parseInt("2345"));
         }
         catch(Exception ioException){
@@ -41,10 +41,10 @@ public class LinkFacade implements iLink {
     @Override
     public String receiveMessage() {
         try{
-        return serverConnection.receiveMessage();
+            return serverConnection.receiveMessage();
         }
         catch(Exception e){
-        return "error";  
+            return "error";  
         }
    }
     

@@ -10,7 +10,6 @@ package client.Logic;
  * @author Peterzxcvbnm
  */
 public class MessageParser {
-
     LogicFacade logic;
 
     public MessageParser(LogicFacade logic) {
@@ -21,12 +20,20 @@ public class MessageParser {
         String message = "00" + ";" + ID + ";" + password;
         logic.sendMessage(message);
         return fromProtocol00(logic.receiveMessage());
-
     }
-
-    private String fromProtocol00(String message) {
-        String data = message;
-        return data;
+    
+    private String fromProtocol00(String message){
+     String data = message;
+     return data;
+    }
+    
+    public int toProtocol02(String accountID){
+        logic.sendMessage("02;"+ accountID);
+        return fromProtocol02(logic.receiveMessage()); 
+    }
+    
+    private int fromProtocol02(String message){
+        return Integer.parseInt(message);
     }
 
     /**
@@ -34,7 +41,7 @@ public class MessageParser {
      *
      * @return 01
      */
-    public String toProtocol01() {
+    public String toProtocol01(){
         return "01";
     }
 

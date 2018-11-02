@@ -64,9 +64,12 @@ public class GUIrun extends Application implements iGUI {
        return logic.login(ID, password);
     }
     
+    public int getAccountBalance(String accountID){
+        return logic.getAccountBalance(accountID);
+    }
+    
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
         return logic.toProtocol07(ID, name, birthday, phonenumber, address, email, password);
-
     }
 
     @Override
