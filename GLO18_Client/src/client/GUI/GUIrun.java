@@ -23,8 +23,6 @@ public class GUIrun extends Application implements iGUI {
 
     private static GUIrun guiRun;
 
-    private Stage stage;
-
     @Override
     public void injectLogic(iLogic LogicLayer) {
         logic = LogicLayer;
@@ -39,7 +37,6 @@ public class GUIrun extends Application implements iGUI {
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 
         Scene scene = new Scene(root);
-        this.stage = stage;
 
         stage.setResizable(true);
         stage.setScene(scene);
@@ -48,7 +45,7 @@ public class GUIrun extends Application implements iGUI {
 
     @Override
     public void startApplication(String[] args) {
-        logic.startConnection();
+        this.startConnection();
         guiRun = this;
         launch(args);
     }
