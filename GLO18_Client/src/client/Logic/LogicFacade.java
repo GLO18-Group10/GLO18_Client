@@ -51,6 +51,11 @@ public class LogicFacade implements iLogic {
         return message;
     }
     
+    @Override
+    public int getAccountBalance(String accountID) {
+        return messageParser.toProtocol02(accountID);
+    }
+    
     public void initializeUser(String ID) {
         
         if (ID.startsWith("A")) {

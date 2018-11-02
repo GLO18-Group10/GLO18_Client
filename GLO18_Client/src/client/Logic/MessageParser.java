@@ -37,12 +37,12 @@ public class MessageParser {
         String[] data = message.split(";");
     }
     
-    public String toProtocol02(String accountID){
+    public int toProtocol02(String accountID){
         logic.sendMessage("02;"+ accountID);
         return fromProtocol02(logic.receiveMessage()); 
     }
     
-    private String fromProtocol02(String message){
-        return message;
+    private int fromProtocol02(String message){
+        return Integer.parseInt(message);
     }
 }

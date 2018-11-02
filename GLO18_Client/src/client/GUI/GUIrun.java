@@ -53,4 +53,8 @@ public class GUIrun extends Application implements iGUI {
         
        return Logic.login(ID, password);
     }
+    
+    public int getAccountBalance(String accountID){
+        return Logic.getAccountBalance(accountID);
+    }
 }
