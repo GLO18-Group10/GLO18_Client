@@ -93,6 +93,8 @@ public class CustomerController implements Initializable {
     private TextField EmailField;
     @FXML
     private Button ProfileButton;
+    
+    GUIrun guiRun = GUIrun.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -105,7 +107,6 @@ public class CustomerController implements Initializable {
             clearPanes();
             AnchorPane2.toFront();
             AnchorPane2.setVisible(true);
-
         } else if (event.getSource() == AccountsButton) {
             clearPanes();
             AnchorPane3.toFront();
@@ -117,15 +118,15 @@ public class CustomerController implements Initializable {
         } else if (event.getSource() == ProfileButton) {
             //Get all the information and update the text fields
             EmailField.setEditable(false);
-            EmailField.setText(GUIrun.getInstance().getName());
+            EmailField.setText(guiRun.getName());
             AddressField.setEditable(false);
-            AddressField.setText(GUIrun.getInstance().getName());
+            AddressField.setText(guiRun.getName());
             PhoneNoField.setEditable(false);
-            PhoneNoField.setText(GUIrun.getInstance().getName());
+            PhoneNoField.setText(guiRun.getName());
             BirthdayField.setEditable(false);
-            BirthdayField.setText(GUIrun.getInstance().getName());
+            BirthdayField.setText(guiRun.getName());
             NameField.setEditable(false);
-            NameField.setText(GUIrun.getInstance().getName());
+            NameField.setText(guiRun.getName());
             //Clear current pane and display to the user
             clearPanes();
             ProfileAnchor.toFront();
