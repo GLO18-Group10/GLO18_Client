@@ -27,8 +27,9 @@ import javafx.scene.layout.VBox;
  *
  * @author antonio
  */
-public class CostumerController implements Initializable {
-   @FXML
+public class CustomerController implements Initializable {
+
+    @FXML
     private AnchorPane AnchorPane;
     @FXML
     private AnchorPane AnchorPane1;
@@ -92,21 +93,25 @@ public class CostumerController implements Initializable {
     private TextField EmailField;
     @FXML
     private Button ProfileButton;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+
     @FXML
     private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
-    if (event.getSource() == TransferButton) {
+        if (event.getSource() == TransferButton) {
+            clearPanes();
             AnchorPane2.toFront();
             AnchorPane2.setVisible(true);
-            
+
         } else if (event.getSource() == AccountsButton) {
+            clearPanes();
             AnchorPane3.toFront();
             AnchorPane3.setVisible(true);
         } else if (event.getSource() == OptionsButton) {
+            clearPanes();
             AnchorPane1.toFront();
             AnchorPane1.setVisible(true);
         } else if (event.getSource() == ProfileButton) {
@@ -121,10 +126,17 @@ public class CostumerController implements Initializable {
             BirthdayField.setText(GUIrun.getInstance().getName());
             NameField.setEditable(false);
             NameField.setText(GUIrun.getInstance().getName());
-            //Display to the user
+            //Clear current pane and display to the user
+            clearPanes();
             ProfileAnchor.toFront();
-            ProfileAnchor.setVisible(true);    
-            
-        } 
+            ProfileAnchor.setVisible(true);
+        }
+    }
+
+    private void clearPanes() {
+        AnchorPane1.setVisible(false);
+        AnchorPane2.setVisible(false);
+        AnchorPane3.setVisible(false);
+        ProfileAnchor.setVisible(false);
     }
 }
