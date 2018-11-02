@@ -16,28 +16,47 @@ public class LogicFacade implements iLogic {
 
     private static iLink Link;
     private static User user;
+    private static iLink link;
+    private Customer customer;
+    private Admin admin;
+
     private MessageParser messageParser = new MessageParser(this);
 
+    @Override
     public void injectLink(iLink LinkLayer) {
-        Link = LinkLayer;
+        link = LinkLayer;
     }
 
     @Override
     public void startConnection() {
-        Link.startConnection();
+        link.startConnection();
     }
 
     @Override
     public void sendMessage(String message) {
-        Link.sendMessage(message);
+        link.sendMessage(message);
     }
 
     @Override
     public String receiveMessage() {
-        return Link.receiveMessage();
+        return link.receiveMessage();
     }
 
     @Override
+    public String getName() {
+        return customer.getName();
+    }
+
+    @Override
+    public String getBirthday() {
+        return customer.getBirthday();
+    }
+
+    @Override
+    public String getPhoneNo() {
+        return customer.getBirthday();
+    }
+    
     public String login(String ID, String password) {
         
         String message = messageParser.toProtocol00(ID, password);
@@ -55,14 +74,23 @@ public class LogicFacade implements iLogic {
         return messageParser.toProtocol02(accountID);
     }
     
+
+    @Override
+    public String getAddress() {
+        return customer.getAddress();
+    }
+
+    @Override
+    public String getEmail() {
+        return customer.getEmail();
+    }
+
     public void initializeUser(String ID) {
-        
         if (ID.startsWith("A")) {
-            user = new Adminstrator(ID);
-        
-        } 
-        else if (ID.startsWith("C")) {
-            user = new Customer(ID);
+            admin = new Admin(ID, this);
+
+        } else if (ID.startsWith("C")) {
+            customer = new Customer(ID, this);
         }
     }
 
