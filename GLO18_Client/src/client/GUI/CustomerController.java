@@ -91,11 +91,10 @@ public class CustomerController implements Initializable {
     @FXML
     private TextField EmailField;
     @FXML
-    private Button AccountsButton1;
-    @FXML
     private MenuButton AccountsDropdown;
     @FXML
     private Label AccountBalanceLabel;
+    @FXML
     private Button ProfileButton;
     
     GUIrun guiRun = GUIrun.getInstance();
@@ -137,16 +136,18 @@ public class CustomerController implements Initializable {
             ProfileAnchor.setVisible(true);
         }
     }
-    
-    @FXML
-    private void getAccountBalance(ActionEvent event){
-       AccountBalanceLabel.setText(guiRun.getAccountBalance(AccountsDropdown.getText())+" DKK");
-    }
 
+    @FXML
+    private void setAccountBalance(javafx.event.ActionEvent event) {
+        AccountBalanceLabel.setText(guiRun.getAccountBalance(AccountsDropdown.getText())+" DKK");
+    }
+    
     private void clearPanes() {
         AnchorPane1.setVisible(false);
         AnchorPane2.setVisible(false);
         AnchorPane3.setVisible(false);
         ProfileAnchor.setVisible(false);
     }
+
+ 
 }

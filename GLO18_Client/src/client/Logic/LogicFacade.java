@@ -14,7 +14,6 @@ import client.Acquaintance.iLogic;
  */
 public class LogicFacade implements iLogic {
 
-    private static iLink Link;
     private static User user;
     private static iLink link;
     private Customer customer;
