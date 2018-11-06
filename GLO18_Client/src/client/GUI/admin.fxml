@@ -25,7 +25,7 @@
       <Button fx:id="DeleteButton" layoutX="233.0" layoutY="571.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="140.0" text="Delete" />
       <TextField fx:id="SearchField" layoutX="658.0" layoutY="223.0" prefHeight="28.0" prefWidth="320.0" promptText="Name" />
       <Label layoutX="658.0" layoutY="163.0" prefHeight="38.0" prefWidth="171.0" text="create customer account" />
-      <Button fx:id="LogoutButton" layoutX="14.0" layoutY="640.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="140.0" text="Logout" />
+      <Button fx:id="LogoutButton" layoutX="14.0" layoutY="640.0" mnemonicParsing="false" onAction="#logoutHandler" prefHeight="38.0" prefWidth="140.0" text="Logout" />
       <Button fx:id="CreateButton" layoutX="883.0" layoutY="571.0" mnemonicParsing="false" onAction="#CreateButtonHandler" prefHeight="38.0" prefWidth="140.0" text="Create" />
       <TextField fx:id="FirstNameField" layoutX="635.0" layoutY="321.0" promptText="First name" />
       <TextField fx:id="LastnameField" layoutX="846.0" layoutY="321.0" promptText="Last name" />

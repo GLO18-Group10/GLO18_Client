@@ -134,6 +134,8 @@ public class CustomerController implements Initializable {
             clearPanes();
             ProfileAnchor.toFront();
             ProfileAnchor.setVisible(true);
+        }else if(event.getSource() == LogoutButton){
+            
         }
     }
 

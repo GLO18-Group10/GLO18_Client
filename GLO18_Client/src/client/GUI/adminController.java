@@ -65,6 +65,11 @@ public class adminController implements Initializable {
     private String createCustomer(String ID, String name, String birthday, String phoneNumber, String address, String email, String password){
        return guiRun.getInstance().toProtocol07(ID, name, birthday, phoneNumber, address, email, password);
     }
+
+    @FXML
+    private void logoutHandler(ActionEvent event) {
+        
+    }
                 
     
 }
