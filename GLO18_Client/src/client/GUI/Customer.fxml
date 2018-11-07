@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -24,105 +19,106 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CustomerController">
+<AnchorPane id="AnchorPane" fx:id="CustomerParentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CustomerController">
 
          <children>
-      <AnchorPane fx:id="AnchorPane2" layoutX="160.0" layoutY="-8.0" prefHeight="608.0" prefWidth="740.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
+      <AnchorPane fx:id="NewTransferAnchorPane" layoutX="292.0" layoutY="-8.0" prefHeight="620.0" prefWidth="608.0" visible="false" AnchorPane.bottomAnchor="-12.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
          <children>
-            <Label layoutX="27.0" layoutY="93.0" text="Choose Account">
+            <Label layoutX="20.0" layoutY="62.0" text="Choose Account">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="33.0" layoutY="60.0" prefHeight="27.0" prefWidth="94.0" text="From" wrapText="true">
+            <Label layoutX="23.0" layoutY="29.0" prefHeight="27.0" prefWidth="94.0" text="From" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="28.0" layoutY="194.0" text="Text on transfer" />
-            <Label layoutX="32.0" layoutY="232.0" text="Amount" />
-            <TextField fx:id="TransferField" layoutX="171.0" layoutY="189.0" />
-            <TextField fx:id="AmountField" layoutX="171.0" layoutY="227.0" />
-            <Label layoutX="33.0" layoutY="272.0" text="Date" />
-            <TextField fx:id="DateField" layoutX="171.0" layoutY="267.0" />
-            <Label layoutX="34.0" layoutY="319.0" prefHeight="27.0" prefWidth="94.0" text="To" wrapText="true">
+            <Label layoutX="27.0" layoutY="229.0" text="Amount" />
+            <TextField fx:id="AmountField" layoutX="171.0" layoutY="225.0" prefHeight="25.0" prefWidth="236.0" />
+            <Label layoutX="29.0" layoutY="267.0" text="Date" />
+            <TextField fx:id="DateField" layoutX="171.0" layoutY="263.0" prefHeight="25.0" prefWidth="236.0" />
+            <Label layoutX="23.0" layoutY="310.0" prefHeight="27.0" prefWidth="94.0" text="To" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="31.0" layoutY="361.0" text="reg and conto number" />
-            <Label layoutX="35.0" layoutY="410.0" text="Text to recipient " />
-            <TextField fx:id="RegField" layoutX="171.0" layoutY="356.0" prefHeight="18.0" prefWidth="75.0" />
-            <TextField fx:id="ContoField" layoutX="253.0" layoutY="356.0" />
-            <TextField fx:id="TextRecipientField" layoutX="171.0" layoutY="405.0" />
-            <TextArea fx:id="MessageArea" layoutX="171.0" layoutY="445.0" prefHeight="115.0" prefWidth="176.0" />
-            <Label layoutX="35.0" layoutY="445.0" text="Message to recipient" />
-            <Button fx:id="ProccedButton" layoutX="41.0" layoutY="568.0" mnemonicParsing="false" style="-fx-background-color: #3f2B63;" text="Procced" textFill="WHITE" />
-            <Button fx:id="CleanButton" layoutX="125.0" layoutY="568.0" mnemonicParsing="false" style="-fx-background-color: #3f2B63;" text="Clean " textFill="WHITE" />
-            <Separator layoutX="5.0" layoutY="301.0" prefHeight="5.0" prefWidth="726.0" />
-            <MenuButton fx:id="MenuButtonAccounts" layoutX="199.0" layoutY="80.0" mnemonicParsing="false" text="Accounts">
+            <Label layoutX="22.0" layoutY="349.0" text="Account ID + reg. " />
+            <TextField fx:id="RegField" layoutX="332.0" layoutY="345.0" prefHeight="18.0" prefWidth="75.0" />
+            <TextField fx:id="AccountField" layoutX="171.0" layoutY="345.0" prefHeight="25.0" prefWidth="152.0" />
+            <TextArea fx:id="MessageArea" layoutX="171.0" layoutY="388.0" prefHeight="115.0" prefWidth="236.0" />
+            <Label layoutX="23.0" layoutY="388.0" text="Message to recipient" />
+            <Button fx:id="ProccedButton" layoutX="25.0" layoutY="568.0" mnemonicParsing="false" style="-fx-background-color: #3f2B63;" text="Procced" textFill="WHITE" />
+            <Button fx:id="CleanButton" layoutX="105.0" layoutY="568.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: #3f2B63;" text="Clean " textFill="WHITE" />
+            <Separator layoutX="-4.0" layoutY="301.0" prefHeight="6.0" prefWidth="608.0" />
+            <MenuButton fx:id="MenuButtonAccounts" layoutX="171.0" layoutY="60.0" mnemonicParsing="false" text="Accounts">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
               </items>
             </MenuButton>
+            <Label fx:id="AmountErrorLabel" layoutX="418.0" layoutY="228.0" prefHeight="17.0" prefWidth="180.0" textFill="RED" />
+            <Label fx:id="DateErrorLabel" layoutX="418.0" layoutY="267.0" prefHeight="17.0" prefWidth="180.0" textFill="RED" />
+            <Label fx:id="AccountErrorLabel" layoutX="418.0" layoutY="349.0" prefHeight="17.0" prefWidth="180.0" textFill="RED" />
+            <Label fx:id="MessageErrorLabel" layoutX="418.0" layoutY="388.0" prefHeight="17.0" prefWidth="180.0" textFill="RED" />
          </children>
       </AnchorPane>
-      <AnchorPane id="AnchorPane" fx:id="AnchorPane1" layoutX="160.0" layoutY="-8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="740.0" style="-fx-background-color: #FFFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
+      <AnchorPane id="AnchorPane" fx:id="AccountsAnchorPane" layoutX="292.0" layoutY="-8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="608.0" style="-fx-background-color: #FFFFFFF;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
          <children>
-            <MenuButton fx:id="AccountsDropdown" layoutX="43.0" layoutY="40.0" mnemonicParsing="false" onAction="#setAccountBalance" text="Accounts">
+            <MenuButton fx:id="AccountsDropdown" layoutX="10.0" layoutY="19.0" mnemonicParsing="false" onAction="#setAccountBalance" text="Accounts">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
               </items>
             </MenuButton>
-            <HBox fx:id="HBox" layoutX="5.0" layoutY="183.0" prefHeight="55.0" prefWidth="726.0">
+            <HBox fx:id="HBox" layoutX="5.0" layoutY="183.0" prefHeight="55.0" prefWidth="608.0">
                <children>
-                  <Label prefHeight="56.0" prefWidth="74.0">
+                  <Label alignment="CENTER" prefHeight="55.0" prefWidth="120.0" text="Account">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="52.0" prefWidth="129.0" text="Date">
+                  <Label alignment="CENTER" prefHeight="52.0" prefWidth="120.0" text="Date">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="55.0" prefWidth="163.0" text="Text">
+                  <Label alignment="CENTER" prefHeight="55.0" prefWidth="120.0" text="Amount">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="61.0" prefWidth="147.0" text="Amount">
+                  <Label alignment="CENTER" prefHeight="55.0" prefWidth="120.0" text="Reciever">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="64.0" prefWidth="129.0" text="Balance ">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label prefHeight="72.0" prefWidth="57.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label prefHeight="70.0" prefWidth="105.0" text="Category">
+                  <Label alignment="CENTER" prefHeight="55.0" prefWidth="120.0" text="Text">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <ScrollPane fx:id="ScrollPane" layoutX="6.0" layoutY="237.0" prefHeight="371.0" prefWidth="733.0" />
-            <Label fx:id="AccountBalanceLabel" layoutX="569.0" layoutY="44.0" prefHeight="17.0" prefWidth="149.0" text="0 DKK" />
-            <Label layoutX="502.0" layoutY="44.0" prefHeight="17.0" prefWidth="49.0" text="Balance:" />
+            <ScrollPane fx:id="ScrollPane" layoutX="-7.0" layoutY="238.0" prefHeight="370.0" prefWidth="615.0" />
+            <Label fx:id="AccountBalanceLabel" alignment="CENTER_RIGHT" layoutX="478.0" layoutY="23.0" prefHeight="35.0" prefWidth="126.0" text="0 DKK" textAlignment="RIGHT">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label layoutX="412.0" layoutY="23.0" prefHeight="35.0" prefWidth="67.0" text="Balance:">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label layoutX="10.0" layoutY="136.0" text="Transaction History">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="AnchorPane3" layoutX="164.0" prefHeight="608.0" prefWidth="583.0" visible="false">
+      <AnchorPane fx:id="AnchorPane3" layoutX="289.0" prefHeight="608.0" prefWidth="615.0" visible="false">
          <children>
-            <GridPane fx:id="GridPane" layoutX="15.0" prefHeight="608.0" prefWidth="717.0" AnchorPane.leftAnchor="15.0">
+            <GridPane fx:id="GridPane" layoutX="2.0" prefHeight="608.0" prefWidth="608.0" AnchorPane.leftAnchor="2.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -134,41 +130,61 @@
             </GridPane>
          </children>
       </AnchorPane>
-      <VBox fx:id="VBox" layoutX="-2.0" prefHeight="608.0" prefWidth="165.0" style="-fx-background-color: #3f2B63;">
+      <VBox fx:id="VBox" layoutX="-2.0" prefHeight="600.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;">
          <children>
-            <Pane fx:id="Pane" prefHeight="321.0" prefWidth="172.0">
+            <Pane fx:id="Pane" prefHeight="321.0" prefWidth="171.0">
                <children>
-                  <TextArea fx:id="TextArea" layoutX="-4.0" layoutY="185.0" prefHeight="5.0" prefWidth="169.0" style="-fx-background-color: #3f2B63;" text="FUNDUS ARE SAFU">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextArea>
-                  <ImageView fitHeight="178.0" fitWidth="159.0" layoutX="3.0" layoutY="7.0">
+                  <ImageView fitHeight="277.0" fitWidth="277.0" layoutX="7.0" layoutY="7.0">
                      <image>
                         <Image url="@../../Img/Elena.png" />
                      </image>
                   </ImageView>
+                  <Label alignment="TOP_CENTER" layoutY="290.0" prefHeight="27.0" prefWidth="292.0" text="FUNDUS ARE SAFU" textAlignment="CENTER" textFill="#ffea00">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
-            <Button fx:id="AccountsButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="183.0" style="-fx-background-color: #3f2B63;" text="Accounts" textFill="WHITE" />
-            <Button fx:id="TransferButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Transferring" textFill="WHITE" />
-            <Button fx:id="ProfileButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="183.0" style="-fx-background-color: #3f2B63;" text="Profile" textFill="WHITE" />
-            <Button fx:id="OptionsButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Options" textFill="WHITE" />
-            <Button fx:id="LogoutButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #3f2B63;" text="Logout" textFill="WHITE" />
+            <Button fx:id="AccountsButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Accounts" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Button fx:id="TransferButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="New Transaction" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Button fx:id="ProfileButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Profile" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Button fx:id="OptionsButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Options" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Button fx:id="LogoutButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Logout" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
          </children>
       </VBox>
-      <AnchorPane fx:id="ProfileAnchor" layoutX="164.0" layoutY="-2.0" prefHeight="620.0" prefWidth="593.0" visible="false">
+      <AnchorPane fx:id="ProfileAnchor" layoutX="289.0" layoutY="-2.0" prefHeight="608.0" prefWidth="608.0">
          <children>
-            <TextField fx:id="BirthdayField" layoutX="100.0" layoutY="150.0" />
-            <TextField fx:id="PhoneNoField" layoutX="100.0" layoutY="225.0" />
-            <TextField fx:id="AddressField" layoutX="100.0" layoutY="300.0" />
-            <TextField fx:id="EmailField" layoutX="100.0" layoutY="375.0" />
-            <TextField fx:id="NameField" layoutX="100.0" layoutY="75.0" />
-            <Label layoutX="100.0" layoutY="350.0" text="Email" />
-            <Label layoutX="100.0" layoutY="200.0" text="Phone Number" />
-            <Label layoutX="100.0" layoutY="275.0" text="Address" />
-            <Label layoutX="100.0" layoutY="125.0" text="Birthday" />
-            <Label layoutX="100.0" layoutY="50.0" text="Name" />
+            <TextField fx:id="BirthdayField" layoutX="18.0" layoutY="141.0" />
+            <TextField fx:id="PhoneNoField" layoutX="18.0" layoutY="198.0" />
+            <TextField fx:id="AddressField" layoutX="18.0" layoutY="257.0" />
+            <TextField fx:id="EmailField" layoutX="18.0" layoutY="316.0" />
+            <TextField fx:id="NameField" layoutX="18.0" layoutY="84.0" />
+            <Label layoutX="21.0" layoutY="299.0" text="Email" />
+            <Label layoutX="20.0" layoutY="181.0" text="Phone Number" />
+            <Label layoutX="19.0" layoutY="240.0" text="Address" />
+            <Label layoutX="19.0" layoutY="124.0" text="Birthday" />
+            <Label layoutX="19.0" layoutY="67.0" text="Name" />
+            <Label layoutX="19.0" layoutY="14.0" text="Profile:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
