@@ -100,6 +100,8 @@ public class CustomerController implements Initializable {
     private Label MessageErrorLabel;
     @FXML
     private AnchorPane AccountsAnchorPane;
+    @FXML
+    private TextField CPRField;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -132,6 +134,7 @@ public class CustomerController implements Initializable {
             BirthdayField.setText(guiRun.getBirthday());
             NameField.setEditable(false);
             NameField.setText(guiRun.getName());
+            CPRField.setEditable(false);
             //Clear current pane and display to the user
             clearPanes();
             ProfileAnchor.toFront();

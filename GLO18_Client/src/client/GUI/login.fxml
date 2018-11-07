@@ -18,10 +18,10 @@
                </image>
             </ImageView>
          </children></AnchorPane>
+      <TextField fx:id="UsernameField" layoutX="591.0" layoutY="206.0" prefHeight="31.0" prefWidth="240.0" promptText="Username" />
       <PasswordField fx:id="passwordField" layoutX="592.0" layoutY="250.0" prefHeight="31.0" prefWidth="240.0" promptText="Password" />
       <Button fx:id="LoginButton" layoutX="720.0" layoutY="341.0" mnemonicParsing="false" onAction="#Login" prefHeight="47.0" prefWidth="182.0" style="-fx-background-color: #3f2B63;" text="Login" textFill="WHITE" />
       <Button fx:id="ExitButton" layoutX="521.0" layoutY="341.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-color: #3f2B63;" text="Exit" textFill="WHITE" />
-      <TextField fx:id="UsernameField" layoutX="591.0" layoutY="206.0" prefHeight="31.0" prefWidth="240.0" promptText="Username" />
       <Label fx:id="alertField" layoutX="592.0" layoutY="292.0" prefHeight="31.0" prefWidth="240.0" />
    </children>
 </AnchorPane>
