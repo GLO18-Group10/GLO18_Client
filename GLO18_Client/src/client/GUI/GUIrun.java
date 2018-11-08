@@ -49,6 +49,14 @@ public class GUIrun extends Application implements iGUI {
         guiRun = this;
         launch(args);
     }
+    
+    /**
+     * when the application stops, the user is logged out
+     */
+    @Override
+    public void stop(){
+        logout();
+    }
 
     @Override
     public String getName() {
@@ -62,6 +70,10 @@ public class GUIrun extends Application implements iGUI {
     
     public String login(String ID, String password){      
        return logic.login(ID, password);
+    }
+    
+    public String logout(){
+        return logic.logout();
     }
     
     public int getAccountBalance(String accountID){

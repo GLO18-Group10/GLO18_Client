@@ -67,4 +67,8 @@ public class MessageParser {
         return message.split(";");
 
     }
+    public String toProtocol18(){
+        logic.sendMessage("18");
+        return logic.receiveMessage();
+    }
 }

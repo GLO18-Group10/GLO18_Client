@@ -56,6 +56,7 @@ public class LogicFacade implements iLogic {
         return customer.getPhoneNo();
     }
     
+    @Override
     public String login(String ID, String password) {
         
         String message = messageParser.toProtocol00(ID, password);
@@ -66,6 +67,20 @@ public class LogicFacade implements iLogic {
         }
         
         return message;
+    }
+    
+    @Override
+    public String logout(){
+        String message = messageParser.toProtocol18();
+        
+        if(message.equalsIgnoreCase("true")){
+            admin = null;
+            customer = null;
+            return "true";
+        }else{
+            return "false";
+        }
+        
     }
     
     @Override

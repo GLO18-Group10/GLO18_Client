@@ -5,15 +5,17 @@
  */
 package client.GUI;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -23,6 +25,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -135,7 +138,22 @@ public class CustomerController implements Initializable {
             ProfileAnchor.toFront();
             ProfileAnchor.setVisible(true);
         }else if(event.getSource() == LogoutButton){
-            
+            System.out.println("logout button");
+            if(guiRun.logout().equalsIgnoreCase("true")){
+                System.out.println("logout was true");
+                try {
+                        Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
+                        Scene newScene = new Scene(nextView);
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        stage.setScene(newScene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        System.out.println("logout error");
+                        ex.printStackTrace();
+                    }
+            }else if(guiRun.logout().equalsIgnoreCase("false")){
+                System.out.println("could not log out"); //this should bechanged to a label in the GUI
+            }
         }
     }
 

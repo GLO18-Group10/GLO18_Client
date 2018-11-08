@@ -18,4 +18,5 @@ public interface iGUI {
     String getAddress();
     String getEmail();
     void startConnection();
+    public String logout();
 }
