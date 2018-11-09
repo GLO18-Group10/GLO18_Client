@@ -100,6 +100,10 @@ public class CustomerController implements Initializable {
     GUIrun guiRun = GUIrun.getInstance();
     @FXML
     private Button EditInformation;
+    @FXML
+    private Button SaveButtonHandler;
+    @FXML
+    private Button CancelEditButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -122,16 +126,11 @@ public class CustomerController implements Initializable {
             AnchorPane3.setVisible(true);
         } else if (event.getSource() == ProfileButton) {
             //Get all the information and update the text fields
-            EmailField.setEditable(false);
-            EmailField.setText(guiRun.getEmail());
-            AddressField.setEditable(false);
-            AddressField.setText(guiRun.getAddress());
-            PhoneNoField.setEditable(false);
-            PhoneNoField.setText(guiRun.getPhoneNo());
-            BirthdayField.setEditable(false);
-            BirthdayField.setText(guiRun.getBirthday());
-            NameField.setEditable(false);
-            NameField.setText(guiRun.getName());
+            EmailField.setText(guiRun.getCustomer().getEmail());
+            AddressField.setText(guiRun.getCustomer().getAddress());
+            PhoneNoField.setText(guiRun.getCustomer().getPhoneNo());
+            BirthdayField.setText(guiRun.getCustomer().getBirthday());
+            NameField.setText(guiRun.getCustomer().getName());
             //Clear current pane and display to the user
             clearPanes();
             ProfileAnchor.toFront();
@@ -164,6 +163,34 @@ public class CustomerController implements Initializable {
         System.out.println(name + phoneNo + address + email);
         System.out.println(storeCustomerInfo(name, phoneNo, address, email));
         
+    }
+
+    @FXML
+    private void EditEnableButtonHandler(javafx.event.ActionEvent event) {
+        NameField.setDisable(false);
+        PhoneNoField.setDisable(false);
+        AddressField.setDisable(false);
+        EmailField.setDisable(false);
+        CancelEditButton.setVisible(true);
+        SaveButtonHandler.setVisible(true);
+    }
+
+    @FXML
+    private void CancelEditButtonHandler(javafx.event.ActionEvent event) {
+        CancelEditButton.setVisible(false);
+        SaveButtonHandler.setVisible(false);
+        NameField.setDisable(true);
+        PhoneNoField.setDisable(true);
+        AddressField.setDisable(true);
+        EmailField.setDisable(true);
+        RestoreInfoInFields();
+    }
+    
+    private void RestoreInfoInFields(){
+        NameField.setText(guiRun.getCustomer().getName());
+        PhoneNoField.setText(guiRun.getCustomer().getPhoneNo());
+        AddressField.setText(guiRun.getCustomer().getAddress());
+        EmailField.setText(guiRun.getCustomer().getEmail());
     }
 
 

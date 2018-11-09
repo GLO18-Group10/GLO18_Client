@@ -154,17 +154,19 @@
       </VBox>
       <AnchorPane fx:id="ProfileAnchor" layoutX="164.0" layoutY="-2.0" prefHeight="620.0" prefWidth="593.0" visible="false">
          <children>
-            <TextField fx:id="BirthdayField" editable="false" layoutX="100.0" layoutY="150.0" />
-            <TextField fx:id="PhoneNoField" layoutX="100.0" layoutY="225.0" />
-            <TextField fx:id="AddressField" layoutX="100.0" layoutY="300.0" />
-            <TextField fx:id="EmailField" layoutX="100.0" layoutY="375.0" />
-            <TextField fx:id="NameField" layoutX="100.0" layoutY="75.0" />
+            <TextField fx:id="BirthdayField" disable="true" editable="false" layoutX="100.0" layoutY="150.0" />
+            <TextField fx:id="PhoneNoField" disable="true" layoutX="100.0" layoutY="225.0" />
+            <TextField fx:id="AddressField" disable="true" layoutX="100.0" layoutY="300.0" />
+            <TextField fx:id="EmailField" disable="true" layoutX="100.0" layoutY="375.0" />
+            <TextField fx:id="NameField" disable="true" layoutX="100.0" layoutY="75.0" />
             <Label layoutX="100.0" layoutY="350.0" text="Email" />
             <Label layoutX="100.0" layoutY="200.0" text="Phone Number" />
             <Label layoutX="100.0" layoutY="275.0" text="Address" />
             <Label layoutX="100.0" layoutY="125.0" text="Birthday" />
             <Label layoutX="100.0" layoutY="50.0" text="Name" />
-            <Button fx:id="EditInformation" layoutX="130.0" layoutY="449.0" mnemonicParsing="false" onAction="#storeCustomerInfoButtonHandler" text="Edit information" />
+            <Button fx:id="EditInformation" layoutX="345.0" layoutY="225.0" mnemonicParsing="false" onAction="#EditEnableButtonHandler" text="Edit information" />
+            <Button fx:id="SaveButtonHandler" layoutX="168.0" layoutY="437.0" mnemonicParsing="false" onAction="#storeCustomerInfoButtonHandler" text="Save" visible="false" />
+            <Button fx:id="CancelEditButton" layoutX="161.0" layoutY="496.0" mnemonicParsing="false" onAction="#CancelEditButtonHandler" text="Cancel" visible="false" />
          </children>
       </AnchorPane>
    </children>

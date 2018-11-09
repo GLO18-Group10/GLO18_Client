@@ -7,7 +7,7 @@ package client.GUI;
 
 import client.Acquaintance.iGUI;
 import client.Acquaintance.iLogic;
-import java.util.jar.Attributes;
+import client.Logic.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,7 +36,7 @@ public class GUIrun extends Application implements iGUI {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("customer.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 
 
         Scene scene = new Scene(root);
@@ -53,21 +53,13 @@ public class GUIrun extends Application implements iGUI {
         launch(args);
     }
     
-    @Override
-    public String getName() {
-        return logic.getName();
+    
+
+    public String login(String ID, String password) {
+        return logic.login(ID, password);
     }
 
-    @Override
-    public String getBirthday() {
-        return logic.getBirthday();
-    }
-    
-    public String login(String ID, String password){      
-       return logic.login(ID, password);
-    }
-    
-    public int getAccountBalance(String accountID){
+    public int getAccountBalance(String accountID) {
         return logic.getAccountBalance(accountID);
     }
     
@@ -80,23 +72,12 @@ public class GUIrun extends Application implements iGUI {
     }
 
     @Override
-    public String getPhoneNo() {
-        return logic.getPhoneNo();
-    }
-
-    @Override
-    public String getAddress() {
-        return logic.getAddress();
-    }
-
-    @Override
-    public String getEmail() {
-        return logic.getEmail();
-    }
-
-    @Override
     public void startConnection() {
         logic.startConnection();
+    }
+
+    public Customer getCustomer() {
+        return logic.getCustomer();
     }
 
 }

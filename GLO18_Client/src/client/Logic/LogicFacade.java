@@ -41,47 +41,21 @@ public class LogicFacade implements iLogic {
         return link.receiveMessage();
     }
 
-    @Override
-    public String getName() {
-        return customer.getName();
-    }
-
-    @Override
-    public String getBirthday() {
-        return customer.getBirthday();
-    }
-
-    @Override
-    public String getPhoneNo() {
-        return customer.getPhoneNo();
-    }
-    
     public String login(String ID, String password) {
-        
+
         String message = messageParser.toProtocol00(ID, password);
-       
+
         if (message.equalsIgnoreCase("true")) {
             initializeUser(ID);
-            
+
         }
-        
+
         return message;
     }
-    
+
     @Override
     public int getAccountBalance(String accountID) {
         return messageParser.toProtocol02(accountID);
-    }
-    
-
-    @Override
-    public String getAddress() {
-        return customer.getAddress();
-    }
-
-    @Override
-    public String getEmail() {
-        return customer.getEmail();
     }
 
     public void initializeUser(String ID) {
@@ -95,15 +69,21 @@ public class LogicFacade implements iLogic {
 
     @Override
     //This method could also be renamed to an appropriate name since the arcitecture has changed. For instance createCustomer(). This is preffered.
-    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
-        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email,  password));
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
+        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email, password));
         return receiveMessage();
     }
+
     
     @Override
     //This method will store the information for a specific customer
     public String toProtocol05(String name, String phoneNo, String address, String email){
         sendMessage(messageParser.toProtocol05(name, phoneNo, address, email));
         return receiveMessage();
+    }
+
+    @Override
+    public Customer getCustomer() {
+        return customer;
     }
 }
