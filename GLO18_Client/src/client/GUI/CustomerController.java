@@ -153,6 +153,4 @@ public class CustomerController implements Initializable {
         AnchorPane3.setVisible(false);
         ProfileAnchor.setVisible(false);
     }
-
- 
 }
