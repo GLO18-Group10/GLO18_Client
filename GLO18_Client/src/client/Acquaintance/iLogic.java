@@ -5,6 +5,8 @@
  */
 package client.Acquaintance;
 
+import client.Logic.Customer;
+
 /**
  *
  * @author Jeppe Enevold
@@ -19,20 +21,16 @@ public interface iLogic {
 
     String receiveMessage();
 
-    String getName();
 
-    String getBirthday();
-
-    String getPhoneNo();
-
-    String getAddress();
-
-    String getEmail();
-    
     String getBankID();
 
+    Customer getCustomer();
+
+
     String login(String ID, String password);
+
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password);
+
     public int getAccountBalance(String accountID);
     public String toProtocol05(String senderID, String amount, String recieverID, String text);
 }

@@ -150,16 +150,19 @@ public class CustomerController implements Initializable {
         } else if (event.getSource() == ProfileButton) {
             //Get all the information and update the text fields
             EmailField.setEditable(false);
-            EmailField.setText(guiRun.getEmail());
+            EmailField.setText(guiRun.getCustomer().getEmail());
             AddressField.setEditable(false);
-            AddressField.setText(guiRun.getAddress());
+            AddressField.setText(guiRun.getCustomer().getAddress());
             PhoneNoField.setEditable(false);
-            PhoneNoField.setText(guiRun.getPhoneNo());
+            PhoneNoField.setText(guiRun.getCustomer().getPhoneNo());
             BirthdayField.setEditable(false);
-            BirthdayField.setText(guiRun.getBirthday());
+            BirthdayField.setText(guiRun.getCustomer().getBirthday());
             NameField.setEditable(false);
-            NameField.setText(guiRun.getName());
+
             CPRField.setEditable(false);
+
+            NameField.setText(guiRun.getCustomer().getName());
+
             //Clear current pane and display to the user
             clearPanes();
             ProfileAnchor.toFront();

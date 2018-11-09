@@ -7,6 +7,7 @@ package client.GUI;
 
 import client.Acquaintance.iGUI;
 import client.Acquaintance.iLogic;
+import client.Logic.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -50,41 +51,16 @@ public class GUIrun extends Application implements iGUI {
         launch(args);
     }
 
-    @Override
-    public String getName() {
-        return logic.getName();
+    public String login(String ID, String password) {
+        return logic.login(ID, password);
     }
 
-    @Override
-    public String getBirthday() {
-        return logic.getBirthday();
-    }
-    
-    public String login(String ID, String password){      
-       return logic.login(ID, password);
-    }
-    
-    public int getAccountBalance(String accountID){
+    public int getAccountBalance(String accountID) {
         return logic.getAccountBalance(accountID);
     }
-    
-    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
+
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
         return logic.toProtocol07(ID, name, birthday, phonenumber, address, email, password);
-    }
-
-    @Override
-    public String getPhoneNo() {
-        return logic.getPhoneNo();
-    }
-
-    @Override
-    public String getAddress() {
-        return logic.getAddress();
-    }
-
-    @Override
-    public String getEmail() {
-        return logic.getEmail();
     }
     
     public String getBankIDs(){
@@ -100,6 +76,10 @@ public class GUIrun extends Application implements iGUI {
     public String toProtocol05(String senderID, String amount, String recieverID, String text){
         
         return logic.toProtocol05(senderID, amount, recieverID, text);
+    }
+
+    public Customer getCustomer() {
+        return logic.getCustomer();
     }
 
 }
