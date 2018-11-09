@@ -35,12 +35,12 @@
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="198.0" prefWidth="536.0" />
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="133.0" prefWidth="536.0">
                      <children>
-                        <TextField fx:id="UsernameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="240.0" promptText="Username">
+                        <TextField fx:id="UsernameField" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#Login" prefHeight="31.0" prefWidth="240.0" promptText="Username">
                            <VBox.margin>
                               <Insets left="148.0" />
                            </VBox.margin>
                         </TextField>
-                        <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="240.0" promptText="Password">
+                        <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#Login" prefHeight="31.0" prefWidth="240.0" promptText="Password">
                            <VBox.margin>
                               <Insets left="148.0" top="20.0" />
                            </VBox.margin>
