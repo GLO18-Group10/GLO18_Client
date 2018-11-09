@@ -98,6 +98,8 @@ public class CustomerController implements Initializable {
     private Button ProfileButton;
     
     GUIrun guiRun = GUIrun.getInstance();
+    @FXML
+    private Button EditInformation;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -148,6 +150,22 @@ public class CustomerController implements Initializable {
         AnchorPane3.setVisible(false);
         ProfileAnchor.setVisible(false);
     }
+    
+    private String storeCustomerInfo(String name, String phoneNo, String address, String email){
+        return guiRun.toProtocol05(name, phoneNo, address, email);
+    }
+
+    @FXML
+    private void storeCustomerInfoButtonHandler(javafx.event.ActionEvent event) {
+        String name = NameField.getText();
+        String phoneNo = PhoneNoField.getText();
+        String address = AddressField.getText();
+        String email = EmailField.getText();
+        System.out.println(name + phoneNo + address + email);
+        System.out.println(storeCustomerInfo(name, phoneNo, address, email));
+        
+    }
+
 
  
 }

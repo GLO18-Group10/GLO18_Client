@@ -57,6 +57,9 @@ public class MessageParser {
         return data;
     }
 
+    public String toProtocol05(String name, String phonenumber, String address, String email){
+        return ("05;" + name + ";" + ";" + phonenumber + ";" + address + ";" + email);
+    }
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
         return ("07;" + ID + ";" + name + ";" + birthday + ";" + phonenumber + ";" + address + ";" + email + ";" + password);
         //return fromProtocol01(logic.receiveMessage());

@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -27,10 +28,10 @@ import javafx.scene.layout.Pane;
 public class adminController implements Initializable {
     GUIrun guiRun;
     @FXML AnchorPane adminOverview;
-    @FXML ListView Listview;
+    ListView Listview;
     @FXML Pane PaneBar; 
     @FXML Button DeleteButton;
-    @FXML TextField SearchField;
+    TextField SearchField;
     @FXML Button LogoutButton;
     @FXML Button CreateButton;
     @FXML TextField FirstNameField;
@@ -46,6 +47,12 @@ public class adminController implements Initializable {
     private TextField PasswordField;
     @FXML
     private DatePicker birthdayFieldDatePicker;
+    @FXML
+    private ListView<?> customerAccountsListView;
+    @FXML
+    private TextField SearchTextField;
+    @FXML
+    private TextArea statusTextArea;
     /**
      * Initializes the controller class.
      */
@@ -63,8 +70,8 @@ public class adminController implements Initializable {
     
     @FXML
     private void CreateButtonHandler(ActionEvent event) {
-        if(isEmpty(textFields) || birthdayFieldDatePicker.getValue()== null){
-            System.out.println("TOM TEST I CONTROLLER");
+        if(isEmpty(textFields) || birthdayFieldDatePicker.getValue()== null || !isValid(CPRField.getText()) ||!isValid(PhoneField.getText())){
+            System.out.println("ERROR TEST");
         }
         else{
         String ID = "C" + CPRField.getText();
@@ -85,16 +92,27 @@ public class adminController implements Initializable {
     
     private boolean isEmpty(ArrayList<TextField> textFieldArray){
         boolean isEmpty = false;
+        statusTextArea.clear();
         for (TextField textField : textFieldArray) {
             if(textField.getText().trim().isEmpty()){
                 System.out.println(textField.toString());
                 String[] textFieldEmpty = textField.toString().split(",");
-                System.out.println(textFieldEmpty[0].substring(13) + " IS EMPTY");
+                statusTextArea.appendText(textFieldEmpty[0].substring(13) + " IS EMPTY\n");
                 isEmpty = true;
             }
         }
         return isEmpty;
     }
-                
+    
+    private boolean isValid(String input){
+        char[] inputCharArray = input.toCharArray();
+        for(int i = 0; i < inputCharArray.length; i++){
+            if(Character.isLetter(inputCharArray[i])){
+                System.out.println("LETTERFOUND");
+                return false;
+            }
+        }
+        return true;
+    }
     
 }

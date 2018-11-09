@@ -99,4 +99,11 @@ public class LogicFacade implements iLogic {
         sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email,  password));
         return receiveMessage();
     }
+    
+    @Override
+    //This method will store the information for a specific customer
+    public String toProtocol05(String name, String phoneNo, String address, String email){
+        sendMessage(messageParser.toProtocol05(name, phoneNo, address, email));
+        return receiveMessage();
+    }
 }

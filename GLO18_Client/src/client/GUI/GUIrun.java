@@ -7,6 +7,7 @@ package client.GUI;
 
 import client.Acquaintance.iGUI;
 import client.Acquaintance.iLogic;
+import java.util.jar.Attributes;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,7 +36,7 @@ public class GUIrun extends Application implements iGUI {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("admin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("customer.fxml"));
 
 
         Scene scene = new Scene(root);
@@ -51,7 +52,7 @@ public class GUIrun extends Application implements iGUI {
         guiRun = this;
         launch(args);
     }
-
+    
     @Override
     public String getName() {
         return logic.getName();
@@ -70,6 +71,10 @@ public class GUIrun extends Application implements iGUI {
         return logic.getAccountBalance(accountID);
     }
     
+    public String toProtocol05(String name, String phoneNo, String address, String email){
+        return logic.toProtocol05(name, phoneNo, address, email);
+    }
+
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
         return logic.toProtocol07(ID, name, birthday, phonenumber, address, email, password);
     }

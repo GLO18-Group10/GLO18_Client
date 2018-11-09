@@ -4,6 +4,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="adminOverview" prefHeight="693.0" prefWidth="1069.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.adminController">
    <children>
-      <ListView fx:id="Listview" layoutX="67.0" layoutY="201.0" prefHeight="363.0" prefWidth="297.0" />
+      <ListView fx:id="customerAccountsListView" layoutX="67.0" layoutY="258.0" prefHeight="363.0" prefWidth="297.0" />
       <Pane fx:id="PaneBar" layoutY="-6.0" prefHeight="138.0" prefWidth="1161.0" style="-fx-background-color: #3f2B63;">
          <children>
             <ImageView fitHeight="138.0" fitWidth="161.0" layoutX="1000.0">
@@ -22,10 +23,10 @@
             </ImageView>
          </children>
       </Pane>
-      <Label layoutX="67.0" layoutY="163.0" prefHeight="38.0" prefWidth="199.0" text="Customer accounts" />
-      <Button fx:id="DeleteButton" layoutX="233.0" layoutY="571.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="140.0" text="Delete" />
-      <TextField fx:id="SearchField" layoutX="658.0" layoutY="223.0" prefHeight="28.0" prefWidth="320.0" promptText="Name" />
-      <Label layoutX="658.0" layoutY="163.0" prefHeight="38.0" prefWidth="171.0" text="create customer account" />
+      <Label layoutX="67.0" layoutY="220.0" prefHeight="38.0" prefWidth="140.0" text="Customer accounts" />
+      <Button fx:id="DeleteButton" layoutX="231.0" layoutY="640.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="140.0" text="Deactivate" />
+      <TextField fx:id="SearchTextField" layoutX="67.0" layoutY="186.0" prefHeight="31.0" prefWidth="297.0" promptText="Name" />
+      <Label layoutX="737.0" layoutY="258.0" prefHeight="38.0" prefWidth="171.0" text="create customer account" />
       <Button fx:id="LogoutButton" layoutX="14.0" layoutY="640.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="140.0" text="Logout" />
       <Button fx:id="CreateButton" layoutX="883.0" layoutY="571.0" mnemonicParsing="false" onAction="#CreateButtonHandler" prefHeight="38.0" prefWidth="140.0" text="Create" />
       <TextField fx:id="FirstNameField" layoutX="635.0" layoutY="321.0" promptText="First name" />
@@ -36,5 +37,7 @@
       <TextField fx:id="AddressField" layoutX="846.0" layoutY="439.0" promptText="Address" />
       <TextField fx:id="PasswordField" layoutX="846.0" layoutY="501.0" promptText="Password" />
       <DatePicker fx:id="birthdayFieldDatePicker" layoutX="635.0" layoutY="439.0" prefHeight="31.0" prefWidth="187.0" />
+      <TextArea fx:id="statusTextArea" layoutX="401.0" layoutY="258.0" prefHeight="363.0" prefWidth="200.0" />
+      <Label layoutX="128.0" layoutY="150.0" text="Look up customer account" />
    </children>
 </AnchorPane>
