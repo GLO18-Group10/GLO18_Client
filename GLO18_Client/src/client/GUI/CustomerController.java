@@ -89,10 +89,10 @@ public class CustomerController implements Initializable {
     GUIrun guiRun = GUIrun.getInstance();
     @FXML
     private Button EditInformation;
-    @FXML
     private Button SaveButtonHandler;
     @FXML
     private Button CancelEditButton;
+    @FXML
     private AnchorPane CustomerParentPane;
     @FXML
     private AnchorPane NewTransferAnchorPane;
@@ -108,12 +108,12 @@ public class CustomerController implements Initializable {
     private Label MessageErrorLabel;
     @FXML
     private AnchorPane AccountsAnchorPane;
-    @FXML
-    private TextField CPRField;
     
    
     @FXML
     private ChoiceBox<String> TransactionBankIDChoiceBox;
+    @FXML
+    private Button SaveButton;
     public CustomerController() {
     }
     
@@ -196,6 +196,7 @@ public class CustomerController implements Initializable {
         AddressField.setDisable(true);
         EmailField.setDisable(true);
         CancelEditButton.setVisible(false);
+        SaveButton.setVisible(false);
     }
 
     @FXML
@@ -205,13 +206,13 @@ public class CustomerController implements Initializable {
         AddressField.setDisable(false);
         EmailField.setDisable(false);
         CancelEditButton.setVisible(true);
-        SaveButtonHandler.setVisible(true);
+        SaveButton.setVisible(true);
     }
 
     @FXML
     private void CancelEditButtonHandler(javafx.event.ActionEvent event) {
         CancelEditButton.setVisible(false);
-        SaveButtonHandler.setVisible(false);
+        SaveButton.setVisible(false);
         NameField.setDisable(true);
         PhoneNoField.setDisable(true);
         AddressField.setDisable(true);
