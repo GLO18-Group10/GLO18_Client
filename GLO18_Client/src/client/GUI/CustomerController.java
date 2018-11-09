@@ -155,7 +155,6 @@ public class CustomerController implements Initializable {
             AddressField.setText(guiRun.getCustomer().getAddress());
             PhoneNoField.setText(guiRun.getCustomer().getPhoneNo());
             BirthdayField.setText(guiRun.getCustomer().getBirthday());
-            NameField.setEditable(false);
             NameField.setText(guiRun.getCustomer().getName());
 
             //Clear current pane and display to the user
@@ -188,7 +187,15 @@ public class CustomerController implements Initializable {
         String email = EmailField.getText();
         System.out.println(name + phoneNo + address + email);
         System.out.println(storeCustomerInfo(name, phoneNo, address, email));
-        
+        guiRun.getCustomer().setName(name);
+        guiRun.getCustomer().setPhoneNo(phoneNo);
+        guiRun.getCustomer().setAddress(address);
+        guiRun.getCustomer().setEmail(email);
+        NameField.setDisable(true);
+        PhoneNoField.setDisable(true);
+        AddressField.setDisable(true);
+        EmailField.setDisable(true);
+        CancelEditButton.setVisible(false);
     }
 
     @FXML
