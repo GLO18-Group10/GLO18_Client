@@ -5,6 +5,8 @@
  */
 package client.Logic;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Nick
@@ -15,7 +17,8 @@ public class Customer extends User {
     private String birthday;
     private String name;
     private String address;
-
+    private ArrayList<String> bankIDs = new ArrayList<>();
+    
     public Customer(String ID, LogicFacade logic) {
         super(ID, logic);
     }
@@ -61,5 +64,32 @@ public class Customer extends User {
     public void setAddress(String address) {
         this.address = address;
     }
-
+    public String getBankID(){
+        
+        if (bankIDs.isEmpty()) {
+            logic.sendMessage(messageParser.toProtocol08());
+            String data[] = messageParser.fromProtocol(logic.receiveMessage());
+            if (data[0].equalsIgnoreCase("error")) {
+                return "No bankIDs";
+            }
+            for (String ID : data){
+                bankIDs.add(ID);
+                
+            
+            }
+        }
+        return bankIDs.toString();
+    }
+    
+    public String checkBankID(String ID){
+        if (bankIDs.isEmpty()) {
+            getBankID();
+        }
+        for (String bankID : bankIDs) {
+            if(bankID.equalsIgnoreCase(ID) == true){
+                return "true";
+            }
+        }
+        return "false";
+    }
 }

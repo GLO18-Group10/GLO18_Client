@@ -86,10 +86,20 @@ public class GUIrun extends Application implements iGUI {
     public String getEmail() {
         return logic.getEmail();
     }
+    
+    public String getBankIDs(){
+        return logic.getBankID();
+    }
+    
 
     @Override
     public void startConnection() {
         logic.startConnection();
+    }
+    
+    public String toProtocol05(String senderID, String amount, String recieverID, String text){
+        
+        return logic.toProtocol05(senderID, amount, recieverID, text);
     }
 
 }

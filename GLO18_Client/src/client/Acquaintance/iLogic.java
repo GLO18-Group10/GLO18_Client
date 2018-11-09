@@ -28,8 +28,11 @@ public interface iLogic {
     String getAddress();
 
     String getEmail();
+    
+    String getBankID();
 
     String login(String ID, String password);
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password);
     public int getAccountBalance(String accountID);
+    public String toProtocol05(String senderID, String amount, String recieverID, String text);
 }
