@@ -56,6 +56,12 @@ public class MessageParser {
         String[] data = message.split(";");
         return data;
     }
+    
+    public String toProtocol05(String senderID, String amount, String recieverID, String text){
+        return "05;" + senderID + ";" + amount + ";"+ recieverID + ";" + text;
+    
+    }
+    
 
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
         return ("07;" + ID + ";" + name + ";" + birthday + ";" + phonenumber + ";" + address + ";" + email + ";" + password);
@@ -66,5 +72,10 @@ public class MessageParser {
         //Split the received data into the different parts
         return message.split(";");
 
+    }
+    
+    public String toProtocol08(){
+        return "08";
+    
     }
 }
