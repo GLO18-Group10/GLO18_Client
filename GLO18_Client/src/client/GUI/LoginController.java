@@ -22,6 +22,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -39,19 +40,19 @@ public class LoginController implements Initializable {
     GUIrun guiRun;
     
     @FXML 
-    private AnchorPane Anchorpane;    
-    @FXML 
     private Button ExitButton;
     @FXML 
     private Button LoginButton;
     @FXML 
     private TextField UsernameField;
     @FXML
-    private AnchorPane anchorpane1;
-    @FXML
     private PasswordField passwordField;
     @FXML
-    private TextField alertField;
+    private Label alertField;
+    @FXML
+    private AnchorPane LoginParentPane;
+    @FXML
+    private AnchorPane LoginAnchorPane;
     
     
     
