@@ -41,48 +41,32 @@ public class LogicFacade implements iLogic {
         return link.receiveMessage();
     }
 
-    @Override
-    public String getName() {
-        return customer.getName();
-    }
-
-    @Override
-    public String getBirthday() {
-        return customer.getBirthday();
-    }
-
-    @Override
-    public String getPhoneNo() {
-        return customer.getPhoneNo();
-    }
-    
     public String login(String ID, String password) {
-        
+
         String message = messageParser.toProtocol00(ID, password);
-       
+
         if (message.equalsIgnoreCase("true")) {
             initializeUser(ID);
-            
+
         }
-        
+
         return message;
     }
-    
+
     @Override
     public int getAccountBalance(String accountID) {
         return messageParser.toProtocol02(accountID);
     }
+
+    @Override
+    public String getBankID(){
+        return customer.getBankID();    
+    }
     
-
-    @Override
-    public String getAddress() {
-        return customer.getAddress();
-    }
-
-    @Override
-    public String getEmail() {
-        return customer.getEmail();
-    }
+    public String checkBankID(String bankID){
+        return customer.checkBankID(bankID);
+    
+    } 
 
     public void initializeUser(String ID) {
         if (ID.startsWith("A")) {
@@ -92,11 +76,21 @@ public class LogicFacade implements iLogic {
             customer = new Customer(ID, this);
         }
     }
-
+    @Override
+    public String toProtocol05(String senderID, String amount, String recieverID, String text){
+        sendMessage(messageParser.toProtocol05(senderID, amount, recieverID, text));
+        return receiveMessage();
+    }
+    
     @Override
     //This method could also be renamed to an appropriate name since the arcitecture has changed. For instance createCustomer(). This is preffered.
-    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
-        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email,  password));
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
+        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email, password));
         return receiveMessage();
+    }
+
+    @Override
+    public Customer getCustomer() {
+        return customer;
     }
 }

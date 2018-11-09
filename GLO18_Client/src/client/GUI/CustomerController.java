@@ -8,13 +8,18 @@ package client.GUI;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -30,6 +35,7 @@ import javafx.scene.layout.VBox;
  * @author antonio
  */
 public class CustomerController implements Initializable {
+    GUIrun guiRun = GUIrun.getInstance();
     @FXML
     private HBox HBox;
     @FXML
@@ -63,8 +69,6 @@ public class CustomerController implements Initializable {
     @FXML
     private Button CleanButton;
     @FXML
-    private MenuButton MenuButtonAccounts;
-    @FXML
     private AnchorPane ProfileAnchor;
     @FXML
     private TextField NameField;
@@ -77,13 +81,11 @@ public class CustomerController implements Initializable {
     @FXML
     private TextField EmailField;
     @FXML
-    private MenuButton AccountsDropdown;
+    private ChoiceBox<String> AccountsDropdown;
     @FXML
     private Label AccountBalanceLabel;
     @FXML
     private Button ProfileButton;
-    
-    GUIrun guiRun = GUIrun.getInstance();
     @FXML
     private AnchorPane CustomerParentPane;
     @FXML
@@ -102,7 +104,14 @@ public class CustomerController implements Initializable {
     private AnchorPane AccountsAnchorPane;
     @FXML
     private TextField CPRField;
-
+    @FXML
+    private ChoiceBox<String> TransactionBankIDChoiceBox;
+    @FXML
+    private Button updateButton;
+    
+    public CustomerController() {
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -114,27 +123,47 @@ public class CustomerController implements Initializable {
             clearPanes();
             NewTransferAnchorPane.toFront();
             NewTransferAnchorPane.setVisible(true);
-        } else if (event.getSource() == AccountsButton) {
+            
+            if (TransactionBankIDChoiceBox.getItems().isEmpty()) {
+                String bankid[] = guiRun.getBankIDs().split(";");
+                for (int i = 0; i < bankid.length; i++) {
+                    TransactionBankIDChoiceBox.getItems().add(bankid[i]);
+                }
+            }
+        } 
+        else if (event.getSource() == AccountsButton) {
             clearPanes();
             AccountsAnchorPane.toFront();
             AccountsAnchorPane.setVisible(true);
-        } else if (event.getSource() == OptionsButton) {
+            
+            if (AccountsDropdown.getItems().isEmpty()) {
+                String bankid[] = guiRun.getBankIDs().split(";");
+                for (int i = 0; i < bankid.length; i++) {
+                    AccountsDropdown.getItems().add(bankid[i]);
+                }
+            }
+        } 
+        else if (event.getSource() == OptionsButton) {
             clearPanes();
             AnchorPane3.toFront();
             AnchorPane3.setVisible(true);
-        } else if (event.getSource() == ProfileButton) {
+        } 
+        else if (event.getSource() == ProfileButton) {
             //Get all the information and update the text fields
             EmailField.setEditable(false);
-            EmailField.setText(guiRun.getEmail());
+            EmailField.setText(guiRun.getCustomer().getEmail());
             AddressField.setEditable(false);
-            AddressField.setText(guiRun.getAddress());
+            AddressField.setText(guiRun.getCustomer().getAddress());
             PhoneNoField.setEditable(false);
-            PhoneNoField.setText(guiRun.getPhoneNo());
+            PhoneNoField.setText(guiRun.getCustomer().getPhoneNo());
             BirthdayField.setEditable(false);
-            BirthdayField.setText(guiRun.getBirthday());
+            BirthdayField.setText(guiRun.getCustomer().getBirthday());
             NameField.setEditable(false);
-            NameField.setText(guiRun.getName());
+
             CPRField.setEditable(false);
+
+            NameField.setText(guiRun.getCustomer().getName());
+
             //Clear current pane and display to the user
             clearPanes();
             ProfileAnchor.toFront();
@@ -144,7 +173,7 @@ public class CustomerController implements Initializable {
 
     @FXML
     private void setAccountBalance(javafx.event.ActionEvent event) {
-        AccountBalanceLabel.setText(guiRun.getAccountBalance(AccountsDropdown.getText())+" DKK");
+        AccountBalanceLabel.setText(guiRun.getAccountBalance(AccountsDropdown.getValue())+" DKK");
     }
     
     private void clearPanes() {
@@ -153,4 +182,33 @@ public class CustomerController implements Initializable {
         AnchorPane3.setVisible(false);
         ProfileAnchor.setVisible(false);
     }
+    
+    @FXML
+    private void transfer(){
+        String amount = AmountField.getText();
+        //String date = DateField.getText();
+        String bankID = AccountField.getText() + RegField.getText();
+        String message = MessageArea.getText();
+        String senderBankID = TransactionBankIDChoiceBox.getValue();
+                
+        
+        String response = guiRun.toProtocol05(senderBankID, amount, bankID, message);
+        if (response.equalsIgnoreCase("Error; recipient not found.")) {
+            AccountErrorLabel.setText("Error; recipient not found.");
+        }
+        else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
+            AmountErrorLabel.setText("Error; insufficient funds.");
+        }
+        else if (response.equalsIgnoreCase("complete")) {
+            //transactionCompleteLabel.setText(test);
+        }
+        else {
+            //overallErrorLabel.setText(test);
+        }
+        
+    }
+    private void setmenutext(){
+    
+    }
+    
 }
