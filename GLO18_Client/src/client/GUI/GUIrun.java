@@ -75,10 +75,20 @@ public class GUIrun extends Application implements iGUI {
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
         return logic.toProtocol07(ID, name, birthday, phonenumber, address, email, password);
     }
+    
+    public String getBankIDs(){
+        return logic.getBankID();
+    }
+    
 
     @Override
     public void startConnection() {
         logic.startConnection();
+    }
+    
+    public String toProtocol05(String senderID, String amount, String recieverID, String text){
+        
+        return logic.toProtocol05(senderID, amount, recieverID, text);
     }
 
     public Customer getCustomer() {

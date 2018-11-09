@@ -56,19 +56,25 @@ public class MessageParser {
         String[] data = message.split(";");
         return data;
     }
+    
+    public String toProtocol05(String senderID, String amount, String recieverID, String text){
+        return "05;" + senderID + ";" + amount + ";"+ recieverID + ";" + text;
+    
+    }
+    
 
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
         return ("07;" + ID + ";" + name + ";" + birthday + ";" + phonenumber + ";" + address + ";" + email + ";" + password);
         //return fromProtocol01(logic.receiveMessage());
     }
 
-    private String[] fromProtocol01(String message) {
-        //Split the received data into the different parts
-        return message.split(";");
-
-    }
     public String toProtocol18(){
         logic.sendMessage("18");
         return logic.receiveMessage();
+    }
+    
+    public String toProtocol08(){
+        return "08";
+    
     }
 }

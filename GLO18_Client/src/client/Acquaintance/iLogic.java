@@ -21,6 +21,8 @@ public interface iLogic {
 
     String receiveMessage();
 
+    String getBankID();
+
     Customer getCustomer();
 
     String login(String ID, String password);
@@ -28,5 +30,8 @@ public interface iLogic {
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password);
 
     public int getAccountBalance(String accountID);
+
     public String logout();
+
+    public String toProtocol05(String senderID, String amount, String recieverID, String text);
 }
