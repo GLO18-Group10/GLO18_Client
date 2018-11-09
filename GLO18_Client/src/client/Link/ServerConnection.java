@@ -39,6 +39,15 @@ public class ServerConnection {
                 new InputStreamReader(this.socket.getInputStream()));
         return in.readLine();
     }
+    
+    public void endConnection(){
+        try {
+            socket.close();
+        } catch (IOException ex) {
+            System.out.println("could not end connection");
+            ex.printStackTrace();
+        }
+    }
 
 //    public static void main(String[] args) throws Exception {
 //        ServerConnection client = new ServerConnection(

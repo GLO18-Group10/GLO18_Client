@@ -48,5 +48,9 @@ public class LinkFacade implements iLink {
         }
    }
     
+    @Override
+    public void endConnection(){
+        serverConnection.endConnection();
+    }
 
 }

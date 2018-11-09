@@ -61,6 +61,7 @@ public class LogicFacade implements iLogic {
         if(message.equalsIgnoreCase("true")){
             admin = null;
             customer = null;
+            link.endConnection();
             return "true";
         }else{
             return "false";

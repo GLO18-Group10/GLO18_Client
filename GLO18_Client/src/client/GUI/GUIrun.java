@@ -65,7 +65,9 @@ public class GUIrun extends Application implements iGUI {
     
     @Override
     public String logout(){
-        return logic.logout();
+        String message = logic.logout();
+        logic.startConnection();
+        return message;
     }
 
     public int getAccountBalance(String accountID) {
@@ -80,14 +82,12 @@ public class GUIrun extends Application implements iGUI {
         return logic.getBankID();
     }
     
-
     @Override
     public void startConnection() {
         logic.startConnection();
     }
     
     public String toProtocol05(String senderID, String amount, String recieverID, String text){
-        
         return logic.toProtocol05(senderID, amount, recieverID, text);
     }
 
