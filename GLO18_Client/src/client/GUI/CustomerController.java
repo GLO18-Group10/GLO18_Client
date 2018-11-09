@@ -10,9 +10,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
@@ -104,8 +106,10 @@ public class CustomerController implements Initializable {
     private AnchorPane AccountsAnchorPane;
     @FXML
     private TextField CPRField;
-    ArrayList<MenuItem>menubankID = new ArrayList<>(); 
-
+    
+   
+    @FXML
+    private ChoiceBox<String> TransactionBankIDChoiceBox;
     public CustomerController() {
     }
     
@@ -123,15 +127,16 @@ public class CustomerController implements Initializable {
             String bankid[] = guiRun.getBankIDs().split(";");
             
             
-            if (MenuButtonAccounts.getItems().isEmpty()) {
-                System.out.println("test");
+            if (TransactionBankIDChoiceBox.getItems().isEmpty()) {
+                
             
             for (int i = 0; i < bankid.length; i++) {
                 
-                MenuItem menuitem = new MenuItem(bankid[i]);
-                menubankID.add(menuitem);
+               
+                TransactionBankIDChoiceBox.getItems().add(bankid[i]);
                }
-            MenuButtonAccounts.getItems().addAll(menubankID);
+            
+            
             }
             
         } else if (event.getSource() == AccountsButton) {
@@ -160,6 +165,7 @@ public class CustomerController implements Initializable {
             ProfileAnchor.toFront();
             ProfileAnchor.setVisible(true);
         }
+        
     }
 
     @FXML
@@ -179,11 +185,28 @@ public class CustomerController implements Initializable {
         //String date = DateField.getText();
         String bankID = AccountField.getText() + RegField.getText();
         String message = MessageArea.getText();
-        String senderBankID = MenuButtonAccounts.getText();
+        String senderBankID = TransactionBankIDChoiceBox.getValue();
+                
         
-        guiRun.toProtocol05(senderBankID, amount, bankID, message);
+        String response = guiRun.toProtocol05(senderBankID, amount, bankID, message);
+        if (response.equalsIgnoreCase("Error; recipient not found.")) {
+            AccountErrorLabel.setText("Error; recipient not found.");
+        }
+        else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
+            AmountErrorLabel.setText("Error; insufficient funds.");
+        }
+        else if (response.equalsIgnoreCase("complete")) {
+            //transactionCompleteLabel.setText(test);
+        }
+        else {
+            //overallErrorLabel.setText(test);
+        }
+        
+    }
+    private void setmenutext(){
         
         
+    
     }
     
 }

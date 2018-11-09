@@ -56,7 +56,7 @@
             <Button fx:id="ProccedButton" layoutX="35.0" layoutY="568.0" mnemonicParsing="false" onAction="#transfer" style="-fx-background-color: #3f2B63;" text="Procced" textFill="WHITE" />
             <Button fx:id="CleanButton" layoutX="121.0" layoutY="568.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: #3f2B63;" text="Clean " textFill="WHITE" />
             <Separator layoutX="-1.0" layoutY="250.0" prefHeight="5.0" prefWidth="608.0" />
-            <MenuButton fx:id="MenuButtonAccounts" layoutX="171.0" layoutY="116.0" mnemonicParsing="false" text="Accounts" />
+            <MenuButton fx:id="MenuButtonAccounts" layoutX="171.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" pickOnBounds="false" text="Accounts" />
             <Label fx:id="AmountErrorLabel" layoutX="418.0" layoutY="166.0" prefHeight="17.0" prefWidth="180.0" textFill="RED" />
             <Label fx:id="DateErrorLabel" layoutX="418.0" layoutY="207.0" prefHeight="17.0" prefWidth="180.0" textFill="RED" />
             <Label fx:id="AccountErrorLabel" layoutX="418.0" layoutY="310.0" prefHeight="17.0" prefWidth="180.0" textFill="RED" />
@@ -66,6 +66,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
+            <ChoiceBox fx:id="TransactionBankIDChoiceBox" layoutX="268.0" layoutY="116.0" prefWidth="150.0" />
          </children>
       </AnchorPane>
       <AnchorPane id="AnchorPane" fx:id="AccountsAnchorPane" layoutX="292.0" layoutY="-8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="608.0" style="-fx-background-color: #FFFFFFF;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
