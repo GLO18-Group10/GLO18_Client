@@ -171,9 +171,7 @@ public class CustomerController implements Initializable {
             ProfileAnchor.toFront();
             ProfileAnchor.setVisible(true);
         }else if(event.getSource() == LogoutButton){
-            System.out.println("logout button");
             if(guiRun.logout().equalsIgnoreCase("true")){
-                System.out.println("logout was true");
                 try {
                         Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
                         Scene newScene = new Scene(nextView);
