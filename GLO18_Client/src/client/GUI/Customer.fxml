@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -24,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="CustomerParentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CustomerController">
+<AnchorPane id="AnchorPane" fx:id="CustomerParentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CustomerController">
 
     <children>
       <AnchorPane fx:id="NewTransferAnchorPane" layoutX="292.0" layoutY="-8.0" prefHeight="620.0" prefWidth="608.0" visible="false" AnchorPane.bottomAnchor="-12.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
@@ -181,23 +177,24 @@
       </VBox>
       <AnchorPane fx:id="ProfileAnchor" layoutX="289.0" layoutY="-2.0" prefHeight="608.0" prefWidth="608.0" visible="false">
          <children>
-            <TextField fx:id="BirthdayField" layoutX="18.0" layoutY="141.0" />
-            <TextField fx:id="PhoneNoField" layoutX="18.0" layoutY="198.0" />
-            <TextField fx:id="AddressField" layoutX="18.0" layoutY="257.0" />
-            <TextField fx:id="EmailField" layoutX="18.0" layoutY="316.0" />
-            <TextField fx:id="NameField" layoutX="18.0" layoutY="84.0" />
-            <Label layoutX="21.0" layoutY="299.0" text="Email" />
-            <Label layoutX="20.0" layoutY="181.0" text="Phone Number" />
-            <Label layoutX="19.0" layoutY="240.0" text="Address" />
-            <Label layoutX="19.0" layoutY="124.0" text="Birthday" />
-            <Label layoutX="19.0" layoutY="67.0" text="Name" />
+            <TextField fx:id="BirthdayField" disable="true" editable="false" layoutX="100.0" layoutY="150.0" />
+            <TextField fx:id="PhoneNoField" disable="true" layoutX="100.0" layoutY="225.0" />
+            <TextField fx:id="AddressField" disable="true" layoutX="100.0" layoutY="300.0" />
+            <TextField fx:id="EmailField" disable="true" layoutX="100.0" layoutY="375.0" />
+            <TextField fx:id="NameField" disable="true" layoutX="100.0" layoutY="75.0" />
+            <Label layoutX="100.0" layoutY="350.0" text="Email" />
+            <Label layoutX="100.0" layoutY="200.0" text="Phone Number" />
+            <Label layoutX="100.0" layoutY="275.0" text="Address" />
+            <Label layoutX="100.0" layoutY="125.0" text="Birthday" />
+            <Label layoutX="100.0" layoutY="50.0" text="Name" />
+            <Button fx:id="EditInformation" layoutX="345.0" layoutY="225.0" mnemonicParsing="false" onAction="#EditEnableButtonHandler" text="Edit information" />
+            <Button fx:id="SaveButton" layoutX="168.0" layoutY="437.0" mnemonicParsing="false" onAction="#storeCustomerInfoButtonHandler" text="Save" visible="false" />
+            <Button fx:id="CancelEditButton" layoutX="161.0" layoutY="496.0" mnemonicParsing="false" onAction="#CancelEditButtonHandler" text="Cancel" visible="false" />
             <Label layoutX="19.0" layoutY="14.0" text="Profile:">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="22.0" layoutY="359.0" text="CPR-number" />
-            <TextField fx:id="CPRField" layoutX="16.0" layoutY="376.0" />
          </children>
       </AnchorPane>
    </children>

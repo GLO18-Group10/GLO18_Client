@@ -89,8 +89,12 @@ public class CustomerController implements Initializable {
     private Label AccountBalanceLabel;
     @FXML
     private Button ProfileButton;
-    
     GUIrun guiRun = GUIrun.getInstance();
+    @FXML
+    private Button EditInformation;
+    private Button SaveButtonHandler;
+    @FXML
+    private Button CancelEditButton;
     @FXML
     private AnchorPane CustomerParentPane;
     @FXML
@@ -107,12 +111,12 @@ public class CustomerController implements Initializable {
     private Label MessageErrorLabel;
     @FXML
     private AnchorPane AccountsAnchorPane;
-    @FXML
-    private TextField CPRField;
     
    
     @FXML
     private ChoiceBox<String> TransactionBankIDChoiceBox;
+    @FXML
+    private Button SaveButton;
     public CustomerController() {
     }
     
@@ -138,8 +142,6 @@ public class CustomerController implements Initializable {
                
                 TransactionBankIDChoiceBox.getItems().add(bankid[i]);
                }
-            
-            
             }
             
         } else if (event.getSource() == AccountsButton) {
@@ -152,18 +154,10 @@ public class CustomerController implements Initializable {
             AnchorPane3.setVisible(true);
         } else if (event.getSource() == ProfileButton) {
             //Get all the information and update the text fields
-            EmailField.setEditable(false);
             EmailField.setText(guiRun.getCustomer().getEmail());
-            AddressField.setEditable(false);
             AddressField.setText(guiRun.getCustomer().getAddress());
-            PhoneNoField.setEditable(false);
             PhoneNoField.setText(guiRun.getCustomer().getPhoneNo());
-            BirthdayField.setEditable(false);
             BirthdayField.setText(guiRun.getCustomer().getBirthday());
-            NameField.setEditable(false);
-
-            CPRField.setEditable(false);
-
             NameField.setText(guiRun.getCustomer().getName());
 
             //Clear current pane and display to the user
@@ -186,20 +180,72 @@ public class CustomerController implements Initializable {
                 System.out.println("could not log out"); //this should bechanged to a label in the GUI
             }
         }
-        
     }
 
     @FXML
     private void setAccountBalance(javafx.event.ActionEvent event) {
         AccountBalanceLabel.setText(guiRun.getAccountBalance(AccountsDropdown.getText())+" DKK");
     }
-    
     private void clearPanes() {
         NewTransferAnchorPane.setVisible(false);
         AccountsAnchorPane.setVisible(false);
         AnchorPane3.setVisible(false);
         ProfileAnchor.setVisible(false);
     }
+    
+    private String storeCustomerInfo(String name, String phoneNo, String address, String email){
+        return guiRun.toProtocol03(name, phoneNo, address, email);
+    }
+
+    @FXML
+    private void storeCustomerInfoButtonHandler(javafx.event.ActionEvent event) {
+        String name = NameField.getText();
+        String phoneNo = PhoneNoField.getText();
+        String address = AddressField.getText();
+        String email = EmailField.getText();
+        System.out.println(name + phoneNo + address + email);
+        System.out.println(storeCustomerInfo(name, phoneNo, address, email));
+        guiRun.getCustomer().setName(name);
+        guiRun.getCustomer().setPhoneNo(phoneNo);
+        guiRun.getCustomer().setAddress(address);
+        guiRun.getCustomer().setEmail(email);
+        NameField.setDisable(true);
+        PhoneNoField.setDisable(true);
+        AddressField.setDisable(true);
+        EmailField.setDisable(true);
+        CancelEditButton.setVisible(false);
+        SaveButton.setVisible(false);
+    }
+
+    @FXML
+    private void EditEnableButtonHandler(javafx.event.ActionEvent event) {
+        NameField.setDisable(false);
+        PhoneNoField.setDisable(false);
+        AddressField.setDisable(false);
+        EmailField.setDisable(false);
+        CancelEditButton.setVisible(true);
+        SaveButton.setVisible(true);
+    }
+
+    @FXML
+    private void CancelEditButtonHandler(javafx.event.ActionEvent event) {
+        CancelEditButton.setVisible(false);
+        SaveButton.setVisible(false);
+        NameField.setDisable(true);
+        PhoneNoField.setDisable(true);
+        AddressField.setDisable(true);
+        EmailField.setDisable(true);
+        RestoreInfoInFields();
+    }
+    
+    private void RestoreInfoInFields(){
+        NameField.setText(guiRun.getCustomer().getName());
+        PhoneNoField.setText(guiRun.getCustomer().getPhoneNo());
+        AddressField.setText(guiRun.getCustomer().getAddress());
+        EmailField.setText(guiRun.getCustomer().getEmail());
+    }
+
+
     @FXML
     private void transfer(){
         String amount = AmountField.getText();
@@ -207,8 +253,6 @@ public class CustomerController implements Initializable {
         String bankID = AccountField.getText() + RegField.getText();
         String message = MessageArea.getText();
         String senderBankID = TransactionBankIDChoiceBox.getValue();
-                
-        
         String response = guiRun.toProtocol05(senderBankID, amount, bankID, message);
         if (response.equalsIgnoreCase("Error; recipient not found.")) {
             AccountErrorLabel.setText("Error; recipient not found.");
@@ -226,8 +270,6 @@ public class CustomerController implements Initializable {
     }
     private void setmenutext(){
         
-        
-    
     }
     
 }

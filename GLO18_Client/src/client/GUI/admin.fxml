@@ -1,39 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane id="AnchorPane" fx:id="adminOverview" prefHeight="693.0" prefWidth="1069.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.adminController">
    <children>
-      <ListView fx:id="Listview" layoutX="67.0" layoutY="201.0" prefHeight="363.0" prefWidth="297.0" />
-      <Pane fx:id="PaneBar" layoutY="-6.0" prefHeight="138.0" prefWidth="1161.0" style="-fx-background-color: #3f2B63;">
+      <Pane fx:id="PaneBar" layoutY="-6.0" prefHeight="138.0" prefWidth="1161.0" style="-fx-background-color: #3f2B63;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="138.0" fitWidth="161.0" layoutX="1000.0">
+            <ImageView fitHeight="138.0" fitWidth="138.0" layoutX="931.0" layoutY="-6.0">
                <image>
                   <Image url="@../../Img/Elena.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Label layoutX="67.0" layoutY="163.0" prefHeight="38.0" prefWidth="199.0" text="Customer accounts" />
-      <Button fx:id="DeleteButton" layoutX="233.0" layoutY="571.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="140.0" text="Delete" />
-      <TextField fx:id="SearchField" layoutX="658.0" layoutY="223.0" prefHeight="28.0" prefWidth="320.0" promptText="Name" />
-      <Label layoutX="658.0" layoutY="163.0" prefHeight="38.0" prefWidth="171.0" text="create customer account" />
-      <Button fx:id="LogoutButton" layoutX="14.0" layoutY="640.0" mnemonicParsing="false" onAction="#logoutHandler" prefHeight="38.0" prefWidth="140.0" text="Logout" />
-      <Button fx:id="CreateButton" layoutX="883.0" layoutY="571.0" mnemonicParsing="false" onAction="#CreateButtonHandler" prefHeight="38.0" prefWidth="140.0" text="Create" />
-      <TextField fx:id="FirstNameField" layoutX="635.0" layoutY="321.0" promptText="First name" />
-      <TextField fx:id="LastnameField" layoutX="846.0" layoutY="321.0" promptText="Last name" />
-      <TextField fx:id="CPRField" layoutX="635.0" layoutY="383.0" promptText="CPR: dd-mm-yy" />
-      <TextField fx:id="PhoneField" layoutX="846.0" layoutY="383.0" promptText="phoneNumber " />
-      <TextField fx:id="EmailField" layoutX="635.0" layoutY="501.0" promptText="Email" />
-      <TextField fx:id="BirthdayField" layoutX="635.0" layoutY="439.0" promptText="Birthday_dd-mm-yy" />
-      <TextField fx:id="AddressField" layoutX="846.0" layoutY="439.0" promptText="Address" />
-      <TextField fx:id="PasswordField" layoutX="846.0" layoutY="501.0" promptText="Password" />
+      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="138.0">
+         <children>
+            <BorderPane prefHeight="555.0" prefWidth="338.0">
+               <bottom>
+                  <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="LogoutButton" mnemonicParsing="false" onAction="#logoutHandler" prefHeight="38.0" prefWidth="140.0" text="Logout" />
+                        <Button fx:id="DeleteButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="140.0" text="Deactivate" />
+                     </children>
+                  </HBox>
+               </bottom>
+               <center>
+                  <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label prefHeight="38.0" prefWidth="140.0" text="Customer accounts" />
+                        <ListView fx:id="customerAccountsListView" prefHeight="363.0" prefWidth="172.0" />
+                     </children>
+                  </VBox>
+               </center>
+               <top>
+                  <VBox prefHeight="92.0" prefWidth="402.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <TextField fx:id="SearchTextField" prefHeight="31.0" prefWidth="297.0" promptText="Name">
+                           <VBox.margin>
+                              <Insets left="15.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="Look up customer account">
+                           <VBox.margin>
+                              <Insets left="15.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </top>
+               <right>
+                  <VBox prefHeight="200.0" prefWidth="103.0" BorderPane.alignment="CENTER" />
+               </right>
+               <left>
+                  <VBox prefHeight="255.0" prefWidth="64.0" BorderPane.alignment="CENTER" />
+               </left>
+            </BorderPane>
+            <BorderPane prefHeight="352.0" prefWidth="200.0">
+               <center>
+                  <VBox prefHeight="555.0" prefWidth="218.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <TextArea fx:id="statusTextArea" prefHeight="343.0" prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets top="110.0" />
+                           </VBox.margin>
+                        </TextArea>
+                     </children>
+                  </VBox>
+               </center>
+            </BorderPane>
+            <BorderPane prefHeight="555.0" prefWidth="336.0">
+               <right>
+                  <VBox prefHeight="470.0" prefWidth="195.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <TextField fx:id="LastnameField" promptText="Last name">
+                           <VBox.margin>
+                              <Insets top="58.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="PhoneField" promptText="phoneNumber ">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="AddressField" promptText="Address">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="PasswordField" promptText="Password">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                  </VBox>
+               </right>
+               <left>
+                  <VBox prefHeight="470.0" prefWidth="186.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label prefHeight="38.0" prefWidth="171.0" text="create customer account" />
+                        <TextField fx:id="FirstNameField" promptText="First name">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="CPRField" promptText="CPR: dd-mm-yy">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="EmailField" promptText="Email">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <DatePicker fx:id="birthdayFieldDatePicker" prefHeight="31.0" prefWidth="187.0">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </DatePicker>
+                     </children>
+                  </VBox>
+               </left>
+               <bottom>
+                  <Button fx:id="CreateButton" mnemonicParsing="false" onAction="#CreateButtonHandler" prefHeight="38.0" prefWidth="140.0" text="Create" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets bottom="80.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </bottom>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <center>
+                  <VBox prefHeight="437.0" prefWidth="80.0" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

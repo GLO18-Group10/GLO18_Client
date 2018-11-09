@@ -23,12 +23,10 @@ public interface iLogic {
 
     String getBankID();
 
-    Customer getCustomer();
-
     String login(String ID, String password);
-
+    public String toProtocol03(String name, String phoneNo, String address, String email);
+    Customer getCustomer();
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password);
-
     public int getAccountBalance(String accountID);
 
     public String logout();
