@@ -7,6 +7,7 @@ package client.GUI;
 
 import client.Acquaintance.iGUI;
 import client.Acquaintance.iLogic;
+import client.Logic.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -58,50 +59,30 @@ public class GUIrun extends Application implements iGUI {
         logout();
     }
 
-    @Override
-    public String getName() {
-        return logic.getName();
-    }
-
-    @Override
-    public String getBirthday() {
-        return logic.getBirthday();
+    public String login(String ID, String password) {
+        return logic.login(ID, password);
     }
     
-    public String login(String ID, String password){      
-       return logic.login(ID, password);
-    }
-    
+    @Override
     public String logout(){
         return logic.logout();
     }
-    
-    public int getAccountBalance(String accountID){
+
+    public int getAccountBalance(String accountID) {
         return logic.getAccountBalance(accountID);
     }
-    
-    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
+
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
         return logic.toProtocol07(ID, name, birthday, phonenumber, address, email, password);
-    }
-
-    @Override
-    public String getPhoneNo() {
-        return logic.getPhoneNo();
-    }
-
-    @Override
-    public String getAddress() {
-        return logic.getAddress();
-    }
-
-    @Override
-    public String getEmail() {
-        return logic.getEmail();
     }
 
     @Override
     public void startConnection() {
         logic.startConnection();
+    }
+
+    public Customer getCustomer() {
+        return logic.getCustomer();
     }
 
 }

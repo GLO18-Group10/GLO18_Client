@@ -42,33 +42,18 @@ public class LogicFacade implements iLogic {
     }
 
     @Override
-    public String getName() {
-        return customer.getName();
-    }
-
-    @Override
-    public String getBirthday() {
-        return customer.getBirthday();
-    }
-
-    @Override
-    public String getPhoneNo() {
-        return customer.getPhoneNo();
-    }
-    
-    @Override
     public String login(String ID, String password) {
-        
+
         String message = messageParser.toProtocol00(ID, password);
-       
+
         if (message.equalsIgnoreCase("true")) {
             initializeUser(ID);
-            
+
         }
-        
+
         return message;
     }
-    
+
     @Override
     public String logout(){
         String message = messageParser.toProtocol18();
@@ -87,17 +72,6 @@ public class LogicFacade implements iLogic {
     public int getAccountBalance(String accountID) {
         return messageParser.toProtocol02(accountID);
     }
-    
-
-    @Override
-    public String getAddress() {
-        return customer.getAddress();
-    }
-
-    @Override
-    public String getEmail() {
-        return customer.getEmail();
-    }
 
     public void initializeUser(String ID) {
         if (ID.startsWith("A")) {
@@ -110,8 +84,13 @@ public class LogicFacade implements iLogic {
 
     @Override
     //This method could also be renamed to an appropriate name since the arcitecture has changed. For instance createCustomer(). This is preffered.
-    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
-        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email,  password));
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
+        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email, password));
         return receiveMessage();
+    }
+
+    @Override
+    public Customer getCustomer() {
+        return customer;
     }
 }
