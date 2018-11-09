@@ -8,6 +8,7 @@ package client.GUI;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -102,7 +104,11 @@ public class CustomerController implements Initializable {
     private AnchorPane AccountsAnchorPane;
     @FXML
     private TextField CPRField;
+    ArrayList<MenuItem>menubankID = new ArrayList<>(); 
 
+    public CustomerController() {
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -114,6 +120,20 @@ public class CustomerController implements Initializable {
             clearPanes();
             NewTransferAnchorPane.toFront();
             NewTransferAnchorPane.setVisible(true);
+            String bankid[] = guiRun.getBankIDs().split(";");
+            
+            
+            if (MenuButtonAccounts.getItems().isEmpty()) {
+                System.out.println("test");
+            
+            for (int i = 0; i < bankid.length; i++) {
+                
+                MenuItem menuitem = new MenuItem(bankid[i]);
+                menubankID.add(menuitem);
+               }
+            MenuButtonAccounts.getItems().addAll(menubankID);
+            }
+            
         } else if (event.getSource() == AccountsButton) {
             clearPanes();
             AccountsAnchorPane.toFront();
@@ -153,6 +173,17 @@ public class CustomerController implements Initializable {
         AnchorPane3.setVisible(false);
         ProfileAnchor.setVisible(false);
     }
-
+    @FXML
+    private void transfer(){
+        String amount = AmountField.getText();
+        //String date = DateField.getText();
+        String bankID = AccountField.getText() + RegField.getText();
+        String message = MessageArea.getText();
+        String senderBankID = MenuButtonAccounts.getText();
+        
+        guiRun.toProtocol05(senderBankID, amount, bankID, message);
+        
+        
+    }
     
 }

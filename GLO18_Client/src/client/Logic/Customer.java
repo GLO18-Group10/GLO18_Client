@@ -65,20 +65,24 @@ public class Customer extends User {
         this.address = address;
     }
     public String getBankID(){
-        
+        String bankID = "";
         if (bankIDs.isEmpty()) {
             logic.sendMessage(messageParser.toProtocol08());
             String data[] = messageParser.fromProtocol(logic.receiveMessage());
+            System.out.println(data[0]);
             if (data[0].equalsIgnoreCase("error")) {
                 return "No bankIDs";
             }
             for (String ID : data){
-                bankIDs.add(ID);
+                bankIDs.add(ID + ";");
                 
             
             }
         }
-        return bankIDs.toString();
+        for (int i = 0; i < bankIDs.size(); i++) {
+            bankID = bankIDs.get(i);
+        }
+        return bankID;
     }
     
     public String checkBankID(String ID){

@@ -58,7 +58,7 @@ public class MessageParser {
     }
     
     public String toProtocol05(String senderID, String amount, String recieverID, String text){
-        return "05;" + senderID + amount + recieverID + text;
+        return "05;" + senderID + ";" + amount + ";"+ recieverID + ";" + text;
     
     }
     

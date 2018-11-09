@@ -88,6 +88,11 @@ public class LogicFacade implements iLogic {
         return customer.getBankID();    
     }
     
+    public String checkBankID(String bankID){
+        return customer.checkBankID(bankID);
+    
+    } 
+    
     public void initializeUser(String ID) {
         if (ID.startsWith("A")) {
             admin = new Admin(ID, this);
