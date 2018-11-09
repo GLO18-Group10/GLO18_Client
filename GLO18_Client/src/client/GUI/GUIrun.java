@@ -36,7 +36,7 @@ public class GUIrun extends Application implements iGUI {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("admin.fxml"));
 
 
         Scene scene = new Scene(root);
@@ -63,17 +63,27 @@ public class GUIrun extends Application implements iGUI {
         return logic.getAccountBalance(accountID);
     }
     
-    public String toProtocol05(String name, String phoneNo, String address, String email){
-        return logic.toProtocol05(name, phoneNo, address, email);
+    public String toProtocol03(String name, String phoneNo, String address, String email){
+        return logic.toProtocol03(name, phoneNo, address, email);
     }
 
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
         return logic.toProtocol07(ID, name, birthday, phonenumber, address, email, password);
     }
+    
+    public String getBankIDs(){
+        return logic.getBankID();
+    }
+    
 
     @Override
     public void startConnection() {
         logic.startConnection();
+    }
+    
+    public String toProtocol05(String senderID, String amount, String recieverID, String text){
+        
+        return logic.toProtocol05(senderID, amount, recieverID, text);
     }
 
     public Customer getCustomer() {

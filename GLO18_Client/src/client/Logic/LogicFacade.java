@@ -58,6 +58,16 @@ public class LogicFacade implements iLogic {
         return messageParser.toProtocol02(accountID);
     }
 
+    @Override
+    public String getBankID(){
+        return customer.getBankID();    
+    }
+    
+    public String checkBankID(String bankID){
+        return customer.checkBankID(bankID);
+    
+    } 
+
     public void initializeUser(String ID) {
         if (ID.startsWith("A")) {
             admin = new Admin(ID, this);
@@ -66,7 +76,12 @@ public class LogicFacade implements iLogic {
             customer = new Customer(ID, this);
         }
     }
-
+    @Override
+    public String toProtocol05(String senderID, String amount, String recieverID, String text){
+        sendMessage(messageParser.toProtocol05(senderID, amount, recieverID, text));
+        return receiveMessage();
+    }
+    
     @Override
     //This method could also be renamed to an appropriate name since the arcitecture has changed. For instance createCustomer(). This is preffered.
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
@@ -77,8 +92,8 @@ public class LogicFacade implements iLogic {
     
     @Override
     //This method will store the information for a specific customer
-    public String toProtocol05(String name, String phoneNo, String address, String email){
-        sendMessage(messageParser.toProtocol05(name, phoneNo, address, email));
+    public String toProtocol03(String name, String phoneNo, String address, String email){
+        sendMessage(messageParser.toProtocol03(name, phoneNo, address, email));
         return receiveMessage();
     }
 
