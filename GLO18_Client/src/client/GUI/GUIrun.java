@@ -81,5 +81,7 @@ public class GUIrun extends Application implements iGUI {
     public Customer getCustomer() {
         return logic.getCustomer();
     }
-
+    public String getTransactionHistory(String accountID){
+        return logic.getTransactionHistory(accountID);
+    }
 }

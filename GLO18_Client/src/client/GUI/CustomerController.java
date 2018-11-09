@@ -206,10 +206,11 @@ public class CustomerController implements Initializable {
         }
         
     }
-    private void setmenutext(){
-        
+    public void getTransactionHistory(){
         
     
+    
     }
+    
     
 }

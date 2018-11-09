@@ -93,4 +93,11 @@ public class LogicFacade implements iLogic {
     public Customer getCustomer() {
         return customer;
     }
+
+    @Override
+    public String getTransactionHistory(String accountID) {
+        sendMessage(messageParser.toProtocol06(accountID));
+        return receiveMessage();
+    }
+    
 }
