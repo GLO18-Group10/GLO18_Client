@@ -18,7 +18,7 @@ public class LinkFacade implements iLink {
     @Override
     public void startConnection() {
         try {
-            serverConnection = new ServerConnection("10.126.33.125",
+            serverConnection = new ServerConnection("192.168.0.173",
                     Integer.parseInt("2345"));
         }
         catch(Exception ioException){
