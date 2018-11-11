@@ -16,4 +16,5 @@ public interface iGUI {
     public void startApplication(String[] args);
 
     void startConnection();
+    public String logout();
 }

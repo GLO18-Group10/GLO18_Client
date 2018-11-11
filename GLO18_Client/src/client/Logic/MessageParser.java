@@ -71,10 +71,9 @@ public class MessageParser {
         //return fromProtocol01(logic.receiveMessage());
     }
 
-    private String[] fromProtocol01(String message) {
-        //Split the received data into the different parts
-        return message.split(";");
-
+    public String toProtocol18(){
+        logic.sendMessage("18");
+        return logic.receiveMessage();
     }
     
     public String toProtocol08(){

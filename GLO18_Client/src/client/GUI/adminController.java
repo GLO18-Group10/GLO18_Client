@@ -5,13 +5,18 @@
  */
 package client.GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
@@ -19,6 +24,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -89,7 +95,27 @@ public class adminController implements Initializable {
     private String createCustomer(String ID, String name, String birthday, String phoneNumber, String address, String email, String password){
        return guiRun.getInstance().toProtocol07(ID, name, birthday, phoneNumber, address, email, password);
     }
-    
+
+    @FXML
+    private void logoutHandler(ActionEvent event) {
+        System.out.println("logout button");
+            if(guiRun.getInstance().logout().equalsIgnoreCase("true")){
+                System.out.println("logout was true");
+                try {
+                        Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
+                        Scene newScene = new Scene(nextView);
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        stage.setScene(newScene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        System.out.println("logout error");
+                        ex.printStackTrace();
+                    }
+            }else if(guiRun.getInstance().logout().equalsIgnoreCase("false")){
+                System.out.println("could not log out"); //this should bechanged to a label in the GUI
+            }
+    }
+
     private boolean isEmpty(ArrayList<TextField> textFieldArray){
         boolean isEmpty = false;
         statusTextArea.clear();
