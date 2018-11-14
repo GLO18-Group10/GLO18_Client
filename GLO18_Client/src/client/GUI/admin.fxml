@@ -100,11 +100,6 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField fx:id="PasswordField" promptText="Password">
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                        </TextField>
                      </children>
                   </VBox>
                </right>

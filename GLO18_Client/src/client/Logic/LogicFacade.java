@@ -19,6 +19,7 @@ public class LogicFacade implements ILogic {
     private static ILink link;
     private ICustomer customer;
     private IAdmin admin;
+    private MailHandler mailHandler = new MailHandler();
 
     private MessageParser messageParser = new MessageParser(this);
 
@@ -107,9 +108,14 @@ public class LogicFacade implements ILogic {
     public ICustomer getCustomer() {
         return customer;
     }
-    
+ 
     @Override
     public IAdmin getAdmin(){
         return admin;
+    }
+
+    @Override
+    public String sendMail(String ID, String email, String name, String password){
+        return mailHandler.sendMail(ID, email, name, password);
     }
 }

@@ -8,6 +8,7 @@ package client.Logic;
 import client.Acquaintance.ICustomer;
 import client.Acquaintance.ILogic;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *

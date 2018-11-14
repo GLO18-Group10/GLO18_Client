@@ -75,7 +75,6 @@ public class adminController implements Initializable {
         textFields.add(PhoneField);
         textFields.add(AddressField);
         textFields.add(EmailField);
-        textFields.add(PasswordField);
     }    
     
     @FXML
@@ -91,8 +90,13 @@ public class adminController implements Initializable {
         String phoneNumber = PhoneField.getText();
         String address = AddressField.getText();
         String email = EmailField.getText();
-        String password = PasswordField.getText();
-        System.out.println(createCustomer(ID, name, birthdayTest, phoneNumber, address, email, password));
+        String password = logic.getAdmin().generatePassword();
+        System.out.println(password);
+        String success = createCustomer(ID, name, birthdayTest, phoneNumber, address, email, password);
+        if(success.equalsIgnoreCase("true")){
+            logic.sendMail(ID, name, email, password);
+            System.out.println("MAIL TEST");
+        }
         }
     }
     
