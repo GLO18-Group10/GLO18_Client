@@ -21,17 +21,16 @@ public interface iLogic {
 
     String receiveMessage();
 
-
     String getBankID();
 
-    Customer getCustomer();
-
-
     String login(String ID, String password);
-
+    public String toProtocol03(String name, String phoneNo, String address, String email);
+    Customer getCustomer();
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password);
-
     public int getAccountBalance(String accountID);
+
+    public String logout();
+
     public String toProtocol05(String senderID, String amount, String recieverID, String text);
     public String getTransactionHistory(String accountID);
 }
