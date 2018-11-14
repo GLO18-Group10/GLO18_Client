@@ -7,6 +7,7 @@ package client.GUI;
 
 import client.Acquaintance.iGUI;
 import client.Acquaintance.iLogic;
+import client.Logic.Admin;
 import client.Logic.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -99,6 +100,13 @@ public class GUIrun extends Application implements iGUI {
 
     public Customer getCustomer() {
         return logic.getCustomer();
+    }
+    
+    public Admin getAdmin(){
+        return logic.getAdmin();
+    }
+    public String sendMail(String ID, String name, String email, String password){
+        return logic.sendMail(ID, email, name, password);
     }
 
 }
