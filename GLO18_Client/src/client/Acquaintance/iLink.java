@@ -13,4 +13,5 @@ public interface iLink {
     void startConnection();
     void sendMessage(String message);
     String receiveMessage();
+    public void endConnection();
 }

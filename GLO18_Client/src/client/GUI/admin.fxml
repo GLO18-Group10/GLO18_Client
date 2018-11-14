@@ -32,7 +32,7 @@
                <bottom>
                   <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="LogoutButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="140.0" text="Logout" />
+                        <Button fx:id="LogoutButton" mnemonicParsing="false" onAction="#logoutHandler" prefHeight="38.0" prefWidth="140.0" text="Logout" />
                         <Button fx:id="DeleteButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="140.0" text="Deactivate" />
                      </children>
                   </HBox>

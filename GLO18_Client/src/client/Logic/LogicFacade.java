@@ -42,6 +42,7 @@ public class LogicFacade implements iLogic {
         return link.receiveMessage();
     }
 
+    @Override
     public String login(String ID, String password) {
 
         String message = messageParser.toProtocol00(ID, password);
@@ -54,6 +55,21 @@ public class LogicFacade implements iLogic {
         return message;
     }
 
+    @Override
+    public String logout(){
+        String message = messageParser.toProtocol18();
+        
+        if(message.equalsIgnoreCase("true")){
+            admin = null;
+            customer = null;
+            link.endConnection();
+            return "true";
+        }else{
+            return "false";
+        }
+        
+    }
+    
     @Override
     public int getAccountBalance(String accountID) {
         return messageParser.toProtocol02(accountID);
