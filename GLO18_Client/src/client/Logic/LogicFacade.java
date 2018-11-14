@@ -120,7 +120,6 @@ public class LogicFacade implements iLogic {
 
     @Override
     public String getTransactionHistory(String accountID) {
-        String testID = customer.getID(); 
         sendMessage(messageParser.toProtocol06(accountID));
         return receiveMessage();
     }

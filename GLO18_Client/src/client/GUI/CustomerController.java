@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
@@ -42,8 +43,6 @@ public class CustomerController implements Initializable {
     @FXML
     private HBox HBox;
     @FXML
-    private ScrollPane ScrollPane;
-    @FXML
     private AnchorPane AnchorPane3;
     @FXML
     private GridPane GridPane;
@@ -61,8 +60,6 @@ public class CustomerController implements Initializable {
     private Button LogoutButton;
     @FXML
     private TextField AmountField;
-    @FXML
-    private TextField DateField;
     @FXML
     private TextField RegField;
     @FXML
@@ -92,8 +89,6 @@ public class CustomerController implements Initializable {
     @FXML
     private Button EditInformation;
     @FXML
-    private Button SaveButtonHandler;
-    @FXML
     private Button CancelEditButton;
     @FXML
     private AnchorPane CustomerParentPane;
@@ -104,21 +99,21 @@ public class CustomerController implements Initializable {
     @FXML
     private Label AmountErrorLabel;
     @FXML
-    private Label DateErrorLabel;
-    @FXML
     private Label AccountErrorLabel;
     @FXML
     private Label MessageErrorLabel;
     @FXML
     private AnchorPane AccountsAnchorPane;
     @FXML
-    private TextField CPRField;
-    @FXML
     private ChoiceBox<String> TransactionBankIDChoiceBox;
     @FXML
     private Button updateButton;
     @FXML
     private Button SaveButton;
+    @FXML
+    private Label TransactionOverallMessageLabel;
+    @FXML
+    private ListView<String> TransactionHistoryListView;
     public CustomerController() {
     }
     
@@ -129,6 +124,7 @@ public class CustomerController implements Initializable {
 
     @FXML
     private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
+        
         if (event.getSource() == TransferButton) {
             clearPanes();
             NewTransferAnchorPane.toFront();
@@ -141,6 +137,7 @@ public class CustomerController implements Initializable {
                 }
             }
         } 
+        
         else if (event.getSource() == AccountsButton) {
             clearPanes();
             AccountsAnchorPane.toFront();
@@ -186,10 +183,20 @@ public class CustomerController implements Initializable {
                 System.out.println("could not log out"); //this should bechanged to a label in the GUI
             }
         }
+        else if (event.getSource() == updateButton) {
+            
+            if (AccountsDropdown.getValue() == null) {
+                System.out.println("ikke valgt account");
+            }
+            else{
+            setAccountBalance();
+            getTransactionHistory();
+            }
+        }
     }
 
-    @FXML
-    private void setAccountBalance(javafx.event.ActionEvent event) {
+    
+    private void setAccountBalance() {
         AccountBalanceLabel.setText(guiRun.getAccountBalance(AccountsDropdown.getValue())+" DKK");
     }
     private void clearPanes() {
@@ -254,7 +261,6 @@ public class CustomerController implements Initializable {
     @FXML
     private void transfer(){
         String amount = AmountField.getText();
-        //String date = DateField.getText();
         String bankID = AccountField.getText() + RegField.getText();
         String message = MessageArea.getText();
         String senderBankID = TransactionBankIDChoiceBox.getValue();
@@ -266,15 +272,22 @@ public class CustomerController implements Initializable {
             AmountErrorLabel.setText("Error; insufficient funds.");
         }
         else if (response.equalsIgnoreCase("complete")) {
-            //transactionCompleteLabel.setText(test);
+            TransactionOverallMessageLabel.setText(response);
         }
         else {
-            //overallErrorLabel.setText(test);
+            TransactionOverallMessageLabel.setText(response);
         }
     }
     //Shows the transaction history
-    public void getTransactionHistory(){
+    
+    private void getTransactionHistory(){
+        String accountID = AccountsDropdown.getValue();
+        String data[] = guiRun.getTransactionHistory(accountID).split(";");
         
+        for (int i = 0; i < data.length; i++) {
+           TransactionHistoryListView.getItems().add(data[i]);
+            
+            }
     }
     
     
