@@ -24,6 +24,8 @@ public interface ILogic {
     public String toProtocol03(String name, String phoneNo, String address, String email);
 
     ICustomer getCustomer();
+    
+    public IAdmin getAdmin();
 
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password);
 

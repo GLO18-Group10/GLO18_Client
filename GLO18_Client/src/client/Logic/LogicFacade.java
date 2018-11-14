@@ -16,7 +16,6 @@ import client.Acquaintance.ILogic;
  */
 public class LogicFacade implements ILogic {
 
-    private static User user;
     private static ILink link;
     private ICustomer customer;
     private IAdmin admin;
@@ -107,5 +106,10 @@ public class LogicFacade implements ILogic {
     @Override
     public ICustomer getCustomer() {
         return customer;
+    }
+    
+    @Override
+    public IAdmin getAdmin(){
+        return admin;
     }
 }
