@@ -120,7 +120,7 @@
                                     <Insets left="15.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <Label text="Account ID + reg. ">
+                              <Label text="Account number + reg. ">
                                  <VBox.margin>
                                     <Insets left="15.0" top="30.0" />
                                  </VBox.margin>
@@ -382,7 +382,7 @@
                   </VBox>
                </center>
                <top>
-                  <Label alignment="TOP_LEFT" text="Profile:" BorderPane.alignment="CENTER_LEFT">
+                  <Label alignment="TOP_LEFT" text="Profile" BorderPane.alignment="CENTER_LEFT">
                      <font>
                         <Font size="24.0" />
                      </font>
