@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 
 /**
  *
@@ -21,10 +23,17 @@ import java.util.Scanner;
 public class ServerConnection {
     
     private Socket socket;
+    private SSLSocketFactory SSLSocketFactory;
+    private SSLSocket SSLSocket;
     private Scanner scanner;
 
     public ServerConnection(String serverAddress, int serverPort) throws Exception {
-        this.socket = new Socket(serverAddress, serverPort);
+        SSLSocketFactory factory =
+        (SSLSocketFactory)SSLSocketFactory.getDefault();
+         SSLSocket = (SSLSocket)factory.createSocket(serverAddress, serverPort);
+         String[] supported = SSLSocket.getSupportedCipherSuites();
+         SSLSocket.setEnabledCipherSuites(supported);
+         SSLSocket.startHandshake();
         this.scanner = new Scanner(System.in);
     }
 
