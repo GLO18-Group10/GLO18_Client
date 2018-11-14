@@ -5,6 +5,7 @@
  */
 package client.Logic;
 
+import client.Acquaintance.ILogic;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +20,7 @@ public class Customer extends User {
     private String address;
     private ArrayList<String> bankIDs = new ArrayList<>();
     
-    public Customer(String ID, LogicFacade logic) {
+    public Customer(String ID, ILogic logic) {
         super(ID, logic);
     }
 

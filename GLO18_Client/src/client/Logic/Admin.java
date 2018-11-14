@@ -5,15 +5,17 @@
  */
 package client.Logic;
 
+import client.Acquaintance.ILogic;
+
 /**
  *
  * @author Nick
  */
 public class Admin extends User {
 
-    private LogicFacade logic;
+    private ILogic logic;
 
-    public Admin(String ID, LogicFacade logic) {
+    public Admin(String ID, ILogic logic) {
         super(ID, logic);
     }
 

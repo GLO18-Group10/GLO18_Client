@@ -5,14 +5,16 @@
  */
 package client.Logic;
 
+import client.Acquaintance.ILogic;
+
 /**
  *
  * @author Peterzxcvbnm
  */
 public class MessageParser {
-    LogicFacade logic;
+    ILogic logic;
 
-    public MessageParser(LogicFacade logic) {
+    public MessageParser(ILogic logic) {
         this.logic = logic;
     }
 

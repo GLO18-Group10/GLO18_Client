@@ -5,20 +5,20 @@
  */
 package client.Link;
 
-import client.Acquaintance.iLink;
+import client.Acquaintance.ILink;
 
 /**
  *
  * @author Jeppe Enevold
  */
-public class LinkFacade implements iLink {
+public class LinkFacade implements ILink {
 
     ServerConnection serverConnection;
 
     @Override
     public void startConnection() {
         try {
-            serverConnection = new ServerConnection("10.126.28.111",
+            serverConnection = new ServerConnection("10.126.98.159",
             Integer.parseInt("2345"));
         }
         catch(Exception ioException){

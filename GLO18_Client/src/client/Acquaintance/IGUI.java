@@ -9,9 +9,13 @@ package client.Acquaintance;
  *
  * @author Jeppe Enevold
  */
-public interface iLink {
+public interface IGUI {
+
+    public void injectLogic(ILogic LogicLayer);
+
+    public void startApplication(String[] args);
+
     void startConnection();
-    void sendMessage(String message);
-    String receiveMessage();
-    public void endConnection();
+
+    public String logout();
 }

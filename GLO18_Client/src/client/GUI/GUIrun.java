@@ -5,27 +5,27 @@
  */
 package client.GUI;
 
-import client.Acquaintance.iGUI;
-import client.Acquaintance.iLogic;
 import client.Logic.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import client.Acquaintance.IGUI;
+import client.Acquaintance.ILogic;
 
 /**
  *
  * @author Jeppe Enevold
  */
-public class GUIrun extends Application implements iGUI {
+public class GUIrun extends Application implements IGUI {
 
-    private static iLogic logic;
+    private static ILogic logic;
 
     private static GUIrun guiRun;
 
     @Override
-    public void injectLogic(iLogic LogicLayer) {
+    public void injectLogic(ILogic LogicLayer) {
         logic = LogicLayer;
     }
 
@@ -99,6 +99,10 @@ public class GUIrun extends Application implements iGUI {
 
     public Customer getCustomer() {
         return logic.getCustomer();
+    }
+    
+    public static ILogic getLogic(){
+        return logic;
     }
 
 }

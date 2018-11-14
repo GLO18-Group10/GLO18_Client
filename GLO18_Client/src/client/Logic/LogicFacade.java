@@ -5,24 +5,24 @@
  */
 package client.Logic;
 
-import client.Acquaintance.iLink;
-import client.Acquaintance.iLogic;
+import client.Acquaintance.ILink;
+import client.Acquaintance.ILogic;
 
 /**
  *
  * @author Jeppe Enevold
  */
-public class LogicFacade implements iLogic {
+public class LogicFacade implements ILogic {
 
     private static User user;
-    private static iLink link;
+    private static ILink link;
     private Customer customer;
     private Admin admin;
 
     private MessageParser messageParser = new MessageParser(this);
 
     @Override
-    public void injectLink(iLink LinkLayer) {
+    public void injectLink(ILink LinkLayer) {
         link = LinkLayer;
     }
 

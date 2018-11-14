@@ -5,13 +5,15 @@
  */
 package client.Logic;
 
+import client.Acquaintance.ILogic;
+
 /**
  *
  * @author Nick
  */
 public class User {
 
-    public LogicFacade logic;
+    public ILogic logic;
     private MessageParser messageParser = new MessageParser(logic);
     private String ID;
     private String email;
@@ -49,7 +51,7 @@ public class User {
         this.phoneNo = phoneNo;
     }
 
-    public User(String ID, LogicFacade logic) {
+    public User(String ID, ILogic logic) {
         this.ID = ID;
         this.logic = logic;
     }
