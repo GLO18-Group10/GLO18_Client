@@ -18,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -37,6 +38,7 @@ import javafx.stage.Stage;
  * @author antonio
  */
 public class CustomerController implements Initializable {
+    GUIrun guiRun = GUIrun.getInstance();
     @FXML
     private HBox HBox;
     @FXML
@@ -70,8 +72,6 @@ public class CustomerController implements Initializable {
     @FXML
     private Button CleanButton;
     @FXML
-    private MenuButton MenuButtonAccounts;
-    @FXML
     private AnchorPane ProfileAnchor;
     @FXML
     private TextField NameField;
@@ -84,14 +84,14 @@ public class CustomerController implements Initializable {
     @FXML
     private TextField EmailField;
     @FXML
-    private MenuButton AccountsDropdown;
+    private ChoiceBox<String> AccountsDropdown;
     @FXML
     private Label AccountBalanceLabel;
     @FXML
     private Button ProfileButton;
-    GUIrun guiRun = GUIrun.getInstance();
     @FXML
     private Button EditInformation;
+    @FXML
     private Button SaveButtonHandler;
     @FXML
     private Button CancelEditButton;
@@ -111,10 +111,12 @@ public class CustomerController implements Initializable {
     private Label MessageErrorLabel;
     @FXML
     private AnchorPane AccountsAnchorPane;
-    
-   
+    @FXML
+    private TextField CPRField;
     @FXML
     private ChoiceBox<String> TransactionBankIDChoiceBox;
+    @FXML
+    private Button updateButton;
     @FXML
     private Button SaveButton;
     public CustomerController() {
@@ -131,28 +133,32 @@ public class CustomerController implements Initializable {
             clearPanes();
             NewTransferAnchorPane.toFront();
             NewTransferAnchorPane.setVisible(true);
-            String bankid[] = guiRun.getBankIDs().split(";");
-            
             
             if (TransactionBankIDChoiceBox.getItems().isEmpty()) {
-                
-            
-            for (int i = 0; i < bankid.length; i++) {
-                
-               
-                TransactionBankIDChoiceBox.getItems().add(bankid[i]);
-               }
+                String bankid[] = guiRun.getBankIDs().split(";");
+                for (int i = 0; i < bankid.length; i++) {
+                    TransactionBankIDChoiceBox.getItems().add(bankid[i]);
+                }
             }
-            
-        } else if (event.getSource() == AccountsButton) {
+        } 
+        else if (event.getSource() == AccountsButton) {
             clearPanes();
             AccountsAnchorPane.toFront();
             AccountsAnchorPane.setVisible(true);
-        } else if (event.getSource() == OptionsButton) {
+            
+            if (AccountsDropdown.getItems().isEmpty()) {
+                String bankid[] = guiRun.getBankIDs().split(";");
+                for (int i = 0; i < bankid.length; i++) {
+                    AccountsDropdown.getItems().add(bankid[i]);
+                }
+            }
+        } 
+        else if (event.getSource() == OptionsButton) {
             clearPanes();
             AnchorPane3.toFront();
             AnchorPane3.setVisible(true);
-        } else if (event.getSource() == ProfileButton) {
+        } 
+        else if (event.getSource() == ProfileButton) {
             //Get all the information and update the text fields
             EmailField.setText(guiRun.getCustomer().getEmail());
             AddressField.setText(guiRun.getCustomer().getAddress());
@@ -184,7 +190,7 @@ public class CustomerController implements Initializable {
 
     @FXML
     private void setAccountBalance(javafx.event.ActionEvent event) {
-        AccountBalanceLabel.setText(guiRun.getAccountBalance(AccountsDropdown.getText())+" DKK");
+        AccountBalanceLabel.setText(guiRun.getAccountBalance(AccountsDropdown.getValue())+" DKK");
     }
     private void clearPanes() {
         NewTransferAnchorPane.setVisible(false);
@@ -245,7 +251,6 @@ public class CustomerController implements Initializable {
         EmailField.setText(guiRun.getCustomer().getEmail());
     }
 
-
     @FXML
     private void transfer(){
         String amount = AmountField.getText();
@@ -266,7 +271,6 @@ public class CustomerController implements Initializable {
         else {
             //overallErrorLabel.setText(test);
         }
-        
     }
     private void setmenutext(){
         
