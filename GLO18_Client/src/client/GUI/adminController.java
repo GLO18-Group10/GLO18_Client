@@ -5,11 +5,14 @@
  */
 package client.GUI;
 
+import client.Acquaintance.IAdmin;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,19 +35,29 @@ import javafx.stage.Stage;
  * @author antonio
  */
 public class adminController implements Initializable {
-    GUIrun guiRun;
-    @FXML AnchorPane adminOverview;
+
+    GUIrun guiRun = GUIrun.getInstance();
+    @FXML
+    AnchorPane adminOverview;
     ListView Listview;
-    @FXML Pane PaneBar; 
-    @FXML Button DeleteButton;
+    @FXML
+    Pane PaneBar;
+    @FXML
+    Button DeleteButton;
     TextField SearchField;
-    @FXML Button LogoutButton;
-    @FXML Button CreateButton;
-    @FXML TextField FirstNameField;
-    @FXML TextField LastnameField;
-    @FXML TextField CPRField;
-    @FXML TextField EmailField;
-    @FXML 
+    @FXML
+    Button LogoutButton;
+    @FXML
+    Button CreateButton;
+    @FXML
+    TextField FirstNameField;
+    @FXML
+    TextField LastnameField;
+    @FXML
+    TextField CPRField;
+    @FXML
+    TextField EmailField;
+    @FXML
     TextField PhoneField;
     ArrayList<TextField> textFields;
     @FXML
@@ -59,6 +72,7 @@ public class adminController implements Initializable {
     private TextField SearchTextField;
     @FXML
     private TextArea statusTextArea;
+
     /**
      * Initializes the controller class.
      */
@@ -72,55 +86,55 @@ public class adminController implements Initializable {
         textFields.add(AddressField);
         textFields.add(EmailField);
         textFields.add(PasswordField);
-    }    
-    
+        getIdForList();
+    }
+
     @FXML
     private void CreateButtonHandler(ActionEvent event) {
-        if(isEmpty(textFields) || birthdayFieldDatePicker.getValue()== null || !isValid(CPRField.getText()) ||!isValid(PhoneField.getText())){
+        if (isEmpty(textFields) || birthdayFieldDatePicker.getValue() == null || !isValid(CPRField.getText()) || !isValid(PhoneField.getText())) {
             System.out.println("ERROR TEST");
-        }
-        else{
-        String ID = "C" + CPRField.getText();
-        String name = FirstNameField.getText() + " " + LastnameField.getText();
-        String birthdayTest = birthdayFieldDatePicker.getValue().toString();
-        System.out.println(birthdayTest);
-        String phoneNumber = PhoneField.getText();
-        String address = AddressField.getText();
-        String email = EmailField.getText();
-        String password = PasswordField.getText();
-        System.out.println(createCustomer(ID, name, birthdayTest, phoneNumber, address, email, password));
+        } else {
+            String ID = "C" + CPRField.getText();
+            String name = FirstNameField.getText() + " " + LastnameField.getText();
+            String birthdayTest = birthdayFieldDatePicker.getValue().toString();
+            System.out.println(birthdayTest);
+            String phoneNumber = PhoneField.getText();
+            String address = AddressField.getText();
+            String email = EmailField.getText();
+            String password = PasswordField.getText();
+            System.out.println(createCustomer(ID, name, birthdayTest, phoneNumber, address, email, password));
         }
     }
-    
-    private String createCustomer(String ID, String name, String birthday, String phoneNumber, String address, String email, String password){
-       return guiRun.getInstance().toProtocol07(ID, name, birthday, phoneNumber, address, email, password);
+
+    private String createCustomer(String ID, String name, String birthday, String phoneNumber, String address, String email, String password) {
+        return guiRun.getInstance().toProtocol07(ID, name, birthday, phoneNumber, address, email, password);
     }
 
     @FXML
     private void logoutHandler(ActionEvent event) {
         System.out.println("logout button");
-            if(guiRun.getInstance().logout().equalsIgnoreCase("true")){
-                System.out.println("logout was true");
-                try {
-                        Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
-                        Scene newScene = new Scene(nextView);
-                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        stage.setScene(newScene);
-                        stage.show();
-                    } catch (IOException ex) {
-                        System.out.println("logout error");
-                        ex.printStackTrace();
-                    }
-            }else if(guiRun.getInstance().logout().equalsIgnoreCase("false")){
-                System.out.println("could not log out"); //this should bechanged to a label in the GUI
+        if (guiRun.getInstance().logout().equalsIgnoreCase("true")) {
+            System.out.println("logout was true");
+            try {
+                Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
+                Scene newScene = new Scene(nextView);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(newScene);
+                stage.show();
+            } catch (IOException ex) {
+                System.out.println("logout error");
+                ex.printStackTrace();
             }
+        } else if (guiRun.getInstance().logout().equalsIgnoreCase("false")) {
+            System.out.println("could not log out"); //this should bechanged to a label in the GUI
+        }
     }
 
-    private boolean isEmpty(ArrayList<TextField> textFieldArray){
+    private boolean isEmpty(ArrayList<TextField> textFieldArray) {
         boolean isEmpty = false;
         statusTextArea.clear();
         for (TextField textField : textFieldArray) {
-            if(textField.getText().trim().isEmpty()){
+            if (textField.getText().trim().isEmpty()) {
                 System.out.println(textField.toString());
                 String[] textFieldEmpty = textField.toString().split(",");
                 statusTextArea.appendText(textFieldEmpty[0].substring(13) + " IS EMPTY\n");
@@ -129,16 +143,23 @@ public class adminController implements Initializable {
         }
         return isEmpty;
     }
-    
-    private boolean isValid(String input){
+
+    private boolean isValid(String input) {
         char[] inputCharArray = input.toCharArray();
-        for(int i = 0; i < inputCharArray.length; i++){
-            if(Character.isLetter(inputCharArray[i])){
+        for (int i = 0; i < inputCharArray.length; i++) {
+            if (Character.isLetter(inputCharArray[i])) {
                 System.out.println("LETTERFOUND");
                 return false;
             }
         }
         return true;
     }
-    
+
+    private void getIdForList() {
+        System.out.println("controller");
+        String[] data = guiRun.getAdmin().getCustomerId();
+        ObservableList list = FXCollections.observableArrayList(data);
+        customerAccountsListView.setItems(list);
+    }
+
 }

@@ -5,6 +5,7 @@
  */
 package client.Logic;
 
+import client.Acquaintance.IAdmin;
 import client.Acquaintance.iLink;
 import client.Acquaintance.iLogic;
 
@@ -17,7 +18,7 @@ public class LogicFacade implements iLogic {
     private static User user;
     private static iLink link;
     private Customer customer;
-    private Admin admin;
+    private IAdmin admin;
 
     private MessageParser messageParser = new MessageParser(this);
 
@@ -116,5 +117,10 @@ public class LogicFacade implements iLogic {
     @Override
     public Customer getCustomer() {
         return customer;
+    }
+
+    @Override
+    public IAdmin getAdmin() {
+        return admin;
     }
 }

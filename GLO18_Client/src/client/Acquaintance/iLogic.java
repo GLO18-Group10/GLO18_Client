@@ -5,6 +5,7 @@
  */
 package client.Acquaintance;
 
+import client.Logic.Admin;
 import client.Logic.Customer;
 
 /**
@@ -32,4 +33,6 @@ public interface iLogic {
     public String logout();
 
     public String toProtocol05(String senderID, String amount, String recieverID, String text);
+    
+    IAdmin getAdmin();
 }

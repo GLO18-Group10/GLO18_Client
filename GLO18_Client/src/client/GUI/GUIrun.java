@@ -5,6 +5,7 @@
  */
 package client.GUI;
 
+import client.Acquaintance.IAdmin;
 import client.Acquaintance.iGUI;
 import client.Acquaintance.iLogic;
 import client.Logic.Customer;
@@ -101,4 +102,7 @@ public class GUIrun extends Application implements iGUI {
         return logic.getCustomer();
     }
 
+    public IAdmin getAdmin(){
+        return logic.getAdmin();
+    }
 }

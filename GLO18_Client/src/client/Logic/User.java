@@ -12,7 +12,7 @@ package client.Logic;
 public class User {
 
     public LogicFacade logic;
-    private MessageParser messageParser = new MessageParser(logic);
+    public MessageParser messageParser = new MessageParser(logic);
     private String ID;
     private String email;
     private String phoneNo;
