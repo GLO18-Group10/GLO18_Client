@@ -206,6 +206,7 @@ public class CustomerController implements Initializable {
         }
         
     }
+    //Shows the transaction history
     public void getTransactionHistory(){
         
     
