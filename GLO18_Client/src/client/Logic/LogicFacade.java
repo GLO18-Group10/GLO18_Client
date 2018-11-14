@@ -5,6 +5,8 @@
  */
 package client.Logic;
 
+import client.Acquaintance.IAdmin;
+import client.Acquaintance.ICustomer;
 import client.Acquaintance.ILink;
 import client.Acquaintance.ILogic;
 
@@ -16,8 +18,8 @@ public class LogicFacade implements ILogic {
 
     private static User user;
     private static ILink link;
-    private Customer customer;
-    private Admin admin;
+    private ICustomer customer;
+    private IAdmin admin;
 
     private MessageParser messageParser = new MessageParser(this);
 
@@ -43,14 +45,12 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String login(String ID, String password) {
-
         String message = messageParser.toProtocol00(ID, password);
 
         if (message.equalsIgnoreCase("true")) {
             initializeUser(ID);
-
         }
-
+        
         return message;
     }
 
@@ -62,6 +62,7 @@ public class LogicFacade implements ILogic {
             admin = null;
             customer = null;
             link.endConnection();
+            link.startConnection(); //the connection is started again to make it possible to log in again
             return "true";
         }else{
             return "false";
@@ -73,16 +74,6 @@ public class LogicFacade implements ILogic {
     public int getAccountBalance(String accountID) {
         return messageParser.toProtocol02(accountID);
     }
-
-    @Override
-    public String getBankID(){
-        return customer.getBankID();    
-    }
-    
-    public String checkBankID(String bankID){
-        return customer.checkBankID(bankID);
-    
-    } 
 
     public void initializeUser(String ID) {
         if (ID.startsWith("A")) {
@@ -114,7 +105,7 @@ public class LogicFacade implements ILogic {
     }
 
     @Override
-    public Customer getCustomer() {
+    public ICustomer getCustomer() {
         return customer;
     }
 }

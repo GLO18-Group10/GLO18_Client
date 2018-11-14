@@ -5,15 +5,14 @@
  */
 package client.Logic;
 
+import client.Acquaintance.IAdmin;
 import client.Acquaintance.ILogic;
 
 /**
  *
  * @author Nick
  */
-public class Admin extends User {
-
-    private ILogic logic;
+public class Admin extends User implements IAdmin{
 
     public Admin(String ID, ILogic logic) {
         super(ID, logic);

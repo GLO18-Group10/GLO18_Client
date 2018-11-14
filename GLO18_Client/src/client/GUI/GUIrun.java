@@ -5,7 +5,6 @@
  */
 package client.GUI;
 
-import client.Logic.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,15 +21,19 @@ public class GUIrun extends Application implements IGUI {
 
     private static ILogic logic;
 
-    private static GUIrun guiRun;
+    private static IGUI guiRun;
 
     @Override
     public void injectLogic(ILogic LogicLayer) {
         logic = LogicLayer;
     }
 
-    public static GUIrun getInstance() {
+    public static IGUI getInstance() {
         return guiRun;
+    }
+    
+        public static ILogic getLogic(){
+        return logic;
     }
 
     @Override
@@ -48,7 +51,7 @@ public class GUIrun extends Application implements IGUI {
 
     @Override
     public void startApplication(String[] args) {
-        this.startConnection();
+        logic.startConnection();
         guiRun = this;
         launch(args);
     }
@@ -58,51 +61,6 @@ public class GUIrun extends Application implements IGUI {
      */
     @Override
     public void stop(){
-        logout();
+        logic.logout();
     }
-
-    public String login(String ID, String password) {
-        return logic.login(ID, password);
-    }
-    
-    @Override
-    public String logout(){
-        String message = logic.logout();
-        logic.startConnection();
-        return message;
-    }
-
-    public int getAccountBalance(String accountID) {
-        return logic.getAccountBalance(accountID);
-    }
-    
-    public String toProtocol03(String name, String phoneNo, String address, String email){
-        return logic.toProtocol03(name, phoneNo, address, email);
-    }
-
-    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password){
-        return logic.toProtocol07(ID, name, birthday, phonenumber, address, email, password);
-    }
-    
-    public String getBankIDs(){
-        return logic.getBankID();
-    }
-    
-    @Override
-    public void startConnection() {
-        logic.startConnection();
-    }
-    
-    public String toProtocol05(String senderID, String amount, String recieverID, String text){
-        return logic.toProtocol05(senderID, amount, recieverID, text);
-    }
-
-    public Customer getCustomer() {
-        return logic.getCustomer();
-    }
-    
-    public static ILogic getLogic(){
-        return logic;
-    }
-
 }

@@ -15,7 +15,7 @@ public interface IGUI {
 
     public void startApplication(String[] args);
 
-    void startConnection();
-
-    public String logout();
+//    void startConnection();
+//
+//    public String logout();
 }

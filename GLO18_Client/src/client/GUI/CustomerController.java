@@ -5,6 +5,8 @@
  */
 package client.GUI;
 
+import client.Acquaintance.IGUI;
+import client.Acquaintance.ILogic;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,7 +36,8 @@ import javafx.stage.Stage;
  */
 public class CustomerController implements Initializable {
 
-    GUIrun guiRun = GUIrun.getInstance();
+    IGUI gui;
+    ILogic logic;
     @FXML
     private HBox HBox;
     @FXML
@@ -121,7 +124,8 @@ public class CustomerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        gui = GUIrun.getInstance();
+        logic = GUIrun.getLogic();
     }
 
     @FXML
@@ -132,7 +136,7 @@ public class CustomerController implements Initializable {
             NewTransferAnchorPane.setVisible(true);
 
             if (TransactionBankIDChoiceBox.getItems().isEmpty()) {
-                String bankid[] = guiRun.getBankIDs().split(";");
+                String bankid[] = logic.getCustomer().getBankID().split(";");
                 for (int i = 0; i < bankid.length; i++) {
                     TransactionBankIDChoiceBox.getItems().add(bankid[i]);
                 }
@@ -143,7 +147,7 @@ public class CustomerController implements Initializable {
             AccountsAnchorPane.setVisible(true);
 
             if (AccountsDropdown.getItems().isEmpty()) {
-                String bankid[] = guiRun.getBankIDs().split(";");
+                String bankid[] = logic.getCustomer().getBankID().split(";");
                 for (int i = 0; i < bankid.length; i++) {
                     AccountsDropdown.getItems().add(bankid[i]);
                 }
@@ -154,18 +158,18 @@ public class CustomerController implements Initializable {
             AnchorPane3.setVisible(true);
         } else if (event.getSource() == ProfileButton) {
             //Get all the information and update the text fields
-            EmailField.setText(guiRun.getCustomer().getEmail());
-            AddressField.setText(guiRun.getCustomer().getAddress());
-            PhoneNoField.setText(guiRun.getCustomer().getPhoneNo());
-            BirthdayField.setText(guiRun.getCustomer().getBirthday());
-            NameField.setText(guiRun.getCustomer().getName());
+            EmailField.setText(logic.getCustomer().getEmail());
+            AddressField.setText(logic.getCustomer().getAddress());
+            PhoneNoField.setText(logic.getCustomer().getPhoneNo());
+            BirthdayField.setText(logic.getCustomer().getBirthday());
+            NameField.setText(logic.getCustomer().getName());
 
             //Clear current pane and display to the user
             clearPanes();
             ProfileAnchor.toFront();
             ProfileAnchor.setVisible(true);
         } else if (event.getSource() == LogoutButton) {
-            if (guiRun.logout().equalsIgnoreCase("true")) {
+            if (logic.logout().equalsIgnoreCase("true")) {
                 try {
                     Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
                     Scene newScene = new Scene(nextView);
@@ -176,7 +180,7 @@ public class CustomerController implements Initializable {
                     System.out.println("logout error");
                     ex.printStackTrace();
                 }
-            } else if (guiRun.logout().equalsIgnoreCase("false")) {
+            } else if (logic.logout().equalsIgnoreCase("false")) {
                 System.out.println("could not log out"); //this should bechanged to a label in the GUI
             }
         }
@@ -184,7 +188,7 @@ public class CustomerController implements Initializable {
 
     @FXML
     private void setAccountBalance(javafx.event.ActionEvent event) {
-        AccountBalanceLabel.setText(guiRun.getAccountBalance(AccountsDropdown.getValue()) + " DKK");
+        AccountBalanceLabel.setText(logic.getAccountBalance(AccountsDropdown.getValue()) + " DKK");
     }
 
     private void clearPanes() {
@@ -195,7 +199,7 @@ public class CustomerController implements Initializable {
     }
 
     private String storeCustomerInfo(String name, String phoneNo, String address, String email) {
-        return guiRun.toProtocol03(name, phoneNo, address, email);
+        return logic.toProtocol03(name, phoneNo, address, email);
     }
 
     @FXML
@@ -206,10 +210,10 @@ public class CustomerController implements Initializable {
         String email = EmailField.getText();
         System.out.println(name + phoneNo + address + email);
         System.out.println(storeCustomerInfo(name, phoneNo, address, email));
-        guiRun.getCustomer().setName(name);
-        guiRun.getCustomer().setPhoneNo(phoneNo);
-        guiRun.getCustomer().setAddress(address);
-        guiRun.getCustomer().setEmail(email);
+        logic.getCustomer().setName(name);
+        logic.getCustomer().setPhoneNo(phoneNo);
+        logic.getCustomer().setAddress(address);
+        logic.getCustomer().setEmail(email);
         NameField.setDisable(true);
         PhoneNoField.setDisable(true);
         AddressField.setDisable(true);
@@ -240,10 +244,10 @@ public class CustomerController implements Initializable {
     }
 
     private void RestoreInfoInFields() {
-        NameField.setText(guiRun.getCustomer().getName());
-        PhoneNoField.setText(guiRun.getCustomer().getPhoneNo());
-        AddressField.setText(guiRun.getCustomer().getAddress());
-        EmailField.setText(guiRun.getCustomer().getEmail());
+        NameField.setText(logic.getCustomer().getName());
+        PhoneNoField.setText(logic.getCustomer().getPhoneNo());
+        AddressField.setText(logic.getCustomer().getAddress());
+        EmailField.setText(logic.getCustomer().getEmail());
     }
 
     @FXML
@@ -253,7 +257,7 @@ public class CustomerController implements Initializable {
         String bankID = AccountField.getText() + RegField.getText();
         String message = MessageArea.getText();
         String senderBankID = TransactionBankIDChoiceBox.getValue();
-        String response = guiRun.toProtocol05(senderBankID, amount, bankID, message);
+        String response = logic.toProtocol05(senderBankID, amount, bankID, message);
         if (response.equalsIgnoreCase("Error; recipient not found.")) {
             AccountErrorLabel.setText("Error; recipient not found.");
         } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {

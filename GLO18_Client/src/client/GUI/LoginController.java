@@ -7,6 +7,8 @@ package client.GUI;
 
 
 
+import client.Acquaintance.IGUI;
+import client.Acquaintance.ILogic;
 import java.io.IOException;
 
 import java.net.URL;
@@ -36,7 +38,8 @@ import javafx.stage.Stage;
 public class LoginController implements Initializable {
     private double xOffset;
     private double yOffset;
-    GUIrun guiRun;
+    IGUI gui;
+    ILogic logic;
     
     @FXML 
     private Button ExitButton;
@@ -57,7 +60,9 @@ public class LoginController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        gui = GUIrun.getInstance();
+        logic = GUIrun.getLogic();
+        
     } 
     
 
@@ -76,7 +81,7 @@ public class LoginController implements Initializable {
              if (ID.startsWith("A")) {
                  System.out.println("test2");
                  
-                String check = guiRun.getInstance().login(ID, password);
+                String check = logic.login(ID, password);
                  
                 if (check.equalsIgnoreCase("true")) {
                     System.out.println(check);
@@ -103,7 +108,7 @@ public class LoginController implements Initializable {
                        
                 String correctedID = "C" + ID;
                 
-                String check = guiRun.getInstance().login(correctedID, password);
+                String check = logic.login(correctedID, password);
                  
                 if (check.equalsIgnoreCase("true")) {
                     try {

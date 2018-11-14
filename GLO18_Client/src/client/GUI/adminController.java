@@ -5,6 +5,8 @@
  */
 package client.GUI;
 
+import client.Acquaintance.IGUI;
+import client.Acquaintance.ILogic;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,7 +33,8 @@ import javafx.stage.Stage;
  * @author antonio
  */
 public class adminController implements Initializable {
-    GUIrun guiRun;
+    IGUI gui;
+    ILogic logic;
     @FXML AnchorPane adminOverview;
     ListView Listview;
     @FXML Pane PaneBar; 
@@ -63,6 +66,8 @@ public class adminController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        gui = GUIrun.getInstance();
+        logic = GUIrun.getLogic();
         textFields = new ArrayList<>();
         textFields.add(CPRField);
         textFields.add(FirstNameField);
@@ -92,13 +97,13 @@ public class adminController implements Initializable {
     }
     
     private String createCustomer(String ID, String name, String birthday, String phoneNumber, String address, String email, String password){
-       return guiRun.getInstance().toProtocol07(ID, name, birthday, phoneNumber, address, email, password);
+       return logic.toProtocol07(ID, name, birthday, phoneNumber, address, email, password);
     }
 
     @FXML
     private void logoutHandler(ActionEvent event) {
         System.out.println("logout button");
-            if(guiRun.getInstance().logout().equalsIgnoreCase("true")){
+            if(logic.logout().equalsIgnoreCase("true")){
                 System.out.println("logout was true");
                 try {
                         Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
@@ -110,7 +115,7 @@ public class adminController implements Initializable {
                         System.out.println("logout error");
                         ex.printStackTrace();
                     }
-            }else if(guiRun.getInstance().logout().equalsIgnoreCase("false")){
+            }else if(logic.logout().equalsIgnoreCase("false")){
                 System.out.println("could not log out"); //this should bechanged to a label in the GUI
             }
     }

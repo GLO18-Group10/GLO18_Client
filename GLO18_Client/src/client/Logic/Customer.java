@@ -5,6 +5,7 @@
  */
 package client.Logic;
 
+import client.Acquaintance.ICustomer;
 import client.Acquaintance.ILogic;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Nick
  */
-public class Customer extends User {
+public class Customer extends User implements ICustomer{
 
     private MessageParser messageParser = new MessageParser(logic);
     private String birthday;
@@ -24,6 +25,7 @@ public class Customer extends User {
         super(ID, logic);
     }
 
+    @Override
     public String getBirthday() {
         //If birthday is null, get the birthday from the server
         if (birthday == null) {
@@ -34,10 +36,12 @@ public class Customer extends User {
         return birthday;
     }
 
+    @Override
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
+    @Override
     public String getName() {
         //If name is null, get the name from the server
         if (name == null) {
@@ -48,10 +52,12 @@ public class Customer extends User {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public String getAddress() {
         //If address is null, get the address from the server
         if (address == null) {
@@ -62,9 +68,11 @@ public class Customer extends User {
         return address;
     }
 
+    @Override
     public void setAddress(String address) {
         this.address = address;
     }
+    @Override
     public String getBankID(){
         String bankID = "";
         if (bankIDs.isEmpty()) {
@@ -86,6 +94,7 @@ public class Customer extends User {
         return bankID;
     }
     
+    @Override
     public String checkBankID(String ID){
         if (bankIDs.isEmpty()) {
             getBankID();
