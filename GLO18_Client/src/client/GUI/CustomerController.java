@@ -19,6 +19,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -41,8 +44,6 @@ public class CustomerController implements Initializable {
     @FXML
     private HBox HBox;
     @FXML
-    private ScrollPane ScrollPane;
-    @FXML
     private AnchorPane AnchorPane3;
     @FXML
     private GridPane GridPane;
@@ -60,8 +61,6 @@ public class CustomerController implements Initializable {
     private Button LogoutButton;
     @FXML
     private TextField AmountField;
-    @FXML
-    private TextField DateField;
     @FXML
     private TextField RegField;
     @FXML
@@ -91,8 +90,6 @@ public class CustomerController implements Initializable {
     @FXML
     private Button EditInformation;
     @FXML
-    private Button SaveButtonHandler;
-    @FXML
     private Button CancelEditButton;
     @FXML
     private AnchorPane CustomerParentPane;
@@ -103,22 +100,21 @@ public class CustomerController implements Initializable {
     @FXML
     private Label AmountErrorLabel;
     @FXML
-    private Label DateErrorLabel;
-    @FXML
     private Label AccountErrorLabel;
     @FXML
     private Label MessageErrorLabel;
     @FXML
     private AnchorPane AccountsAnchorPane;
     @FXML
-    private TextField CPRField;
-    @FXML
     private ChoiceBox<String> TransactionBankIDChoiceBox;
     @FXML
     private Button updateButton;
     @FXML
     private Button SaveButton;
-
+    @FXML
+    private Label TransactionOverallMessageLabel;
+    @FXML
+    private ListView<String> TransactionHistoryListView;
     public CustomerController() {
     }
 
@@ -130,6 +126,7 @@ public class CustomerController implements Initializable {
 
     @FXML
     private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
+        
         if (event.getSource() == TransferButton) {
             clearPanes();
             NewTransferAnchorPane.toFront();
@@ -141,7 +138,8 @@ public class CustomerController implements Initializable {
                     TransactionBankIDChoiceBox.getItems().add(bankid[i]);
                 }
             }
-        } else if (event.getSource() == AccountsButton) {
+        } 
+        else if (event.getSource() == AccountsButton) {
             clearPanes();
             AccountsAnchorPane.toFront();
             AccountsAnchorPane.setVisible(true);
@@ -184,11 +182,20 @@ public class CustomerController implements Initializable {
                 System.out.println("could not log out"); //this should bechanged to a label in the GUI
             }
         }
+        else if (event.getSource() == updateButton) {
+            
+            if (AccountsDropdown.getValue() == null) {
+                System.out.println("ikke valgt account");
+            }
+            else{
+            setAccountBalance();
+            getTransactionHistory();
+            }
+        }
     }
 
-    @FXML
-    private void setAccountBalance(javafx.event.ActionEvent event) {
-        AccountBalanceLabel.setText(logic.getAccountBalance(AccountsDropdown.getValue()) + " DKK");
+    private void setAccountBalance() {
+        AccountBalanceLabel.setText(logic.getAccountBalance(AccountsDropdown.getValue())+" DKK");
     }
 
     private void clearPanes() {
@@ -253,7 +260,6 @@ public class CustomerController implements Initializable {
     @FXML
     private void transfer() {
         String amount = AmountField.getText();
-        //String date = DateField.getText();
         String bankID = AccountField.getText() + RegField.getText();
         String message = MessageArea.getText();
         String senderBankID = TransactionBankIDChoiceBox.getValue();
@@ -262,15 +268,24 @@ public class CustomerController implements Initializable {
             AccountErrorLabel.setText("Error; recipient not found.");
         } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
             AmountErrorLabel.setText("Error; insufficient funds.");
-        } else if (response.equalsIgnoreCase("complete")) {
-            //transactionCompleteLabel.setText(test);
-        } else {
-            //overallErrorLabel.setText(test);
+        }
+        else if (response.equalsIgnoreCase("complete")) {
+            TransactionOverallMessageLabel.setText(response);
+        }
+        else {
+            TransactionOverallMessageLabel.setText(response);
         }
     }
-
-    private void setmenutext() {
-
+    //Shows the transaction history
+    
+    private void getTransactionHistory(){
+        String accountID = AccountsDropdown.getValue();
+        String data[] = logic.getTransactionHistory(accountID).split(";");
+        
+        for (int i = 0; i < data.length; i++) {
+           TransactionHistoryListView.getItems().add(data[i]);
+            
+            }
     }
-
 }
+

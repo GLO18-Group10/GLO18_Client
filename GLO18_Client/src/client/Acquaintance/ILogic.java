@@ -35,5 +35,8 @@ public interface ILogic {
 
     public String toProtocol05(String senderID, String amount, String recieverID, String text);
 
+    public String getTransactionHistory(String accountID);
+
     public String sendMail(String ID, String email, String name, String password);
+
 }
