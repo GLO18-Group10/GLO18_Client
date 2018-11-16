@@ -6,9 +6,10 @@
 package client.GUI;
 
 import client.Acquaintance.IAdmin;
+import client.Acquaintance.IGUI;
+import client.Acquaintance.ILogic;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -36,7 +37,8 @@ import javafx.stage.Stage;
  */
 public class adminController implements Initializable {
 
-    GUIrun guiRun = GUIrun.getInstance();
+    IGUI gui;
+    ILogic logic;
     @FXML
     AnchorPane adminOverview;
     ListView Listview;
@@ -78,6 +80,8 @@ public class adminController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        gui = GUIrun.getInstance();
+        logic = GUIrun.getLogic();
         textFields = new ArrayList<>();
         textFields.add(CPRField);
         textFields.add(FirstNameField);
@@ -94,33 +98,32 @@ public class adminController implements Initializable {
         if (isEmpty(textFields) || birthdayFieldDatePicker.getValue() == null || !isValid(CPRField.getText()) || !isValid(PhoneField.getText())) {
             System.out.println("ERROR TEST");
 
-        }
-        else{
-        String ID = "C" + CPRField.getText();
-        String name = FirstNameField.getText() + " " + LastnameField.getText();
-        String birthdayTest = birthdayFieldDatePicker.getValue().toString();
-        System.out.println(birthdayTest);
-        String phoneNumber = PhoneField.getText();
-        String address = AddressField.getText();
-        String email = EmailField.getText();
-        String password = guiRun.getInstance().getAdmin().generatePassword();
-        System.out.println(password);
-        String success = createCustomer(ID, name, birthdayTest, phoneNumber, address, email, password);
-        if(success.equalsIgnoreCase("true")){
-            guiRun.getInstance().sendMail(ID, name, email, password);
-            System.out.println("MAIL TEST");
-        }
+        } else {
+            String ID = "C" + CPRField.getText();
+            String name = FirstNameField.getText() + " " + LastnameField.getText();
+            String birthdayTest = birthdayFieldDatePicker.getValue().toString();
+            System.out.println(birthdayTest);
+            String phoneNumber = PhoneField.getText();
+            String address = AddressField.getText();
+            String email = EmailField.getText();
+            String password = logic.getAdmin().generatePassword();
+            System.out.println(password);
+            String success = createCustomer(ID, name, birthdayTest, phoneNumber, address, email, password);
+            if (success.equalsIgnoreCase("true")) {
+                logic.sendMail(ID, name, email, password);
+                System.out.println("MAIL TEST");
+            }
         }
     }
 
     private String createCustomer(String ID, String name, String birthday, String phoneNumber, String address, String email, String password) {
-        return guiRun.getInstance().toProtocol07(ID, name, birthday, phoneNumber, address, email, password);
+        return logic.toProtocol07(ID, name, birthday, phoneNumber, address, email, password);
     }
 
     @FXML
     private void logoutHandler(ActionEvent event) {
         System.out.println("logout button");
-        if (guiRun.getInstance().logout().equalsIgnoreCase("true")) {
+        if (logic.logout().equalsIgnoreCase("true")) {
             System.out.println("logout was true");
             try {
                 Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
@@ -132,7 +135,7 @@ public class adminController implements Initializable {
                 System.out.println("logout error");
                 ex.printStackTrace();
             }
-        } else if (guiRun.getInstance().logout().equalsIgnoreCase("false")) {
+        } else if (logic.logout().equalsIgnoreCase("false")) {
             System.out.println("could not log out"); //this should bechanged to a label in the GUI
         }
     }
@@ -163,7 +166,7 @@ public class adminController implements Initializable {
     }
 
     private void getIdForList() {
-        String[] data = guiRun.getAdmin().getCustomerId();
+        String[] data = logic.getAdmin().getCustomerId();
         ObservableList list = FXCollections.observableArrayList(data);
         customerAccountsListView.setItems(list);
     }

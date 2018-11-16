@@ -5,11 +5,11 @@
  */
 package client.GUI;
 
+import client.Acquaintance.IGUI;
+import client.Acquaintance.ILogic;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,8 +18,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
@@ -38,11 +38,11 @@ import javafx.stage.Stage;
  * @author antonio
  */
 public class CustomerController implements Initializable {
-    GUIrun guiRun = GUIrun.getInstance();
+
+    IGUI gui;
+    ILogic logic;
     @FXML
     private HBox HBox;
-    @FXML
-    private ScrollPane ScrollPane;
     @FXML
     private AnchorPane AnchorPane3;
     @FXML
@@ -61,8 +61,6 @@ public class CustomerController implements Initializable {
     private Button LogoutButton;
     @FXML
     private TextField AmountField;
-    @FXML
-    private TextField DateField;
     @FXML
     private TextField RegField;
     @FXML
@@ -92,8 +90,6 @@ public class CustomerController implements Initializable {
     @FXML
     private Button EditInformation;
     @FXML
-    private Button SaveButtonHandler;
-    @FXML
     private Button CancelEditButton;
     @FXML
     private AnchorPane CustomerParentPane;
@@ -104,38 +100,40 @@ public class CustomerController implements Initializable {
     @FXML
     private Label AmountErrorLabel;
     @FXML
-    private Label DateErrorLabel;
-    @FXML
     private Label AccountErrorLabel;
     @FXML
     private Label MessageErrorLabel;
     @FXML
     private AnchorPane AccountsAnchorPane;
     @FXML
-    private TextField CPRField;
-    @FXML
     private ChoiceBox<String> TransactionBankIDChoiceBox;
     @FXML
     private Button updateButton;
     @FXML
     private Button SaveButton;
+    @FXML
+    private Label TransactionOverallMessageLabel;
+    @FXML
+    private ListView<String> TransactionHistoryListView;
     public CustomerController() {
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        gui = GUIrun.getInstance();
+        logic = GUIrun.getLogic();
     }
 
     @FXML
     private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
+        
         if (event.getSource() == TransferButton) {
             clearPanes();
             NewTransferAnchorPane.toFront();
             NewTransferAnchorPane.setVisible(true);
-            
+
             if (TransactionBankIDChoiceBox.getItems().isEmpty()) {
-                String bankid[] = guiRun.getBankIDs().split(";");
+                String bankid[] = logic.getCustomer().getBankID().split(";");
                 for (int i = 0; i < bankid.length; i++) {
                     TransactionBankIDChoiceBox.getItems().add(bankid[i]);
                 }
@@ -145,62 +143,70 @@ public class CustomerController implements Initializable {
             clearPanes();
             AccountsAnchorPane.toFront();
             AccountsAnchorPane.setVisible(true);
-            
+
             if (AccountsDropdown.getItems().isEmpty()) {
-                String bankid[] = guiRun.getBankIDs().split(";");
+                String bankid[] = logic.getCustomer().getBankID().split(";");
                 for (int i = 0; i < bankid.length; i++) {
                     AccountsDropdown.getItems().add(bankid[i]);
                 }
             }
-        } 
-        else if (event.getSource() == OptionsButton) {
+        } else if (event.getSource() == OptionsButton) {
             clearPanes();
             AnchorPane3.toFront();
             AnchorPane3.setVisible(true);
-        } 
-        else if (event.getSource() == ProfileButton) {
+        } else if (event.getSource() == ProfileButton) {
             //Get all the information and update the text fields
-            EmailField.setText(guiRun.getCustomer().getEmail());
-            AddressField.setText(guiRun.getCustomer().getAddress());
-            PhoneNoField.setText(guiRun.getCustomer().getPhoneNo());
-            BirthdayField.setText(guiRun.getCustomer().getBirthday());
-            NameField.setText(guiRun.getCustomer().getName());
+            EmailField.setText(logic.getCustomer().getEmail());
+            AddressField.setText(logic.getCustomer().getAddress());
+            PhoneNoField.setText(logic.getCustomer().getPhoneNo());
+            BirthdayField.setText(logic.getCustomer().getBirthday());
+            NameField.setText(logic.getCustomer().getName());
 
             //Clear current pane and display to the user
             clearPanes();
             ProfileAnchor.toFront();
             ProfileAnchor.setVisible(true);
-        }else if(event.getSource() == LogoutButton){
-            if(guiRun.logout().equalsIgnoreCase("true")){
+        } else if (event.getSource() == LogoutButton) {
+            if (logic.logout().equalsIgnoreCase("true")) {
                 try {
-                        Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
-                        Scene newScene = new Scene(nextView);
-                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        stage.setScene(newScene);
-                        stage.show();
-                    } catch (IOException ex) {
-                        System.out.println("logout error");
-                        ex.printStackTrace();
-                    }
-            }else if(guiRun.logout().equalsIgnoreCase("false")){
+                    Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
+                    Scene newScene = new Scene(nextView);
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(newScene);
+                    stage.show();
+                } catch (IOException ex) {
+                    System.out.println("logout error");
+                    ex.printStackTrace();
+                }
+            } else if (logic.logout().equalsIgnoreCase("false")) {
                 System.out.println("could not log out"); //this should bechanged to a label in the GUI
+            }
+        }
+        else if (event.getSource() == updateButton) {
+            
+            if (AccountsDropdown.getValue() == null) {
+                System.out.println("ikke valgt account");
+            }
+            else{
+            setAccountBalance();
+            getTransactionHistory();
             }
         }
     }
 
-    @FXML
-    private void setAccountBalance(javafx.event.ActionEvent event) {
-        AccountBalanceLabel.setText(guiRun.getAccountBalance(AccountsDropdown.getValue())+" DKK");
+    private void setAccountBalance() {
+        AccountBalanceLabel.setText(logic.getAccountBalance(AccountsDropdown.getValue())+" DKK");
     }
+
     private void clearPanes() {
         NewTransferAnchorPane.setVisible(false);
         AccountsAnchorPane.setVisible(false);
         AnchorPane3.setVisible(false);
         ProfileAnchor.setVisible(false);
     }
-    
-    private String storeCustomerInfo(String name, String phoneNo, String address, String email){
-        return guiRun.toProtocol03(name, phoneNo, address, email);
+
+    private String storeCustomerInfo(String name, String phoneNo, String address, String email) {
+        return logic.toProtocol03(name, phoneNo, address, email);
     }
 
     @FXML
@@ -211,10 +217,10 @@ public class CustomerController implements Initializable {
         String email = EmailField.getText();
         System.out.println(name + phoneNo + address + email);
         System.out.println(storeCustomerInfo(name, phoneNo, address, email));
-        guiRun.getCustomer().setName(name);
-        guiRun.getCustomer().setPhoneNo(phoneNo);
-        guiRun.getCustomer().setAddress(address);
-        guiRun.getCustomer().setEmail(email);
+        logic.getCustomer().setName(name);
+        logic.getCustomer().setPhoneNo(phoneNo);
+        logic.getCustomer().setAddress(address);
+        logic.getCustomer().setEmail(email);
         NameField.setDisable(true);
         PhoneNoField.setDisable(true);
         AddressField.setDisable(true);
@@ -243,37 +249,43 @@ public class CustomerController implements Initializable {
         EmailField.setDisable(true);
         RestoreInfoInFields();
     }
-    
-    private void RestoreInfoInFields(){
-        NameField.setText(guiRun.getCustomer().getName());
-        PhoneNoField.setText(guiRun.getCustomer().getPhoneNo());
-        AddressField.setText(guiRun.getCustomer().getAddress());
-        EmailField.setText(guiRun.getCustomer().getEmail());
+
+    private void RestoreInfoInFields() {
+        NameField.setText(logic.getCustomer().getName());
+        PhoneNoField.setText(logic.getCustomer().getPhoneNo());
+        AddressField.setText(logic.getCustomer().getAddress());
+        EmailField.setText(logic.getCustomer().getEmail());
     }
 
     @FXML
-    private void transfer(){
+    private void transfer() {
         String amount = AmountField.getText();
-        //String date = DateField.getText();
         String bankID = AccountField.getText() + RegField.getText();
         String message = MessageArea.getText();
         String senderBankID = TransactionBankIDChoiceBox.getValue();
-        String response = guiRun.toProtocol05(senderBankID, amount, bankID, message);
+        String response = logic.toProtocol05(senderBankID, amount, bankID, message);
         if (response.equalsIgnoreCase("Error; recipient not found.")) {
             AccountErrorLabel.setText("Error; recipient not found.");
-        }
-        else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
+        } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
             AmountErrorLabel.setText("Error; insufficient funds.");
         }
         else if (response.equalsIgnoreCase("complete")) {
-            //transactionCompleteLabel.setText(test);
+            TransactionOverallMessageLabel.setText(response);
         }
         else {
-            //overallErrorLabel.setText(test);
+            TransactionOverallMessageLabel.setText(response);
         }
     }
-    private void setmenutext(){
-        
-    }
+    //Shows the transaction history
     
+    private void getTransactionHistory(){
+        String accountID = AccountsDropdown.getValue();
+        String data[] = logic.getTransactionHistory(accountID).split(";");
+        
+        for (int i = 0; i < data.length; i++) {
+           TransactionHistoryListView.getItems().add(data[i]);
+            
+            }
+    }
 }
+

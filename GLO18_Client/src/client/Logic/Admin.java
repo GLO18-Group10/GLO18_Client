@@ -5,10 +5,9 @@
  */
 package client.Logic;
 
-
 import client.Acquaintance.IAdmin;
+import client.Acquaintance.ILogic;
 import java.util.Random;
-
 
 /**
  *
@@ -16,12 +15,15 @@ import java.util.Random;
  */
 public class Admin extends User implements IAdmin {
     
-    
-    private MessageParser messeageParser = new MessageParser(logic);
-    public Admin(String ID, LogicFacade logic) {
+   private MessageParser messageParser = new MessageParser(logic);
+
+    public Admin(String ID, ILogic logic) {
+
         super(ID, logic);
     }
+
     //Source code taken and adjusted from https://stackoverflow.com/questions/19743124/java-password-generator
+    @Override
     public String generatePassword() {
         String lower = "abcdefghijklmnopqrstuvwxyz";
         String digits = "0123456789";
@@ -37,6 +39,7 @@ public class Admin extends User implements IAdmin {
         return sb.toString();
     }
 
+    @Override
     public String[] getCustomerId() {
         logic.sendMessage(messageParser.toProtocol10());
         String[] data = messageParser.fromProtocol(logic.receiveMessage());
