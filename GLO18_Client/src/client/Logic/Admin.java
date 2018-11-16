@@ -5,20 +5,21 @@
  */
 package client.Logic;
 
+import client.Acquaintance.IAdmin;
+import client.Acquaintance.ILogic;
 import java.util.Random;
 
 /**
  *
  * @author Nick
  */
-public class Admin extends User {
+public class Admin extends User implements IAdmin{
 
-    private LogicFacade logic;
-
-    public Admin(String ID, LogicFacade logic) {
+    public Admin(String ID, ILogic logic) {
         super(ID, logic);
     }
     //Source code taken and adjusted from https://stackoverflow.com/questions/19743124/java-password-generator
+    @Override
     public String generatePassword() {
         String lower = "abcdefghijklmnopqrstuvwxyz";
         String digits = "0123456789";

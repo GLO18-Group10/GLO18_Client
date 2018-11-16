@@ -54,7 +54,7 @@
                   </VBox>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="536.0">
                      <children>
-                        <Button fx:id="ExitButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-color: #3f2B63;" text="Exit" textFill="WHITE">
+                        <Button fx:id="ExitButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#exitHandler" prefHeight="47.0" prefWidth="182.0" style="-fx-background-color: #3f2B63;" text="Exit" textFill="WHITE">
                            <HBox.margin>
                               <Insets left="76.0" />
                            </HBox.margin>

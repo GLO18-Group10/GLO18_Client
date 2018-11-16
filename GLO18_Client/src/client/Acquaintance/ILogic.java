@@ -5,30 +5,30 @@
  */
 package client.Acquaintance;
 
-import client.Logic.Admin;
-import client.Logic.Customer;
-
 /**
  *
  * @author Jeppe Enevold
  */
-public interface iLogic {
+public interface ILogic {
 
-    public void injectLink(iLink LinkLayer);
+    public void injectLink(ILink LinkLayer);
 
     void startConnection();
 
     void sendMessage(String message);
 
-    String receiveMessage();
+    public String receiveMessage();
 
-    String getBankID();
+    public String login(String ID, String password);
 
-    String login(String ID, String password);
     public String toProtocol03(String name, String phoneNo, String address, String email);
-    Customer getCustomer();
-    Admin getAdmin();
+
+    public ICustomer getCustomer();
+
+    public IAdmin getAdmin();
+
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password);
+
     public int getAccountBalance(String accountID);
 
     public String logout();

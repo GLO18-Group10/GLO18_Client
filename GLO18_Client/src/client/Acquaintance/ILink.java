@@ -9,9 +9,13 @@ package client.Acquaintance;
  *
  * @author Jeppe Enevold
  */
-public interface iLink {
+public interface ILink {
+
     void startConnection();
+
     void sendMessage(String message);
+
     String receiveMessage();
+
     public void endConnection();
 }

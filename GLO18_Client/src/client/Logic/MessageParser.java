@@ -5,35 +5,28 @@
  */
 package client.Logic;
 
+import client.Acquaintance.ILogic;
+
 /**
  *
  * @author Peterzxcvbnm
  */
 public class MessageParser {
-    LogicFacade logic;
+    ILogic logic;
 
-    public MessageParser(LogicFacade logic) {
+    public MessageParser(ILogic logic) {
         this.logic = logic;
     }
 
     public String toProtocol00(String ID, String password) {
         String message = "00" + ";" + ID + ";" + password;
         logic.sendMessage(message);
-        return fromProtocol00(logic.receiveMessage());
-    }
-    
-    private String fromProtocol00(String message){
-     String data = message;
-     return data;
+        return logic.receiveMessage();
     }
     
     public int toProtocol02(String accountID){
         logic.sendMessage("02;"+ accountID);
-        return fromProtocol02(logic.receiveMessage()); 
-    }
-    
-    private int fromProtocol02(String message){
-        return Integer.parseInt(message);
+        return Integer.parseInt(logic.receiveMessage()); 
     }
 
     /**

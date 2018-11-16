@@ -5,25 +5,26 @@
  */
 package client.Logic;
 
-import client.Acquaintance.iLink;
-import client.Acquaintance.iLogic;
+import client.Acquaintance.IAdmin;
+import client.Acquaintance.ICustomer;
+import client.Acquaintance.ILink;
+import client.Acquaintance.ILogic;
 
 /**
  *
  * @author Jeppe Enevold
  */
-public class LogicFacade implements iLogic {
+public class LogicFacade implements ILogic {
 
-    private static User user;
-    private static iLink link;
-    private Customer customer;
-    private Admin admin;
+    private static ILink link;
+    private ICustomer customer;
+    private IAdmin admin;
     private MailHandler mailHandler = new MailHandler();
 
     private MessageParser messageParser = new MessageParser(this);
 
     @Override
-    public void injectLink(iLink LinkLayer) {
+    public void injectLink(ILink LinkLayer) {
         link = LinkLayer;
     }
 
@@ -44,14 +45,12 @@ public class LogicFacade implements iLogic {
 
     @Override
     public String login(String ID, String password) {
-
         String message = messageParser.toProtocol00(ID, password);
 
         if (message.equalsIgnoreCase("true")) {
             initializeUser(ID);
-
         }
-
+        
         return message;
     }
 
@@ -63,6 +62,7 @@ public class LogicFacade implements iLogic {
             admin = null;
             customer = null;
             link.endConnection();
+            link.startConnection(); //the connection is started again to make it possible to log in again
             return "true";
         }else{
             return "false";
@@ -74,16 +74,6 @@ public class LogicFacade implements iLogic {
     public int getAccountBalance(String accountID) {
         return messageParser.toProtocol02(accountID);
     }
-
-    @Override
-    public String getBankID(){
-        return customer.getBankID();    
-    }
-    
-    public String checkBankID(String bankID){
-        return customer.checkBankID(bankID);
-    
-    } 
 
     public void initializeUser(String ID) {
         if (ID.startsWith("A")) {
@@ -115,23 +105,21 @@ public class LogicFacade implements iLogic {
     }
 
     @Override
-    public Customer getCustomer() {
+    public ICustomer getCustomer() {
         return customer;
     }
-
 
     @Override
     public String getTransactionHistory(String accountID) {
         sendMessage(messageParser.toProtocol06(accountID));
         return receiveMessage();
     }
-    
 
     @Override
-    public Admin getAdmin(){
+    public IAdmin getAdmin(){
         return admin;
     }
-    
+
     @Override
     public String sendMail(String ID, String email, String name, String password){
         return mailHandler.sendMail(ID, email, name, password);
