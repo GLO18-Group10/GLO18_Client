@@ -13,11 +13,15 @@ import java.util.Random;
  *
  * @author Nick
  */
-public class Admin extends User implements IAdmin{
+public class Admin extends User implements IAdmin {
+    
+   private MessageParser messageParser = new MessageParser(logic);
 
     public Admin(String ID, ILogic logic) {
+
         super(ID, logic);
     }
+
     //Source code taken and adjusted from https://stackoverflow.com/questions/19743124/java-password-generator
     @Override
     public String generatePassword() {
@@ -35,4 +39,10 @@ public class Admin extends User implements IAdmin{
         return sb.toString();
     }
 
+    @Override
+    public String[] getCustomerId() {
+        logic.sendMessage(messageParser.toProtocol10());
+        String[] data = messageParser.fromProtocol(logic.receiveMessage());
+        return data;
+    }
 }

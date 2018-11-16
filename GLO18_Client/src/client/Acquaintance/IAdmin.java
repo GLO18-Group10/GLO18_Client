@@ -1,9 +1,12 @@
+
 package client.Acquaintance;
 
 /**
  *
- * @author Robin
+ * @author irus
  */
+
 public interface IAdmin extends IUser {
     public String generatePassword();
+    public String[] getCustomerId();
 }

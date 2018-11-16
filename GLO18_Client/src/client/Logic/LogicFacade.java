@@ -10,11 +10,13 @@ import client.Acquaintance.ICustomer;
 import client.Acquaintance.ILink;
 import client.Acquaintance.ILogic;
 
+
 /**
  *
  * @author Jeppe Enevold
  */
 public class LogicFacade implements ILogic {
+
 
     private static ILink link;
     private ICustomer customer;
@@ -109,6 +111,7 @@ public class LogicFacade implements ILogic {
         return customer;
     }
 
+
     @Override
     public String getTransactionHistory(String accountID) {
         sendMessage(messageParser.toProtocol06(accountID));
@@ -119,6 +122,7 @@ public class LogicFacade implements ILogic {
     public IAdmin getAdmin(){
         return admin;
     }
+
 
     @Override
     public String sendMail(String ID, String email, String name, String password){

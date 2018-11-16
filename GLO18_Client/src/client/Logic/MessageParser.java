@@ -78,4 +78,7 @@ public class MessageParser {
         return "08";
     
     }
+    public String toProtocol10(){
+        return "10";
+    }
 }

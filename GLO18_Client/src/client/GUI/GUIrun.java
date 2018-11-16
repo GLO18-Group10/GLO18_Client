@@ -5,6 +5,7 @@
  */
 package client.GUI;
 
+import client.Acquaintance.IAdmin;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

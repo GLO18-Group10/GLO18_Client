@@ -12,7 +12,7 @@ import client.Acquaintance.IUser;
  *
  * @author Nick
  */
-public class User implements IUser{
+public class User implements IUser {
 
     public ILogic logic;
     private MessageParser messageParser = new MessageParser(logic);
@@ -24,7 +24,7 @@ public class User implements IUser{
         this.ID = ID;
         this.logic = logic;
     }
-    
+
     @Override
     public String getID() {
         return ID;
