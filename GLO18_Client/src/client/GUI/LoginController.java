@@ -82,6 +82,8 @@ public class LoginController implements Initializable {
                 if (check.equalsIgnoreCase("true")) {
                     System.out.println(check);
                     try {
+                        UsernameField.setText("");
+                        passwordField.setText("");
                         Parent nextView = FXMLLoader.load(getClass().getResource("admin.fxml"));
                         Scene newScene = new Scene(nextView);
                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -92,12 +94,11 @@ public class LoginController implements Initializable {
                     }
                 }
                 else if (check.equalsIgnoreCase("false")) {
-                alertField.setText("Log in is wrong");
-                
-    
-            
+                    UsernameField.setText("");
+                    passwordField.setText("");
+                    alertField.setText("Log in is wrong");
+                }
             }
-             }
                  
             else {
                        
@@ -105,8 +106,10 @@ public class LoginController implements Initializable {
                 
                 String check = guiRun.getInstance().login(correctedID, password);
                  
-                 if (check.equalsIgnoreCase("true")) {
+                if (check.equalsIgnoreCase("true")) {
                     try {
+                        UsernameField.setText("");
+                        passwordField.setText("");
                         Parent nextView = FXMLLoader.load(getClass().getResource("Customer.fxml"));
                         Scene newScene = new Scene(nextView);
                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -115,16 +118,14 @@ public class LoginController implements Initializable {
                     } catch (IOException ex) {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                 }
-                 else if (check.equalsIgnoreCase("false")) {
-                     alertField.setText("Log in is wrong");
+                }
+                else if (check.equalsIgnoreCase("false")) {
+                    UsernameField.setText("");
+                    passwordField.setText("");
+                    alertField.setText("Log in is wrong");
                      
-                 }
-            
+                }
             }
-        
-        
-        
         }
     }
 }

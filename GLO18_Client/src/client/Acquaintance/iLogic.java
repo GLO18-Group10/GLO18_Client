@@ -33,6 +33,10 @@ public interface iLogic {
     public String logout();
 
     public String toProtocol05(String senderID, String amount, String recieverID, String text);
+
     
     IAdmin getAdmin();
+
+    public String sendMail(String ID, String email, String name, String password);
+
 }

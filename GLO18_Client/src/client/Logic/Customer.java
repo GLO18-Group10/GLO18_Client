@@ -6,6 +6,7 @@
 package client.Logic;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *

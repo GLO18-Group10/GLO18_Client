@@ -93,16 +93,23 @@ public class adminController implements Initializable {
     private void CreateButtonHandler(ActionEvent event) {
         if (isEmpty(textFields) || birthdayFieldDatePicker.getValue() == null || !isValid(CPRField.getText()) || !isValid(PhoneField.getText())) {
             System.out.println("ERROR TEST");
-        } else {
-            String ID = "C" + CPRField.getText();
-            String name = FirstNameField.getText() + " " + LastnameField.getText();
-            String birthdayTest = birthdayFieldDatePicker.getValue().toString();
-            System.out.println(birthdayTest);
-            String phoneNumber = PhoneField.getText();
-            String address = AddressField.getText();
-            String email = EmailField.getText();
-            String password = PasswordField.getText();
-            System.out.println(createCustomer(ID, name, birthdayTest, phoneNumber, address, email, password));
+
+        }
+        else{
+        String ID = "C" + CPRField.getText();
+        String name = FirstNameField.getText() + " " + LastnameField.getText();
+        String birthdayTest = birthdayFieldDatePicker.getValue().toString();
+        System.out.println(birthdayTest);
+        String phoneNumber = PhoneField.getText();
+        String address = AddressField.getText();
+        String email = EmailField.getText();
+        String password = guiRun.getInstance().getAdmin().generatePassword();
+        System.out.println(password);
+        String success = createCustomer(ID, name, birthdayTest, phoneNumber, address, email, password);
+        if(success.equalsIgnoreCase("true")){
+            guiRun.getInstance().sendMail(ID, name, email, password);
+            System.out.println("MAIL TEST");
+        }
         }
     }
 
