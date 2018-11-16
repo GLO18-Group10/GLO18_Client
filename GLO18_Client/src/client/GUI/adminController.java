@@ -89,7 +89,6 @@ public class adminController implements Initializable {
         textFields.add(PhoneField);
         textFields.add(AddressField);
         textFields.add(EmailField);
-        textFields.add(PasswordField);
         getIdForList();
     }
 

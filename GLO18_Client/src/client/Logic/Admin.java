@@ -43,7 +43,6 @@ public class Admin extends User implements IAdmin {
     public String[] getCustomerId() {
         logic.sendMessage(messageParser.toProtocol10());
         String[] data = messageParser.fromProtocol(logic.receiveMessage());
-        System.out.println("Admin: " + data[0]);
         return data;
     }
 }
