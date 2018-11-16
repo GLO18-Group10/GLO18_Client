@@ -156,7 +156,6 @@ public class adminController implements Initializable {
     }
 
     private void getIdForList() {
-        System.out.println("controller");
         String[] data = guiRun.getAdmin().getCustomerId();
         ObservableList list = FXCollections.observableArrayList(data);
         customerAccountsListView.setItems(list);

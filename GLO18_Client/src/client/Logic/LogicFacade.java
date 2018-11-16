@@ -123,4 +123,5 @@ public class LogicFacade implements iLogic {
     public IAdmin getAdmin() {
         return admin;
     }
+   
 }
