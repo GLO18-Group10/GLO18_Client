@@ -101,6 +101,11 @@ public class GUIrun extends Application implements iGUI {
     public Customer getCustomer() {
         return logic.getCustomer();
     }
+
+    public String getTransactionHistory(String accountID){
+        return logic.getTransactionHistory(accountID);
+    }
+
     
     public Admin getAdmin(){
         return logic.getAdmin();
@@ -108,5 +113,6 @@ public class GUIrun extends Application implements iGUI {
     public String sendMail(String ID, String name, String email, String password){
         return logic.sendMail(ID, email, name, password);
     }
+
 
 }

@@ -62,6 +62,11 @@ public class MessageParser {
     
     }
     
+    public String toProtocol06(String ID){
+    
+        return "06;" + ID;
+    }
+    
 
     public String toProtocol03(String name, String phonenumber, String address, String email){
         return ("03;" + name + ";" + phonenumber + ";" + address + ";" + email);

@@ -118,6 +118,15 @@ public class LogicFacade implements iLogic {
     public Customer getCustomer() {
         return customer;
     }
+
+
+    @Override
+    public String getTransactionHistory(String accountID) {
+        sendMessage(messageParser.toProtocol06(accountID));
+        return receiveMessage();
+    }
+    
+
     @Override
     public Admin getAdmin(){
         return admin;
@@ -127,4 +136,5 @@ public class LogicFacade implements iLogic {
     public String sendMail(String ID, String email, String name, String password){
         return mailHandler.sendMail(ID, email, name, password);
     }
+
 }
