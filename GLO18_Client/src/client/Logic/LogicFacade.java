@@ -128,5 +128,20 @@ public class LogicFacade implements ILogic {
     public String sendMail(String ID, String email, String name, String password){
         return mailHandler.sendMail(ID, email, name, password);
     }
+    @Override
+    public String toProtocol09(String ID, boolean open) {
+      sendMessage(messageParser.toProtocol09(ID, open));
+      return receiveMessage();
+    }
 
+   
+    public boolean openCustomerAccount(String ID) {
+        return admin.openCustomerAccount(ID);
+        //admin.CloseAccount(ID);
+    }
+    
+    public boolean closeCustomerAccount(String ID) {
+        return admin.openCustomerAccount(ID);
+        //admin.CloseAccount(ID);
+    }
 }
