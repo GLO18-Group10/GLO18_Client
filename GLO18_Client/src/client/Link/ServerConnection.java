@@ -22,7 +22,6 @@ import javax.net.ssl.SSLSocketFactory;
  */
 public class ServerConnection {
     
-    private Socket socket;
     private SSLSocketFactory SSLSocketFactory;
     private SSLSocket SSLSocket;
     private Scanner scanner;
@@ -34,24 +33,24 @@ public class ServerConnection {
          String[] supported = SSLSocket.getSupportedCipherSuites();
          SSLSocket.setEnabledCipherSuites(supported);
          SSLSocket.startHandshake();
-        this.scanner = new Scanner(System.in);
+         System.out.println("SERVERCONNECTIONBLOK");
     }
 
     public void sendMessage(String message) throws IOException {
-        PrintWriter out = new PrintWriter(this.socket.getOutputStream(), true);
+        PrintWriter out = new PrintWriter(this.SSLSocket.getOutputStream(), true);
         out.println(message);
         out.flush();
     }
     
     public String receiveMessage() throws IOException{
         BufferedReader in = new BufferedReader(
-                new InputStreamReader(this.socket.getInputStream()));
+                new InputStreamReader(this.SSLSocket.getInputStream()));
         return in.readLine();
     }
     
     public void endConnection(){
         try {
-            socket.close();
+            SSLSocket.close();
         } catch (IOException ex) {
             System.out.println("could not end connection");
             ex.printStackTrace();
