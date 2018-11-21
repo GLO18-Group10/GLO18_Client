@@ -13,6 +13,15 @@ import java.net.Socket;
 import java.util.Scanner;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+//VERY IMPORTANT.  SOME OF THESE EXIST IN MORE THAN ONE PACKAGE!
+import java.security.GeneralSecurityException;
+import java.security.KeyStore;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
 
 /**
  *
@@ -27,6 +36,9 @@ public class ServerConnection {
     private Scanner scanner;
 
     public ServerConnection(String serverAddress, int serverPort) throws Exception {
+        
+        System.setProperty("javax.net.ssl.trustStore","cacerts");
+        System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
         SSLSocketFactory factory =
         (SSLSocketFactory)SSLSocketFactory.getDefault();
          SSLSocket = (SSLSocket)factory.createSocket(serverAddress, serverPort);
