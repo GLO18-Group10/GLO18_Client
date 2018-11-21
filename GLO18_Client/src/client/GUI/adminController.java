@@ -5,7 +5,7 @@
  */
 package client.GUI;
 
-import client.Acquaintance.IAdmin;
+
 import client.Acquaintance.IGUI;
 import client.Acquaintance.ILogic;
 import java.io.IOException;
@@ -45,10 +45,12 @@ public class adminController implements Initializable {
     @FXML
     Pane PaneBar;
     @FXML
-    Button DeleteButton;
+    Button Close_Button;
     TextField SearchField;
     @FXML
     Button LogoutButton;
+    @FXML
+    Button Open_Button;
     @FXML
     Button CreateButton;
     @FXML
@@ -169,5 +171,22 @@ public class adminController implements Initializable {
         ObservableList list = FXCollections.observableArrayList(data);
         customerAccountsListView.setItems(list);
     }
-
+    @FXML 
+    private void CloseCustomerAccount(ActionEvent event) {
+        if(event.getSource() == Close_Button) {
+            logic.getAdmin().closeCustomerAccount((String) customerAccountsListView.getSelectionModel().getSelectedItem());
+            System.out.println("ClosedAccount");
+            
+            
+            
+            
+        }
+        
+    }
+     @FXML 
+    private void openCustomerAccount(ActionEvent event) {
+        if(event.getSource() == Open_Button) {
+            logic.getAdmin().openCustomerAccount((String) customerAccountsListView.getSelectionModel().getSelectedItem());
+            System.out.println("Opened");
+        }}
 }

@@ -33,7 +33,8 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
                         <Button fx:id="LogoutButton" mnemonicParsing="false" onAction="#logoutHandler" prefHeight="38.0" prefWidth="140.0" text="Logout" />
-                        <Button fx:id="DeleteButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="140.0" text="Deactivate" />
+                        <Button fx:id="Close_Button" mnemonicParsing="false" onAction="#CloseCustomerAccount" prefHeight="38.0" prefWidth="140.0" text="Deactivate" />
+                        <Button fx:id="Open_Button" mnemonicParsing="false" onAction="#openCustomerAccount" prefHeight="38.0" prefWidth="140.0" text="Open" />
                      </children>
                   </HBox>
                </bottom>
