@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -20,7 +26,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="CustomerParentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CustomerController">
+<AnchorPane id="AnchorPane" fx:id="CustomerParentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CustomerController">
          <children>
       <AnchorPane fx:id="NewTransferAnchorPane" layoutX="292.0" layoutY="-8.0" prefHeight="620.0" prefWidth="608.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -61,28 +67,23 @@
                                     <Insets left="15.0" top="15.0" />
                                  </VBox.margin>
                               </Label>
-                              <Label text="Date">
-                                 <VBox.margin>
-                                    <Insets left="15.0" top="20.0" />
-                                 </VBox.margin>
-                              </Label>
                            </children>
                         </VBox>
                      </left>
                      <center>
                         <VBox prefHeight="216.0" prefWidth="236.0" BorderPane.alignment="CENTER">
                            <children>
+                              <Label fx:id="TransactionOverallMessageLabel">
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </Label>
                               <ChoiceBox fx:id="TransactionBankIDChoiceBox" prefHeight="25.0" prefWidth="236.0">
                                  <VBox.margin>
-                                    <Insets top="75.0" />
+                                    <Insets top="40.0" />
                                  </VBox.margin>
                               </ChoiceBox>
                               <TextField fx:id="AmountField" prefHeight="25.0" prefWidth="236.0">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </TextField>
-                              <TextField fx:id="DateField" prefHeight="25.0" prefWidth="236.0">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
@@ -96,11 +97,6 @@
                               <Label fx:id="AmountErrorLabel" prefHeight="25.0" prefWidth="180.0" textFill="RED">
                                  <VBox.margin>
                                     <Insets left="10.0" top="110.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <Label fx:id="DateErrorLabel" prefHeight="25.0" prefWidth="180.0" textFill="RED">
-                                 <VBox.margin>
-                                    <Insets left="10.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
                            </children>
@@ -211,7 +207,7 @@
                                     <Insets left="15.0" top="30.0" />
                                  </HBox.margin>
                               </ChoiceBox>
-                              <Button fx:id="updateButton" mnemonicParsing="false" onAction="#setAccountBalance" prefHeight="25.0" prefWidth="87.0" text="Update">
+                              <Button fx:id="updateButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="87.0" text="Update">
                                  <HBox.margin>
                                     <Insets left="15.0" top="30.0" />
                                  </HBox.margin>
@@ -258,34 +254,34 @@
                   </BorderPane>
                   <HBox fx:id="HBox" prefHeight="55.0" prefWidth="608.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="120.0" text="Account">
+                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="68.0" text="Reciever">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="52.0" prefWidth="120.0" text="Date">
+                        <Label alignment="CENTER" prefHeight="52.0" prefWidth="113.0" text="Sender">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="120.0" text="Amount">
+                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="120.0" text="Date">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="120.0" text="Reciever">
+                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="142.0" text="        Amount">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="120.0" text="Text">
+                        <Label alignment="CENTER" prefHeight="52.0" prefWidth="109.0" text="Text">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <ScrollPane fx:id="ScrollPane" prefHeight="370.0" prefWidth="608.0" />
+                  <ListView fx:id="TransactionHistoryListView" prefHeight="343.0" prefWidth="608.0" />
                </children>
             </VBox>
          </children>

@@ -5,13 +5,13 @@
  */
 package client.Link;
 
-import client.Acquaintance.iLink;
+import client.Acquaintance.ILink;
 
 /**
  *
  * @author Jeppe Enevold
  */
-public class LinkFacade implements iLink {
+public class LinkFacade implements ILink {
 
     ServerConnection serverConnection;
 
@@ -28,28 +28,26 @@ public class LinkFacade implements iLink {
 
     @Override
     public void sendMessage(String message) {
-        try{
+        try {
             System.out.println(message);
-        serverConnection.sendMessage(message);
-        }
-        catch(Exception e){
+            serverConnection.sendMessage(message);
+        } catch (Exception e) {
             System.out.println("Send message error - is the client connection running?");
             System.out.println(e.getMessage());
         }
- }
+    }
 
     @Override
     public String receiveMessage() {
-        try{
+        try {
             return serverConnection.receiveMessage();
+        } catch (Exception e) {
+            return "error";
         }
-        catch(Exception e){
-            return "error";  
-        }
-   }
-    
+    }
+
     @Override
-    public void endConnection(){
+    public void endConnection() {
         serverConnection.endConnection();
     }
 
