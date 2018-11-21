@@ -109,7 +109,7 @@ public class adminController implements Initializable {
             System.out.println(password);
             String success = createCustomer(ID, name, birthdayTest, phoneNumber, address, email, password);
             if (success.equalsIgnoreCase("true")) {
-                logic.sendMail(ID, name, email, password);
+                logic.sendMail(ID, email, name, password);
                 System.out.println("MAIL TEST");
             }
         }
