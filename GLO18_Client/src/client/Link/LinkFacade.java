@@ -18,10 +18,8 @@ public class LinkFacade implements ILink {
     @Override
     public void startConnection() {
         try {
-
-            serverConnection = new ServerConnection("00.000.00.000",
-                    Integer.parseInt("9999"));
-
+            serverConnection = new ServerConnection("0.0.0.0",
+                    Integer.parseInt("2345"));
         } catch (Exception ioException) {
             System.out.println("Connection error");
         }
@@ -30,11 +28,9 @@ public class LinkFacade implements ILink {
     @Override
     public void sendMessage(String message) {
         try {
-            System.out.println(message);
             serverConnection.sendMessage(message);
         } catch (Exception e) {
-            System.out.println("Send message error - is the client connection running?");
-            System.out.println(e.toString());
+            System.out.println("Error; sendMessage - is the client connection running?");
         }
     }
 

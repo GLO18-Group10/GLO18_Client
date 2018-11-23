@@ -95,23 +95,17 @@ public class adminController implements Initializable {
 
     @FXML
     private void CreateButtonHandler(ActionEvent event) {
-        if (isEmpty(textFields) || birthdayFieldDatePicker.getValue() == null || !isValid(CPRField.getText()) || !isValid(PhoneField.getText())) {
-            System.out.println("ERROR TEST");
-
-        } else {
+        if (!(isEmpty(textFields) || birthdayFieldDatePicker.getValue() == null || !isValid(CPRField.getText()) || !isValid(PhoneField.getText()))) {
             String ID = "C" + CPRField.getText();
             String name = FirstNameField.getText() + " " + LastnameField.getText();
             String birthdayTest = birthdayFieldDatePicker.getValue().toString();
-            System.out.println(birthdayTest);
             String phoneNumber = PhoneField.getText();
             String address = AddressField.getText();
             String email = EmailField.getText();
             String password = logic.getAdmin().generatePassword();
-            System.out.println(password);
             String success = createCustomer(ID, name, birthdayTest, phoneNumber, address, email, password);
             if (success.equalsIgnoreCase("true")) {
-                logic.sendMail(ID, name, email, password);
-                System.out.println("MAIL TEST");
+                logic.sendMail(ID, email, name, password);
             }
         }
     }
@@ -122,9 +116,7 @@ public class adminController implements Initializable {
 
     @FXML
     private void logoutHandler(ActionEvent event) {
-        System.out.println("logout button");
         if (logic.logout().equalsIgnoreCase("true")) {
-            System.out.println("logout was true");
             try {
                 Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
                 Scene newScene = new Scene(nextView);
@@ -132,11 +124,11 @@ public class adminController implements Initializable {
                 stage.setScene(newScene);
                 stage.show();
             } catch (IOException ex) {
-                System.out.println("logout error");
+                System.out.println("Error; logoutHandler(admin)");
                 ex.printStackTrace();
             }
         } else if (logic.logout().equalsIgnoreCase("false")) {
-            System.out.println("could not log out"); //this should bechanged to a label in the GUI
+            System.out.println("could not log out"); //this should be changed to a label in the GUI
         }
     }
 
@@ -145,7 +137,6 @@ public class adminController implements Initializable {
         statusTextArea.clear();
         for (TextField textField : textFieldArray) {
             if (textField.getText().trim().isEmpty()) {
-                System.out.println(textField.toString());
                 String[] textFieldEmpty = textField.toString().split(",");
                 statusTextArea.appendText(textFieldEmpty[0].substring(13) + " IS EMPTY\n");
                 isEmpty = true;
@@ -158,7 +149,6 @@ public class adminController implements Initializable {
         char[] inputCharArray = input.toCharArray();
         for (int i = 0; i < inputCharArray.length; i++) {
             if (Character.isLetter(inputCharArray[i])) {
-                System.out.println("LETTERFOUND");
                 return false;
             }
         }

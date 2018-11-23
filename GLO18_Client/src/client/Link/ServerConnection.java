@@ -11,6 +11,17 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+//VERY IMPORTANT.  SOME OF THESE EXIST IN MORE THAN ONE PACKAGE!
+import java.security.GeneralSecurityException;
+import java.security.KeyStore;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
 
 /**
  *
@@ -19,32 +30,44 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class ServerConnection {
-    
-    private Socket socket;
+
+    private SSLSocketFactory SSLSocketFactory;
+    private SSLSocket SSLSocket;
     private Scanner scanner;
 
     public ServerConnection(String serverAddress, int serverPort) throws Exception {
-        this.socket = new Socket(serverAddress, serverPort);
-        this.scanner = new Scanner(System.in);
+
+        System.setProperty("javax.net.ssl.trustStore", "cacerts");
+        System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
+        SSLSocketFactory factory
+                = (SSLSocketFactory) SSLSocketFactory.getDefault();
+        SSLSocket = (SSLSocket) factory.createSocket(serverAddress, serverPort);
+        String[] supported = SSLSocket.getSupportedCipherSuites();
+        SSLSocket.setEnabledCipherSuites(supported);
+        SSLSocket.startHandshake();
+        System.out.println("Connection established");
     }
 
     public void sendMessage(String message) throws IOException {
-        PrintWriter out = new PrintWriter(this.socket.getOutputStream(), true);
+        System.out.printf("%-30s %s \n", "Message to server: ", message);
+        PrintWriter out = new PrintWriter(this.SSLSocket.getOutputStream(), true);
         out.println(message);
         out.flush();
     }
-    
-    public String receiveMessage() throws IOException{
+
+    public String receiveMessage() throws IOException {
         BufferedReader in = new BufferedReader(
-                new InputStreamReader(this.socket.getInputStream()));
-        return in.readLine();
+                new InputStreamReader(this.SSLSocket.getInputStream()));
+        String response = in.readLine();
+        System.out.printf("%-30s %s \n", "Response from server: ", response);
+        return response;
     }
-    
-    public void endConnection(){
+
+    public void endConnection() {
         try {
-            socket.close();
+            SSLSocket.close();
         } catch (IOException ex) {
-            System.out.println("could not end connection");
+            System.out.println("Error; endConnection; ServerConnection");
             ex.printStackTrace();
         }
     }
