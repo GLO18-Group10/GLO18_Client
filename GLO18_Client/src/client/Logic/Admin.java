@@ -47,17 +47,17 @@ public class Admin extends User implements IAdmin {
     }
     
     @Override
-    public boolean openCustomerAccount(String ID) {
+    public String openCustomerAccount(String ID) {
         logic.sendMessage(messageParser.toProtocol09(ID, true));
         String data[] = messageParser.fromProtocol(logic.receiveMessage());
-        return data[0].equals("1");
+        return data[0];
     }
     
     @Override
-    public boolean closeCustomerAccount(String ID) {
+    public String closeCustomerAccount(String ID) {
         logic.sendMessage(messageParser.toProtocol09(ID, false));
         String data[] = messageParser.fromProtocol(logic.receiveMessage());
-        return data[0].equals("1");
+        return data[0];
     }
     
     

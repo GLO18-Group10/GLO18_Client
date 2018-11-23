@@ -5,7 +5,6 @@
  */
 package client.GUI;
 
-
 import client.Acquaintance.IGUI;
 import client.Acquaintance.ILogic;
 import java.io.IOException;
@@ -171,22 +170,21 @@ public class adminController implements Initializable {
         ObservableList list = FXCollections.observableArrayList(data);
         customerAccountsListView.setItems(list);
     }
-    @FXML 
+
+    @FXML
     private void CloseCustomerAccount(ActionEvent event) {
-        if(event.getSource() == Close_Button) {
-            logic.getAdmin().closeCustomerAccount((String) customerAccountsListView.getSelectionModel().getSelectedItem());
-            System.out.println("ClosedAccount");
-            
-            
-            
-            
+        if (event.getSource() == Close_Button) {
+            String response = logic.getAdmin().closeCustomerAccount((String) customerAccountsListView.getSelectionModel().getSelectedItem());
+            System.out.println(response); //To be added as label
         }
-        
+
     }
-     @FXML 
+
+    @FXML
     private void openCustomerAccount(ActionEvent event) {
-        if(event.getSource() == Open_Button) {
-            logic.getAdmin().openCustomerAccount((String) customerAccountsListView.getSelectionModel().getSelectedItem());
-            System.out.println("Opened");
-        }}
+        if (event.getSource() == Open_Button) {
+            String response = logic.getAdmin().openCustomerAccount((String) customerAccountsListView.getSelectionModel().getSelectedItem());
+            System.out.println(response); //to be added as label
+        }
+    }
 }
