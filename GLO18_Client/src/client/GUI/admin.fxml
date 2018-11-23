@@ -49,17 +49,20 @@
                            <font>
                               <Font size="14.0" />
                            </font></Label>
-                        <ListView fx:id="customerAccountsListView" prefHeight="265.0" prefWidth="200.0" />
+                        <ListView fx:id="customerAccountsListView" prefHeight="270.0" prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin></ListView>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Button fx:id="Close_Button" mnemonicParsing="false" onAction="#CloseCustomerAccount" prefHeight="38.0" prefWidth="100.0" text="Deactivate">
                                  <HBox.margin>
-                                    <Insets top="50.0" />
+                                    <Insets right="5.0" top="20.0" />
                                  </HBox.margin>
                               </Button>
                               <Button fx:id="Open_Button" mnemonicParsing="false" onAction="#openCustomerAccount" prefHeight="38.0" prefWidth="100.0" text="Activate">
                                  <HBox.margin>
-                                    <Insets top="50.0" />
+                                    <Insets left="5.0" top="20.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
@@ -132,7 +135,7 @@
                         </TextArea>
                         <Button fx:id="CreateButton" mnemonicParsing="false" onAction="#CreateButtonHandler" prefHeight="38.0" prefWidth="100.0" text="Create">
                            <VBox.margin>
-                              <Insets top="30.0" />
+                              <Insets top="20.0" />
                            </VBox.margin>
                         </Button>
                      </children>
