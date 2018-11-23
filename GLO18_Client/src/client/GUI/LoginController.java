@@ -5,8 +5,6 @@
  */
 package client.GUI;
 
-
-
 import client.Acquaintance.IGUI;
 import client.Acquaintance.ILogic;
 import java.io.IOException;
@@ -32,22 +30,22 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
-
+ *
  *
  * @author antonio
  */
-
 public class LoginController implements Initializable {
+
     private double xOffset;
     private double yOffset;
     IGUI gui;
     ILogic logic;
-    
-    @FXML 
+
+    @FXML
     private Button ExitButton;
-    @FXML 
+    @FXML
     private Button LoginButton;
-    @FXML 
+    @FXML
     private TextField UsernameField;
     @FXML
     private PasswordField passwordField;
@@ -57,36 +55,27 @@ public class LoginController implements Initializable {
     private AnchorPane LoginParentPane;
     @FXML
     private AnchorPane LoginAnchorPane;
-    
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gui = GUIrun.getInstance();
         logic = GUIrun.getLogic();
-        
-    } 
-    
+
+    }
 
     @FXML
     private void Login(javafx.event.ActionEvent event) {
         String ID = UsernameField.getText();
         String password = passwordField.getText();
-        System.out.println(ID);
-        System.out.println(password);
         if (ID.trim().isEmpty() || password.trim().isEmpty()) {
             alertField.setText("Log in is wrong");
             //virker hertil
-        }
-        else{
-           
-             if (ID.startsWith("A")) {
-                 System.out.println("test2");
-                 
+        } else {
+
+            if (ID.startsWith("A")) {
                 String check = logic.login(ID, password);
-                 
+
                 if (check.equalsIgnoreCase("true")) {
-                    System.out.println(check);
                     try {
                         UsernameField.setText("");
                         passwordField.setText("");
@@ -98,20 +87,17 @@ public class LoginController implements Initializable {
                     } catch (IOException ex) {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
-                else if (check.equalsIgnoreCase("false")) {
+                } else if (check.equalsIgnoreCase("false")) {
                     UsernameField.setText("");
                     passwordField.setText("");
                     alertField.setText("Log in is wrong");
                 }
-            }
-                 
-            else {
-                       
+            } else {
+
                 String correctedID = "C" + ID;
-                
+
                 String check = logic.login(correctedID, password);
-                 
+
                 if (check.equalsIgnoreCase("true")) {
                     try {
                         UsernameField.setText("");
@@ -124,12 +110,11 @@ public class LoginController implements Initializable {
                     } catch (IOException ex) {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
-                else if (check.equalsIgnoreCase("false")) {
+                } else if (check.equalsIgnoreCase("false")) {
                     UsernameField.setText("");
                     passwordField.setText("");
                     alertField.setText("Log in is wrong");
-                     
+
                 }
             }
         }
@@ -140,8 +125,3 @@ public class LoginController implements Initializable {
         Platform.exit();
     }
 }
-
-    
-    
-
-
