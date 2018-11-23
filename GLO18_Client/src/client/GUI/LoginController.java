@@ -67,17 +67,17 @@ public class LoginController implements Initializable {
     private void Login(javafx.event.ActionEvent event) {
         String ID = UsernameField.getText();
         String password = passwordField.getText();
-        if (ID.trim().isEmpty() || password.trim().isEmpty()) {
-            alertField.setText("Log in is wrong");
-            //virker hertil
-        } else {
-
-            if (ID.startsWith("A")) {
+        if (ID.trim().isEmpty() || password.trim().isEmpty() ) {
+            alertField.setText("Please provide username and password");
+        }
+        else if(ID.trim().contains(";")|| password.trim().contains(";")){
+            alertField.setText("Please check if your input is valid");
+        }
+        else{
+             if (ID.startsWith("A")) {
                 String check = logic.login(ID, password);
-
                 if (check.equalsIgnoreCase("true")) {
                     try {
-                        UsernameField.setText("");
                         passwordField.setText("");
                         Parent nextView = FXMLLoader.load(getClass().getResource("admin.fxml"));
                         Scene newScene = new Scene(nextView);
@@ -87,8 +87,8 @@ public class LoginController implements Initializable {
                     } catch (IOException ex) {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } else if (check.equalsIgnoreCase("false")) {
-                    UsernameField.setText("");
+                }
+                else if (check.equalsIgnoreCase("false")) {
                     passwordField.setText("");
                     alertField.setText("Log in is wrong");
                 }
@@ -110,8 +110,8 @@ public class LoginController implements Initializable {
                     } catch (IOException ex) {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } else if (check.equalsIgnoreCase("false")) {
-                    UsernameField.setText("");
+                }
+                else if (check.equalsIgnoreCase("false")) {
                     passwordField.setText("");
                     alertField.setText("Log in is wrong");
 

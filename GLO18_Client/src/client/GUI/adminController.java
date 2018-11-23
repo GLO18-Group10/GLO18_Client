@@ -95,7 +95,8 @@ public class adminController implements Initializable {
 
     @FXML
     private void CreateButtonHandler(ActionEvent event) {
-        if (!(isEmpty(textFields) || birthdayFieldDatePicker.getValue() == null || !isValid(CPRField.getText()) || !isValid(PhoneField.getText()))) {
+        if (isEmptyOrContainsIllegalChar(textFields) || birthdayFieldDatePicker.getValue() == null || !isValid(CPRField.getText()) || !isValid(PhoneField.getText())) {
+        } else {
             String ID = "C" + CPRField.getText();
             String name = FirstNameField.getText() + " " + LastnameField.getText();
             String birthdayTest = birthdayFieldDatePicker.getValue().toString();
@@ -132,13 +133,18 @@ public class adminController implements Initializable {
         }
     }
 
-    private boolean isEmpty(ArrayList<TextField> textFieldArray) {
+    private boolean isEmptyOrContainsIllegalChar(ArrayList<TextField> textFieldArray) {
         boolean isEmpty = false;
         statusTextArea.clear();
         for (TextField textField : textFieldArray) {
             if (textField.getText().trim().isEmpty()) {
                 String[] textFieldEmpty = textField.toString().split(",");
                 statusTextArea.appendText(textFieldEmpty[0].substring(13) + " IS EMPTY\n");
+                isEmpty = true;
+            }
+            if (textField.getText().contains(";")) {
+                String[] textFieldEmpty = textField.toString().split(",");
+                statusTextArea.appendText(textFieldEmpty[0].substring(13) + " CANNOT CONTAIN ;\n");
                 isEmpty = true;
             }
         }
@@ -148,7 +154,8 @@ public class adminController implements Initializable {
     private boolean isValid(String input) {
         char[] inputCharArray = input.toCharArray();
         for (int i = 0; i < inputCharArray.length; i++) {
-            if (Character.isLetter(inputCharArray[i])) {
+            if (!Character.isDigit(inputCharArray[i])) {
+                statusTextArea.appendText("Only digits in phone field and CPR");
                 return false;
             }
         }
