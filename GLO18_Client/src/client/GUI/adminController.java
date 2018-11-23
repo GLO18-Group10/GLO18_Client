@@ -95,8 +95,7 @@ public class adminController implements Initializable {
     @FXML
     private void CreateButtonHandler(ActionEvent event) {
         if (isEmptyOrContainsIllegalChar(textFields) || birthdayFieldDatePicker.getValue() == null || !isValid(CPRField.getText()) || !isValid(PhoneField.getText())) {
-        }
-        else {
+        } else {
             String ID = "C" + CPRField.getText();
             String name = FirstNameField.getText() + " " + LastnameField.getText();
             String birthdayTest = birthdayFieldDatePicker.getValue().toString();
@@ -137,9 +136,14 @@ public class adminController implements Initializable {
         boolean isEmpty = false;
         statusTextArea.clear();
         for (TextField textField : textFieldArray) {
-            if (textField.getText().trim().isEmpty() || textField.getText().contains(";")) {
+            if (textField.getText().trim().isEmpty()) {
                 String[] textFieldEmpty = textField.toString().split(",");
                 statusTextArea.appendText(textFieldEmpty[0].substring(13) + " IS EMPTY\n");
+                isEmpty = true;
+            }
+            if (textField.getText().contains(";")) {
+                String[] textFieldEmpty = textField.toString().split(",");
+                statusTextArea.appendText(textFieldEmpty[0].substring(13) + " CANNOT CONTAIN ;\n");
                 isEmpty = true;
             }
         }
