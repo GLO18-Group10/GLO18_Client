@@ -150,6 +150,7 @@ public class adminController implements Initializable {
         char[] inputCharArray = input.toCharArray();
         for (int i = 0; i < inputCharArray.length; i++) {
             if (!Character.isDigit(inputCharArray[i])) {
+                statusTextArea.appendText("Only digits in phone field and CPR");
                 return false;
             }
         }
