@@ -74,21 +74,22 @@ public class LoginController implements Initializable {
         String password = passwordField.getText();
         System.out.println(ID);
         System.out.println(password);
-        if (ID.trim().isEmpty() || password.trim().isEmpty()) {
-            alertField.setText("Log in is wrong");
+        if (ID.trim().isEmpty() || password.trim().isEmpty() ) {
+            alertField.setText("Please provide username and password");
             //virker hertil
         }
+        else if(ID.trim().contains(";")|| password.trim().contains(";")){
+            alertField.setText("Please check if your input is valid");
+        }
         else{
-           
              if (ID.startsWith("A")) {
                  System.out.println("test2");
                  
                 String check = logic.login(ID, password);
-                 
+                
                 if (check.equalsIgnoreCase("true")) {
                     System.out.println(check);
                     try {
-                        UsernameField.setText("");
                         passwordField.setText("");
                         Parent nextView = FXMLLoader.load(getClass().getResource("admin.fxml"));
                         Scene newScene = new Scene(nextView);
@@ -100,7 +101,6 @@ public class LoginController implements Initializable {
                     }
                 }
                 else if (check.equalsIgnoreCase("false")) {
-                    UsernameField.setText("");
                     passwordField.setText("");
                     alertField.setText("Log in is wrong");
                 }
@@ -126,7 +126,6 @@ public class LoginController implements Initializable {
                     }
                 }
                 else if (check.equalsIgnoreCase("false")) {
-                    UsernameField.setText("");
                     passwordField.setText("");
                     alertField.setText("Log in is wrong");
                      

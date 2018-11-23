@@ -94,10 +94,10 @@ public class adminController implements Initializable {
 
     @FXML
     private void CreateButtonHandler(ActionEvent event) {
-        if (isEmpty(textFields) || birthdayFieldDatePicker.getValue() == null || !isValid(CPRField.getText()) || !isValid(PhoneField.getText())) {
+        if (isEmptyOrContainsIllegalChar(textFields) || birthdayFieldDatePicker.getValue() == null || !isValid(CPRField.getText()) || !isValid(PhoneField.getText())) {
             System.out.println("ERROR TEST");
-
-        } else {
+        }
+        else {
             String ID = "C" + CPRField.getText();
             String name = FirstNameField.getText() + " " + LastnameField.getText();
             String birthdayTest = birthdayFieldDatePicker.getValue().toString();
@@ -139,11 +139,11 @@ public class adminController implements Initializable {
         }
     }
 
-    private boolean isEmpty(ArrayList<TextField> textFieldArray) {
+    private boolean isEmptyOrContainsIllegalChar(ArrayList<TextField> textFieldArray) {
         boolean isEmpty = false;
         statusTextArea.clear();
         for (TextField textField : textFieldArray) {
-            if (textField.getText().trim().isEmpty()) {
+            if (textField.getText().trim().isEmpty() || textField.getText().contains(";")) {
                 System.out.println(textField.toString());
                 String[] textFieldEmpty = textField.toString().split(",");
                 statusTextArea.appendText(textFieldEmpty[0].substring(13) + " IS EMPTY\n");
@@ -156,8 +156,7 @@ public class adminController implements Initializable {
     private boolean isValid(String input) {
         char[] inputCharArray = input.toCharArray();
         for (int i = 0; i < inputCharArray.length; i++) {
-            if (Character.isLetter(inputCharArray[i])) {
-                System.out.println("LETTERFOUND");
+            if (!Character.isDigit(inputCharArray[i])) {
                 return false;
             }
         }
