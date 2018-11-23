@@ -30,7 +30,7 @@ public class Customer extends User implements ICustomer{
     public String getBirthday() {
         //If birthday is null, get the birthday from the server
         if (birthday == null) {
-            logic.sendMessage(messageParser.toProtocol01());
+            logic.sendMessage(messageParser.toProtocol01(super.getID()));
             String data[] = messageParser.fromProtocol(logic.receiveMessage());
             setBirthday(data[1]);
         }
@@ -46,7 +46,7 @@ public class Customer extends User implements ICustomer{
     public String getName() {
         //If name is null, get the name from the server
         if (name == null) {
-            logic.sendMessage(messageParser.toProtocol01());
+            logic.sendMessage(messageParser.toProtocol01(super.getID()));
             String data[] = messageParser.fromProtocol(logic.receiveMessage());
             setName(data[0]);
         }
@@ -62,7 +62,7 @@ public class Customer extends User implements ICustomer{
     public String getAddress() {
         //If address is null, get the address from the server
         if (address == null) {
-            logic.sendMessage(messageParser.toProtocol01());
+            logic.sendMessage(messageParser.toProtocol01(super.getID()));
             String data[] = messageParser.fromProtocol(logic.receiveMessage());
             setAddress(data[3]);
         }
@@ -77,7 +77,7 @@ public class Customer extends User implements ICustomer{
     public String getBankID(){
         String bankID = "";
         if (bankIDs.isEmpty()) {
-            logic.sendMessage(messageParser.toProtocol08());
+            logic.sendMessage(messageParser.toProtocol08(super.getID()));
             String data[] = messageParser.fromProtocol(logic.receiveMessage());
             System.out.println(data[0]);
             if (data[0].equalsIgnoreCase("error")) {
