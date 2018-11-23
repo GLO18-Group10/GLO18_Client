@@ -34,8 +34,8 @@ public class MessageParser {
      *
      * @return 01
      */
-    public String toProtocol01(){
-        return "01";
+    public String toProtocol01(String ID){
+        return "01;" + ID;
     }
 
     /**
@@ -61,8 +61,8 @@ public class MessageParser {
     }
     
 
-    public String toProtocol03(String name, String phonenumber, String address, String email){
-        return ("03;" + name + ";" + phonenumber + ";" + address + ";" + email);
+    public String toProtocol03(String name, String phonenumber, String address, String email, String ID){
+        return ("03;" + name + ";" + phonenumber + ";" + address + ";" + email + ";" + ID);
     }
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
         return ("07;" + ID + ";" + name + ";" + birthday + ";" + phonenumber + ";" + address + ";" + email + ";" + password);
