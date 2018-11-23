@@ -81,4 +81,7 @@ public class MessageParser {
     public String toProtocol10(){
         return "10";
     }
+    public String toProtocol09(String ID, boolean open) {
+        return "09;" + "C" + ID + ";" + (open ? "1" : "0");
+    }
 }

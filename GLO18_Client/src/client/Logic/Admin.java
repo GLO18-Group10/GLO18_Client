@@ -14,7 +14,7 @@ import java.util.Random;
  * @author Nick
  */
 public class Admin extends User implements IAdmin {
-    
+   private String account; 
    private MessageParser messageParser = new MessageParser(logic);
 
     public Admin(String ID, ILogic logic) {
@@ -45,4 +45,21 @@ public class Admin extends User implements IAdmin {
         String[] data = messageParser.fromProtocol(logic.receiveMessage());
         return data;
     }
+    
+    @Override
+    public String openCustomerAccount(String ID) {
+        logic.sendMessage(messageParser.toProtocol09(ID, true));
+        String data[] = messageParser.fromProtocol(logic.receiveMessage());
+        return data[0];
+    }
+    
+    @Override
+    public String closeCustomerAccount(String ID) {
+        logic.sendMessage(messageParser.toProtocol09(ID, false));
+        String data[] = messageParser.fromProtocol(logic.receiveMessage());
+        return data[0];
+    }
+    
+    
 }
+
