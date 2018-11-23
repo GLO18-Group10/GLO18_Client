@@ -89,7 +89,7 @@
                      <right>
                         <VBox prefHeight="216.0" prefWidth="215.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="AmountErrorLabel" prefHeight="71.0" prefWidth="180.0" textFill="RED" wrapText="true">
+                              <Label fx:id="AmountErrorLabel" alignment="TOP_LEFT" prefHeight="71.0" prefWidth="180.0" textFill="RED" wrapText="true">
                                  <VBox.margin>
                                     <Insets left="10.0" top="110.0" />
                                  </VBox.margin>

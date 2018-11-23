@@ -120,6 +120,7 @@ public class CustomerController implements Initializable {
     private Label alertLabel;
     @FXML
     private TextField LastNameField;
+
     public CustomerController() {
     }
 
@@ -217,30 +218,27 @@ public class CustomerController implements Initializable {
         String phoneNo = PhoneNoField.getText();
         String address = AddressField.getText();
         String email = EmailField.getText();
-        if(fullname.trim().isEmpty() || phoneNo.trim().isEmpty() || address.trim().isEmpty() || email.trim().isEmpty()){
+        if (fullname.trim().isEmpty() || phoneNo.trim().isEmpty() || address.trim().isEmpty() || email.trim().isEmpty()) {
             alertLabel.setText("Please make sure you have input in all the fields");
-        }
-        else if(fullname.contains(";") || phoneNo.contains(";") || address.contains(";") || email.contains(";") || containsInvalidInput(phoneNo)){
+        } else if (fullname.contains(";") || phoneNo.contains(";") || address.contains(";") || email.contains(";") || containsInvalidInput(phoneNo)) {
             alertLabel.setText("Please make sure your input is valid");
-        }
-        else if(!"true".equals(storeCustomerInfo(fullname, phoneNo, address, email))){
+        } else if (!"true".equals(storeCustomerInfo(fullname, phoneNo, address, email))) {
             alertLabel.setText("Server ERROR - Please try again");
-        }
-        else{
-        if(storeCustomerInfo(fullname, phoneNo, address, email)!="true"){
-            TransactionOverallMessageLabel.setText("Error - Server fail");
-        }
-        logic.getCustomer().setName(fullname);
-        logic.getCustomer().setPhoneNo(phoneNo);
-        logic.getCustomer().setAddress(address);
-        logic.getCustomer().setEmail(email);
-        NameField.setDisable(true);
-        LastNameField.setDisable(true);
-        PhoneNoField.setDisable(true);
-        AddressField.setDisable(true);
-        EmailField.setDisable(true);
-        CancelEditButton.setVisible(false);
-        SaveButton.setVisible(false);
+        } else {
+            if (storeCustomerInfo(fullname, phoneNo, address, email) != "true") {
+                TransactionOverallMessageLabel.setText("Error - Server fail");
+            }
+            logic.getCustomer().setName(fullname);
+            logic.getCustomer().setPhoneNo(phoneNo);
+            logic.getCustomer().setAddress(address);
+            logic.getCustomer().setEmail(email);
+            NameField.setDisable(true);
+            LastNameField.setDisable(true);
+            PhoneNoField.setDisable(true);
+            AddressField.setDisable(true);
+            EmailField.setDisable(true);
+            CancelEditButton.setVisible(false);
+            SaveButton.setVisible(false);
         }
     }
 
@@ -277,34 +275,34 @@ public class CustomerController implements Initializable {
 
     @FXML
     private void transfer() {
+        AmountErrorLabel.setText("");
+        AccountErrorLabel.setText("");
+        MessageErrorLabel.setText("");
         String amount = AmountField.getText();
         String bankID = AccountField.getText() + RegField.getText();
         String message = MessageArea.getText();
         String senderBankID = TransactionBankIDChoiceBox.getValue();
-        if(amount.trim().isEmpty()){
+        if (amount.trim().isEmpty()) {
             AmountErrorLabel.setText("Please enter an amount in the amount textfield");
-        }
-        else if(AccountField.getText().trim().isEmpty() || RegField.getText().trim().isEmpty()){
+        } else if (AccountField.getText().trim().isEmpty() || RegField.getText().trim().isEmpty()) {
             AccountErrorLabel.setText("Please enter both the account number and regnumber");
-        }
-        else if(containsInvalidInput(amount)){
+        } else if (containsInvalidInput(amount)) {
             AmountErrorLabel.setText("Please only input numbers");
-        }
-        else if(containsInvalidInput(bankID)){
+        } else if (containsInvalidInput(bankID)) {
             AccountErrorLabel.setText("Please only input numbers");
-        }
-        else if(message.contains(";")){
+        } else if (message.contains(";")) {
             MessageErrorLabel.setText("Error - Invalid input.");
-        }
-        String response = logic.toProtocol05(senderBankID, amount, bankID, message);
-        if (response.equalsIgnoreCase("Error; recipient not found.")) {
-            AccountErrorLabel.setText("Error; recipient not found.");
-        } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
-            AmountErrorLabel.setText("Error; insufficient funds.");
-        } else if (response.equalsIgnoreCase("complete")) {
-            TransactionOverallMessageLabel.setText(response);
         } else {
-            TransactionOverallMessageLabel.setText(response);
+            String response = logic.toProtocol05(senderBankID, amount, bankID, message);
+            if (response.equalsIgnoreCase("Error; recipient not found.")) {
+                AccountErrorLabel.setText("Error; recipient not found.");
+            } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
+                AmountErrorLabel.setText("Error; insufficient funds.");
+            } else if (response.equalsIgnoreCase("complete")) {
+                TransactionOverallMessageLabel.setText(response);
+            } else {
+                TransactionOverallMessageLabel.setText(response);
+            }
         }
     }
     //Shows the transaction history
@@ -318,11 +316,11 @@ public class CustomerController implements Initializable {
 
         }
     }
-    
-    private boolean containsInvalidInput(String stringToCheck){
+
+    private boolean containsInvalidInput(String stringToCheck) {
         char[] charArrayToCheck = stringToCheck.toCharArray();
         for (char c : charArrayToCheck) {
-            if(!Character.isDigit(c)){
+            if (!Character.isDigit(c)) {
                 return true;
             }
         }
