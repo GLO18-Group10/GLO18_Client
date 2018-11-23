@@ -77,7 +77,7 @@ public class Customer extends User implements ICustomer{
     public String getBankID(){
         String bankID = "";
         if (bankIDs.isEmpty()) {
-            logic.sendMessage(messageParser.toProtocol08());
+            logic.sendMessage(messageParser.toProtocol08(super.getID()));
             String data[] = messageParser.fromProtocol(logic.receiveMessage());
             System.out.println(data[0]);
             if (data[0].equalsIgnoreCase("error")) {

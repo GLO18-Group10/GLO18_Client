@@ -50,8 +50,8 @@ public class MessageParser {
         return data;
     }
     
-    public String toProtocol05(String senderID, String amount, String recieverID, String text){
-        return "05;" + senderID + ";" + amount + ";"+ recieverID + ";" + text;
+    public String toProtocol05(String senderID, String amount, String recieverID, String text, String customerID){
+        return "05;" + senderID + ";" + amount + ";"+ recieverID + ";" + text + ";" + customerID;
     
     }
     
@@ -74,8 +74,8 @@ public class MessageParser {
         return logic.receiveMessage();
     }
     
-    public String toProtocol08(){
-        return "08";
+    public String toProtocol08(String ID){
+        return "08;" + ID;
     
     }
     public String toProtocol10(){

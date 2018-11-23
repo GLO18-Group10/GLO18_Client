@@ -87,7 +87,7 @@ public class LogicFacade implements ILogic {
     }
     @Override
     public String toProtocol05(String senderID, String amount, String recieverID, String text){
-        sendMessage(messageParser.toProtocol05(senderID, amount, recieverID, text));
+        sendMessage(messageParser.toProtocol05(senderID, amount, recieverID, text, customer.getID()));
         return receiveMessage();
     }
     
