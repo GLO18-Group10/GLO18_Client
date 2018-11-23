@@ -72,7 +72,7 @@
                <center>
                   <VBox prefHeight="555.0" prefWidth="218.0" BorderPane.alignment="CENTER">
                      <children>
-                        <TextArea fx:id="statusTextArea" prefHeight="343.0" prefWidth="200.0">
+                        <TextArea fx:id="statusTextArea" editable="false" prefHeight="343.0" prefWidth="200.0">
                            <VBox.margin>
                               <Insets top="110.0" />
                            </VBox.margin>
