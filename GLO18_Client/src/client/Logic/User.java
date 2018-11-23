@@ -34,7 +34,7 @@ public class User implements IUser {
     public String getEmail() {
         //If email is null, get the email from the server
         if (email == null) {
-            logic.sendMessage(messageParser.toProtocol01());
+            logic.sendMessage(messageParser.toProtocol01(ID));
             String data[] = messageParser.fromProtocol(logic.receiveMessage());
             setEmail(data[4]);
         }
@@ -50,7 +50,7 @@ public class User implements IUser {
     public String getPhoneNo() {
         //If phone number is null, get the phone number from the server
         if (phoneNo == null) {
-            logic.sendMessage(messageParser.toProtocol01());
+            logic.sendMessage(messageParser.toProtocol01(ID));
             String data[] = messageParser.fromProtocol(logic.receiveMessage());
             setPhoneNo(data[2]);
         }

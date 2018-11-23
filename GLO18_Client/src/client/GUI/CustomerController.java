@@ -131,7 +131,7 @@ public class CustomerController implements Initializable {
 
     @FXML
     private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
-        
+
         if (event.getSource() == TransferButton) {
             clearPanes();
             NewTransferAnchorPane.toFront();
@@ -143,8 +143,7 @@ public class CustomerController implements Initializable {
                     TransactionBankIDChoiceBox.getItems().add(bankid[i]);
                 }
             }
-        } 
-        else if (event.getSource() == AccountsButton) {
+        } else if (event.getSource() == AccountsButton) {
             clearPanes();
             AccountsAnchorPane.toFront();
             AccountsAnchorPane.setVisible(true);
@@ -180,27 +179,23 @@ public class CustomerController implements Initializable {
                     stage.setScene(newScene);
                     stage.show();
                 } catch (IOException ex) {
-                    System.out.println("logout error");
+                    System.out.println("Error; logoutButton(customer)");
                     ex.printStackTrace();
                 }
             } else if (logic.logout().equalsIgnoreCase("false")) {
                 System.out.println("could not log out"); //this should bechanged to a label in the GUI
             }
-        }
-        else if (event.getSource() == updateButton) {
-            
-            if (AccountsDropdown.getValue() == null) {
-                System.out.println("ikke valgt account");
-            }
-            else{
-            setAccountBalance();
-            getTransactionHistory();
+        } else if (event.getSource() == updateButton) {
+
+            if (AccountsDropdown.getValue() != null) {
+                setAccountBalance();
+                getTransactionHistory();
             }
         }
     }
 
     private void setAccountBalance() {
-        AccountBalanceLabel.setText(logic.getAccountBalance(AccountsDropdown.getValue())+" DKK");
+        AccountBalanceLabel.setText(logic.getAccountBalance(AccountsDropdown.getValue()) + " DKK");
     }
 
     private void clearPanes() {
@@ -232,7 +227,9 @@ public class CustomerController implements Initializable {
             alertLabel.setText("Server ERROR - Please try again");
         }
         else{
-        System.out.println(storeCustomerInfo(fullname, phoneNo, address, email)); //Husk error hvis det går galt.
+        if(storeCustomerInfo(fullname, phoneNo, address, email)!="true"){
+            TransactionOverallMessageLabel.setText("Error - Server fail");
+        }
         logic.getCustomer().setName(fullname);
         logic.getCustomer().setPhoneNo(phoneNo);
         logic.getCustomer().setAddress(address);
@@ -304,24 +301,22 @@ public class CustomerController implements Initializable {
             AccountErrorLabel.setText("Error; recipient not found.");
         } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
             AmountErrorLabel.setText("Error; insufficient funds.");
-        }
-        else if (response.equalsIgnoreCase("complete")) {
+        } else if (response.equalsIgnoreCase("complete")) {
             TransactionOverallMessageLabel.setText(response);
-        }
-        else {
+        } else {
             TransactionOverallMessageLabel.setText(response);
         }
     }
     //Shows the transaction history
-    
-    private void getTransactionHistory(){
+
+    private void getTransactionHistory() {
         String accountID = AccountsDropdown.getValue();
         String data[] = logic.getTransactionHistory(accountID).split(";");
-        
+
         for (int i = 0; i < data.length; i++) {
-           TransactionHistoryListView.getItems().add(data[i]);
-            
-            }
+            TransactionHistoryListView.getItems().add(data[i]);
+
+        }
     }
     
     private boolean containsInvalidInput(String stringToCheck){
@@ -346,4 +341,3 @@ public class CustomerController implements Initializable {
         TransactionOverallMessageLabel.setText("");
     }
 }
-

@@ -30,41 +30,44 @@ import java.security.cert.CertificateFactory;
  * @version 1.0
  */
 public class ServerConnection {
-    
+
     private SSLSocketFactory SSLSocketFactory;
     private SSLSocket SSLSocket;
     private Scanner scanner;
 
     public ServerConnection(String serverAddress, int serverPort) throws Exception {
-        
-        System.setProperty("javax.net.ssl.trustStore","cacerts");
+
+        System.setProperty("javax.net.ssl.trustStore", "cacerts");
         System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
-        SSLSocketFactory factory =
-        (SSLSocketFactory)SSLSocketFactory.getDefault();
-         SSLSocket = (SSLSocket)factory.createSocket(serverAddress, serverPort);
-         String[] supported = SSLSocket.getSupportedCipherSuites();
-         SSLSocket.setEnabledCipherSuites(supported);
-         SSLSocket.startHandshake();
-         System.out.println("SERVERCONNECTIONBLOK");
+        SSLSocketFactory factory
+                = (SSLSocketFactory) SSLSocketFactory.getDefault();
+        SSLSocket = (SSLSocket) factory.createSocket(serverAddress, serverPort);
+        String[] supported = SSLSocket.getSupportedCipherSuites();
+        SSLSocket.setEnabledCipherSuites(supported);
+        SSLSocket.startHandshake();
+        System.out.println("Connection established");
     }
 
     public void sendMessage(String message) throws IOException {
+        System.out.printf("%-30s %s \n", "Message to server: ", message);
         PrintWriter out = new PrintWriter(this.SSLSocket.getOutputStream(), true);
         out.println(message);
         out.flush();
     }
-    
-    public String receiveMessage() throws IOException{
+
+    public String receiveMessage() throws IOException {
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(this.SSLSocket.getInputStream()));
-        return in.readLine();
+        String response = in.readLine();
+        System.out.printf("%-30s %s \n", "Response from server: ", response);
+        return response;
     }
-    
-    public void endConnection(){
+
+    public void endConnection() {
         try {
             SSLSocket.close();
         } catch (IOException ex) {
-            System.out.println("could not end connection");
+            System.out.println("Error; endConnection; ServerConnection");
             ex.printStackTrace();
         }
     }

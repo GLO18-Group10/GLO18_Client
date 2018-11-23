@@ -14,14 +14,14 @@ import java.util.Random;
  *
  * @author Nick
  */
-public class Customer extends User implements ICustomer{
+public class Customer extends User implements ICustomer {
 
     private MessageParser messageParser = new MessageParser(logic);
     private String birthday;
     private String name;
     private String address;
     private ArrayList<String> bankIDs = new ArrayList<>();
-    
+
     public Customer(String ID, ILogic logic) {
         super(ID, logic);
     }
@@ -30,7 +30,7 @@ public class Customer extends User implements ICustomer{
     public String getBirthday() {
         //If birthday is null, get the birthday from the server
         if (birthday == null) {
-            logic.sendMessage(messageParser.toProtocol01());
+            logic.sendMessage(messageParser.toProtocol01(super.getID()));
             String data[] = messageParser.fromProtocol(logic.receiveMessage());
             setBirthday(data[1]);
         }
@@ -46,7 +46,7 @@ public class Customer extends User implements ICustomer{
     public String getName() {
         //If name is null, get the name from the server
         if (name == null) {
-            logic.sendMessage(messageParser.toProtocol01());
+            logic.sendMessage(messageParser.toProtocol01(super.getID()));
             String data[] = messageParser.fromProtocol(logic.receiveMessage());
             setName(data[0]);
         }
@@ -62,7 +62,7 @@ public class Customer extends User implements ICustomer{
     public String getAddress() {
         //If address is null, get the address from the server
         if (address == null) {
-            logic.sendMessage(messageParser.toProtocol01());
+            logic.sendMessage(messageParser.toProtocol01(super.getID()));
             String data[] = messageParser.fromProtocol(logic.receiveMessage());
             setAddress(data[3]);
         }
@@ -73,20 +73,18 @@ public class Customer extends User implements ICustomer{
     public void setAddress(String address) {
         this.address = address;
     }
+
     @Override
-    public String getBankID(){
+    public String getBankID() {
         String bankID = "";
         if (bankIDs.isEmpty()) {
-            logic.sendMessage(messageParser.toProtocol08());
+            logic.sendMessage(messageParser.toProtocol08(super.getID()));
             String data[] = messageParser.fromProtocol(logic.receiveMessage());
-            System.out.println(data[0]);
             if (data[0].equalsIgnoreCase("error")) {
                 return "No bankIDs";
             }
-            for (String ID : data){
+            for (String ID : data) {
                 bankIDs.add(ID + ";");
-                
-            
             }
         }
         for (int i = 0; i < bankIDs.size(); i++) {
@@ -94,14 +92,14 @@ public class Customer extends User implements ICustomer{
         }
         return bankID;
     }
-    
+
     @Override
-    public String checkBankID(String ID){
+    public String checkBankID(String ID) {
         if (bankIDs.isEmpty()) {
             getBankID();
         }
         for (String bankID : bankIDs) {
-            if(bankID.equalsIgnoreCase(ID) == true){
+            if (bankID.equalsIgnoreCase(ID) == true) {
                 return "true";
             }
         }
