@@ -49,10 +49,12 @@
                            <font>
                               <Font size="14.0" />
                            </font></Label>
+                        <Button fx:id="updateIDButton" mnemonicParsing="false" onAction="#getIdForList" text="Update" />
                         <ListView fx:id="customerAccountsListView" prefHeight="270.0" prefWidth="200.0">
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin></ListView>
+                        <Label fx:id="activateIDLabel" prefHeight="17.0" prefWidth="211.0" />
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Button fx:id="Close_Button" mnemonicParsing="false" onAction="#CloseCustomerAccount" prefHeight="38.0" prefWidth="100.0" text="Deactivate">

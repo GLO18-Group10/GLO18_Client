@@ -40,5 +40,7 @@ public interface ILogic {
     public String sendMail(String ID, String email, String name, String password);
     
     public String toProtocol09(String ID, boolean open);
+    
+    public String updatePassword(String ID, String oldPassword, String newPassword);
 
 }
