@@ -23,7 +23,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -47,6 +46,8 @@ public class CustomerController implements Initializable {
     private HBox HBox;
     @FXML
     private AnchorPane AnchorPane3;
+    @FXML
+    private GridPane GridPane;
     @FXML
     private VBox VBox;
     @FXML
@@ -119,18 +120,6 @@ public class CustomerController implements Initializable {
     private Label alertLabel;
     @FXML
     private TextField LastNameField;
-    @FXML
-    private PasswordField oldPasswordField;
-    @FXML
-    private PasswordField newPasswordField;
-    @FXML
-    private PasswordField repeatPasswordField;
-    @FXML
-    private Label passwordErrorLabel;
-    @FXML
-    private Button changePasswordButton;
-    @FXML
-    private Button clearButtonPassord;
 
     public CustomerController() {
     }
@@ -348,56 +337,5 @@ public class CustomerController implements Initializable {
         AmountErrorLabel.setText("");
         MessageErrorLabel.setText("");
         TransactionOverallMessageLabel.setText("");
-    }
-
-    @FXML
-    private void changePassword() {
-        //Check for illegal characters and compare the two passwords
-        if (checkPassword()) {
-            if (newPasswordField.getText().equals(repeatPasswordField.getText())) {
-                String answer = logic.updatePassword(logic.getCustomer().getID(), oldPasswordField.getText(), newPasswordField.getText());
-                if (answer.equals("true")) {
-                    clearPasswordFields();
-                    passwordErrorLabel.setText("Password has been updated");
-                } else if (answer.equals("Incorrect password")) {
-                    clearPasswordFields();
-                    passwordErrorLabel.setText("Your current password is incorrect");
-                } else {
-                    clearPasswordFields();
-                    passwordErrorLabel.setText("Unexpected error: " + answer);
-                }
-            } else {
-                passwordErrorLabel.setText("The entered passwords are not identical");
-            }
-        } else {
-            passwordErrorLabel.setText("Password cannot contain ; or \"");
-        }
-    }
-
-    /**
-     * Checks the password fields for illegal characters
-     *
-     * @return true for no illegal characters and false for illegal characters
-     */
-    private boolean checkPassword() {
-        if (oldPasswordField.getText().contains(";") || oldPasswordField.getText().contains("\"")) {
-            return false;
-        } else if (newPasswordField.getText().contains(";") || newPasswordField.getText().contains("\"")) {
-            return false;
-        } else if (repeatPasswordField.getText().contains(";") || repeatPasswordField.getText().contains("\"")) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    /**
-     * Clears the password fields under options
-     */
-    @FXML
-    private void clearPasswordFields() {
-        oldPasswordField.clear();
-        newPasswordField.clear();
-        repeatPasswordField.clear();
     }
 }

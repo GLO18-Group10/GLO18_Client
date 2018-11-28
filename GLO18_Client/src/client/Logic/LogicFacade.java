@@ -130,11 +130,4 @@ public class LogicFacade implements ILogic {
         sendMessage(messageParser.toProtocol09(ID, open));
         return receiveMessage();
     }
-
-    @Override
-    public String updatePassword(String ID, String oldPassword, String newPassword) {
-        sendMessage(messageParser.toProtocol13(ID, oldPassword, newPassword));
-        return receiveMessage();
-    }
-    
 }
