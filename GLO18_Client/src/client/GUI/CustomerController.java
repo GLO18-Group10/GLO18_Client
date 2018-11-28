@@ -323,7 +323,7 @@ public class CustomerController implements Initializable {
         String accountID = AccountsDropdown.getValue();
         String data[] = logic.getTransactionHistory(accountID).split(";");
 
-        for (int i = 0; i < data.length; i++) {
+        for (int i = data.length-1; i >= 0; i--) {
             TransactionHistoryListView.getItems().add(data[i]);
 
         }
