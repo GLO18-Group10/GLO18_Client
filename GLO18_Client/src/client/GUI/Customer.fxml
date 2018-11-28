@@ -289,18 +289,85 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="AnchorPane3" layoutX="289.0" prefHeight="608.0" prefWidth="615.0" visible="false">
+      <AnchorPane fx:id="AnchorPane3" layoutX="289.0" prefHeight="608.0" prefWidth="615.0">
          <children>
-            <GridPane fx:id="GridPane" layoutX="2.0" prefHeight="608.0" prefWidth="608.0" AnchorPane.leftAnchor="2.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
+            <BorderPane prefHeight="600.0" prefWidth="608.0">
+               <left>
+                  <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+               </left>
+               <center>
+                  <VBox prefHeight="550.0" prefWidth="236.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label prefHeight="41.0" prefWidth="239.0" text="Change Password">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Current password">
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </Label>
+                        <PasswordField fx:id="oldPasswordField">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </PasswordField>
+                        <Label text="New password">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <PasswordField fx:id="newPasswordField">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </PasswordField>
+                        <Label text="Repeat new password">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <PasswordField fx:id="repeatPasswordField">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </PasswordField>
+                        <Label fx:id="passwordErrorLabel" prefHeight="46.0" prefWidth="243.0">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="changePasswordButton" mnemonicParsing="false" onAction="#changePassword" prefWidth="120.0" text="Change Password">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="clearButtonPassord" mnemonicParsing="false" onAction="#clearPasswordFields" prefHeight="25.0" prefWidth="120.0" text="Clear">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </center>
+               <top>
+                  <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </top>
+               <right>
+                  <VBox prefHeight="550.0" prefWidth="260.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
          </children>
       </AnchorPane>
       <VBox fx:id="VBox" layoutX="-2.0" prefHeight="600.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -345,11 +412,11 @@
          <children>
             <BorderPane layoutY="137.0" prefHeight="600.0" prefWidth="608.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <center>
-                  <VBox prefHeight="307.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <VBox prefHeight="302.0" prefWidth="268.0" BorderPane.alignment="CENTER">
                      <children>
                         <Label text="Firstname">
                            <padding>
-                              <Insets top="100.0" />
+                              <Insets top="50.0" />
                            </padding>
                         </Label>
                         <TextField fx:id="NameField" disable="true" />
@@ -387,9 +454,9 @@
                      <font>
                         <Font size="24.0" />
                      </font>
-                     <padding>
-                        <Insets left="15.0" />
-                     </padding>
+                     <BorderPane.margin>
+                        <Insets left="100.0" top="50.0" />
+                     </BorderPane.margin>
                   </Label>
                </top>
                <left>
@@ -430,5 +497,6 @@
             </BorderPane>
          </children>
       </AnchorPane>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
