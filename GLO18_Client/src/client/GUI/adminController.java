@@ -22,7 +22,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -67,15 +66,15 @@ public class adminController implements Initializable {
     @FXML
     private TextField AddressField;
     @FXML
+    private TextField PasswordField;
+    @FXML
     private DatePicker birthdayFieldDatePicker;
     @FXML
     private ListView<?> customerAccountsListView;
     @FXML
+    private TextField SearchTextField;
+    @FXML
     private TextArea statusTextArea;
-    @FXML
-    private Button updateIDButton;
-    @FXML
-    private Label activateIDLabel;
 
     /**
      * Initializes the controller class.
@@ -163,7 +162,6 @@ public class adminController implements Initializable {
         return true;
     }
 
-    @FXML
     private void getIdForList() {
         String[] data = logic.getAdmin().getCustomerId();
         ObservableList list = FXCollections.observableArrayList(data);
@@ -174,7 +172,7 @@ public class adminController implements Initializable {
     private void CloseCustomerAccount(ActionEvent event) {
         if (event.getSource() == Close_Button) {
             String response = logic.getAdmin().closeCustomerAccount((String) customerAccountsListView.getSelectionModel().getSelectedItem());
-            activateIDLabel.setText("Deactivation: " + response);
+            System.out.println(response); //To be added as label
         }
 
     }
@@ -183,7 +181,7 @@ public class adminController implements Initializable {
     private void openCustomerAccount(ActionEvent event) {
         if (event.getSource() == Open_Button) {
             String response = logic.getAdmin().openCustomerAccount((String) customerAccountsListView.getSelectionModel().getSelectedItem());
-            activateIDLabel.setText("Activation: " + response); 
+            System.out.println(response); //to be added as label
         }
     }
 }
