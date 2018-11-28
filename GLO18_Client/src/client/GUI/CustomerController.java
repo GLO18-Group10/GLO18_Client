@@ -168,6 +168,7 @@ public class CustomerController implements Initializable {
             }
         } else if (event.getSource() == OptionsButton) {
             clearPanes();
+            passwordErrorLabel.setText("");
             AnchorPane3.toFront();
             AnchorPane3.setVisible(true);
         } else if (event.getSource() == ProfileButton) {
