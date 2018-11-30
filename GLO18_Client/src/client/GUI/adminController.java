@@ -115,6 +115,7 @@ public class adminController implements Initializable {
                 } else {
                     statusTextArea.appendText("Error occured. Email could not be sent");
                 }
+                getIdForList();
             } else {
                 statusTextArea.appendText("Customer account could not be created\nIs the CPR number already in use?");
             }
@@ -122,7 +123,6 @@ public class adminController implements Initializable {
     }
 
     private String createCustomer(String ID, String name, String birthday, String phoneNumber, String address, String email, String password) {
-        getIdForList();
         return logic.toProtocol07(ID, name, birthday, phoneNumber, address, email, password);
     }
 
