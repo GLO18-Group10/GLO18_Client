@@ -138,6 +138,12 @@ public class LogicFacade implements ILogic {
     }
     
     @Override
+    public String contactBank(String ID, String subject, String text){
+        sendMessage(messageParser.toProtocol15(ID, subject, text));
+        return receiveMessage();
+    }
+    
+    @Override
     public String checkPassword(String ID, String password){
         return messageParser.toProtocol16(ID, password);
     }    

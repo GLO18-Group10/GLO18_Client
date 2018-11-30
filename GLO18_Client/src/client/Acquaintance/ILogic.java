@@ -44,5 +44,6 @@ public interface ILogic {
     public String updatePassword(String ID, String oldPassword, String newPassword);
     
     public String checkPassword(String ID, String password);
-
+    
+    public String contactBank(String ID, String subject, String text);
 }

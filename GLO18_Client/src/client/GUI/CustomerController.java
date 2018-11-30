@@ -137,6 +137,20 @@ public class CustomerController implements Initializable {
     private Button CancelTransactionButton;
     @FXML
     private PasswordField ConfirmPasswordField;
+    @FXML
+    private Button ContactButton;
+    @FXML
+    private AnchorPane ContactAnchor;
+    @FXML
+    private Label ContactErrorLabel;
+    @FXML
+    private Button SendBankMail;
+    @FXML
+    private Button CancelBankMail;
+    @FXML
+    private TextField ContactSubjectField;
+    @FXML
+    private TextArea ContactTextArea;
 
     public CustomerController() {
     }
@@ -189,6 +203,10 @@ public class CustomerController implements Initializable {
             clearPanes();
             ProfileAnchor.toFront();
             ProfileAnchor.setVisible(true);
+        } else if(event.getSource()==ContactButton) {
+            clearPanes();
+            ContactAnchor.toFront();
+            ContactAnchor.setVisible(true);
         } else if (event.getSource() == LogoutButton) {
             if (logic.logout().equalsIgnoreCase("true")) {
                 try {
@@ -222,6 +240,7 @@ public class CustomerController implements Initializable {
         AccountsAnchorPane.setVisible(false);
         AnchorPane3.setVisible(false);
         ProfileAnchor.setVisible(false);
+        ContactAnchor.setVisible(false);
     }
 
     private String storeCustomerInfo(String name, String phoneNo, String address, String email) {
@@ -441,5 +460,32 @@ public class CustomerController implements Initializable {
         oldPasswordField.clear();
         newPasswordField.clear();
         repeatPasswordField.clear();
+    }
+    
+    @FXML
+    private void sendBankMail(){
+        if(ContactSubjectField.getText().equalsIgnoreCase("")){
+            ContactErrorLabel.setText("Please Insert Subject");
+        }
+        else if(ContactTextArea.getText().equalsIgnoreCase("")){
+            ContactErrorLabel.setText("Please Insert Text");
+        }
+        else if(ContactSubjectField.getText().contains(";")||ContactSubjectField.getText().contains("\"")){
+            ContactErrorLabel.setText("Do not use ; or \" in the subject field");
+        }
+        else if(ContactTextArea.getText().contains(";")||ContactTextArea.getText().contains("\"")){
+            ContactErrorLabel.setText("Do not use ; or \" in the text area");
+        }
+        else{
+            ContactErrorLabel.setText(logic.contactBank(logic.getCustomer().getID(), ContactSubjectField.getText(), ContactTextArea.getText()));
+            ContactSubjectField.clear();
+            ContactTextArea.clear();
+        }
+    }
+    
+    @FXML
+    private void cancelBankMail(){
+        ContactSubjectField.clear();
+        ContactTextArea.clear();
     }
 }
