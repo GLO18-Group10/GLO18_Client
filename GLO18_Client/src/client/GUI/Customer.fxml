@@ -233,12 +233,26 @@
                      <center>
                         <HBox prefHeight="95.0" prefWidth="608.0" BorderPane.alignment="CENTER">
                            <children>
-                              <ChoiceBox fx:id="AccountsDropdown" prefWidth="150.0">
+                              <VBox prefHeight="130.0" prefWidth="140.0">
+                                 <children>
+                                    <ChoiceBox fx:id="AccountsDropdown" prefWidth="150.0">
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" top="30.0" />
+                                       </VBox.margin>
+                                    </ChoiceBox>
+                                    <Label fx:id="CreateBankAccountSucceslabel">
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <Button fx:id="updateButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="87.0" text="Update">
                                  <HBox.margin>
                                     <Insets left="15.0" top="30.0" />
                                  </HBox.margin>
-                              </ChoiceBox>
-                              <Button fx:id="updateButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="87.0" text="Update">
+                              </Button>
+                              <Button fx:id="CreateBankAccountButton" mnemonicParsing="false" onAction="#openBankAccount" prefHeight="25.0" prefWidth="136.0" text="Create Bank Account">
                                  <HBox.margin>
                                     <Insets left="15.0" top="30.0" />
                                  </HBox.margin>
@@ -248,10 +262,10 @@
                                     <Font size="14.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="120.0" top="25.0" />
+                                    <Insets left="55.0" top="25.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label fx:id="AccountBalanceLabel" alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="126.0" text="0 DKK" textAlignment="RIGHT">
+                              <Label fx:id="AccountBalanceLabel" alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="86.0" text="0 DKK" textAlignment="RIGHT">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

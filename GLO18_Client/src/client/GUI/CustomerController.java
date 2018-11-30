@@ -138,8 +138,12 @@ public class CustomerController implements Initializable {
     @FXML
     private PasswordField ConfirmPasswordField;
     @FXML
+    private Button CreateBankAccountButton;
+    @FXML
+    private Label CreateBankAccountSucceslabel;
+    @FXML
     private ChoiceBox<String> CategoryChoiceBox;
-    
+
     public CustomerController() {
     }
     
@@ -179,8 +183,11 @@ public class CustomerController implements Initializable {
             
             if (AccountsDropdown.getItems().isEmpty()) {
                 String bankid[] = logic.getCustomer().getBankID().split(";");
+                
                 for (int i = 0; i < bankid.length; i++) {
-                    AccountsDropdown.getItems().add(bankid[i]);
+                    
+                    AccountsDropdown.getItems().addAll(bankid[i]);
+                   
                 }
             }
         } else if (event.getSource() == OptionsButton) {
@@ -429,6 +436,7 @@ public class CustomerController implements Initializable {
         MessageErrorLabel.setText("");
         TransactionOverallMessageLabel.setText("");
         ConfirmPasswordField.setText("");
+        CreateBankAccountSucceslabel.setText("");
     }
     
     @FXML
@@ -485,6 +493,20 @@ public class CustomerController implements Initializable {
         newPasswordField.clear();
         repeatPasswordField.clear();
     }
+
+    @FXML
+    private void openBankAccount(){
+        String message = logic.openBankAccount();
+        CreateBankAccountSucceslabel.setText(message);
+        AccountsDropdown.getItems().clear();
+        if (AccountsDropdown.getItems().isEmpty()) {
+                String bankid[] = logic.getCustomer().getBankID().split(";");
+                for (int i = 0; i < bankid.length; i++) {
+                    AccountsDropdown.getItems().addAll(bankid[i]);
+                }
+            }
+    }    
+
     
     private String makeInt(String text) {
         int commaPos = text.indexOf(",");
@@ -546,5 +568,6 @@ public class CustomerController implements Initializable {
         AccountField.setEditable(true);
         RegField.setEditable(true);
         MessageArea.setEditable(true);
+
     }
 }
