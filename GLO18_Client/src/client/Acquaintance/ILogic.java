@@ -33,7 +33,7 @@ public interface ILogic {
 
     public String logout();
 
-    public String toProtocol05(String senderID, String amount, String recieverID, String text);
+    public String toProtocol05(String senderID, String amount, String recieverID, String category, String text);
 
     public String getTransactionHistory(String accountID);
 

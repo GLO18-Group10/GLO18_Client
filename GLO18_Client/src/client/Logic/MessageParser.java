@@ -50,8 +50,8 @@ public class MessageParser {
         return data;
     }
     
-    public String toProtocol05(String senderID, String amount, String recieverID, String text, String customerID){
-        return "05;" + senderID + ";" + amount + ";"+ recieverID + ";" + text + ";" + customerID;
+    public String toProtocol05(String senderID, String amount, String recieverID, String category, String text, String customerID){
+        return "05;" + senderID + ";" + amount + ";"+ recieverID + ";" + category + ";" + text + ";" + customerID;
     
     }
     

@@ -137,6 +137,8 @@ public class CustomerController implements Initializable {
     private Button CancelTransactionButton;
     @FXML
     private PasswordField ConfirmPasswordField;
+    @FXML
+    private ChoiceBox<String> CategoryChoiceBox;
     
     public CustomerController() {
     }
@@ -145,6 +147,15 @@ public class CustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         gui = GUIrun.getInstance();
         logic = GUIrun.getLogic();
+        CategoryChoiceBox = new ChoiceBox();
+        CategoryChoiceBox.getItems().add("Groceries");
+        CategoryChoiceBox.getItems().add("Transportation");
+        CategoryChoiceBox.getItems().add("Rent");
+        CategoryChoiceBox.getItems().add("Electronics");
+        CategoryChoiceBox.getItems().add("Webshopping");
+        CategoryChoiceBox.getItems().add("Other");
+        CategoryChoiceBox.getItems().add("Default Transaction");
+        CategoryChoiceBox.setValue("Default Transaction");
     }
     
     @FXML
@@ -303,11 +314,13 @@ public class CustomerController implements Initializable {
         String bankID = AccountField.getText() + RegField.getText();
         String message = MessageArea.getText();
         String senderBankID = TransactionBankIDChoiceBox.getValue();
+        String category = CategoryChoiceBox.getValue();
         if (amount.trim().isEmpty()) {
             AmountErrorLabel.setText("Please enter an amount in the amount textfield");
         } else if (AccountField.getText().trim().isEmpty() || RegField.getText().trim().isEmpty()) {
             AccountErrorLabel.setText("Please enter both the account number and regnumber");
-        } else if (bankID.equals(senderBankID)) {
+        } 
+        else if (bankID.equals(senderBankID)) {
             AccountErrorLabel.setText("You cannot send money to the same account");
         } else if (checkAmount(amount)) {
             AmountErrorLabel.setText("Please input a number");
@@ -350,12 +363,14 @@ public class CustomerController implements Initializable {
         String bankID = AccountField.getText() + RegField.getText();
         String message = MessageArea.getText();
         String senderBankID = TransactionBankIDChoiceBox.getValue();
+        String category = CategoryChoiceBox.getValue();
         if (ConfirmPasswordField.getText().equalsIgnoreCase("")) {
             TransactionOverallMessageLabel.setText("Please enter your password before confirming transaction");
         } else if (ConfirmPasswordField.getText().contains(";") || ConfirmPasswordField.getText().contains("\"")) {
             TransactionOverallMessageLabel.setText("Dont use ; or \"");
         } else if (logic.checkPassword(logic.getCustomer().getID(), ConfirmPasswordField.getText()).equalsIgnoreCase("true")) {
-            String response = logic.toProtocol05(senderBankID, amount, bankID, message);
+            //Makes the transaction
+            String response = logic.toProtocol05(senderBankID, amount, bankID, category, message);
             if (response.equalsIgnoreCase("Error; recipient not found.")) {
                 AccountErrorLabel.setText("Error; recipient not found.");
                 ConfirmTransactionButton.setVisible(false);
