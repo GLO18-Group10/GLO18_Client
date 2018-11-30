@@ -88,4 +88,10 @@ public class MessageParser {
     public String toProtocol13(String ID, String oldPassword, String newPassword){
         return "13;" + ID + ";" + oldPassword + ";" + newPassword;
     }
+    
+    public String toProtocol16(String ID, String password){
+        String message = "16" + ";" + ID + ";" + password;
+        logic.sendMessage(message);
+        return logic.receiveMessage();
+    }
 }
