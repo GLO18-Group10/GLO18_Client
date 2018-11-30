@@ -172,8 +172,11 @@ public class CustomerController implements Initializable {
 
             if (AccountsDropdown.getItems().isEmpty()) {
                 String bankid[] = logic.getCustomer().getBankID().split(";");
+                
                 for (int i = 0; i < bankid.length; i++) {
-                    AccountsDropdown.getItems().add(bankid[i]);
+                    
+                    AccountsDropdown.getItems().addAll(bankid[i]);
+                   
                 }
             }
         } else if (event.getSource() == OptionsButton) {
@@ -449,9 +452,15 @@ public class CustomerController implements Initializable {
     }
     @FXML
     private void openBankAccount(){
-        
         String message = logic.openBankAccount();
         CreateBankAccountSucceslabel.setText(message);
-        setAccountBalance();
+        AccountsDropdown.getItems().clear();
+        if (AccountsDropdown.getItems().isEmpty()) {
+                String bankid[] = logic.getCustomer().getBankID().split(";");
+                for (int i = 0; i < bankid.length; i++) {
+                    AccountsDropdown.getItems().addAll(bankid[i]);
+                }
+            }
+        
     }
 }
