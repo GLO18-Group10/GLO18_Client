@@ -55,7 +55,16 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String logout() {
-        String message = messageParser.toProtocol18();
+        String message = "";
+        if(customer != null && admin == null){
+            message = messageParser.toProtocol18(customer.getID());
+        }else if(admin != null && customer == null){
+            message = messageParser.toProtocol18(admin.getID());
+        }else{
+            System.out.println("logout error - customer and admin is either both null or not null");
+        }
+        
+        
 
         if (message.equalsIgnoreCase("true")) {
             admin = null;

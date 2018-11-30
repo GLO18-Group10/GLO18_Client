@@ -69,8 +69,8 @@ public class MessageParser {
         //return fromProtocol01(logic.receiveMessage());
     }
 
-    public String toProtocol18(){
-        logic.sendMessage("18");
+    public String toProtocol18(String ID){
+        logic.sendMessage("18;" + ID);
         return logic.receiveMessage();
     }
     
