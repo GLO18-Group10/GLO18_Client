@@ -318,10 +318,13 @@ public class CustomerController implements Initializable {
                 AmountErrorLabel.setText("Only two decimals allowed");
             } else if (amount.equals("Enter a number before the comma")) {
                 AmountErrorLabel.setText("Enter a number before the comma");
+            } else if (amount.equals("Amount is too large. Please contact bank")) {
+                AmountErrorLabel.setText("Amount is too large. Please contact bank");
             } else {
                 ConfirmTransactionButton.setVisible(true);
                 CancelTransactionButton.setVisible(true);
                 ConfirmPasswordField.setVisible(true);
+                freezeInputTransaction();
             }
         }
     }
@@ -333,6 +336,7 @@ public class CustomerController implements Initializable {
         ConfirmTransactionButton.setVisible(false);
         CancelTransactionButton.setVisible(false);
         ConfirmPasswordField.setVisible(false);
+        defreezeInputTransaction();
     }
 
     @FXML
@@ -352,8 +356,14 @@ public class CustomerController implements Initializable {
             String response = logic.toProtocol05(senderBankID, amount, bankID, message);
             if (response.equalsIgnoreCase("Error; recipient not found.")) {
                 AccountErrorLabel.setText("Error; recipient not found.");
+                ConfirmTransactionButton.setVisible(false);
+                CancelTransactionButton.setVisible(false);
+                ConfirmPasswordField.setVisible(false);
             } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
                 AmountErrorLabel.setText("Error; insufficient funds.");
+                ConfirmTransactionButton.setVisible(false);
+                CancelTransactionButton.setVisible(false);
+                ConfirmPasswordField.setVisible(false);
             } else if (response.equalsIgnoreCase("complete")) {
                 cleanInputFields(event);
                 TransactionOverallMessageLabel.setText(response);
@@ -366,6 +376,7 @@ public class CustomerController implements Initializable {
         } else {
             TransactionOverallMessageLabel.setText("Incorrect Password");
         }
+        defreezeInputTransaction();
     }
 
 //Shows the transaction history
@@ -461,6 +472,11 @@ public class CustomerController implements Initializable {
     private String makeInt(String text) {
         int commaPos = text.indexOf(",");
         if (commaPos == -1) {
+            try {
+                int i = Integer.parseInt(text);
+            } catch (Exception e) {
+                return "Amount is too large. Please contact bank";
+            }
             return text;
         } else if (commaPos == 0) {
             return "Enter a number before the comma";
@@ -473,6 +489,11 @@ public class CustomerController implements Initializable {
                 text += "0";
             } else if (charAfterComma > 2) {
                 return "Only two decimals allowed";
+            }
+            try {
+                int i = Integer.parseInt(text);
+            } catch (Exception e) {
+                return "Amount is too large. Please contact bank";
             }
             return text;
         }
@@ -494,5 +515,19 @@ public class CustomerController implements Initializable {
             }
         }
         return false;
+    }
+
+    private void freezeInputTransaction() {
+        AmountField.setEditable(false);
+        AccountField.setEditable(false);
+        RegField.setEditable(false);
+        MessageArea.setEditable(false);
+    }
+
+    private void defreezeInputTransaction() {
+        AmountField.setEditable(true);
+        AccountField.setEditable(true);
+        RegField.setEditable(true);
+        MessageArea.setEditable(true);
     }
 }
