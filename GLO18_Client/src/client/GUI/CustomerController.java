@@ -131,6 +131,12 @@ public class CustomerController implements Initializable {
     private Button changePasswordButton;
     @FXML
     private Button clearButtonPassord;
+    @FXML
+    private Button ConfirmTransactionButton;
+    @FXML
+    private Button CancelTransactionButton;
+    @FXML
+    private PasswordField ConfirmPasswordField;
 
     public CustomerController() {
     }
@@ -286,35 +292,65 @@ public class CustomerController implements Initializable {
     }
 
     @FXML
-    private void transfer() {
-        AmountErrorLabel.setText("");
-        AccountErrorLabel.setText("");
-        MessageErrorLabel.setText("");
-        String amount = AmountField.getText();
-        String bankID = AccountField.getText() + RegField.getText();
-        String message = MessageArea.getText();
-        String senderBankID = TransactionBankIDChoiceBox.getValue();
-        if (amount.trim().isEmpty()) {
-            AmountErrorLabel.setText("Please enter an amount in the amount textfield");
-        } else if (AccountField.getText().trim().isEmpty() || RegField.getText().trim().isEmpty()) {
-            AccountErrorLabel.setText("Please enter both the account number and regnumber");
-        } else if (containsInvalidInput(amount)) {
-            AmountErrorLabel.setText("Please only input numbers");
-        } else if (containsInvalidInput(bankID)) {
-            AccountErrorLabel.setText("Please only input numbers");
-        } else if (message.contains(";")) {
-            MessageErrorLabel.setText("Error - Invalid input.");
-        } else {
-            String response = logic.toProtocol05(senderBankID, amount, bankID, message);
-            if (response.equalsIgnoreCase("Error; recipient not found.")) {
-                AccountErrorLabel.setText("Error; recipient not found.");
-            } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
-                AmountErrorLabel.setText("Error; insufficient funds.");
-            } else if (response.equalsIgnoreCase("complete")) {
-                TransactionOverallMessageLabel.setText(response);
+    private void proceedTransfer(){
+        ConfirmTransactionButton.setVisible(true);
+        CancelTransactionButton.setVisible(true);
+        ConfirmPasswordField.setVisible(true);
+    }
+    
+    @FXML
+    private void CancelTransfer(ActionEvent event){
+        cleanInputFields(event);
+        ConfirmTransactionButton.setVisible(false);
+        CancelTransactionButton.setVisible(false);
+        ConfirmPasswordField.setVisible(false);
+    }
+    
+    @FXML
+    private void transfer(ActionEvent event) {
+        if (ConfirmPasswordField.getText().equalsIgnoreCase("")){
+            TransactionOverallMessageLabel.setText("Please write enter your password before confirming transaction");
+        }
+        else if(ConfirmPasswordField.getText().contains(";")||ConfirmPasswordField.getText().contains("\"")){
+            TransactionOverallMessageLabel.setText("Dont use ; or \"");
+        }
+        else if(logic.checkPassword(logic.getCustomer().getID(), ConfirmPasswordField.getText()).equalsIgnoreCase("true")) {
+            AmountErrorLabel.setText("");
+            AccountErrorLabel.setText("");
+            MessageErrorLabel.setText("");
+            String amount = AmountField.getText();
+            String bankID = AccountField.getText() + RegField.getText();
+            String message = MessageArea.getText();
+            String senderBankID = TransactionBankIDChoiceBox.getValue();
+            if (amount.trim().isEmpty()) {
+                AmountErrorLabel.setText("Please enter an amount in the amount textfield");
+            } else if (AccountField.getText().trim().isEmpty() || RegField.getText().trim().isEmpty()) {
+                AccountErrorLabel.setText("Please enter both the account number and regnumber");
+            } else if (containsInvalidInput(amount)) {
+                AmountErrorLabel.setText("Please only input numbers");
+            } else if (containsInvalidInput(bankID)) {
+                AccountErrorLabel.setText("Please only input numbers");
+            } else if (message.contains(";")) {
+                MessageErrorLabel.setText("Error - Invalid input.");
             } else {
-                TransactionOverallMessageLabel.setText(response);
+                String response = logic.toProtocol05(senderBankID, amount, bankID, message);
+                if (response.equalsIgnoreCase("Error; recipient not found.")) {
+                    AccountErrorLabel.setText("Error; recipient not found.");
+                } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
+                    AmountErrorLabel.setText("Error; insufficient funds.");
+                } else if (response.equalsIgnoreCase("complete")) {
+                    cleanInputFields(event);
+                    TransactionOverallMessageLabel.setText(response);
+                    ConfirmTransactionButton.setVisible(false);
+                    CancelTransactionButton.setVisible(false);
+                    ConfirmPasswordField.setVisible(false);
+                } else {
+                    TransactionOverallMessageLabel.setText(response);
+                }
             }
+        }
+        else {
+            TransactionOverallMessageLabel.setText("Incorrect Password");
         }
     }
     //Shows the transaction history
@@ -349,6 +385,7 @@ public class CustomerController implements Initializable {
         AmountErrorLabel.setText("");
         MessageErrorLabel.setText("");
         TransactionOverallMessageLabel.setText("");
+        ConfirmPasswordField.setText("");
     }
 
     @FXML
