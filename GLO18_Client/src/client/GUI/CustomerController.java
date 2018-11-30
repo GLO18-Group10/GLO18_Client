@@ -308,7 +308,7 @@ public class CustomerController implements Initializable {
     
     @FXML
     private void transfer(ActionEvent event) {
-        if(ConfirmPasswordField.getText().contains(";")||ConfirmPasswordField.getText().contains("\"")){
+        if(ConfirmPasswordField.getText().contains(";")||ConfirmPasswordField.getText().contains("\"")||ConfirmPasswordField.getText().equalsIgnoreCase("")){
             TransactionOverallMessageLabel.setText("Dont use ; or \"");
         }
         else if(logic.checkPassword(logic.getCustomer().getID(), ConfirmPasswordField.getText()).equalsIgnoreCase("true")) {
