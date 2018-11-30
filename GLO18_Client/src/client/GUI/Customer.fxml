@@ -315,7 +315,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="AnchorPane3" layoutX="289.0" prefHeight="608.0" prefWidth="615.0" visible="false">
+      <AnchorPane fx:id="OptionAnchorPane" layoutX="289.0" prefHeight="608.0" prefWidth="615.0" visible="false">
          <children>
             <BorderPane prefHeight="600.0" prefWidth="608.0">
                <left>

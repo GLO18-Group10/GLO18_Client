@@ -40,13 +40,11 @@ import javafx.stage.Stage;
  * @author antonio
  */
 public class CustomerController implements Initializable {
-    
+
     IGUI gui;
     ILogic logic;
     @FXML
     private HBox HBox;
-    @FXML
-    private AnchorPane AnchorPane3;
     @FXML
     private VBox VBox;
     @FXML
@@ -137,24 +135,26 @@ public class CustomerController implements Initializable {
     private Button CancelTransactionButton;
     @FXML
     private PasswordField ConfirmPasswordField;
-    
+    @FXML
+    private AnchorPane OptionAnchorPane;
+
     public CustomerController() {
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gui = GUIrun.getInstance();
         logic = GUIrun.getLogic();
     }
-    
+
     @FXML
     private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
-        
+
         if (event.getSource() == TransferButton) {
             clearPanes();
             NewTransferAnchorPane.toFront();
             NewTransferAnchorPane.setVisible(true);
-            
+
             if (TransactionBankIDChoiceBox.getItems().isEmpty()) {
                 String bankid[] = logic.getCustomer().getBankID().split(";");
                 for (int i = 0; i < bankid.length; i++) {
@@ -165,7 +165,7 @@ public class CustomerController implements Initializable {
             clearPanes();
             AccountsAnchorPane.toFront();
             AccountsAnchorPane.setVisible(true);
-            
+
             if (AccountsDropdown.getItems().isEmpty()) {
                 String bankid[] = logic.getCustomer().getBankID().split(";");
                 for (int i = 0; i < bankid.length; i++) {
@@ -175,14 +175,14 @@ public class CustomerController implements Initializable {
         } else if (event.getSource() == OptionsButton) {
             clearPanes();
             passwordErrorLabel.setText("");
-            AnchorPane3.toFront();
-            AnchorPane3.setVisible(true);
+            OptionAnchorPane.toFront();
+            OptionAnchorPane.setVisible(true);
         } else if (event.getSource() == ProfileButton) {
             //Get all the information and update the text fields
-            EmailField.setText(logic.getCustomer().getEmail());
             AddressField.setText(logic.getCustomer().getAddress());
             PhoneNoField.setText(logic.getCustomer().getPhoneNo());
             BirthdayField.setText(logic.getCustomer().getBirthday());
+            EmailField.setText(logic.getCustomer().getEmail());
             NameField.setText(logic.getCustomer().getName().split(" ")[0]);
             LastNameField.setText(logic.getCustomer().getName().split(" ")[1]);
             //Clear current pane and display to the user
@@ -214,22 +214,22 @@ public class CustomerController implements Initializable {
             }
         }
     }
-    
+
     private void setAccountBalance() {
         AccountBalanceLabel.setText(logic.getAccountBalance(AccountsDropdown.getValue()) + " DKK");
     }
-    
+
     private void clearPanes() {
         NewTransferAnchorPane.setVisible(false);
         AccountsAnchorPane.setVisible(false);
-        AnchorPane3.setVisible(false);
+        OptionAnchorPane.setVisible(false);
         ProfileAnchor.setVisible(false);
     }
-    
+
     private String storeCustomerInfo(String name, String phoneNo, String address, String email) {
         return logic.toProtocol03(name, phoneNo, address, email);
     }
-    
+
     @FXML
     private void storeCustomerInfoButtonHandler(javafx.event.ActionEvent event) {
         String firstName = NameField.getText();
@@ -242,8 +242,6 @@ public class CustomerController implements Initializable {
             alertLabel.setText("Please make sure you have input in all the fields");
         } else if (fullname.contains(";") || phoneNo.contains(";") || address.contains(";") || email.contains(";") || containsInvalidInput(phoneNo)) {
             alertLabel.setText("Please make sure your input is valid");
-        } else if (!"true".equals(storeCustomerInfo(fullname, phoneNo, address, email))) {
-            alertLabel.setText("Server ERROR - Please try again");
         } else {
             if (!storeCustomerInfo(fullname, phoneNo, address, email).equals("true")) {
                 alertLabel.setText("Error - Server fail");
@@ -261,7 +259,7 @@ public class CustomerController implements Initializable {
             SaveButton.setVisible(false);
         }
     }
-    
+
     @FXML
     private void EditEnableButtonHandler(javafx.event.ActionEvent event) {
         NameField.setDisable(false);
@@ -272,7 +270,7 @@ public class CustomerController implements Initializable {
         CancelEditButton.setVisible(true);
         SaveButton.setVisible(true);
     }
-    
+
     @FXML
     private void CancelEditButtonHandler(javafx.event.ActionEvent event) {
         CancelEditButton.setVisible(false);
@@ -284,7 +282,7 @@ public class CustomerController implements Initializable {
         EmailField.setDisable(true);
         RestoreInfoInFields();
     }
-    
+
     private void RestoreInfoInFields() {
         NameField.setText(logic.getCustomer().getName().split(" ")[0]);
         LastNameField.setText(logic.getCustomer().getName().split(" ")[1]);
@@ -292,7 +290,7 @@ public class CustomerController implements Initializable {
         AddressField.setText(logic.getCustomer().getAddress());
         EmailField.setText(logic.getCustomer().getEmail());
     }
-    
+
     @FXML
     private void proceedTransfer() {
         TransactionOverallMessageLabel.setText("");
@@ -331,7 +329,7 @@ public class CustomerController implements Initializable {
             }
         }
     }
-    
+
     @FXML
     private void CancelTransfer(ActionEvent event
     ) {
@@ -340,7 +338,7 @@ public class CustomerController implements Initializable {
         ConfirmPasswordField.setVisible(false);
         defreezeInputTransaction();
     }
-    
+
     @FXML
     private void transfer(ActionEvent event) {
         AmountErrorLabel.setText("");
@@ -386,13 +384,13 @@ public class CustomerController implements Initializable {
         String accountID = AccountsDropdown.getValue();
         TransactionHistoryListView.getItems().clear();
         String data[] = logic.getTransactionHistory(accountID).split(";");
-        
+
         for (int i = data.length - 1; i >= 0; i--) {
             TransactionHistoryListView.getItems().add(data[i]);
-            
+
         }
     }
-    
+
     private boolean containsInvalidInput(String stringToCheck) {
         char[] charArrayToCheck = stringToCheck.toCharArray();
         for (char c : charArrayToCheck) {
@@ -402,7 +400,7 @@ public class CustomerController implements Initializable {
         }
         return false;
     }
-    
+
     @FXML
     private void cleanInputFields(ActionEvent event) {
         AccountField.clear();
@@ -415,7 +413,7 @@ public class CustomerController implements Initializable {
         TransactionOverallMessageLabel.setText("");
         ConfirmPasswordField.setText("");
     }
-    
+
     @FXML
     private void changePassword() {
         //Check for illegal characters and compare the two passwords
@@ -470,7 +468,7 @@ public class CustomerController implements Initializable {
         newPasswordField.clear();
         repeatPasswordField.clear();
     }
-    
+
     private String makeInt(String text) {
         int commaPos = text.indexOf(",");
         if (commaPos == -1) {
@@ -500,7 +498,7 @@ public class CustomerController implements Initializable {
             return text;
         }
     }
-    
+
     private boolean checkAmount(String amount) {
         char[] charArrayToCheck = amount.toCharArray();
         int commaCount = 0;
@@ -518,14 +516,14 @@ public class CustomerController implements Initializable {
         }
         return false;
     }
-    
+
     private void freezeInputTransaction() {
         AmountField.setEditable(false);
         AccountField.setEditable(false);
         RegField.setEditable(false);
         MessageArea.setEditable(false);
     }
-    
+
     private void defreezeInputTransaction() {
         AmountField.setEditable(true);
         AccountField.setEditable(true);
