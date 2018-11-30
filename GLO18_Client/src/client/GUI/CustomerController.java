@@ -294,29 +294,27 @@ public class CustomerController implements Initializable {
     }
 
     @FXML
-    private void proceedTransfer(){
+    private void proceedTransfer() {
         ConfirmTransactionButton.setVisible(true);
         CancelTransactionButton.setVisible(true);
         ConfirmPasswordField.setVisible(true);
     }
-    
+
     @FXML
-    private void CancelTransfer(ActionEvent event){
+    private void CancelTransfer(ActionEvent event) {
         cleanInputFields(event);
         ConfirmTransactionButton.setVisible(false);
         CancelTransactionButton.setVisible(false);
         ConfirmPasswordField.setVisible(false);
     }
-    
+
     @FXML
     private void transfer(ActionEvent event) {
-        if (ConfirmPasswordField.getText().equalsIgnoreCase("")){
+        if (ConfirmPasswordField.getText().equalsIgnoreCase("")) {
             TransactionOverallMessageLabel.setText("Please write enter your password before confirming transaction");
-        }
-        else if(ConfirmPasswordField.getText().contains(";")||ConfirmPasswordField.getText().contains("\"")){
+        } else if (ConfirmPasswordField.getText().contains(";") || ConfirmPasswordField.getText().contains("\"")) {
             TransactionOverallMessageLabel.setText("Dont use ; or \"");
-        }
-        else if(logic.checkPassword(logic.getCustomer().getID(), ConfirmPasswordField.getText()).equalsIgnoreCase("true")) {
+        } else if (logic.checkPassword(logic.getCustomer().getID(), ConfirmPasswordField.getText()).equalsIgnoreCase("true")) {
             AmountErrorLabel.setText("");
             AccountErrorLabel.setText("");
             MessageErrorLabel.setText("");
@@ -328,30 +326,34 @@ public class CustomerController implements Initializable {
                 AmountErrorLabel.setText("Please enter an amount in the amount textfield");
             } else if (AccountField.getText().trim().isEmpty() || RegField.getText().trim().isEmpty()) {
                 AccountErrorLabel.setText("Please enter both the account number and regnumber");
-            } else if (containsInvalidInput(amount)) {
-                AmountErrorLabel.setText("Please only input numbers");
+            } else if (checkAmount(amount)) {
+                AmountErrorLabel.setText("Please input a number");
             } else if (containsInvalidInput(bankID)) {
                 AccountErrorLabel.setText("Please only input numbers");
             } else if (message.contains(";")) {
                 MessageErrorLabel.setText("Error - Invalid input.");
             } else {
-                String response = logic.toProtocol05(senderBankID, amount, bankID, message);
-                if (response.equalsIgnoreCase("Error; recipient not found.")) {
-                    AccountErrorLabel.setText("Error; recipient not found.");
-                } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
-                    AmountErrorLabel.setText("Error; insufficient funds.");
-                } else if (response.equalsIgnoreCase("complete")) {
-                    cleanInputFields(event);
-                    TransactionOverallMessageLabel.setText(response);
-                    ConfirmTransactionButton.setVisible(false);
-                    CancelTransactionButton.setVisible(false);
-                    ConfirmPasswordField.setVisible(false);
+                amount = makeInt(amount);
+                if (amount.equals("Only two decimals allowed")) {
+                    AmountErrorLabel.setText("Only two decimals allowed");
                 } else {
-                    TransactionOverallMessageLabel.setText(response);
+                    String response = logic.toProtocol05(senderBankID, amount, bankID, message);
+                    if (response.equalsIgnoreCase("Error; recipient not found.")) {
+                        AccountErrorLabel.setText("Error; recipient not found.");
+                    } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
+                        AmountErrorLabel.setText("Error; insufficient funds.");
+                    } else if (response.equalsIgnoreCase("complete")) {
+                        cleanInputFields(event);
+                        TransactionOverallMessageLabel.setText(response);
+                        ConfirmTransactionButton.setVisible(false);
+                        CancelTransactionButton.setVisible(false);
+                        ConfirmPasswordField.setVisible(false);
+                    } else {
+                        TransactionOverallMessageLabel.setText(response);
+                    }
                 }
             }
-        }
-        else {
+        } else {
             TransactionOverallMessageLabel.setText("Incorrect Password");
         }
     }
@@ -444,5 +446,34 @@ public class CustomerController implements Initializable {
         oldPasswordField.clear();
         newPasswordField.clear();
         repeatPasswordField.clear();
+    }
+
+    private String makeInt(String text) {
+        int commaPos = text.indexOf(",");
+        if (commaPos == -1) {
+            return text;
+        }
+        int charAfterComma = text.length() - 1 - commaPos;
+        if (charAfterComma == 2) {
+            text = text.replace(",", "");
+        } else if (charAfterComma == 1) {
+            text = text.replace(",", "");
+            text += "0";
+        } else if (charAfterComma > 2) {
+            return "Only two decimals allowed";
+        }
+        return text;
+    }
+
+    private boolean checkAmount(String amount) {
+        char[] charArrayToCheck = amount.toCharArray();
+        for (char c : charArrayToCheck) {
+            if (c != ',') {
+                if (!Character.isDigit(c)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
