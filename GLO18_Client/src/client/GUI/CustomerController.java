@@ -137,6 +137,10 @@ public class CustomerController implements Initializable {
     private Button CancelTransactionButton;
     @FXML
     private PasswordField ConfirmPasswordField;
+    @FXML
+    private Button CreateBankAccountButton;
+    @FXML
+    private Label CreateBankAccountSucceslabel;
 
     public CustomerController() {
     }
@@ -386,6 +390,7 @@ public class CustomerController implements Initializable {
         MessageErrorLabel.setText("");
         TransactionOverallMessageLabel.setText("");
         ConfirmPasswordField.setText("");
+        CreateBankAccountSucceslabel.setText("");
     }
 
     @FXML
@@ -441,5 +446,12 @@ public class CustomerController implements Initializable {
         oldPasswordField.clear();
         newPasswordField.clear();
         repeatPasswordField.clear();
+    }
+    @FXML
+    private void openBankAccount(){
+        
+        String message = logic.openBankAccount();
+        CreateBankAccountSucceslabel.setText(message);
+        setAccountBalance();
     }
 }
