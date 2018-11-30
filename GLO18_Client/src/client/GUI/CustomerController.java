@@ -243,8 +243,8 @@ public class CustomerController implements Initializable {
         } else if (!"true".equals(storeCustomerInfo(fullname, phoneNo, address, email))) {
             alertLabel.setText("Server ERROR - Please try again");
         } else {
-            if (storeCustomerInfo(fullname, phoneNo, address, email) != "true") {
-                TransactionOverallMessageLabel.setText("Error - Server fail");
+            if (!storeCustomerInfo(fullname, phoneNo, address, email).equals("true")) {
+                alertLabel.setText("Error - Server fail");
             }
             logic.getCustomer().setName(fullname);
             logic.getCustomer().setPhoneNo(phoneNo);
