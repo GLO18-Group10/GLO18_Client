@@ -42,5 +42,7 @@ public interface ILogic {
     public String toProtocol09(String ID, boolean open);
     
     public String updatePassword(String ID, String oldPassword, String newPassword);
+    
+    public String checkPassword(String ID, String password);
 
 }
