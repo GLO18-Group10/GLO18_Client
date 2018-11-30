@@ -144,7 +144,7 @@
                                     <Insets top="60.0" />
                                  </VBox.margin>
                               </HBox>
-                              <TextArea fx:id="MessageArea" prefHeight="115.0" prefWidth="236.0">
+                              <TextArea fx:id="MessageArea" prefHeight="107.0" prefWidth="213.0">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
@@ -177,20 +177,49 @@
                         </VBox>
                      </right>
                      <bottom>
-                        <HBox prefHeight="40.0" prefWidth="608.0" BorderPane.alignment="CENTER">
+                        <VBox>
                            <children>
-                              <Button fx:id="ProccedButton" mnemonicParsing="false" onAction="#transfer" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: #3f2B63;" text="Proceed" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button fx:id="CleanButton" mnemonicParsing="false" onAction="#cleanInputFields" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: #3f2B63;" text="Clean " textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets left="15.0" />
-                                 </HBox.margin>
-                              </Button>
+                              <HBox prefHeight="40.0" prefWidth="608.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="ProccedButton" mnemonicParsing="false" onAction="#proceedTransfer" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: #3f2B63;" text="Proceed" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="CleanButton" mnemonicParsing="false" onAction="#cleanInputFields" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: #3f2B63;" text="Clean " textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <PasswordField fx:id="ConfirmPasswordField" promptText="Enter Password to Confirm Transaction" visible="false">
+                                 <VBox.margin>
+                                    <Insets left="15.0" right="350.0" top="5.0" />
+                                 </VBox.margin>
+                              </PasswordField>
+                              <HBox prefHeight="33.0" prefWidth="608.0">
+                                 <children>
+                                    <Button fx:id="ConfirmTransactionButton" mnemonicParsing="false" onAction="#transfer" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: #3f2B63;" text="Confirm" textFill="WHITE" visible="false">
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="CancelTransactionButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#CancelTransfer" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: #3f2B63;" text="Cancel" textFill="WHITE" visible="false">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
                            </children>
-                        </HBox>
+                        </VBox>
                      </bottom>
                   </BorderPane>
                </children>
@@ -497,6 +526,5 @@
             </BorderPane>
          </children>
       </AnchorPane>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

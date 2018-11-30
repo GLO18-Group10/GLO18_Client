@@ -137,4 +137,8 @@ public class LogicFacade implements ILogic {
         return receiveMessage();
     }
     
+    @Override
+    public String checkPassword(String ID, String password){
+        return messageParser.toProtocol16(ID, password);
+    }    
 }
