@@ -122,6 +122,7 @@ public class adminController implements Initializable {
     }
 
     private String createCustomer(String ID, String name, String birthday, String phoneNumber, String address, String email, String password) {
+        getIdForList();
         return logic.toProtocol07(ID, name, birthday, phoneNumber, address, email, password);
     }
 
