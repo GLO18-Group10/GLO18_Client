@@ -199,10 +199,12 @@ public class CustomerController implements Initializable {
                 System.out.println("could not log out"); //this should bechanged to a label in the GUI
             }
         } else if (event.getSource() == updateButton) {
-
-            if (AccountsDropdown.getValue() != null) {
-                setAccountBalance();
-                getTransactionHistory();
+            String accountID = AccountsDropdown.getValue();
+            if (accountID != null) {
+                if (!accountID.equals("No bankIDs")) {
+                    setAccountBalance();
+                    getTransactionHistory();
+                }
             }
         }
     }
