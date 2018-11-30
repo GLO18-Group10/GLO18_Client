@@ -307,9 +307,9 @@ public class CustomerController implements Initializable {
     }
     
     @FXML
-    private void transfer() {
-        if(containsInvalidInput(ConfirmPasswordField.getText())){
-            ConfirmPasswordField.setPromptText("No special characters allowed!");
+    private void transfer(ActionEvent event) {
+        if(ConfirmPasswordField.getText().contains(";")||ConfirmPasswordField.getText().contains("\"")){
+            TransactionOverallMessageLabel.setText("Dont use ; or \"");
         }
         else if(logic.checkPassword(logic.getCustomer().getID(), ConfirmPasswordField.getText()).equalsIgnoreCase("true")) {
             AmountErrorLabel.setText("");
@@ -336,14 +336,18 @@ public class CustomerController implements Initializable {
                 } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
                     AmountErrorLabel.setText("Error; insufficient funds.");
                 } else if (response.equalsIgnoreCase("complete")) {
+                    cleanInputFields(event);
                     TransactionOverallMessageLabel.setText(response);
+                    ConfirmTransactionButton.setVisible(false);
+                    CancelTransactionButton.setVisible(false);
+                    ConfirmPasswordField.setVisible(false);
                 } else {
                     TransactionOverallMessageLabel.setText(response);
                 }
             }
         }
         else {
-            ConfirmPasswordField.setPromptText("Incorrect Password");
+            TransactionOverallMessageLabel.setText("Incorrect Password");
         }
     }
     //Shows the transaction history
