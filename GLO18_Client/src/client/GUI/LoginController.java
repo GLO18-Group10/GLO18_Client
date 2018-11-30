@@ -69,14 +69,12 @@ public class LoginController implements Initializable {
     private void Login(javafx.event.ActionEvent event) {
         String ID = UsernameField.getText();
         String password = passwordField.getText();
-        if (ID.trim().isEmpty() || password.trim().isEmpty() ) {
+        if (ID.trim().isEmpty() || password.trim().isEmpty()) {
             alertField.setText("Please provide username and password");
-        }
-        else if(ID.trim().contains(";")|| password.trim().contains(";")){
+        } else if (ID.trim().contains(";") || password.trim().contains(";")) {
             alertField.setText("Please check if your input is valid");
-        }
-        else{
-             if (ID.startsWith("A")) {
+        } else {
+            if (ID.startsWith("A")) {
                 String check = logic.login(ID, password);
                 if (check.equalsIgnoreCase("true")) {
                     try {
@@ -89,8 +87,7 @@ public class LoginController implements Initializable {
                     } catch (IOException ex) {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
-                else if (check.equalsIgnoreCase("false")) {
+                } else if (check.equalsIgnoreCase("false")) {
                     passwordField.setText("");
                     alertField.setText("Log in is wrong");
                 }
@@ -112,8 +109,7 @@ public class LoginController implements Initializable {
                     } catch (IOException ex) {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
-                else if (check.equalsIgnoreCase("false")) {
+                } else if (check.equalsIgnoreCase("false")) {
                     passwordField.setText("");
                     alertField.setText("Log in is wrong");
 
@@ -126,18 +122,16 @@ public class LoginController implements Initializable {
     private void exitHandler(ActionEvent event) {
         Platform.exit();
     }
-    
+
     @FXML
-    private void resetHandler(ActionEvent event) {
-                    try {
-                        passwordField.setText("");
+    private void resetHandler(ActionEvent event)throws IOException { 
+        
                         Parent nextView = FXMLLoader.load(getClass().getResource("ResetPassword.fxml"));
-                        Scene newScene = new Scene(nextView);
-                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        stage.setScene(newScene);
-                        stage.show();
-                    } catch (IOException ex) {
-                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+        Scene newScene = new Scene(nextView);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(newScene);
+        stage.show();
+
     }
 }
+
