@@ -284,7 +284,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ListView fx:id="TransactionHistoryListView" prefHeight="343.0" prefWidth="608.0" />
+                  <ListView fx:id="TransactionHistoryListView" prefHeight="343.0" prefWidth="608.0" styleClass="pretty-list" stylesheets="@monospace.css" />
                </children>
             </VBox>
          </children>

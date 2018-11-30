@@ -323,7 +323,7 @@ public class CustomerController implements Initializable {
         String accountID = AccountsDropdown.getValue();
         String data[] = logic.getTransactionHistory(accountID).split(";");
 
-        for (int i = 0; i < data.length; i++) {
+        for (int i = data.length - 1; i >= 0; i--) {
             TransactionHistoryListView.getItems().add(data[i]);
 
         }
@@ -356,16 +356,20 @@ public class CustomerController implements Initializable {
         //Check for illegal characters and compare the two passwords
         if (checkPassword()) {
             if (newPasswordField.getText().equals(repeatPasswordField.getText())) {
-                String answer = logic.updatePassword(logic.getCustomer().getID(), oldPasswordField.getText(), newPasswordField.getText());
-                if (answer.equals("true")) {
-                    clearPasswordFields();
-                    passwordErrorLabel.setText("Password has been updated");
-                } else if (answer.equals("Incorrect password")) {
-                    clearPasswordFields();
-                    passwordErrorLabel.setText("Your current password is incorrect");
+                if (newPasswordField.getText().length() > 7) {
+                    String answer = logic.updatePassword(logic.getCustomer().getID(), oldPasswordField.getText(), newPasswordField.getText());
+                    if (answer.equals("true")) {
+                        clearPasswordFields();
+                        passwordErrorLabel.setText("Password has been updated");
+                    } else if (answer.equals("Incorrect password")) {
+                        clearPasswordFields();
+                        passwordErrorLabel.setText("Your current password is incorrect");
+                    } else {
+                        clearPasswordFields();
+                        passwordErrorLabel.setText("Unexpected error: " + answer);
+                    }
                 } else {
-                    clearPasswordFields();
-                    passwordErrorLabel.setText("Unexpected error: " + answer);
+                    passwordErrorLabel.setText("The password has to be a minimum of 8 characters");
                 }
             } else {
                 passwordErrorLabel.setText("The entered passwords are not identical");
