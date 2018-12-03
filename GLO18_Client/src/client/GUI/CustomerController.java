@@ -40,7 +40,7 @@ import javafx.stage.Stage;
  * @author antonio
  */
 public class CustomerController implements Initializable {
-
+    
     IGUI gui;
     ILogic logic;
     @FXML
@@ -152,23 +152,29 @@ public class CustomerController implements Initializable {
     @FXML
     private TextArea ContactTextArea;
 
+    @FXML
+    private Button CreateBankAccountButton;
+    @FXML
+    private Label CreateBankAccountSucceslabel;
+
+
     public CustomerController() {
     }
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gui = GUIrun.getInstance();
         logic = GUIrun.getLogic();
     }
-
+    
     @FXML
     private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
-
+        
         if (event.getSource() == TransferButton) {
             clearPanes();
             NewTransferAnchorPane.toFront();
             NewTransferAnchorPane.setVisible(true);
-
+            
             if (TransactionBankIDChoiceBox.getItems().isEmpty()) {
                 String bankid[] = logic.getCustomer().getBankID().split(";");
                 for (int i = 0; i < bankid.length; i++) {
@@ -179,11 +185,14 @@ public class CustomerController implements Initializable {
             clearPanes();
             AccountsAnchorPane.toFront();
             AccountsAnchorPane.setVisible(true);
-
+            
             if (AccountsDropdown.getItems().isEmpty()) {
                 String bankid[] = logic.getCustomer().getBankID().split(";");
+                
                 for (int i = 0; i < bankid.length; i++) {
-                    AccountsDropdown.getItems().add(bankid[i]);
+                    
+                    AccountsDropdown.getItems().addAll(bankid[i]);
+                   
                 }
             }
         } else if (event.getSource() == OptionsButton) {
@@ -223,18 +232,20 @@ public class CustomerController implements Initializable {
                 System.out.println("could not log out"); //this should bechanged to a label in the GUI
             }
         } else if (event.getSource() == updateButton) {
-
-            if (AccountsDropdown.getValue() != null) {
-                setAccountBalance();
-                getTransactionHistory();
+            String accountID = AccountsDropdown.getValue();
+            if (accountID != null) {
+                if (!accountID.equals("No bankIDs")) {
+                    setAccountBalance();
+                    getTransactionHistory();
+                }
             }
         }
     }
-
+    
     private void setAccountBalance() {
         AccountBalanceLabel.setText(logic.getAccountBalance(AccountsDropdown.getValue()) + " DKK");
     }
-
+    
     private void clearPanes() {
         NewTransferAnchorPane.setVisible(false);
         AccountsAnchorPane.setVisible(false);
@@ -242,11 +253,11 @@ public class CustomerController implements Initializable {
         ProfileAnchor.setVisible(false);
         ContactAnchor.setVisible(false);
     }
-
+    
     private String storeCustomerInfo(String name, String phoneNo, String address, String email) {
         return logic.toProtocol03(name, phoneNo, address, email);
     }
-
+    
     @FXML
     private void storeCustomerInfoButtonHandler(javafx.event.ActionEvent event) {
         String firstName = NameField.getText();
@@ -262,8 +273,8 @@ public class CustomerController implements Initializable {
         } else if (!"true".equals(storeCustomerInfo(fullname, phoneNo, address, email))) {
             alertLabel.setText("Server ERROR - Please try again");
         } else {
-            if (storeCustomerInfo(fullname, phoneNo, address, email) != "true") {
-                TransactionOverallMessageLabel.setText("Error - Server fail");
+            if (!storeCustomerInfo(fullname, phoneNo, address, email).equals("true")) {
+                alertLabel.setText("Error - Server fail");
             }
             logic.getCustomer().setName(fullname);
             logic.getCustomer().setPhoneNo(phoneNo);
@@ -278,7 +289,7 @@ public class CustomerController implements Initializable {
             SaveButton.setVisible(false);
         }
     }
-
+    
     @FXML
     private void EditEnableButtonHandler(javafx.event.ActionEvent event) {
         NameField.setDisable(false);
@@ -289,7 +300,7 @@ public class CustomerController implements Initializable {
         CancelEditButton.setVisible(true);
         SaveButton.setVisible(true);
     }
-
+    
     @FXML
     private void CancelEditButtonHandler(javafx.event.ActionEvent event) {
         CancelEditButton.setVisible(false);
@@ -301,7 +312,7 @@ public class CustomerController implements Initializable {
         EmailField.setDisable(true);
         RestoreInfoInFields();
     }
-
+    
     private void RestoreInfoInFields() {
         NameField.setText(logic.getCustomer().getName().split(" ")[0]);
         LastNameField.setText(logic.getCustomer().getName().split(" ")[1]);
@@ -309,81 +320,107 @@ public class CustomerController implements Initializable {
         AddressField.setText(logic.getCustomer().getAddress());
         EmailField.setText(logic.getCustomer().getEmail());
     }
-
+    
     @FXML
-    private void proceedTransfer(){
-        ConfirmTransactionButton.setVisible(true);
-        CancelTransactionButton.setVisible(true);
-        ConfirmPasswordField.setVisible(true);
+    private void proceedTransfer() {
+        TransactionOverallMessageLabel.setText("");
+        AmountErrorLabel.setText("");
+        AccountErrorLabel.setText("");
+        MessageErrorLabel.setText("");
+        String amount = AmountField.getText();
+        String bankID = AccountField.getText() + RegField.getText();
+        String message = MessageArea.getText();
+        String senderBankID = TransactionBankIDChoiceBox.getValue();
+        if (amount.trim().isEmpty()) {
+            AmountErrorLabel.setText("Please enter an amount in the amount textfield");
+        } else if (AccountField.getText().trim().isEmpty() || RegField.getText().trim().isEmpty()) {
+            AccountErrorLabel.setText("Please enter both the account number and regnumber");
+        } else if (bankID.equals(senderBankID)) {
+            AccountErrorLabel.setText("You cannot send money to the same account");
+        } else if (checkAmount(amount)) {
+            AmountErrorLabel.setText("Please input a number");
+        } else if (containsInvalidInput(bankID)) {
+            AccountErrorLabel.setText("Please only input numbers");
+        } else if (message.contains(";")) {
+            MessageErrorLabel.setText("Error - Invalid input.");
+        } else {
+            amount = makeInt(amount);
+            if (amount.equals("Only two decimals allowed")) {
+                AmountErrorLabel.setText("Only two decimals allowed");
+            } else if (amount.equals("Enter a number before the comma")) {
+                AmountErrorLabel.setText("Enter a number before the comma");
+            } else if (amount.equals("Amount is too large. Please contact bank")) {
+                AmountErrorLabel.setText("Amount is too large. Please contact bank");
+            } else {
+                ConfirmTransactionButton.setVisible(true);
+                CancelTransactionButton.setVisible(true);
+                ConfirmPasswordField.setVisible(true);
+                freezeInputTransaction();
+            }
+        }
     }
     
     @FXML
-    private void CancelTransfer(ActionEvent event){
-        cleanInputFields(event);
+    private void CancelTransfer(ActionEvent event
+    ) {
         ConfirmTransactionButton.setVisible(false);
         CancelTransactionButton.setVisible(false);
         ConfirmPasswordField.setVisible(false);
+        defreezeInputTransaction();
     }
     
     @FXML
     private void transfer(ActionEvent event) {
-        if (ConfirmPasswordField.getText().equalsIgnoreCase("")){
-            TransactionOverallMessageLabel.setText("Please write enter your password before confirming transaction");
-        }
-        else if(ConfirmPasswordField.getText().contains(";")||ConfirmPasswordField.getText().contains("\"")){
+        AmountErrorLabel.setText("");
+        AccountErrorLabel.setText("");
+        MessageErrorLabel.setText("");
+        String amount = makeInt(AmountField.getText());
+        String bankID = AccountField.getText() + RegField.getText();
+        String message = MessageArea.getText();
+        String senderBankID = TransactionBankIDChoiceBox.getValue();
+        if (ConfirmPasswordField.getText().equalsIgnoreCase("")) {
+            TransactionOverallMessageLabel.setText("Please enter your password before confirming transaction");
+        } else if (ConfirmPasswordField.getText().contains(";") || ConfirmPasswordField.getText().contains("\"")) {
             TransactionOverallMessageLabel.setText("Dont use ; or \"");
-        }
-        else if(logic.checkPassword(logic.getCustomer().getID(), ConfirmPasswordField.getText()).equalsIgnoreCase("true")) {
-            AmountErrorLabel.setText("");
-            AccountErrorLabel.setText("");
-            MessageErrorLabel.setText("");
-            String amount = AmountField.getText();
-            String bankID = AccountField.getText() + RegField.getText();
-            String message = MessageArea.getText();
-            String senderBankID = TransactionBankIDChoiceBox.getValue();
-            if (amount.trim().isEmpty()) {
-                AmountErrorLabel.setText("Please enter an amount in the amount textfield");
-            } else if (AccountField.getText().trim().isEmpty() || RegField.getText().trim().isEmpty()) {
-                AccountErrorLabel.setText("Please enter both the account number and regnumber");
-            } else if (containsInvalidInput(amount)) {
-                AmountErrorLabel.setText("Please only input numbers");
-            } else if (containsInvalidInput(bankID)) {
-                AccountErrorLabel.setText("Please only input numbers");
-            } else if (message.contains(";")) {
-                MessageErrorLabel.setText("Error - Invalid input.");
+        } else if (logic.checkPassword(logic.getCustomer().getID(), ConfirmPasswordField.getText()).equalsIgnoreCase("true")) {
+            String response = logic.toProtocol05(senderBankID, amount, bankID, message);
+            if (response.equalsIgnoreCase("Error; recipient not found.")) {
+                AccountErrorLabel.setText("Error; recipient not found.");
+                ConfirmTransactionButton.setVisible(false);
+                CancelTransactionButton.setVisible(false);
+                ConfirmPasswordField.setVisible(false);
+            } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
+                AmountErrorLabel.setText("Error; insufficient funds.");
+                ConfirmTransactionButton.setVisible(false);
+                CancelTransactionButton.setVisible(false);
+                ConfirmPasswordField.setVisible(false);
+            } else if (response.equalsIgnoreCase("complete")) {
+                cleanInputFields(event);
+                TransactionOverallMessageLabel.setText(response);
+                ConfirmTransactionButton.setVisible(false);
+                CancelTransactionButton.setVisible(false);
+                ConfirmPasswordField.setVisible(false);
             } else {
-                String response = logic.toProtocol05(senderBankID, amount, bankID, message);
-                if (response.equalsIgnoreCase("Error; recipient not found.")) {
-                    AccountErrorLabel.setText("Error; recipient not found.");
-                } else if (response.equalsIgnoreCase("Error; insufficient funds.")) {
-                    AmountErrorLabel.setText("Error; insufficient funds.");
-                } else if (response.equalsIgnoreCase("complete")) {
-                    cleanInputFields(event);
-                    TransactionOverallMessageLabel.setText(response);
-                    ConfirmTransactionButton.setVisible(false);
-                    CancelTransactionButton.setVisible(false);
-                    ConfirmPasswordField.setVisible(false);
-                } else {
-                    TransactionOverallMessageLabel.setText(response);
-                }
+                TransactionOverallMessageLabel.setText(response);
             }
-        }
-        else {
+        } else {
             TransactionOverallMessageLabel.setText("Incorrect Password");
         }
+        defreezeInputTransaction();
     }
-    //Shows the transaction history
 
+//Shows the transaction history
     private void getTransactionHistory() {
         String accountID = AccountsDropdown.getValue();
+        TransactionHistoryListView.getItems().clear();
         String data[] = logic.getTransactionHistory(accountID).split(";");
-
+        
         for (int i = data.length - 1; i >= 0; i--) {
             TransactionHistoryListView.getItems().add(data[i]);
-
+            
         }
     }
-
+    
     private boolean containsInvalidInput(String stringToCheck) {
         char[] charArrayToCheck = stringToCheck.toCharArray();
         for (char c : charArrayToCheck) {
@@ -393,7 +430,7 @@ public class CustomerController implements Initializable {
         }
         return false;
     }
-
+    
     @FXML
     private void cleanInputFields(ActionEvent event) {
         AccountField.clear();
@@ -405,8 +442,9 @@ public class CustomerController implements Initializable {
         MessageErrorLabel.setText("");
         TransactionOverallMessageLabel.setText("");
         ConfirmPasswordField.setText("");
+        CreateBankAccountSucceslabel.setText("");
     }
-
+    
     @FXML
     private void changePassword() {
         //Check for illegal characters and compare the two passwords
@@ -487,5 +525,81 @@ public class CustomerController implements Initializable {
     private void cancelBankMail(){
         ContactSubjectField.clear();
         ContactTextArea.clear();
+    }
+        
+    @FXML
+    private void openBankAccount(){
+        String message = logic.openBankAccount();
+        CreateBankAccountSucceslabel.setText(message);
+        AccountsDropdown.getItems().clear();
+        if (AccountsDropdown.getItems().isEmpty()) {
+                String bankid[] = logic.getCustomer().getBankID().split(";");
+                for (int i = 0; i < bankid.length; i++) {
+                    AccountsDropdown.getItems().addAll(bankid[i]);
+                }
+            }
+    }    
+    
+    private String makeInt(String text) {
+        int commaPos = text.indexOf(",");
+        if (commaPos == -1) {
+            try {
+                int i = Integer.parseInt(text);
+            } catch (Exception e) {
+                return "Amount is too large. Please contact bank";
+            }
+            return text;
+        } else if (commaPos == 0) {
+            return "Enter a number before the comma";
+        } else {
+            int charAfterComma = text.length() - 1 - commaPos;
+            if (charAfterComma == 2 || charAfterComma == 0) {
+                text = text.replace(",", "");
+            } else if (charAfterComma == 1) {
+                text = text.replace(",", "");
+                text += "0";
+            } else if (charAfterComma > 2) {
+                return "Only two decimals allowed";
+            }
+            try {
+                int i = Integer.parseInt(text);
+            } catch (Exception e) {
+                return "Amount is too large. Please contact bank";
+            }
+            return text;
+        }
+    }
+    
+    private boolean checkAmount(String amount) {
+        char[] charArrayToCheck = amount.toCharArray();
+        int commaCount = 0;
+        for (char c : charArrayToCheck) {
+            if (c != ',') {
+                if (!Character.isDigit(c)) {
+                    return true;
+                }
+            } else {
+                commaCount++;
+                if (commaCount > 1) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    private void freezeInputTransaction() {
+        AmountField.setEditable(false);
+        AccountField.setEditable(false);
+        RegField.setEditable(false);
+        MessageArea.setEditable(false);
+    }
+    
+    private void defreezeInputTransaction() {
+        AmountField.setEditable(true);
+        AccountField.setEditable(true);
+        RegField.setEditable(true);
+        MessageArea.setEditable(true);
+
     }
 }
