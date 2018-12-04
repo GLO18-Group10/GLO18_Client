@@ -80,7 +80,7 @@ public class LogicFacade implements ILogic {
 
     @Override
     public int getAccountBalance(String accountID) {
-        return messageParser.toProtocol02(accountID);
+        return messageParser.toProtocol02(accountID, customer.getID());
     }
 
     public void initializeUser(String ID) {
@@ -101,7 +101,7 @@ public class LogicFacade implements ILogic {
     @Override
     //This method could also be renamed to an appropriate name since the arcitecture has changed. For instance createCustomer(). This is preffered.
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
-        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email, password));
+        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email, password, admin.getID()));
         return receiveMessage();
     }
 
@@ -119,7 +119,7 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String getTransactionHistory(String accountID) {
-        sendMessage(messageParser.toProtocol06(accountID));
+        sendMessage(messageParser.toProtocol06(accountID, customer.getID()));
         return receiveMessage();
     }
 
@@ -136,7 +136,7 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String toProtocol09(String ID, boolean open) {
-        sendMessage(messageParser.toProtocol09(ID, open));
+        sendMessage(messageParser.toProtocol09(ID, open, admin.getID()));
         return receiveMessage();
     }
 

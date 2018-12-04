@@ -24,8 +24,8 @@ public class MessageParser {
         return logic.receiveMessage();
     }
     
-    public int toProtocol02(String accountID){
-        logic.sendMessage("02;"+ accountID);
+    public int toProtocol02(String accountID, String customerID){
+        logic.sendMessage("02;"+ accountID + ";" + customerID);
         return Integer.parseInt(logic.receiveMessage()); 
     }
 
@@ -55,17 +55,17 @@ public class MessageParser {
     
     }
     
-    public String toProtocol06(String ID){
+    public String toProtocol06(String ID, String customerID){
     
-        return "06;" + ID;
+        return "06;" + ID + ";" + customerID;
     }
     
 
     public String toProtocol03(String name, String phonenumber, String address, String email, String ID){
         return ("03;" + name + ";" + phonenumber + ";" + address + ";" + email + ";" + ID);
     }
-    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
-        return ("07;" + ID + ";" + name + ";" + birthday + ";" + phonenumber + ";" + address + ";" + email + ";" + password);
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password, String adminID) {
+        return ("07;" + ID + ";" + name + ";" + birthday + ";" + phonenumber + ";" + address + ";" + email + ";" + password + ";" + adminID);
         //return fromProtocol01(logic.receiveMessage());
     }
 
@@ -78,11 +78,11 @@ public class MessageParser {
         return "08;" + ID;
     
     }
-    public String toProtocol10(){
-        return "10";
+    public String toProtocol10(String adminID){
+        return "10;"+ adminID;
     }
-    public String toProtocol09(String ID, boolean open) {
-        return "09;" + "C" + ID + ";" + (open ? "1" : "0");
+    public String toProtocol09(String ID, boolean open, String adminID) {
+        return "09;" + "C" + ID + ";" + (open ? "1" : "0") + ";" + adminID;
     }
     
     public String toProtocol13(String ID, String oldPassword, String newPassword){
