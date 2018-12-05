@@ -223,7 +223,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane id="AnchorPane" fx:id="AccountsAnchorPane" layoutX="292.0" layoutY="-8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="608.0" style="-fx-background-color: #FFFFFFF;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane id="AnchorPane" fx:id="AccountsAnchorPane" layoutX="292.0" layoutY="-8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="608.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox prefHeight="600.0" prefWidth="608.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -245,7 +245,7 @@
                                     </Label>
                                  </children>
                               </VBox>
-                              <Button fx:id="updateButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="87.0" text="Update">
+                              <Button fx:id="updateButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="87.0" text="Update">
                                  <HBox.margin>
                                     <Insets left="15.0" top="30.0" />
                                  </HBox.margin>
@@ -351,7 +351,7 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Label>
-                        <PasswordField fx:id="oldPasswordField">
+                        <PasswordField fx:id="oldPasswordField" onAction="#changePassword">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -361,7 +361,7 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                         </Label>
-                        <PasswordField fx:id="newPasswordField">
+                        <PasswordField fx:id="newPasswordField" onAction="#changePassword">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -371,7 +371,7 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                         </Label>
-                        <PasswordField fx:id="repeatPasswordField">
+                        <PasswordField fx:id="repeatPasswordField" onAction="#changePassword">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -426,27 +426,27 @@
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="AccountsButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Accounts" textFill="WHITE">
+            <Button fx:id="AccountsButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Accounts" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="TransferButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="New Transaction" textFill="WHITE">
+            <Button fx:id="TransferButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="New Transaction" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="ProfileButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Profile" textFill="WHITE">
+            <Button fx:id="ProfileButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Profile" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="OptionsButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Options" textFill="WHITE">
+            <Button fx:id="OptionsButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Options" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="ContactButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Contact" textFill="WHITE">
+            <Button fx:id="ContactButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Contact" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="LogoutButton" layoutX="10.0" layoutY="551.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Logout" textFill="WHITE">
+            <Button fx:id="LogoutButton" layoutX="10.0" layoutY="551.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Logout" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -604,6 +604,48 @@
                   </HBox>
                </children>
             </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="WelcomeAnchorPane" layoutX="291.0" layoutY="-1.0" prefHeight="601.0" prefWidth="610.0">
+         <children>
+            <BorderPane layoutX="2.0" layoutY="4.0" prefHeight="599.0" prefWidth="606.0">
+               <top>
+                  <HBox prefHeight="163.0" prefWidth="606.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label text="Welcome">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="50.0" top="50.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="welcomeNameLabel">
+                           <HBox.margin>
+                              <Insets left="10.0" top="50.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </top>
+               <center>
+                  <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="lastLoginLabel">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="50.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </center>
+            </BorderPane>
          </children>
       </AnchorPane>
    </children>

@@ -154,16 +154,21 @@ public class LogicFacade implements ILogic {
         return receiveMessage();
     }
 
-    public String contactBank(String ID, String subject, String text){
+    public String contactBank(String ID, String subject, String text) {
         sendMessage(messageParser.toProtocol15(ID, subject, text, customer.getEmail()));
         return receiveMessage();
     }
-
 
     @Override
     public String openBankAccount() {
         String ID = customer.getID();
         sendMessage(messageParser.toProtocol12(ID, customer.getID()));
+        return receiveMessage();
+    }
+
+    @Override
+    public String lastLogin() {
+        sendMessage(messageParser.toProtocol04(customer.getID()));
         return receiveMessage();
     }
 }
