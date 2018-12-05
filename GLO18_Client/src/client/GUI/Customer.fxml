@@ -28,7 +28,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="CustomerParentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CustomerController">
          <children>
-      <AnchorPane fx:id="NewTransferAnchorPane" layoutX="292.0" layoutY="-8.0" prefHeight="620.0" prefWidth="608.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="NewTransferAnchorPane" layoutX="292.0" layoutY="-8.0" prefHeight="620.0" prefWidth="608.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox prefHeight="600.0" prefWidth="608.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -149,7 +149,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </TextArea>
-                              <Label fx:id="TransactionOverallMessageLabel" prefHeight="30.0" prefWidth="214.0" textFill="RED" wrapText="true">
+                              <Label fx:id="TransactionOverallMessageLabel" prefHeight="30.0" textFill="RED" wrapText="true">
                                  <VBox.margin>
                                     <Insets top="20.0" />
                                  </VBox.margin>
