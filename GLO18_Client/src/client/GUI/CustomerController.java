@@ -40,13 +40,11 @@ import javafx.stage.Stage;
  * @author antonio
  */
 public class CustomerController implements Initializable {
-    
+
     IGUI gui;
     ILogic logic;
     @FXML
     private HBox HBox;
-    @FXML
-    private AnchorPane AnchorPane3;
     @FXML
     private VBox VBox;
     @FXML
@@ -138,6 +136,10 @@ public class CustomerController implements Initializable {
     @FXML
     private PasswordField ConfirmPasswordField;
     @FXML
+
+    private AnchorPane OptionAnchorPane;
+
+    @FXML
     private Button ContactButton;
     @FXML
     private AnchorPane ContactAnchor;
@@ -157,24 +159,23 @@ public class CustomerController implements Initializable {
     @FXML
     private Label CreateBankAccountSucceslabel;
 
-
     public CustomerController() {
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gui = GUIrun.getInstance();
         logic = GUIrun.getLogic();
     }
-    
+
     @FXML
     private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
-        
+
         if (event.getSource() == TransferButton) {
             clearPanes();
             NewTransferAnchorPane.toFront();
             NewTransferAnchorPane.setVisible(true);
-            
+
             if (TransactionBankIDChoiceBox.getItems().isEmpty()) {
                 String bankid[] = logic.getCustomer().getBankID().split(";");
                 for (int i = 0; i < bankid.length; i++) {
@@ -185,34 +186,24 @@ public class CustomerController implements Initializable {
             clearPanes();
             AccountsAnchorPane.toFront();
             AccountsAnchorPane.setVisible(true);
-            
-            if (AccountsDropdown.getItems().isEmpty()) {
-                String bankid[] = logic.getCustomer().getBankID().split(";");
-                
-                for (int i = 0; i < bankid.length; i++) {
-                    
-                    AccountsDropdown.getItems().addAll(bankid[i]);
-                   
-                }
-            }
+            getBankIDs();
         } else if (event.getSource() == OptionsButton) {
             clearPanes();
             passwordErrorLabel.setText("");
-            AnchorPane3.toFront();
-            AnchorPane3.setVisible(true);
+            OptionAnchorPane.toFront();
+            OptionAnchorPane.setVisible(true);
         } else if (event.getSource() == ProfileButton) {
             //Get all the information and update the text fields
-            EmailField.setText(logic.getCustomer().getEmail());
             AddressField.setText(logic.getCustomer().getAddress());
             PhoneNoField.setText(logic.getCustomer().getPhoneNo());
             BirthdayField.setText(logic.getCustomer().getBirthday());
-            NameField.setText(logic.getCustomer().getName().split(" ")[0]);
-            LastNameField.setText(logic.getCustomer().getName().split(" ")[1]);
+            EmailField.setText(logic.getCustomer().getEmail());
+            displayName();
             //Clear current pane and display to the user
             clearPanes();
             ProfileAnchor.toFront();
             ProfileAnchor.setVisible(true);
-        } else if(event.getSource()==ContactButton) {
+        } else if (event.getSource() == ContactButton) {
             clearPanes();
             ContactAnchor.toFront();
             ContactAnchor.setVisible(true);
@@ -241,30 +232,30 @@ public class CustomerController implements Initializable {
             }
         }
     }
-    
+
     private void setAccountBalance() {
         AccountBalanceLabel.setText(logic.getAccountBalance(AccountsDropdown.getValue()) + " DKK");
     }
-    
+
     private void clearPanes() {
         NewTransferAnchorPane.setVisible(false);
         AccountsAnchorPane.setVisible(false);
-        AnchorPane3.setVisible(false);
+        OptionAnchorPane.setVisible(false);
         ProfileAnchor.setVisible(false);
         clearContact();
         ContactAnchor.setVisible(false);
     }
-    
-    private void clearContact(){
+
+    private void clearContact() {
         ContactSubjectField.clear();
         ContactTextArea.clear();
         ContactErrorLabel.setText("");
     }
-    
+
     private String storeCustomerInfo(String name, String phoneNo, String address, String email) {
         return logic.toProtocol03(name, phoneNo, address, email);
     }
-    
+
     @FXML
     private void storeCustomerInfoButtonHandler(javafx.event.ActionEvent event) {
         String firstName = NameField.getText();
@@ -277,8 +268,6 @@ public class CustomerController implements Initializable {
             alertLabel.setText("Please make sure you have input in all the fields");
         } else if (fullname.contains(";") || phoneNo.contains(";") || address.contains(";") || email.contains(";") || containsInvalidInput(phoneNo)) {
             alertLabel.setText("Please make sure your input is valid");
-        } else if (!"true".equals(storeCustomerInfo(fullname, phoneNo, address, email))) {
-            alertLabel.setText("Server ERROR - Please try again");
         } else {
             if (!storeCustomerInfo(fullname, phoneNo, address, email).equals("true")) {
                 alertLabel.setText("Error - Server fail");
@@ -296,7 +285,7 @@ public class CustomerController implements Initializable {
             SaveButton.setVisible(false);
         }
     }
-    
+
     @FXML
     private void EditEnableButtonHandler(javafx.event.ActionEvent event) {
         NameField.setDisable(false);
@@ -307,7 +296,7 @@ public class CustomerController implements Initializable {
         CancelEditButton.setVisible(true);
         SaveButton.setVisible(true);
     }
-    
+
     @FXML
     private void CancelEditButtonHandler(javafx.event.ActionEvent event) {
         CancelEditButton.setVisible(false);
@@ -319,7 +308,7 @@ public class CustomerController implements Initializable {
         EmailField.setDisable(true);
         RestoreInfoInFields();
     }
-    
+
     private void RestoreInfoInFields() {
         NameField.setText(logic.getCustomer().getName().split(" ")[0]);
         LastNameField.setText(logic.getCustomer().getName().split(" ")[1]);
@@ -327,7 +316,7 @@ public class CustomerController implements Initializable {
         AddressField.setText(logic.getCustomer().getAddress());
         EmailField.setText(logic.getCustomer().getEmail());
     }
-    
+
     @FXML
     private void proceedTransfer() {
         TransactionOverallMessageLabel.setText("");
@@ -366,7 +355,7 @@ public class CustomerController implements Initializable {
             }
         }
     }
-    
+
     @FXML
     private void CancelTransfer(ActionEvent event
     ) {
@@ -375,7 +364,7 @@ public class CustomerController implements Initializable {
         ConfirmPasswordField.setVisible(false);
         defreezeInputTransaction();
     }
-    
+
     @FXML
     private void transfer(ActionEvent event) {
         AmountErrorLabel.setText("");
@@ -421,12 +410,12 @@ public class CustomerController implements Initializable {
         String accountID = AccountsDropdown.getValue();
         TransactionHistoryListView.getItems().clear();
         String data[] = logic.getTransactionHistory(accountID).split(";");
-        
+
         for (int i = data.length - 1; i >= 0; i--) {
             TransactionHistoryListView.getItems().add(data[i]);
         }
     }
-    
+
     private boolean containsInvalidInput(String stringToCheck) {
         char[] charArrayToCheck = stringToCheck.toCharArray();
         for (char c : charArrayToCheck) {
@@ -436,7 +425,7 @@ public class CustomerController implements Initializable {
         }
         return false;
     }
-    
+
     @FXML
     private void cleanInputFields(ActionEvent event) {
         AccountField.clear();
@@ -450,7 +439,7 @@ public class CustomerController implements Initializable {
         ConfirmPasswordField.setText("");
         CreateBankAccountSucceslabel.setText("");
     }
-    
+
     @FXML
     private void changePassword() {
         //Check for illegal characters and compare the two passwords
@@ -505,58 +494,49 @@ public class CustomerController implements Initializable {
         newPasswordField.clear();
         repeatPasswordField.clear();
     }
-    
+
     @FXML
-    private void sendBankMail(){
-        if(ContactSubjectField.getText().equalsIgnoreCase("")){
+    private void sendBankMail() {
+        if (ContactSubjectField.getText().equalsIgnoreCase("")) {
             ContactErrorLabel.setText("Please Insert Subject");
-        }
-        else if(ContactTextArea.getText().equalsIgnoreCase("")){
+        } else if (ContactTextArea.getText().equalsIgnoreCase("")) {
             ContactErrorLabel.setText("Please Insert Text");
-        }
-        else if(ContactSubjectField.getText().contains(";")||ContactSubjectField.getText().contains("\"")){
+        } else if (ContactSubjectField.getText().contains(";") || ContactSubjectField.getText().contains("\"")) {
             ContactErrorLabel.setText("Do not use ; or \" in the subject field");
-        }
-        else if(ContactTextArea.getText().contains(";")||ContactTextArea.getText().contains("\"")){
+        } else if (ContactTextArea.getText().contains(";") || ContactTextArea.getText().contains("\"")) {
             ContactErrorLabel.setText("Do not use ; or \" in the text area");
-        }
-        else{
+        } else {
             ContactErrorLabel.setText(logic.contactBank(logic.getCustomer().getID(), ContactSubjectField.getText(), ContactTextArea.getText()));
             ContactSubjectField.clear();
             ContactTextArea.clear();
         }
     }
-    
+
     @FXML
-    private void cancelBankMail(){
+    private void cancelBankMail() {
         ContactSubjectField.clear();
         ContactTextArea.clear();
     }
-        
+
     @FXML
-    private void openBankAccount(){
+    private void openBankAccount() {
         String message = logic.openBankAccount();
         CreateBankAccountSucceslabel.setText(message);
         AccountsDropdown.getItems().clear();
         if (AccountsDropdown.getItems().isEmpty()) {
-                String bankid[] = logic.getCustomer().getBankID().split(";");
-                for (int i = 0; i < bankid.length; i++) {
-                    AccountsDropdown.getItems().addAll(bankid[i]);
-                }
+            String bankid[] = logic.getCustomer().getBankID().split(";");
+            for (int i = 0; i < bankid.length; i++) {
+                AccountsDropdown.getItems().addAll(bankid[i]);
             }
-    }    
-    
+        }
+    }
+
     private String makeInt(String text) {
         int commaPos = text.indexOf(",");
-        if (commaPos == -1) {
-            try {
-                int i = Integer.parseInt(text);
-            } catch (Exception e) {
-                return "Amount is too large. Please contact bank";
-            }
-            return text;
-        } else if (commaPos == 0) {
+        if (commaPos == 0) {
             return "Enter a number before the comma";
+        } else if (commaPos == -1) {
+            text += "00";
         } else {
             int charAfterComma = text.length() - 1 - commaPos;
             if (charAfterComma == 2 || charAfterComma == 0) {
@@ -567,15 +547,16 @@ public class CustomerController implements Initializable {
             } else if (charAfterComma > 2) {
                 return "Only two decimals allowed";
             }
-            try {
-                int i = Integer.parseInt(text);
-            } catch (Exception e) {
-                return "Amount is too large. Please contact bank";
-            }
-            return text;
         }
+        try {
+            int i = Integer.parseInt(text);
+        } catch (Exception e) {
+            return "Amount is too large. Please contact bank";
+        }
+        return text;
+
     }
-    
+
     private boolean checkAmount(String amount) {
         char[] charArrayToCheck = amount.toCharArray();
         int commaCount = 0;
@@ -593,18 +574,37 @@ public class CustomerController implements Initializable {
         }
         return false;
     }
-    
+
     private void freezeInputTransaction() {
         AmountField.setEditable(false);
         AccountField.setEditable(false);
         RegField.setEditable(false);
         MessageArea.setEditable(false);
     }
-    
+
     private void defreezeInputTransaction() {
         AmountField.setEditable(true);
         AccountField.setEditable(true);
         RegField.setEditable(true);
         MessageArea.setEditable(true);
+    }
+
+    private void displayName() {
+        String[] name = logic.getCustomer().getName().split(" ");
+        String firstName = "";
+        for (int i = 0; i < name.length - 1; i++) {
+            firstName += name[i] + " ";
+        }
+        NameField.setText(firstName);
+        LastNameField.setText(logic.getCustomer().getName().split(" ")[name.length - 1]);
+    }
+
+    private void getBankIDs() {
+        if (AccountsDropdown.getItems().isEmpty()) {
+            String bankid[] = logic.getCustomer().getBankID().split(";");
+            for (int i = 0; i < bankid.length; i++) {
+                AccountsDropdown.getItems().add(bankid[i]);
+            }
+        }
     }
 }
