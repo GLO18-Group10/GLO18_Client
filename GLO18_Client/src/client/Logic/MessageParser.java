@@ -96,4 +96,7 @@ public class MessageParser {
     public String toProtocol15(String ID, String name, String message){
         return "15;" + ID + ";" + name + ";" + message;
     }
+    public String toProtocol17(String ID){
+        return "17;" + ID;
+    }
 }

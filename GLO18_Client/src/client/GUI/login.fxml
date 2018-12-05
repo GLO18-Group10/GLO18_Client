@@ -45,7 +45,7 @@
                               <Insets left="148.0" top="20.0" />
                            </VBox.margin>
                         </PasswordField>
-                        <Button fx:id="ResetButton" mnemonicParsing="false" onAction="#resetHandler" text="Reset password">
+                        <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetHandler" text="Reset password">
                            <VBox.margin>
                               <Insets left="148.0" />
                            </VBox.margin>

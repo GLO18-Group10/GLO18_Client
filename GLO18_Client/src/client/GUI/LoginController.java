@@ -56,7 +56,7 @@ public class LoginController implements Initializable {
     @FXML
     private AnchorPane LoginAnchorPane;
     @FXML
-    private Button ResetButton;
+    private Button resetButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -124,9 +124,9 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void resetHandler(ActionEvent event)throws IOException { 
-        
-                        Parent nextView = FXMLLoader.load(getClass().getResource("ResetPassword.fxml"));
+    private void resetHandler(ActionEvent event) throws IOException {
+
+        Parent nextView = FXMLLoader.load(getClass().getResource("ResetPassword.fxml"));
         Scene newScene = new Scene(nextView);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(newScene);
@@ -134,4 +134,3 @@ public class LoginController implements Initializable {
 
     }
 }
-
