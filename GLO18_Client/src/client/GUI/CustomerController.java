@@ -177,7 +177,7 @@ public class CustomerController implements Initializable {
     }
     
     @FXML
-    private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
+    private void handleButtonAction(ActionEvent event) throws IOException {
         
         if (event.getSource() == TransferButton) {
             clearPanes();
