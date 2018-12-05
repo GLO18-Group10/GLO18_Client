@@ -136,7 +136,27 @@ public class CustomerController implements Initializable {
     @FXML
     private PasswordField ConfirmPasswordField;
     @FXML
+
     private AnchorPane OptionAnchorPane;
+
+    private Button ContactButton;
+    @FXML
+    private AnchorPane ContactAnchor;
+    @FXML
+    private Label ContactErrorLabel;
+    @FXML
+    private Button SendBankMail;
+    @FXML
+    private Button CancelBankMail;
+    @FXML
+    private TextField ContactSubjectField;
+    @FXML
+    private TextArea ContactTextArea;
+
+    @FXML
+    private Button CreateBankAccountButton;
+    @FXML
+    private Label CreateBankAccountSucceslabel;
 
     public CustomerController() {
     }
@@ -184,6 +204,10 @@ public class CustomerController implements Initializable {
             clearPanes();
             ProfileAnchor.toFront();
             ProfileAnchor.setVisible(true);
+        } else if(event.getSource()==ContactButton) {
+            clearPanes();
+            ContactAnchor.toFront();
+            ContactAnchor.setVisible(true);
         } else if (event.getSource() == LogoutButton) {
             if (logic.logout().equalsIgnoreCase("true")) {
                 try {
@@ -219,6 +243,14 @@ public class CustomerController implements Initializable {
         AccountsAnchorPane.setVisible(false);
         OptionAnchorPane.setVisible(false);
         ProfileAnchor.setVisible(false);
+        clearContact();
+        ContactAnchor.setVisible(false);
+    }
+    
+    private void clearContact(){
+        ContactSubjectField.clear();
+        ContactTextArea.clear();
+        ContactErrorLabel.setText("");
     }
 
     private String storeCustomerInfo(String name, String phoneNo, String address, String email) {
@@ -374,7 +406,7 @@ public class CustomerController implements Initializable {
         defreezeInputTransaction();
     }
 
-//Shows the transaction history
+    //Shows the transaction history
     private void getTransactionHistory() {
         String accountID = AccountsDropdown.getValue();
         TransactionHistoryListView.getItems().clear();
@@ -382,7 +414,6 @@ public class CustomerController implements Initializable {
 
         for (int i = data.length - 1; i >= 0; i--) {
             TransactionHistoryListView.getItems().add(data[i]);
-
         }
     }
 
@@ -407,6 +438,7 @@ public class CustomerController implements Initializable {
         MessageErrorLabel.setText("");
         TransactionOverallMessageLabel.setText("");
         ConfirmPasswordField.setText("");
+        CreateBankAccountSucceslabel.setText("");
     }
 
     @FXML
@@ -463,6 +495,46 @@ public class CustomerController implements Initializable {
         newPasswordField.clear();
         repeatPasswordField.clear();
     }
+
+    @FXML
+    private void sendBankMail(){
+        if(ContactSubjectField.getText().equalsIgnoreCase("")){
+            ContactErrorLabel.setText("Please Insert Subject");
+        }
+        else if(ContactTextArea.getText().equalsIgnoreCase("")){
+            ContactErrorLabel.setText("Please Insert Text");
+        }
+        else if(ContactSubjectField.getText().contains(";")||ContactSubjectField.getText().contains("\"")){
+            ContactErrorLabel.setText("Do not use ; or \" in the subject field");
+        }
+        else if(ContactTextArea.getText().contains(";")||ContactTextArea.getText().contains("\"")){
+            ContactErrorLabel.setText("Do not use ; or \" in the text area");
+        }
+        else{
+            ContactErrorLabel.setText(logic.contactBank(logic.getCustomer().getID(), ContactSubjectField.getText(), ContactTextArea.getText()));
+            ContactSubjectField.clear();
+            ContactTextArea.clear();
+        }
+    }
+    
+    @FXML
+    private void cancelBankMail(){
+        ContactSubjectField.clear();
+        ContactTextArea.clear();
+    }
+        
+    @FXML
+    private void openBankAccount(){
+        String message = logic.openBankAccount();
+        CreateBankAccountSucceslabel.setText(message);
+        AccountsDropdown.getItems().clear();
+        if (AccountsDropdown.getItems().isEmpty()) {
+                String bankid[] = logic.getCustomer().getBankID().split(";");
+                for (int i = 0; i < bankid.length; i++) {
+                    AccountsDropdown.getItems().addAll(bankid[i]);
+                }
+            }
+    }    
 
     private String makeInt(String text) {
         int commaPos = text.indexOf(",");
