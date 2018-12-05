@@ -111,7 +111,7 @@
                                     <Insets left="15.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <Label text="Account number + reg. ">
+                              <Label text="Reg. + Account Number">
                                  <VBox.margin>
                                     <Insets left="15.0" top="30.0" />
                                  </VBox.margin>
@@ -129,12 +129,12 @@
                            <children>
                               <HBox prefHeight="28.0" prefWidth="213.0">
                                  <children>
-                                    <TextField fx:id="AccountField" onAction="#proceedTransfer" prefHeight="25.0" prefWidth="152.0">
+                                    <TextField fx:id="AccountField" onAction="#proceedTransfer" prefHeight="25.0" prefWidth="60.0">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
                                     </TextField>
-                                    <TextField fx:id="RegField" onAction="#proceedTransfer" prefHeight="18.0" prefWidth="75.0">
+                                    <TextField fx:id="RegField" onAction="#proceedTransfer" prefHeight="25.0">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
