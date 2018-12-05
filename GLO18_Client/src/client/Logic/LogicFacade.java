@@ -56,10 +56,19 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String logout() {
-        sendMessage(messageParser.toProtocol18());
-        String message = receiveMessage();
+        String message = "";
+        if(customer != null && admin == null){
+            message = messageParser.toProtocol18(customer.getID());
+        }else if(admin != null && customer == null){
+            message = messageParser.toProtocol18(admin.getID());
+        }else{
+            System.out.println("logout error - customer and admin is either both null or not null");
+        }
 
-        if (message.equalsIgnoreCase("true")) {
+        sendMessage(message);
+        String receivedMessage = receiveMessage();
+
+        if (receivedMessage.equalsIgnoreCase("true")) {
             admin = null;
             customer = null;
             link.endConnection();
@@ -72,7 +81,7 @@ public class LogicFacade implements ILogic {
 
     @Override
     public int getAccountBalance(String accountID) {
-        sendMessage(messageParser.toProtocol02(accountID));
+        sendMessage(messageParser.toProtocol02(accountID, customer.getID()));
         return Integer.parseInt(receiveMessage());
     }
 
@@ -94,7 +103,7 @@ public class LogicFacade implements ILogic {
     @Override
     //This method could also be renamed to an appropriate name since the arcitecture has changed. For instance createCustomer(). This is preffered.
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
-        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email, password));
+        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email, password, admin.getID()));
         return receiveMessage();
     }
 
@@ -112,7 +121,7 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String getTransactionHistory(String accountID) {
-        sendMessage(messageParser.toProtocol06(accountID));
+        sendMessage(messageParser.toProtocol06(accountID, customer.getID()));
         return receiveMessage();
     }
 
@@ -129,7 +138,7 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String toProtocol09(String ID, boolean open) {
-        sendMessage(messageParser.toProtocol09(ID, open));
+        sendMessage(messageParser.toProtocol09(ID, open, admin.getID()));
         return receiveMessage();
     }
 
@@ -153,7 +162,7 @@ public class LogicFacade implements ILogic {
     @Override
     public String openBankAccount() {
         String ID = customer.getID();
-        sendMessage(messageParser.toProtocol12(ID));
+        sendMessage(messageParser.toProtocol12(ID, customer.getID()));
         return receiveMessage();
     }
 

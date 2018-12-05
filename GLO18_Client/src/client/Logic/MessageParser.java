@@ -26,14 +26,15 @@ public class MessageParser {
     /**
      * Protocol 01: get customer info
      *
+     * @param ID
      * @return 01
      */
     public String toProtocol01(String ID) {
         return "01;" + ID;
     }
 
-    public String toProtocol02(String accountID) {
-        return "02;" + accountID;
+    public String toProtocol02(String accountID, String customerID) {
+        return "02;" + accountID + ";" + customerID;
     }
 
     public String toProtocol03(String name, String phonenumber, String address, String email, String ID) {
@@ -48,29 +49,28 @@ public class MessageParser {
         return "05;" + senderID + ";" + amount + ";" + recieverID + ";" + text + ";" + customerID;
     }
 
-    public String toProtocol06(String ID) {
-        return "06;" + ID;
+    public String toProtocol06(String ID, String customerID) {
+        return "06;" + ID + ";" + customerID;
     }
 
-    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
-        return ("07;" + ID + ";" + name + ";" + birthday + ";" + phonenumber + ";" + address + ";" + email + ";" + password);
+    public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password, String adminID) {
+        return ("07;" + ID + ";" + name + ";" + birthday + ";" + phonenumber + ";" + address + ";" + email + ";" + password + ";" + adminID);
     }
 
     public String toProtocol08(String ID) {
         return "08;" + ID;
-
     }
 
-    public String toProtocol09(String ID, boolean open) {
-        return "09;" + "C" + ID + ";" + (open ? "1" : "0");
+    public String toProtocol09(String ID, boolean open, String adminID) {
+        return "09;" + "C" + ID + ";" + (open ? "1" : "0") + ";" + adminID;
     }
 
-    public String toProtocol10() {
-        return "10";
+    public String toProtocol10(String adminID) {
+        return "10;"+ adminID;
     }
 
-    public String toProtocol12(String ID) {
-        return "12;" + ID;
+    public String toProtocol12(String ID, String customerID) {
+        return "12;" + ID + ";" + customerID;
     }
 
     public String toProtocol13(String ID, String oldPassword, String newPassword) {
@@ -89,8 +89,8 @@ public class MessageParser {
         return "16" + ";" + ID + ";" + password;
     }
 
-    public String toProtocol18() {
-        return "18";
+    public String toProtocol18(String ID) {
+        return "18;" + ID;
     }
 
     /**
