@@ -139,7 +139,7 @@ public class LogicFacade implements ILogic {
     
     @Override
     public String contactBank(String ID, String subject, String text){
-        sendMessage(messageParser.toProtocol15(ID, subject, text));
+        sendMessage(messageParser.toProtocol15(ID, subject, text, customer.getEmail()));
         return receiveMessage();
     }
     

@@ -97,8 +97,8 @@ public class MessageParser {
         return "14;" + ID + ";" + mailTo + ";" + name + ";" + password;
     }
     
-    public String toProtocol15(String ID, String subject, String message){
-        return "15;" + ID + ";" + subject + ";" + message;
+    public String toProtocol15(String ID, String subject, String message, String email){
+        return "15;" + ID + ";" + subject + ";" + message + ";" + email;
     }
 
     public String toProtocol16(String ID, String password){
