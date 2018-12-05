@@ -151,6 +151,7 @@ public class CustomerController implements Initializable {
     private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
 
         if (event.getSource() == TransferButton) {
+           
             clearPanes();
             NewTransferAnchorPane.toFront();
             NewTransferAnchorPane.setVisible(true);
@@ -165,13 +166,7 @@ public class CustomerController implements Initializable {
             clearPanes();
             AccountsAnchorPane.toFront();
             AccountsAnchorPane.setVisible(true);
-
-            if (AccountsDropdown.getItems().isEmpty()) {
-                String bankid[] = logic.getCustomer().getBankID().split(";");
-                for (int i = 0; i < bankid.length; i++) {
-                    AccountsDropdown.getItems().add(bankid[i]);
-                }
-            }
+            getBankIDs();
         } else if (event.getSource() == OptionsButton) {
             clearPanes();
             passwordErrorLabel.setText("");
@@ -536,5 +531,14 @@ public class CustomerController implements Initializable {
         }
         NameField.setText(firstName);
         LastNameField.setText(logic.getCustomer().getName().split(" ")[name.length - 1]);
+    }
+
+    private void getBankIDs() {
+        if (AccountsDropdown.getItems().isEmpty()) {
+            String bankid[] = logic.getCustomer().getBankID().split(";");
+            for (int i = 0; i < bankid.length; i++) {
+                AccountsDropdown.getItems().add(bankid[i]);
+            }
+        }
     }
 }
