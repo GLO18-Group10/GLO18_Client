@@ -162,6 +162,8 @@ public class CustomerController implements Initializable {
     private AnchorPane WelcomeAnchorPane;
     @FXML
     private Label welcomeNameLabel;
+    @FXML
+    private Label lastLoginLabel;
     
     public CustomerController() {
     }
@@ -171,7 +173,7 @@ public class CustomerController implements Initializable {
         gui = GUIrun.getInstance();
         logic = GUIrun.getLogic();
         welcomeNameLabel.setText(logic.getCustomer().getName().split(" ")[0] + "!");        
-        
+        lastLoginLabel.setText("Your last login was: " + logic.lastLogin());
     }
     
     @FXML

@@ -48,4 +48,6 @@ public interface ILogic {
     public String contactBank(String ID, String subject, String text);
 
     public String openBankAccount();
+    
+    public String lastLogin();
 }
