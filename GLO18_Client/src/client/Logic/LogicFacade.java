@@ -71,7 +71,8 @@ public class LogicFacade implements ILogic {
 
     @Override
     public int getAccountBalance(String accountID) {
-        return messageParser.toProtocol02(accountID);
+        sendMessage(messageParser.toProtocol02(accountID));
+        return Integer.parseInt(receiveMessage());
     }
 
     public void initializeUser(String ID) {

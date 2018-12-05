@@ -151,7 +151,6 @@ public class CustomerController implements Initializable {
     private void handleButtonAction(javafx.scene.input.MouseEvent event) throws IOException {
 
         if (event.getSource() == TransferButton) {
-           
             clearPanes();
             NewTransferAnchorPane.toFront();
             NewTransferAnchorPane.setVisible(true);
