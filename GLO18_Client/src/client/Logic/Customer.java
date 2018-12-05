@@ -76,20 +76,25 @@ public class Customer extends User implements ICustomer {
 
     @Override
     public String getBankID() {
-        String bankID = "";
+        
         if (bankIDs.isEmpty()) {
             logic.sendMessage(messageParser.toProtocol08(super.getID()));
             String data[] = messageParser.fromProtocol(logic.receiveMessage());
             if (data[0].equalsIgnoreCase("error")) {
-                return "No bankIDs";
+                return "No bankIDS";
             }
             for (String ID : data) {
+                
                 bankIDs.add(ID + ";");
             }
         }
+        String bankID = "";
+        
         for (int i = 0; i < bankIDs.size(); i++) {
-            bankID = bankIDs.get(i);
+            bankID += bankIDs.get(i);
         }
+        
+        bankIDs.clear();
         return bankID;
     }
 
