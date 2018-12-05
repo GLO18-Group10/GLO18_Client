@@ -251,7 +251,14 @@ public class CustomerController implements Initializable {
         AccountsAnchorPane.setVisible(false);
         AnchorPane3.setVisible(false);
         ProfileAnchor.setVisible(false);
+        clearContact();
         ContactAnchor.setVisible(false);
+    }
+    
+    private void clearContact(){
+        ContactSubjectField.clear();
+        ContactTextArea.clear();
+        ContactErrorLabel.setText("");
     }
     
     private String storeCustomerInfo(String name, String phoneNo, String address, String email) {
@@ -409,7 +416,7 @@ public class CustomerController implements Initializable {
         defreezeInputTransaction();
     }
 
-//Shows the transaction history
+    //Shows the transaction history
     private void getTransactionHistory() {
         String accountID = AccountsDropdown.getValue();
         TransactionHistoryListView.getItems().clear();
@@ -417,7 +424,6 @@ public class CustomerController implements Initializable {
         
         for (int i = data.length - 1; i >= 0; i--) {
             TransactionHistoryListView.getItems().add(data[i]);
-            
         }
     }
     
@@ -600,6 +606,5 @@ public class CustomerController implements Initializable {
         AccountField.setEditable(true);
         RegField.setEditable(true);
         MessageArea.setEditable(true);
-
     }
 }
