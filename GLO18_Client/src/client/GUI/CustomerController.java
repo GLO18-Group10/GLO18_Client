@@ -183,8 +183,9 @@ public class CustomerController implements Initializable {
             PhoneNoField.setText(logic.getCustomer().getPhoneNo());
             BirthdayField.setText(logic.getCustomer().getBirthday());
             EmailField.setText(logic.getCustomer().getEmail());
-            NameField.setText(logic.getCustomer().getName().split(" ")[0]);
-            LastNameField.setText(logic.getCustomer().getName().split(" ")[1]);
+            displayName();
+            //NameField.setText(logic.getCustomer().getName().split(" ")[0]);
+            //LastNameField.setText(logic.getCustomer().getName().split(" ")[1]);
             //Clear current pane and display to the user
             clearPanes();
             ProfileAnchor.toFront();
@@ -529,5 +530,15 @@ public class CustomerController implements Initializable {
         AccountField.setEditable(true);
         RegField.setEditable(true);
         MessageArea.setEditable(true);
+    }
+
+    private void displayName() {
+        String[] name = logic.getCustomer().getName().split(" ");
+        String firstName = "";
+        for (int i = 0; i < name.length - 1; i++) {
+            firstName += name[i] + " ";
+        }
+        NameField.setText(firstName);
+        LastNameField.setText(logic.getCustomer().getName().split(" ")[name.length - 1]);
     }
 }
