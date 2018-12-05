@@ -44,7 +44,8 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String login(String ID, String password) {
-        String message = messageParser.toProtocol00(ID, password);
+        sendMessage(messageParser.toProtocol00(ID, password));
+        String message = receiveMessage();
 
         if (message.equalsIgnoreCase("true")) {
             initializeUser(ID);
@@ -63,10 +64,11 @@ public class LogicFacade implements ILogic {
         }else{
             System.out.println("logout error - customer and admin is either both null or not null");
         }
-        
-        
 
-        if (message.equalsIgnoreCase("true")) {
+        sendMessage(message);
+        String receivedMessage = receiveMessage();
+
+        if (receivedMessage.equalsIgnoreCase("true")) {
             admin = null;
             customer = null;
             link.endConnection();
@@ -75,12 +77,12 @@ public class LogicFacade implements ILogic {
         } else {
             return "false";
         }
-
     }
 
     @Override
     public int getAccountBalance(String accountID) {
-        return messageParser.toProtocol02(accountID, customer.getID());
+        sendMessage(messageParser.toProtocol02(accountID, customer.getID()));
+        return Integer.parseInt(receiveMessage());
     }
 
     public void initializeUser(String ID) {
@@ -145,17 +147,18 @@ public class LogicFacade implements ILogic {
         sendMessage(messageParser.toProtocol13(ID, oldPassword, newPassword));
         return receiveMessage();
     }
-    
+
     @Override
+    public String checkPassword(String ID, String password) {
+        sendMessage(messageParser.toProtocol16(ID, password));
+        return receiveMessage();
+    }
+
     public String contactBank(String ID, String subject, String text){
         sendMessage(messageParser.toProtocol15(ID, subject, text, customer.getEmail()));
         return receiveMessage();
     }
-    
-    @Override
-    public String checkPassword(String ID, String password){
-        return messageParser.toProtocol16(ID, password);
-    } 
+
 
     @Override
     public String openBankAccount() {
@@ -163,6 +166,4 @@ public class LogicFacade implements ILogic {
         sendMessage(messageParser.toProtocol12(ID, customer.getID()));
         return receiveMessage();
     }
-    
-    
 }
