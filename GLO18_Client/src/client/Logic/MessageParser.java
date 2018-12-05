@@ -20,9 +20,7 @@ public class MessageParser {
     }
 
     public String toProtocol00(String ID, String password) {
-        String message = "00" + ";" + ID + ";" + password;
-        logic.sendMessage(message);
-        return logic.receiveMessage();
+        return "00" + ";" + ID + ";" + password;
     }
 
     /**
@@ -80,14 +78,11 @@ public class MessageParser {
     }
 
     public String toProtocol16(String ID, String password) {
-        String message = "16" + ";" + ID + ";" + password;
-        logic.sendMessage(message);
-        return logic.receiveMessage();
+        return "16" + ";" + ID + ";" + password;
     }
 
     public String toProtocol18() {
-        logic.sendMessage("18");
-        return logic.receiveMessage();
+        return "18";
     }
 
     /**

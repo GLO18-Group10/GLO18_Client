@@ -44,7 +44,8 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String login(String ID, String password) {
-        String message = messageParser.toProtocol00(ID, password);
+        sendMessage(messageParser.toProtocol00(ID, password));
+        String message = receiveMessage();
 
         if (message.equalsIgnoreCase("true")) {
             initializeUser(ID);
@@ -55,7 +56,8 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String logout() {
-        String message = messageParser.toProtocol18();
+        sendMessage(messageParser.toProtocol18());
+        String message = receiveMessage();
 
         if (message.equalsIgnoreCase("true")) {
             admin = null;
@@ -66,7 +68,6 @@ public class LogicFacade implements ILogic {
         } else {
             return "false";
         }
-
     }
 
     @Override
@@ -137,9 +138,10 @@ public class LogicFacade implements ILogic {
         sendMessage(messageParser.toProtocol13(ID, oldPassword, newPassword));
         return receiveMessage();
     }
-    
+
     @Override
-    public String checkPassword(String ID, String password){
-        return messageParser.toProtocol16(ID, password);
-    }    
+    public String checkPassword(String ID, String password) {
+        sendMessage(messageParser.toProtocol16(ID, password));
+        return receiveMessage();
+    }
 }
