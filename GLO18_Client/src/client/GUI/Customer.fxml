@@ -351,7 +351,7 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Label>
-                        <PasswordField fx:id="oldPasswordField">
+                        <PasswordField fx:id="oldPasswordField" onAction="#changePassword">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -361,7 +361,7 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                         </Label>
-                        <PasswordField fx:id="newPasswordField">
+                        <PasswordField fx:id="newPasswordField" onAction="#changePassword">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -371,7 +371,7 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                         </Label>
-                        <PasswordField fx:id="repeatPasswordField">
+                        <PasswordField fx:id="repeatPasswordField" onAction="#changePassword">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
