@@ -472,15 +472,10 @@ public class CustomerController implements Initializable {
 
     private String makeInt(String text) {
         int commaPos = text.indexOf(",");
-        if (commaPos == -1) {
-            try {
-                int i = Integer.parseInt(text);
-            } catch (Exception e) {
-                return "Amount is too large. Please contact bank";
-            }
-            return text;
-        } else if (commaPos == 0) {
+        if (commaPos == 0) {
             return "Enter a number before the comma";
+        } else if (commaPos == -1) {
+            text += "00";
         } else {
             int charAfterComma = text.length() - 1 - commaPos;
             if (charAfterComma == 2 || charAfterComma == 0) {
@@ -491,13 +486,14 @@ public class CustomerController implements Initializable {
             } else if (charAfterComma > 2) {
                 return "Only two decimals allowed";
             }
-            try {
-                int i = Integer.parseInt(text);
-            } catch (Exception e) {
-                return "Amount is too large. Please contact bank";
-            }
-            return text;
         }
+        try {
+            int i = Integer.parseInt(text);
+        } catch (Exception e) {
+            return "Amount is too large. Please contact bank";
+        }
+        return text;
+
     }
 
     private boolean checkAmount(String amount) {

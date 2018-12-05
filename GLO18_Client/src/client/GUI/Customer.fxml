@@ -78,7 +78,7 @@
                                     <Insets top="70.0" />
                                  </VBox.margin>
                               </ChoiceBox>
-                              <TextField fx:id="AmountField" prefHeight="25.0" prefWidth="236.0">
+                              <TextField fx:id="AmountField" onAction="#proceedTransfer" prefHeight="25.0" prefWidth="236.0">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
@@ -129,12 +129,12 @@
                            <children>
                               <HBox prefHeight="28.0" prefWidth="213.0">
                                  <children>
-                                    <TextField fx:id="AccountField" prefHeight="25.0" prefWidth="152.0">
+                                    <TextField fx:id="AccountField" onAction="#proceedTransfer" prefHeight="25.0" prefWidth="152.0">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
                                     </TextField>
-                                    <TextField fx:id="RegField" prefHeight="18.0" prefWidth="75.0">
+                                    <TextField fx:id="RegField" onAction="#proceedTransfer" prefHeight="18.0" prefWidth="75.0">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -193,7 +193,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <PasswordField fx:id="ConfirmPasswordField" promptText="Enter Password to Confirm Transaction" visible="false">
+                              <PasswordField fx:id="ConfirmPasswordField" onAction="#transfer" promptText="Enter Password to Confirm Transaction" visible="false">
                                  <VBox.margin>
                                     <Insets left="15.0" right="350.0" top="5.0" />
                                  </VBox.margin>
@@ -445,33 +445,39 @@
                               <Insets top="50.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="NameField" disable="true" />
-                        <Label text="Lastname" />
-                        <TextField fx:id="LastNameField" disable="true" />
+                        <TextField fx:id="NameField" disable="true" onAction="#storeCustomerInfoButtonHandler" />
+                        <Label text="Lastname">
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding></Label>
+                        <TextField fx:id="LastNameField" disable="true" onAction="#storeCustomerInfoButtonHandler">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin></TextField>
                         <Label text="Birthday">
                            <padding>
                               <Insets top="10.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="BirthdayField" disable="true" editable="false" />
+                        <TextField fx:id="BirthdayField" disable="true" editable="false" onAction="#storeCustomerInfoButtonHandler" />
                         <Label text="Phone Number">
                            <padding>
                               <Insets top="10.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="PhoneNoField" disable="true" />
+                        <TextField fx:id="PhoneNoField" disable="true" onAction="#storeCustomerInfoButtonHandler" />
                         <Label text="Address">
                            <padding>
                               <Insets top="10.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="AddressField" disable="true" />
+                        <TextField fx:id="AddressField" disable="true" onAction="#storeCustomerInfoButtonHandler" />
                         <Label text="Email">
                            <padding>
                               <Insets top="10.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="EmailField" disable="true" />
+                        <TextField fx:id="EmailField" disable="true" onAction="#storeCustomerInfoButtonHandler" />
                      </children>
                   </VBox>
                </center>
