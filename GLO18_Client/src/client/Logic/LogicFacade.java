@@ -160,7 +160,7 @@ public class LogicFacade implements ILogic {
     @Override
     public String openBankAccount() {
         String ID = customer.getID();
-        sendMessage(messageParser.toProtocol12(ID));
+        sendMessage(messageParser.toProtocol12(ID, customer.getID()));
         return receiveMessage();
     }
     

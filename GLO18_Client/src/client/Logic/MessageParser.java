@@ -85,8 +85,8 @@ public class MessageParser {
         return "09;" + "C" + ID + ";" + (open ? "1" : "0") + ";" + adminID;
     }
     
-    public String toProtocol12(String ID){
-        return "12;" + ID;
+    public String toProtocol12(String ID, String customerID){
+        return "12;" + ID + ";" + customerID;
     }
     
     public String toProtocol13(String ID, String oldPassword, String newPassword){
