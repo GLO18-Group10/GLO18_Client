@@ -45,5 +45,7 @@ public interface ILogic {
     
     public String checkPassword(String ID, String password);
     
+    public String contactBank(String ID, String subject, String text);
+
     public String openBankAccount();
 }
