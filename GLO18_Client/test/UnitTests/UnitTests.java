@@ -26,6 +26,7 @@ public class UnitTests {
     
     final private static ILogic logic = new LogicFacade();
     final private static ILink link = new LinkFacade();
+    private static int value;
     
     public UnitTests() {
     }
@@ -35,7 +36,7 @@ public class UnitTests {
         logic.injectLink(link);
         logic.startConnection();
     }
-    
+    /*
     @AfterClass
     public static void tearDownClass() {
     }
@@ -47,21 +48,40 @@ public class UnitTests {
     @After
     public void tearDown() {
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
+    */
+    
     @Test
     public void testLogin() {
         String expected = "true";
         Assert.assertEquals(expected, logic.login("C111234552", "password"));
     }
     
-    /*
+    @Test
+    public void testAccountBalance() {
+        value = logic.getAccountBalance("123456789");
+        int expected = value-500;
+        logic.toProtocol05("123456789", "500", "2323", "accountBalanceUnitTest");
+        Assert.assertEquals(expected, logic.getAccountBalance("123456789"));
+    }
+    
     @Test
     public void testTransaction() {
-        
+        value = logic.getAccountBalance("2323");
+        int expected = value+500;
+        logic.toProtocol05("123456789", "500", "2323", "transactionUnitTest");
+        Assert.assertEquals(expected, logic.getAccountBalance("2323"));
     }
-    */
     
+    @Test
+    public void testLogout(){
+        String expected = "true";
+        Assert.assertEquals(expected, logic.logout());
+    }
+    
+    @Test
+    public void testCreateBankAccount() {
+        String expected = "Complete";
+        logic.login("C111234552", "password");
+        Assert.assertEquals(expected, logic.openBankAccount());
+    }
 }
