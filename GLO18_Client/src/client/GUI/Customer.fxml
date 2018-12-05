@@ -324,7 +324,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ListView fx:id="TransactionHistoryListView" prefHeight="343.0" prefWidth="608.0" styleClass="pretty-list" stylesheets="@monospace.css" />
+                  <ListView fx:id="TransactionHistoryListView" onMouseClicked="#testmethod" prefHeight="343.0" prefWidth="608.0" styleClass="pretty-list" stylesheets="@monospace.css" />
                </children>
             </VBox>
          </children>
@@ -424,6 +424,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
+                  <Label fx:id="CustomerWatchLabel" layoutY="6.0" />
                </children>
             </Pane>
             <Button fx:id="AccountsButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Accounts" textFill="WHITE">
