@@ -139,6 +139,7 @@ public class CustomerController implements Initializable {
 
     private AnchorPane OptionAnchorPane;
 
+    @FXML
     private Button ContactButton;
     @FXML
     private AnchorPane ContactAnchor;
@@ -198,13 +199,11 @@ public class CustomerController implements Initializable {
             BirthdayField.setText(logic.getCustomer().getBirthday());
             EmailField.setText(logic.getCustomer().getEmail());
             displayName();
-            //NameField.setText(logic.getCustomer().getName().split(" ")[0]);
-            //LastNameField.setText(logic.getCustomer().getName().split(" ")[1]);
             //Clear current pane and display to the user
             clearPanes();
             ProfileAnchor.toFront();
             ProfileAnchor.setVisible(true);
-        } else if(event.getSource()==ContactButton) {
+        } else if (event.getSource() == ContactButton) {
             clearPanes();
             ContactAnchor.toFront();
             ContactAnchor.setVisible(true);
@@ -246,8 +245,8 @@ public class CustomerController implements Initializable {
         clearContact();
         ContactAnchor.setVisible(false);
     }
-    
-    private void clearContact(){
+
+    private void clearContact() {
         ContactSubjectField.clear();
         ContactTextArea.clear();
         ContactErrorLabel.setText("");
@@ -497,44 +496,40 @@ public class CustomerController implements Initializable {
     }
 
     @FXML
-    private void sendBankMail(){
-        if(ContactSubjectField.getText().equalsIgnoreCase("")){
+    private void sendBankMail() {
+        if (ContactSubjectField.getText().equalsIgnoreCase("")) {
             ContactErrorLabel.setText("Please Insert Subject");
-        }
-        else if(ContactTextArea.getText().equalsIgnoreCase("")){
+        } else if (ContactTextArea.getText().equalsIgnoreCase("")) {
             ContactErrorLabel.setText("Please Insert Text");
-        }
-        else if(ContactSubjectField.getText().contains(";")||ContactSubjectField.getText().contains("\"")){
+        } else if (ContactSubjectField.getText().contains(";") || ContactSubjectField.getText().contains("\"")) {
             ContactErrorLabel.setText("Do not use ; or \" in the subject field");
-        }
-        else if(ContactTextArea.getText().contains(";")||ContactTextArea.getText().contains("\"")){
+        } else if (ContactTextArea.getText().contains(";") || ContactTextArea.getText().contains("\"")) {
             ContactErrorLabel.setText("Do not use ; or \" in the text area");
-        }
-        else{
+        } else {
             ContactErrorLabel.setText(logic.contactBank(logic.getCustomer().getID(), ContactSubjectField.getText(), ContactTextArea.getText()));
             ContactSubjectField.clear();
             ContactTextArea.clear();
         }
     }
-    
+
     @FXML
-    private void cancelBankMail(){
+    private void cancelBankMail() {
         ContactSubjectField.clear();
         ContactTextArea.clear();
     }
-        
+
     @FXML
-    private void openBankAccount(){
+    private void openBankAccount() {
         String message = logic.openBankAccount();
         CreateBankAccountSucceslabel.setText(message);
         AccountsDropdown.getItems().clear();
         if (AccountsDropdown.getItems().isEmpty()) {
-                String bankid[] = logic.getCustomer().getBankID().split(";");
-                for (int i = 0; i < bankid.length; i++) {
-                    AccountsDropdown.getItems().addAll(bankid[i]);
-                }
+            String bankid[] = logic.getCustomer().getBankID().split(";");
+            for (int i = 0; i < bankid.length; i++) {
+                AccountsDropdown.getItems().addAll(bankid[i]);
             }
-    }    
+        }
+    }
 
     private String makeInt(String text) {
         int commaPos = text.indexOf(",");
