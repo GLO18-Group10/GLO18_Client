@@ -606,5 +606,33 @@
             </VBox>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="WelcomeAnchorPane" layoutX="291.0" layoutY="-1.0" prefHeight="601.0" prefWidth="610.0">
+         <children>
+            <BorderPane layoutX="2.0" layoutY="4.0" prefHeight="599.0" prefWidth="606.0">
+               <top>
+                  <HBox prefHeight="163.0" prefWidth="606.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label text="Welcome">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="50.0" top="50.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="welcomeNameLabel">
+                           <HBox.margin>
+                              <Insets left="10.0" top="50.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </top>
+            </BorderPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
