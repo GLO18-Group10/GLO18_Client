@@ -55,9 +55,9 @@ public class MessageParser {
     
     }
     
-    public String toProtocol06(String ID){
+    public String toProtocol06(String ID, String category){
     
-        return "06;" + ID;
+        return "06;" + ID + ";" + category;
     }
     
 
@@ -85,6 +85,9 @@ public class MessageParser {
         return "09;" + "C" + ID + ";" + (open ? "1" : "0");
     }
     
+    public String toProtocol11(String accountNo, String category, String date){
+        return "11;" + accountNo + ";" + category + ";" + date;
+    }
     public String toProtocol12(String ID){
         return "12;" + ID;
     }

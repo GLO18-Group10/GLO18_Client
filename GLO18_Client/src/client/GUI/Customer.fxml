@@ -252,7 +252,7 @@
                                     <Insets left="15.0" top="30.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="CreateBankAccountButton" mnemonicParsing="false" onAction="#openBankAccount" prefHeight="25.0" prefWidth="136.0" text="Create Bank Account">
+                              <Button fx:id="CreateBankAccountButton" mnemonicParsing="false" onAction="#openBankAccount" prefHeight="31.0" prefWidth="180.0" text="Create Bank Account">
                                  <HBox.margin>
                                     <Insets left="15.0" top="30.0" />
                                  </HBox.margin>
@@ -287,14 +287,31 @@
                         </Label>
                      </top>
                      <bottom>
-                        <Label text="Transaction History" BorderPane.alignment="CENTER_LEFT">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
+                        <HBox BorderPane.alignment="CENTER_LEFT">
                            <BorderPane.margin>
                               <Insets left="15.0" />
                            </BorderPane.margin>
-                        </Label>
+                           <children>
+                              <Label text="Transaction History">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox fx:id="TransactionHistoryCategoryChoiceBox" prefWidth="150.0">
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                              </ChoiceBox>
+                              <Button fx:id="ChangeCategoryButton" mnemonicParsing="false" onAction="#ChangeCategoryButtonHandler" text="Change Category">
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
                      </bottom>
                   </BorderPane>
                   <HBox fx:id="HBox" prefHeight="55.0" prefWidth="608.0">
@@ -319,6 +336,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
+                        <Label prefHeight="56.0" prefWidth="78.0" text="Category" />
                         <Label alignment="CENTER" prefHeight="52.0" prefWidth="109.0" text="Text">
                            <font>
                               <Font size="16.0" />
@@ -327,6 +345,7 @@
                      </children>
                   </HBox>
                   <ListView fx:id="TransactionHistoryListView" prefHeight="343.0" prefWidth="608.0" styleClass="pretty-list" stylesheets="@monospace.css" />
+                  <Label fx:id="ErrorLabelShowTransactionHistory" />
                </children>
             </VBox>
          </children>

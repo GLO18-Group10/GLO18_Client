@@ -109,8 +109,14 @@ public class LogicFacade implements ILogic {
     }
 
     @Override
-    public String getTransactionHistory(String accountID) {
-        sendMessage(messageParser.toProtocol06(accountID));
+    public String getTransactionHistory(String accountID, String category) {
+        sendMessage(messageParser.toProtocol06(accountID, category));
+        return receiveMessage();
+    }
+    
+    @Override
+    public String changeTransactionCategory(String accountNo, String category, String dateToSend){
+        sendMessage(messageParser.toProtocol11(accountNo, category, dateToSend));
         return receiveMessage();
     }
 

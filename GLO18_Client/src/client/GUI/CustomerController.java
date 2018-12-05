@@ -9,7 +9,10 @@ import client.Acquaintance.IGUI;
 import client.Acquaintance.ILogic;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -143,6 +146,12 @@ public class CustomerController implements Initializable {
     private Label CreateBankAccountSucceslabel;
     @FXML
     private ChoiceBox<String> CategoryChoiceBox;
+    @FXML
+    private ChoiceBox<String> TransactionHistoryCategoryChoiceBox;
+    @FXML
+    private Button ChangeCategoryButton;
+    @FXML
+    private Label ErrorLabelShowTransactionHistory;
 
     public CustomerController() {
     }
@@ -151,15 +160,15 @@ public class CustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         gui = GUIrun.getInstance();
         logic = GUIrun.getLogic();
-        CategoryChoiceBox = new ChoiceBox();
         CategoryChoiceBox.getItems().add("Groceries");
         CategoryChoiceBox.getItems().add("Transportation");
         CategoryChoiceBox.getItems().add("Rent");
         CategoryChoiceBox.getItems().add("Electronics");
         CategoryChoiceBox.getItems().add("Webshopping");
         CategoryChoiceBox.getItems().add("Other");
-        CategoryChoiceBox.getItems().add("Default Transaction");
+        CategoryChoiceBox.getItems().add("all");
         CategoryChoiceBox.setValue("Default Transaction");
+        TransactionHistoryCategoryChoiceBox.getItems().addAll(CategoryChoiceBox.getItems());
     }
     
     @FXML
@@ -321,7 +330,6 @@ public class CustomerController implements Initializable {
         String bankID = AccountField.getText() + RegField.getText();
         String message = MessageArea.getText();
         String senderBankID = TransactionBankIDChoiceBox.getValue();
-        String category = CategoryChoiceBox.getValue();
         if (amount.trim().isEmpty()) {
             AmountErrorLabel.setText("Please enter an amount in the amount textfield");
         } else if (AccountField.getText().trim().isEmpty() || RegField.getText().trim().isEmpty()) {
@@ -407,11 +415,13 @@ public class CustomerController implements Initializable {
     private void getTransactionHistory() {
         String accountID = AccountsDropdown.getValue();
         TransactionHistoryListView.getItems().clear();
-        String data[] = logic.getTransactionHistory(accountID).split(";");
-        
+        String category = TransactionHistoryCategoryChoiceBox.getValue();
+        if(category != null && category.equals("all")){
+            category = "null";
+        }
+        String data[] = logic.getTransactionHistory(accountID, category).split(";");
         for (int i = data.length - 1; i >= 0; i--) {
             TransactionHistoryListView.getItems().add(data[i]);
-            
         }
     }
     
@@ -569,5 +579,22 @@ public class CustomerController implements Initializable {
         RegField.setEditable(true);
         MessageArea.setEditable(true);
 
+    }
+
+    @FXML
+    private void ChangeCategoryButtonHandler(ActionEvent event) {
+        int i = TransactionHistoryListView.selectionModelProperty().get().getSelectedIndex();
+        if(i == -1 || TransactionHistoryCategoryChoiceBox.getValue() == null){
+            ErrorLabelShowTransactionHistory.setText("Select transaction by clicking to change please. And please select a category");
+        }
+        else{
+        String category = TransactionHistoryCategoryChoiceBox.getValue();
+        String accountNo = AccountsDropdown.getValue();
+        String transaction = TransactionHistoryListView.getItems().get(i);
+        String transactionFixed = transaction.trim().replaceAll(" +", " ");
+        String[] date = transactionFixed.split(" ");
+        String dateToSend = date[1] + " " + date[2];
+        logic.changeTransactionCategory(accountNo, category, dateToSend);
+        }
     }
 }
