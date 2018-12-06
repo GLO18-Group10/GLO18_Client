@@ -172,7 +172,6 @@ public class CustomerController implements Initializable {
     @FXML
     private Label CreateBankAccountSucceslabel;
     @FXML
-
     private Label CustomerWatchLabel;
     
 
@@ -296,8 +295,7 @@ public class CustomerController implements Initializable {
         ContactTextArea.clear();
         ContactErrorLabel.setText("");
         CreateBankAccountSucceslabel.setText("");
-        welcomeNameLabel.setText("");        
-        lastLoginLabel.setText("");
+        
     }
     
     private String storeCustomerInfo(String name, String phoneNo, String address, String email) {
