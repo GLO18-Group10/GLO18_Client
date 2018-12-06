@@ -191,14 +191,15 @@ public class CustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         gui = GUIrun.getInstance();
         logic = GUIrun.getLogic();
-
+        welcomeNameLabel.setText(logic.getCustomer().getName().split(" ")[0] + "!");        
+        lastLoginLabel.setText("Your last login was: " + logic.lastLogin());
+        
         watch.setDaemon(true);
         watch.start();
         movewatch.setDaemon(true);
         movewatch.start();
 
-        welcomeNameLabel.setText(logic.getCustomer().getName().split(" ")[0] + "!");        
-        lastLoginLabel.setText("Your last login was: " + logic.lastLogin());
+        
 
     }
     
@@ -217,7 +218,9 @@ public class CustomerController implements Initializable {
                 }
             }
         } else if (event.getSource() == AccountsButton) {
+            System.out.println("test 1");
             clearPanes();
+            System.out.println("test 2");
             AccountsAnchorPane.toFront();
             AccountsAnchorPane.setVisible(true);
             getBankIDs();
@@ -274,14 +277,18 @@ public class CustomerController implements Initializable {
     }
     
     private void clearPanes() {
+        System.out.println("test 3");
+       
         NewTransferAnchorPane.setVisible(false);
         AccountsAnchorPane.setVisible(false);
         OptionAnchorPane.setVisible(false);
         ProfileAnchor.setVisible(false);
-        WelcomeAnchorPane.setVisible(false);
+        System.out.println("test 4");
         clearContact();
+        System.out.println("test 4,5");
         ContactAnchor.setVisible(false);
-        
+        WelcomeAnchorPane.setVisible(false);        
+        System.out.println("test 5");
     }
     
     private void clearContact() {
@@ -289,6 +296,8 @@ public class CustomerController implements Initializable {
         ContactTextArea.clear();
         ContactErrorLabel.setText("");
         CreateBankAccountSucceslabel.setText("");
+        welcomeNameLabel.setText("");        
+        lastLoginLabel.setText("");
     }
     
     private String storeCustomerInfo(String name, String phoneNo, String address, String email) {
