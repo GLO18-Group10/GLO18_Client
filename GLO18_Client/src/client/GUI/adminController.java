@@ -125,7 +125,7 @@ public class adminController implements Initializable {
             String address = AddressField.getText();
             String email = EmailField.getText();
             String password = logic.getAdmin().generatePassword();
-            String success = createCustomer(ID, name, birthdayTest, phoneNumber, address, email, password);
+            String success = logic.toProtocol07(ID, name, birthdayTest, phoneNumber, address, email, password);
             if (success.equalsIgnoreCase("true")) {
                 statusTextArea.clear();
                 statusTextArea.appendText("Customer account has been created\n");
@@ -140,10 +140,6 @@ public class adminController implements Initializable {
                 statusTextArea.appendText("Customer account could not be created\nIs the CPR number already in use?");
             }
         }
-    }
-
-    private String createCustomer(String ID, String name, String birthday, String phoneNumber, String address, String email, String password) {
-        return logic.toProtocol07(ID, name, birthday, phoneNumber, address, email, password);
     }
 
     @FXML

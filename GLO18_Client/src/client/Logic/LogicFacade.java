@@ -44,7 +44,8 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String login(String ID, String password) {
-        String message = messageParser.toProtocol00(ID, password);
+        sendMessage(messageParser.toProtocol00(ID, password));
+        String message = receiveMessage();
 
         if (message.equalsIgnoreCase("true")) {
             initializeUser(ID);
@@ -55,9 +56,19 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String logout() {
-        String message = messageParser.toProtocol18();
+        String message = "";
+        if(customer != null && admin == null){
+            message = messageParser.toProtocol18(customer.getID());
+        }else if(admin != null && customer == null){
+            message = messageParser.toProtocol18(admin.getID());
+        }else{
+            System.out.println("logout error - customer and admin is either both null or not null");
+        }
 
-        if (message.equalsIgnoreCase("true")) {
+        sendMessage(message);
+        String receivedMessage = receiveMessage();
+
+        if (receivedMessage.equalsIgnoreCase("true")) {
             admin = null;
             customer = null;
             link.endConnection();
@@ -66,12 +77,12 @@ public class LogicFacade implements ILogic {
         } else {
             return "false";
         }
-
     }
 
     @Override
     public int getAccountBalance(String accountID) {
-        return messageParser.toProtocol02(accountID);
+        sendMessage(messageParser.toProtocol02(accountID, customer.getID()));
+        return Integer.parseInt(receiveMessage());
     }
 
     public void initializeUser(String ID) {
@@ -92,7 +103,7 @@ public class LogicFacade implements ILogic {
     @Override
     //This method could also be renamed to an appropriate name since the arcitecture has changed. For instance createCustomer(). This is preffered.
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password) {
-        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email, password));
+        sendMessage(messageParser.toProtocol07(ID, name, birthday, phonenumber, address, email, password, admin.getID()));
         return receiveMessage();
     }
 
@@ -110,7 +121,7 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String getTransactionHistory(String accountID) {
-        sendMessage(messageParser.toProtocol06(accountID));
+        sendMessage(messageParser.toProtocol06(accountID, customer.getID()));
         return receiveMessage();
     }
 
@@ -127,7 +138,7 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String toProtocol09(String ID, boolean open) {
-        sendMessage(messageParser.toProtocol09(ID, open));
+        sendMessage(messageParser.toProtocol09(ID, open, admin.getID()));
         return receiveMessage();
     }
 
@@ -136,24 +147,28 @@ public class LogicFacade implements ILogic {
         sendMessage(messageParser.toProtocol13(ID, oldPassword, newPassword));
         return receiveMessage();
     }
-    
+
     @Override
-    public String contactBank(String ID, String subject, String text){
+    public String checkPassword(String ID, String password) {
+        sendMessage(messageParser.toProtocol16(ID, password));
+        return receiveMessage();
+    }
+
+    public String contactBank(String ID, String subject, String text) {
         sendMessage(messageParser.toProtocol15(ID, subject, text, customer.getEmail()));
         return receiveMessage();
     }
-    
-    @Override
-    public String checkPassword(String ID, String password){
-        return messageParser.toProtocol16(ID, password);
-    } 
 
     @Override
     public String openBankAccount() {
         String ID = customer.getID();
-        sendMessage(messageParser.toProtocol12(ID));
+        sendMessage(messageParser.toProtocol12(ID, customer.getID()));
         return receiveMessage();
     }
-    
-    
+
+    @Override
+    public String lastLogin() {
+        sendMessage(messageParser.toProtocol04(customer.getID()));
+        return receiveMessage();
+    }
 }
