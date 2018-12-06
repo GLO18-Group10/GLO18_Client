@@ -148,8 +148,14 @@ public class adminController implements Initializable {
 
     @FXML
     private void logoutHandler(ActionEvent event) {
+        System.out.println("test 0");
+        watch.interrupt();
+        System.out.println("test 0,5");
+        movewatch.interrupt();
+        System.out.println("test1");
         if (logic.logout().equalsIgnoreCase("true")) {
             try {
+                System.out.println("test 2");
                 Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
                 Scene newScene = new Scene(nextView);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -216,12 +222,12 @@ public class adminController implements Initializable {
             activateIDLabel.setText("Activation: " + response);
         }
     }
-    
+    boolean threads = true;
      Thread watch = new Thread(new Runnable(){
             @Override
             public void run() {
                 try{
-                        while (true) {                        
+                        while (threads) {                        
                             Platform.runLater(new Runnable() {
 
                                 @Override
@@ -261,7 +267,7 @@ public class adminController implements Initializable {
             public void run() {
                 try{
                     
-                        while (true) {                        
+                        while (threads) {                        
                             Platform.runLater(new Runnable() {
                             double xpos;
                             
