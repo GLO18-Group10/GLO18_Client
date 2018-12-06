@@ -213,12 +213,12 @@ public class adminController implements Initializable {
             activateIDLabel.setText("Activation: " + response);
         }
     }
-    boolean threads = true;
+    
      Thread watch = new Thread(new Runnable(){
             @Override
             public void run() {
                 try{
-                        while (threads) {                        
+                        while (true) {                        
                             Platform.runLater(new Runnable() {
 
                                 @Override
@@ -258,7 +258,7 @@ public class adminController implements Initializable {
             public void run() {
                 try{
                     
-                        while (threads) {                        
+                        while (true) {                        
                             Platform.runLater(new Runnable() {
                             double xpos;
                             

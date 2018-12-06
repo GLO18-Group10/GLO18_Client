@@ -175,7 +175,7 @@ public class CustomerController implements Initializable {
     private Label CustomerWatchLabel;
     
 
-
+    @FXML
     private AnchorPane WelcomeAnchorPane;
     @FXML
     private Label welcomeNameLabel;
@@ -192,14 +192,10 @@ public class CustomerController implements Initializable {
         logic = GUIrun.getLogic();
         welcomeNameLabel.setText(logic.getCustomer().getName().split(" ")[0] + "!");        
         lastLoginLabel.setText("Your last login was: " + logic.lastLogin());
-        
         watch.setDaemon(true);
         watch.start();
         movewatch.setDaemon(true);
         movewatch.start();
-
-        
-
     }
     
     @FXML
@@ -217,9 +213,7 @@ public class CustomerController implements Initializable {
                 }
             }
         } else if (event.getSource() == AccountsButton) {
-            System.out.println("test 1");
             clearPanes();
-            System.out.println("test 2");
             AccountsAnchorPane.toFront();
             AccountsAnchorPane.setVisible(true);
             getBankIDs();
@@ -276,18 +270,13 @@ public class CustomerController implements Initializable {
     }
     
     private void clearPanes() {
-        System.out.println("test 3");
-       
         NewTransferAnchorPane.setVisible(false);
         AccountsAnchorPane.setVisible(false);
         OptionAnchorPane.setVisible(false);
         ProfileAnchor.setVisible(false);
-        System.out.println("test 4");
         clearContact();
-        System.out.println("test 4,5");
-        ContactAnchor.setVisible(false);
-        WelcomeAnchorPane.setVisible(false);        
-        System.out.println("test 5");
+        ContactAnchor.setVisible(false);        
+        lastLoginLabel.setVisible(false);WelcomeAnchorPane.setVisible(false);
     }
     
     private void clearContact() {
