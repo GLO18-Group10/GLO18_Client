@@ -37,8 +37,9 @@ public class LogoutTimer extends Timer  {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                  if(getimeRemaining()==0)
-                      cancel();
+                    Platform.exit();
+                    cancel();
+                     
                     
                     
                 }
