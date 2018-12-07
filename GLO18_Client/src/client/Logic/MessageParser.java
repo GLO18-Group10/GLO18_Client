@@ -108,4 +108,7 @@ public class MessageParser {
         String[] data = message.split(";");
         return data;
     }
+    public String toProtocol17(String ID){
+        return "17;" + ID;
+    }
 }

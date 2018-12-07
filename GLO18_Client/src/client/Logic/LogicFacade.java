@@ -155,6 +155,13 @@ public class LogicFacade implements ILogic {
     }
 
     @Override
+
+    public String toProtocol17(String ID) {
+        sendMessage(messageParser.toProtocol17(ID));
+        return receiveMessage();
+    }
+
+
     public String checkPassword(String ID, String password) {
         sendMessage(messageParser.toProtocol16(ID, password));
         return receiveMessage();
@@ -177,4 +184,5 @@ public class LogicFacade implements ILogic {
         sendMessage(messageParser.toProtocol04(customer.getID()));
         return receiveMessage();
     }
+
 }

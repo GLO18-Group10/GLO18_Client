@@ -21,4 +21,5 @@ public interface ICustomer extends IUser{
     public String getBankID();
 
     public String checkBankID(String ID);
+
 }
