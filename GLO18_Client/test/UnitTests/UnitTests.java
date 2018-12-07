@@ -60,7 +60,7 @@ public class UnitTests {
     public void testAccountBalance() {
         value = logic.getAccountBalance("123456789");
         int expected = value-500;
-        logic.toProtocol05("123456789", "500", "2323", "accountBalanceUnitTest");
+        logic.toProtocol05("123456789", "500", "2323", "accountBalanceUnitTest","Webshopping");
         Assert.assertEquals(expected, logic.getAccountBalance("123456789"));
     }
     
@@ -68,7 +68,7 @@ public class UnitTests {
     public void testTransaction() {
         value = logic.getAccountBalance("2323");
         int expected = value+500;
-        logic.toProtocol05("123456789", "500", "2323", "transactionUnitTest");
+        logic.toProtocol05("123456789", "500", "2323", "transactionUnitTest", "Webshopping");
         Assert.assertEquals(expected, logic.getAccountBalance("2323"));
     }
     
