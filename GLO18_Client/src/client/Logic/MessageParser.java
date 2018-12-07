@@ -38,7 +38,11 @@ public class MessageParser {
     }
 
     public String toProtocol03(String name, String phonenumber, String address, String email, String ID) {
-        return ("03;" + name + ";" + phonenumber + ";" + address + ";" + email + ";" + ID);
+        return "03;" + name + ";" + phonenumber + ";" + address + ";" + email + ";" + ID;
+    }
+
+    public String toProtocol04(String ID) {
+        return "04;" + ID;
     }
 
     public String toProtocol05(String senderID, String amount, String recieverID, String text, String customerID) {
