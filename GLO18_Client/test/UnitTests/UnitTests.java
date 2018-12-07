@@ -81,7 +81,7 @@ public class UnitTests {
     @Test
     public void testCreateBankAccount() {
         String expected = "Complete";
-        logic.login("C0902981234", "£ZMSv7h(=@");
+        logic.login("C0902981234", "password");
         Assert.assertEquals(expected, logic.openBankAccount());
     }
 }
