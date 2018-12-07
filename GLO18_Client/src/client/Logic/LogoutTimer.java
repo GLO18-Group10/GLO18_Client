@@ -21,7 +21,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 public class LogoutTimer extends Timer  {
     
     // Amount of time before logging the user out
@@ -38,10 +37,8 @@ public class LogoutTimer extends Timer  {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                   gui.logout();
-                    cancel();
-                   
-                    
+                  if(getimeRemaining()==0)
+                      cancel();
                     
                     
                 }
@@ -49,11 +46,18 @@ public class LogoutTimer extends Timer  {
         }
     }
      
+    public long getimeRemaining() {
+        return DELAY;
+    }
     /*
      * Updates the timer such that the user is logged out 5 minutes from now!
     */
     public void updateTimer() {
         this.purge();
         this.schedule(new LogoutTask(), LogoutTimer.DELAY);
-    }}
+    }
+}
+
+
+
 

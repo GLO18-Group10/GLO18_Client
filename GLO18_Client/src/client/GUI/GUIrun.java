@@ -26,8 +26,8 @@ public class GUIrun extends Application implements IGUI {
     private static ILogic logic;
 
     private static IGUI guiRun;
-    private Stage mainStage;
-    
+    private Stage stage;
+
     @Override
     public void injectLogic(ILogic LogicLayer) {
         logic = LogicLayer;
@@ -36,8 +36,8 @@ public class GUIrun extends Application implements IGUI {
     public static IGUI getInstance() {
         return guiRun;
     }
-    
-        public static ILogic getLogic(){
+
+    public static ILogic getLogic() {
         return logic;
     }
 
@@ -46,12 +46,12 @@ public class GUIrun extends Application implements IGUI {
 
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 
-
         Scene scene = new Scene(root);
-        
+
         stage.setResizable(true);
         stage.setScene(scene);
         stage.show();
+        
     }
 
     @Override
@@ -60,15 +60,15 @@ public class GUIrun extends Application implements IGUI {
         guiRun = this;
         launch(args);
     }
-     @Override
+
+    @Override
     public void logout() {
         if (logic.logout().equalsIgnoreCase("true")) {
             try {
-                Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
-                Scene newScene = new Scene(nextView);
-                //Stage stage = (Stage) this.stage.getScene().getWindow();
-                mainStage.setScene(newScene);
-                mainStage.show();
+                Parent p = FXMLLoader.load(getClass().getResource("MainView.fxml"));
+                Scene scene = new Scene(p);
+                stage.setScene(scene);
+                stage.show();
             } catch (IOException ex) {
                 System.out.println("Error; logoutButton(customer)");
                 ex.printStackTrace();
@@ -80,5 +80,5 @@ public class GUIrun extends Application implements IGUI {
     /**
      * when the application stops, the user is logged out
      */
- 
+
 }

@@ -89,7 +89,12 @@ public class LogicFacade implements ILogic {
         sendMessage(messageParser.toProtocol02(accountID, customer.getID()));
         return Integer.parseInt(receiveMessage());
     }
-
+    
+    @Override
+    public long getimeRemaining() {
+        long timeRemaining = timer.getimeRemaining();
+        return timeRemaining;
+    }
     public void initializeUser(String ID) {
         if (ID.startsWith("A")) {
             admin = new Admin(ID, this);
