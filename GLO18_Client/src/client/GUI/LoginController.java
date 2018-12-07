@@ -131,6 +131,7 @@ public class LoginController implements Initializable {
                         stage.setScene(newScene);
                         stage.show();
                         logic.updateTimer();
+                        
                     } catch (IOException ex) {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }

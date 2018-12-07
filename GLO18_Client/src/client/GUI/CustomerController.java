@@ -54,8 +54,6 @@ import javafx.stage.Stage;
  *
  * @author antonio
  */
-
-
 public class CustomerController implements Initializable {
 
     IGUI gui;
@@ -197,11 +195,8 @@ public class CustomerController implements Initializable {
         welcomeNameLabel.setText(logic.getCustomer().getName().split(" ")[0] + "!");
         lastLoginLabel.setText("Your last login was: " + logic.lastLogin());
 
-        if (logic.getimeRemaining() == 0) {
-            gui.logout();
-
-        }
-
+        timer.setDaemon(true);
+        timer.start();
         watch.setDaemon(true);
         watch.start();
         movewatch.setDaemon(true);
@@ -249,20 +244,7 @@ public class CustomerController implements Initializable {
             ContactAnchor.toFront();
             ContactAnchor.setVisible(true);
         } else if (event.getSource() == LogoutButton) {
-            if (logic.logout().equalsIgnoreCase("true")) {
-                try {
-                    Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
-                    Scene newScene = new Scene(nextView);
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(newScene);
-                    stage.show();
-                } catch (IOException ex) {
-                    System.out.println("Error; logoutButton(customer)");
-                    ex.printStackTrace();
-                }
-            } else if (logic.logout().equalsIgnoreCase("false")) {
-                System.out.println("could not log out"); //this should bechanged to a label in the GUI
-            }
+            logoutButtonHandler();
         } else if (event.getSource() == updateButton) {
             String accountID = AccountsDropdown.getValue();
             if (accountID != null) {
@@ -585,16 +567,8 @@ public class CustomerController implements Initializable {
                 }
             }
         }
-        
-    
+
     }
-
-
-
-    
-            
-
-    
 
     private String makeInt(String text) {
         int commaPos = text.indexOf(",");
@@ -654,37 +628,32 @@ public class CustomerController implements Initializable {
         MessageArea.setEditable(true);
     }
 
-
-
-    
-
-     Thread watch = new Thread(new Runnable(){
-            @Override
+    Thread watch = new Thread(new Runnable() {
+        @Override
         public void run() {
-                try{
-                        while (true) {                        
-                            Platform.runLater(new Runnable() {
+            try {
+                while (true) {
+                    Platform.runLater(new Runnable() {
 
-                                @Override
-        public void run() {
-                                    Date date = new Date();
-                                    //dateFormat.getCalendar().ge
-                                    CustomerWatchLabel.setText(dateFormat.format(date));
-                                    
-                                    
-                                }
-                            });
-                            Thread.sleep(500);
-                    }
-                    } catch(InterruptedException ex){
-                        ex.printStackTrace();
-                        
-                    }
-                
+                        @Override
+                        public void run() {
+                            Date date = new Date();
+                            //dateFormat.getCalendar().ge
+                            CustomerWatchLabel.setText(dateFormat.format(date));
+
+                        }
+                    });
+                    Thread.sleep(500);
+                }
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+
             }
-        });
-     //MUST NOT BE DELETED
-   Paint paint = new Paint() {
+
+        }
+    });
+    //MUST NOT BE DELETED
+    Paint paint = new Paint() {
 
         @Override
         public PaintContext createContext(ColorModel cm, Rectangle rctngl, Rectangle2D rd, AffineTransform at, RenderingHints rh) {
@@ -697,58 +666,55 @@ public class CustomerController implements Initializable {
         }
     };
     boolean testwatch = true;
-    Thread movewatch = new Thread(new Runnable(){
-            @Override
+    Thread movewatch = new Thread(new Runnable() {
+        @Override
         public void run() {
-                try{
-                    
-                        while (true) {                        
-                            Platform.runLater(new Runnable() {
-                            double xpos;
-                            
-                            
-                                @Override
-        public void run() {
-                                    double furthestx = 292 - CustomerWatchLabel.getWidth();
-                                    
-                                    if (testwatch == false) {
-                                        xpos = CustomerWatchLabel.getLayoutX() - 1;
-                                        CustomerWatchLabel.setLayoutX(xpos);
-                                        
-                                        if (CustomerWatchLabel.getLayoutX() == 0) {
-                                            testwatch = true;
-                                            CustomerWatchLabel.setTextFill(javafx.scene.paint.Paint.valueOf(randomColor()));
-                                        }
-                                    }
-                                    else if (testwatch == true) {
-                                       
-                                       xpos = CustomerWatchLabel.getLayoutX() + 1;
-                                       CustomerWatchLabel.setLayoutX(xpos);
-                                       
-                                       if (furthestx <= CustomerWatchLabel.getLayoutX()) {
-                                            testwatch = false;
-                                            CustomerWatchLabel.setTextFill(javafx.scene.paint.Paint.valueOf(randomColor()));
-                                        }  
-                                        
-                                    }
-                                    
-                                    else
-                                    CustomerWatchLabel.setLayoutX(xpos);
-                                    
+            try {
+
+                while (true) {
+                    Platform.runLater(new Runnable() {
+                        double xpos;
+
+                        @Override
+                        public void run() {
+                            double furthestx = 292 - CustomerWatchLabel.getWidth();
+
+                            if (testwatch == false) {
+                                xpos = CustomerWatchLabel.getLayoutX() - 1;
+                                CustomerWatchLabel.setLayoutX(xpos);
+
+                                if (CustomerWatchLabel.getLayoutX() == 0) {
+                                    testwatch = true;
+                                    CustomerWatchLabel.setTextFill(javafx.scene.paint.Paint.valueOf(randomColor()));
                                 }
-                            });
-                            Thread.sleep(37);
-                    }
-                    } catch(InterruptedException ex){
-                        ex.printStackTrace();
-                        
-                    }
-                
+                            } else if (testwatch == true) {
+
+                                xpos = CustomerWatchLabel.getLayoutX() + 1;
+                                CustomerWatchLabel.setLayoutX(xpos);
+
+                                if (furthestx <= CustomerWatchLabel.getLayoutX()) {
+                                    testwatch = false;
+                                    CustomerWatchLabel.setTextFill(javafx.scene.paint.Paint.valueOf(randomColor()));
+                                }
+
+                            } else {
+                                CustomerWatchLabel.setLayoutX(xpos);
+                            }
+
+                        }
+                    });
+                    Thread.sleep(37);
+                }
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+
             }
-        });
-    
-    private String randomColor(){
-        
+
+        }
+    });
+
+    private String randomColor() {
+
         // create random object - reuse this as often as possible
         Random random = new Random();
 
@@ -759,10 +725,8 @@ public class CustomerController implements Initializable {
         String colorCode = String.format("#%06x", nextInt);
 
         return colorCode;
-    
-    }
 
-   
+    }
 
     private void displayName() {
         String[] name = logic.getCustomer().getName().split(" ");
@@ -782,5 +746,61 @@ public class CustomerController implements Initializable {
             }
         }
 
+    }
+
+    
+    
+    Thread timer = new Thread(new Runnable() {
+        
+        @Override
+        public void run() {
+            try {
+
+                while (true) {
+                    Platform.runLater(new Runnable() {
+
+                        @Override
+                        public void run() {
+                           
+                            System.out.println("test1");
+                            System.out.println(logic.getimeRemaining());
+                            if (logic.getimeRemaining() == 0) {
+                                System.out.println("test2");
+                                logoutButtonHandler(stage);
+                                logic.logout();
+                                
+
+                            }
+                        }
+                    }
+                        );
+                        Thread.sleep (1000);
+                    }
+                    } catch(InterruptedException ex){
+                        ex.printStackTrace();
+                        
+                    }
+
+            }
+        }
+    );
+
+    @FXML
+    private void logoutButtonHandler() {
+        
+        if (logic.logout().equalsIgnoreCase("true")) {
+                try {
+                    Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
+                    Scene newScene = new Scene(nextView);
+//                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(newScene);
+                    stage.show();
+                } catch (IOException ex) {
+                    System.out.println("Error; logoutButton(customer)");
+                    ex.printStackTrace();
+                }
+            } else if (logic.logout().equalsIgnoreCase("false")) {
+                System.out.println("could not log out"); //this should bechanged to a label in the GUI
+            }
     }
 }
