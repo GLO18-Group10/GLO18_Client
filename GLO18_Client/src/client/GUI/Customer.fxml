@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="CustomerParentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CustomerController">
+<AnchorPane id="AnchorPane" fx:id="CustomerParentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CustomerController">
          <children>
       <AnchorPane fx:id="NewTransferAnchorPane" layoutX="292.0" layoutY="-8.0" prefHeight="620.0" prefWidth="608.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -321,7 +321,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="52.0" prefWidth="113.0" text="Sender">
+                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="113.0" text="Sender">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -336,8 +336,11 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="56.0" prefWidth="78.0" text="Category" />
-                        <Label alignment="CENTER" prefHeight="52.0" prefWidth="109.0" text="Text">
+                        <Label prefHeight="55.0" prefWidth="78.0" text="Category">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="109.0" text="Text">
                            <font>
                               <Font size="16.0" />
                            </font>
