@@ -7,12 +7,21 @@ package client.GUI;
 
 import client.Acquaintance.IGUI;
 import client.Acquaintance.ILogic;
+import java.awt.Paint;
+import java.awt.PaintContext;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.ColorModel;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +39,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -167,15 +177,18 @@ public class CustomerController implements Initializable {
     @FXML
     private Label ErrorLabelShowTransactionHistory;
 
+    private Label CustomerWatchLabel;
+    @FXML
     private AnchorPane WelcomeAnchorPane;
     @FXML
     private Label welcomeNameLabel;
     @FXML
     private Label lastLoginLabel;
     
+
     public CustomerController() {
     }
-    
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gui = GUIrun.getInstance();
@@ -191,6 +204,10 @@ public class CustomerController implements Initializable {
         TransactionHistoryCategoryChoiceBox.getItems().addAll(CategoryChoiceBox.getItems());
         welcomeNameLabel.setText(logic.getCustomer().getName().split(" ")[0] + "!");        
         lastLoginLabel.setText("Your last login was: " + logic.lastLogin());
+        watch.setDaemon(true);
+        watch.start();
+        movewatch.setDaemon(true);
+        movewatch.start();
     }
     
     @FXML
@@ -255,6 +272,8 @@ public class CustomerController implements Initializable {
                     getTransactionHistory();
                 }
             }
+            
+            
         }
     }
     
@@ -267,15 +286,17 @@ public class CustomerController implements Initializable {
         AccountsAnchorPane.setVisible(false);
         OptionAnchorPane.setVisible(false);
         ProfileAnchor.setVisible(false);
-        WelcomeAnchorPane.setVisible(false);
         clearContact();
-        ContactAnchor.setVisible(false);
+        ContactAnchor.setVisible(false);        
+        lastLoginLabel.setVisible(false);WelcomeAnchorPane.setVisible(false);
     }
     
     private void clearContact() {
         ContactSubjectField.clear();
         ContactTextArea.clear();
         ContactErrorLabel.setText("");
+        CreateBankAccountSucceslabel.setText("");
+        
     }
     
     private String storeCustomerInfo(String name, String phoneNo, String address, String email) {
@@ -551,17 +572,30 @@ public class CustomerController implements Initializable {
     }
     
     @FXML
-    private void openBankAccount() {
+    private void openBankAccount(){
+        System.out.println(AccountsDropdown.getItems().size());
+
+        if (AccountsDropdown.getItems().size() == 10) {
+            CreateBankAccountSucceslabel.setText("Max bank accounts");
+            
+        }
+        else {
+
         String message = logic.openBankAccount();
         CreateBankAccountSucceslabel.setText(message);
         AccountsDropdown.getItems().clear();
         if (AccountsDropdown.getItems().isEmpty()) {
-            String bankid[] = logic.getCustomer().getBankID().split(";");
-            for (int i = 0; i < bankid.length; i++) {
-                AccountsDropdown.getItems().addAll(bankid[i]);
+
+                String bankid[] = logic.getCustomer().getBankID().split(";");
+                for (int i = 0; i < bankid.length; i++) {
+                    AccountsDropdown.getItems().addAll(bankid[i]);
+                   
+                }
             }
         }
-    }
+    }   
+            
+
     
     private String makeInt(String text) {
         int commaPos = text.indexOf(",");
@@ -621,6 +655,112 @@ public class CustomerController implements Initializable {
         MessageArea.setEditable(true);
     }
     
+
+     Thread watch = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try{
+                        while (true) {                        
+                            Platform.runLater(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    Date date = new Date();
+                                    //dateFormat.getCalendar().ge
+                                    CustomerWatchLabel.setText(dateFormat.format(date));
+                                    
+                                    
+                                }
+                            });
+                            Thread.sleep(500);
+                    }
+                    } catch(InterruptedException ex){
+                        ex.printStackTrace();
+                        
+                    }
+                
+            }
+        });
+     //MUST NOT BE DELETED
+   Paint paint = new Paint() {
+
+        @Override
+        public PaintContext createContext(ColorModel cm, Rectangle rctngl, Rectangle2D rd, AffineTransform at, RenderingHints rh) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int getTransparency() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    };
+    boolean testwatch = true;
+    Thread movewatch = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try{
+                    
+                        while (true) {                        
+                            Platform.runLater(new Runnable() {
+                            double xpos;
+                            
+                            
+                                @Override
+                                public void run() {
+                                    double furthestx = 292 - CustomerWatchLabel.getWidth();
+                                    
+                                    if (testwatch == false) {
+                                        xpos = CustomerWatchLabel.getLayoutX() - 1;
+                                        CustomerWatchLabel.setLayoutX(xpos);
+                                        
+                                        if (CustomerWatchLabel.getLayoutX() == 0) {
+                                            testwatch = true;
+                                            CustomerWatchLabel.setTextFill(javafx.scene.paint.Paint.valueOf(randomColor()));
+                                        }
+                                    }
+                                    else if (testwatch == true) {
+                                       
+                                       xpos = CustomerWatchLabel.getLayoutX() + 1;
+                                       CustomerWatchLabel.setLayoutX(xpos);
+                                       
+                                       if (furthestx <= CustomerWatchLabel.getLayoutX()) {
+                                            testwatch = false;
+                                            CustomerWatchLabel.setTextFill(javafx.scene.paint.Paint.valueOf(randomColor()));
+                                        }  
+                                        
+                                    }
+                                    
+                                    else
+                                    CustomerWatchLabel.setLayoutX(xpos);
+                                    
+                                }
+                            });
+                            Thread.sleep(37);
+                    }
+                    } catch(InterruptedException ex){
+                        ex.printStackTrace();
+                        
+                    }
+                
+            }
+        });
+    
+    private String randomColor(){
+        
+        // create random object - reuse this as often as possible
+        Random random = new Random();
+
+        // create a big random number - maximum is ffffff (hex) = 16777215 (dez)
+        int nextInt = random.nextInt(0xffffff + 1);
+
+        // format it as hexadecimal string (with hashtag and leading zeros)
+        String colorCode = String.format("#%06x", nextInt);
+
+        return colorCode;
+    
+    }
+
+   
     private void displayName() {
         String[] name = logic.getCustomer().getName().split(" ");
         String firstName = "";
@@ -638,6 +778,7 @@ public class CustomerController implements Initializable {
                 AccountsDropdown.getItems().add(bankid[i]);
             }
         }
+
     }
 
     @FXML
@@ -657,3 +798,4 @@ public class CustomerController implements Initializable {
         }
     }
 }
+

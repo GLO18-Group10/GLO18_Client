@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="CustomerParentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CustomerController">
+<AnchorPane id="AnchorPane" fx:id="CustomerParentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CustomerController">
          <children>
       <AnchorPane fx:id="NewTransferAnchorPane" layoutX="292.0" layoutY="-8.0" prefHeight="620.0" prefWidth="608.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -445,6 +445,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
+                  <Label fx:id="CustomerWatchLabel" layoutY="6.0" />
                </children>
             </Pane>
             <Button fx:id="AccountsButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Accounts" textFill="WHITE">
