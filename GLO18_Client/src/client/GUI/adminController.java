@@ -7,10 +7,22 @@ package client.GUI;
 
 import client.Acquaintance.IGUI;
 import client.Acquaintance.ILogic;
+import java.awt.Paint;
+import java.awt.PaintContext;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.ColorModel;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -76,10 +88,14 @@ public class adminController implements Initializable {
     private Button updateIDButton;
     @FXML
     private Label activateIDLabel;
+    @FXML
+    private Label AdminWatchLabel;
 
     /**
      * Initializes the controller class.
      */
+    
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gui = GUIrun.getInstance();
@@ -92,6 +108,10 @@ public class adminController implements Initializable {
         textFields.add(AddressField);
         textFields.add(EmailField);
         getIdForList();
+        watch.setDaemon(true);
+        watch.start();
+        movewatch.setDaemon(true);
+        movewatch.start();
     }
 
     @FXML
@@ -126,6 +146,7 @@ public class adminController implements Initializable {
     private void logoutHandler(ActionEvent event) {
         if (logic.logout().equalsIgnoreCase("true")) {
             try {
+                
                 Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
                 Scene newScene = new Scene(nextView);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -192,4 +213,110 @@ public class adminController implements Initializable {
             activateIDLabel.setText("Activation: " + response);
         }
     }
+    
+     Thread watch = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try{
+                        while (true) {                        
+                            Platform.runLater(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    Date date = new Date();
+                                    //dateFormat.getCalendar().ge
+                                    AdminWatchLabel.setText(dateFormat.format(date));
+                                    
+                                    
+                                }
+                            });
+                            Thread.sleep(500);
+                    }
+                    } catch(InterruptedException ex){
+                        ex.printStackTrace();
+                        
+                    }
+                
+            }
+        });
+     //MUSTNT BE DELETED
+   Paint paint = new Paint() {
+
+        @Override
+        public PaintContext createContext(ColorModel cm, Rectangle rctngl, Rectangle2D rd, AffineTransform at, RenderingHints rh) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int getTransparency() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    };
+    boolean testwatch = true;
+    Thread movewatch = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try{
+                    
+                        while (true) {                        
+                            Platform.runLater(new Runnable() {
+                            double xpos;
+                            
+                            
+                                @Override
+                                public void run() {
+                                    double furthestx = 936 - AdminWatchLabel.getWidth();
+                                    
+                                    if (testwatch == false) {
+                                        xpos = AdminWatchLabel.getLayoutX() - 1;
+                                        AdminWatchLabel.setLayoutX(xpos);
+                                        
+                                        if (AdminWatchLabel.getLayoutX() == 0) {
+                                            testwatch = true;
+                                            AdminWatchLabel.setTextFill(javafx.scene.paint.Paint.valueOf(randomColor()));
+                                        }
+                                    }
+                                    else if (testwatch == true) {
+                                       
+                                       xpos = AdminWatchLabel.getLayoutX() + 1;
+                                       AdminWatchLabel.setLayoutX(xpos);
+                                       
+                                       if (furthestx <= AdminWatchLabel.getLayoutX()) {
+                                            testwatch = false;
+                                            AdminWatchLabel.setTextFill(javafx.scene.paint.Paint.valueOf(randomColor()));
+                                        }  
+                                        
+                                    }
+                                    
+                                    else
+                                    AdminWatchLabel.setLayoutX(xpos);
+                                    
+                                }
+                            });
+                            Thread.sleep(37);
+                    }
+                    } catch(InterruptedException ex){
+                        ex.printStackTrace();
+                        
+                    }
+                
+            }
+        });
+    
+    private String randomColor(){
+        
+        // create random object - reuse this as often as possible
+        Random random = new Random();
+
+        // create a big random number - maximum is ffffff (hex) = 16777215 (dez)
+        int nextInt = random.nextInt(0xffffff + 1);
+
+        // format it as hexadecimal string (with hashtag and leading zeros)
+        String colorCode = String.format("#%06x", nextInt);
+
+        return colorCode;
+    
+    }
+    
+    
 }
