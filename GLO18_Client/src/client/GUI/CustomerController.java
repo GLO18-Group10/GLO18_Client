@@ -176,7 +176,7 @@ public class CustomerController implements Initializable {
     private Button ChangeCategoryButton;
     @FXML
     private Label ErrorLabelShowTransactionHistory;
-
+    @FXML
     private Label CustomerWatchLabel;
     @FXML
     private AnchorPane WelcomeAnchorPane;
@@ -184,8 +184,6 @@ public class CustomerController implements Initializable {
     private Label welcomeNameLabel;
     @FXML
     private Label lastLoginLabel;
-    
-
     public CustomerController() {
     }
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -429,7 +427,7 @@ public class CustomerController implements Initializable {
             TransactionOverallMessageLabel.setText("Dont use ; or \"");
         } else if (logic.checkPassword(logic.getCustomer().getID(), ConfirmPasswordField.getText()).equalsIgnoreCase("true")) {
             //Makes the transaction
-            String response = logic.toProtocol05(senderBankID, amount, bankID, category, message);
+            String response = logic.toProtocol05(senderBankID, amount, bankID, message, category);
             if (response.equalsIgnoreCase("Error; recipient not found.")) {
                 AccountErrorLabel.setText("Error; recipient not found.");
                 ConfirmTransactionButton.setVisible(false);
@@ -793,7 +791,7 @@ public class CustomerController implements Initializable {
         String transaction = TransactionHistoryListView.getItems().get(i);
         String transactionFixed = transaction.trim().replaceAll(" +", " ");
         String[] date = transactionFixed.split(" ");
-        String dateToSend = date[1] + " " + date[2];
+        String dateToSend = date[2] + " " + date[3];
         logic.changeTransactionCategory(accountNo, category, dateToSend);
         }
     }
