@@ -82,55 +82,62 @@
                </center>
             </BorderPane>
             <BorderPane prefHeight="555.0" prefWidth="336.0">
-               <right>
-                  <VBox prefHeight="470.0" prefWidth="195.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <TextField fx:id="LastnameField" promptText="Last name">
-                           <VBox.margin>
-                              <Insets left="5.0" top="58.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <TextField fx:id="PhoneField" promptText="Phone number ">
-                           <VBox.margin>
-                              <Insets left="5.0" top="20.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <TextField fx:id="AddressField" promptText="Address">
-                           <VBox.margin>
-                              <Insets left="5.0" top="20.0" />
-                           </VBox.margin>
-                        </TextField>
-                     </children>
-                  </VBox>
-               </right>
                <left>
-                  <VBox prefHeight="470.0" prefWidth="186.0" BorderPane.alignment="CENTER">
+                  <VBox prefHeight="555.0" prefWidth="326.0" BorderPane.alignment="CENTER">
                      <children>
                         <Label prefHeight="40.0" prefWidth="171.0" text="Create customer account">
                            <font>
                               <Font size="14.0" />
                            </font></Label>
-                        <TextField fx:id="FirstNameField" promptText="First name">
+                        <HBox prefHeight="26.0" prefWidth="186.0">
+                           <children>
+                              <TextField fx:id="FirstNameField" prefHeight="25.0" prefWidth="150.0" promptText="First name">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <TextField fx:id="LastnameField" prefWidth="150.0" promptText="Last name" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="25.0" prefWidth="186.0">
+                           <children>
+                              <TextField fx:id="CPRField" prefHeight="25.0" prefWidth="150.0" promptText="CPR">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <TextField fx:id="PhoneField" prefWidth="150.0" promptText="Phone number " />
+                           </children>
                            <VBox.margin>
-                              <Insets right="5.0" top="20.0" />
+                              <Insets top="15.0" />
                            </VBox.margin>
-                        </TextField>
-                        <TextField fx:id="CPRField" prefHeight="25.0" prefWidth="140.0" promptText="CPR">
+                        </HBox>
+                        <HBox prefHeight="28.0" prefWidth="186.0">
+                           <children>
+                              <TextField fx:id="EmailField" prefWidth="150.0" promptText="Email">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <TextField fx:id="AddressField" prefWidth="150.0" promptText="Address" />
+                           </children>
                            <VBox.margin>
-                              <Insets right="5.0" top="20.0" />
+                              <Insets top="15.0" />
                            </VBox.margin>
-                        </TextField>
-                        <TextField fx:id="EmailField" promptText="Email">
+                        </HBox>
+                        <HBox prefHeight="36.0" prefWidth="321.0">
+                           <children>
+                              <DatePicker fx:id="birthdayFieldDatePicker" prefHeight="31.0" prefWidth="150.0" promptText="Birthday">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </DatePicker>
+                           </children>
                            <VBox.margin>
-                              <Insets right="5.0" top="20.0" />
+                              <Insets top="15.0" />
                            </VBox.margin>
-                        </TextField>
-                        <DatePicker fx:id="birthdayFieldDatePicker" prefHeight="31.0" prefWidth="187.0" promptText="Birthday">
-                           <VBox.margin>
-                              <Insets right="5.0" top="20.0" />
-                           </VBox.margin>
-                        </DatePicker>
-                        <TextArea fx:id="statusTextArea" editable="false" prefHeight="90.0" prefWidth="186.0">
+                        </HBox>
+                        <TextArea fx:id="statusTextArea" editable="false" prefHeight="90.0" prefWidth="384.0">
                            <VBox.margin>
                               <Insets right="5.0" top="10.0" />
                            </VBox.margin>
@@ -146,9 +153,6 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
-               <center>
-                  <VBox prefHeight="437.0" prefWidth="80.0" BorderPane.alignment="CENTER" />
-               </center>
             </BorderPane>
          </children>
       </HBox>

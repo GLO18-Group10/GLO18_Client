@@ -75,7 +75,7 @@
                                     <Insets top="70.0" />
                                  </VBox.margin>
                               </ChoiceBox>
-                              <TextField fx:id="AmountField" prefHeight="25.0" prefWidth="236.0">
+                              <TextField fx:id="AmountField" onAction="#proceedTransfer" prefHeight="25.0" prefWidth="236.0">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
@@ -113,7 +113,7 @@
                                     <Insets left="15.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <Label text="Account number + reg. ">
+                              <Label text="Reg. + Account Number">
                                  <VBox.margin>
                                     <Insets left="15.0" top="30.0" />
                                  </VBox.margin>
@@ -131,12 +131,12 @@
                            <children>
                               <HBox prefHeight="28.0" prefWidth="213.0">
                                  <children>
-                                    <TextField fx:id="AccountField" prefHeight="25.0" prefWidth="152.0">
+                                    <TextField fx:id="AccountField" onAction="#proceedTransfer" prefHeight="25.0" prefWidth="60.0">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
                                     </TextField>
-                                    <TextField fx:id="RegField" prefHeight="18.0" prefWidth="75.0">
+                                    <TextField fx:id="RegField" onAction="#proceedTransfer" prefHeight="25.0">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -151,7 +151,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </TextArea>
-                              <Label fx:id="TransactionOverallMessageLabel" prefHeight="30.0" prefWidth="214.0" textFill="RED" wrapText="true">
+                              <Label fx:id="TransactionOverallMessageLabel" prefHeight="30.0" textFill="RED" wrapText="true">
                                  <VBox.margin>
                                     <Insets top="20.0" />
                                  </VBox.margin>
@@ -195,7 +195,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <PasswordField fx:id="ConfirmPasswordField" promptText="Enter Password to Confirm Transaction" visible="false">
+                              <PasswordField fx:id="ConfirmPasswordField" onAction="#transfer" promptText="Enter Password to Confirm Transaction" visible="false">
                                  <VBox.margin>
                                     <Insets left="15.0" right="350.0" top="5.0" />
                                  </VBox.margin>
@@ -225,7 +225,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane id="AnchorPane" fx:id="AccountsAnchorPane" layoutX="292.0" layoutY="-8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="608.0" style="-fx-background-color: #FFFFFF;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane id="AnchorPane" fx:id="AccountsAnchorPane" layoutX="292.0" layoutY="-8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="608.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox prefHeight="600.0" prefWidth="608.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -247,7 +247,7 @@
                                     </Label>
                                  </children>
                               </VBox>
-                              <Button fx:id="updateButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="87.0" text="Update">
+                              <Button fx:id="updateButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="87.0" text="Update">
                                  <HBox.margin>
                                     <Insets left="15.0" top="30.0" />
                                  </HBox.margin>
@@ -350,7 +350,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="AnchorPane3" layoutX="289.0" prefHeight="608.0" prefWidth="615.0" visible="false">
+      <AnchorPane fx:id="OptionAnchorPane" layoutX="289.0" prefHeight="608.0" prefWidth="615.0" visible="false">
          <children>
             <BorderPane prefHeight="600.0" prefWidth="608.0">
                <left>
@@ -372,7 +372,7 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Label>
-                        <PasswordField fx:id="oldPasswordField">
+                        <PasswordField fx:id="oldPasswordField" onAction="#changePassword">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -382,7 +382,7 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                         </Label>
-                        <PasswordField fx:id="newPasswordField">
+                        <PasswordField fx:id="newPasswordField" onAction="#changePassword">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -392,7 +392,7 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                         </Label>
-                        <PasswordField fx:id="repeatPasswordField">
+                        <PasswordField fx:id="repeatPasswordField" onAction="#changePassword">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -435,38 +435,43 @@
          <children>
             <Pane fx:id="Pane" prefHeight="321.0" prefWidth="171.0">
                <children>
-                  <ImageView fitHeight="277.0" fitWidth="277.0" layoutX="7.0" layoutY="7.0">
+                  <ImageView fitHeight="277.0" fitWidth="277.0" layoutX="7.0" layoutY="4.0">
                      <image>
                         <Image url="@../../Img/Elena.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="TOP_CENTER" layoutY="290.0" prefHeight="27.0" prefWidth="292.0" text="FUNDUS ARE SAFU" textAlignment="CENTER" textFill="#ffea00">
+                  <Label alignment="TOP_CENTER" layoutY="284.0" prefHeight="27.0" prefWidth="292.0" text="FUNDUS ARE SAFU" textAlignment="CENTER" textFill="#ffea00">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="AccountsButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Accounts" textFill="WHITE">
+            <Button fx:id="AccountsButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Accounts" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="TransferButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="New Transaction" textFill="WHITE">
+            <Button fx:id="TransferButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="New Transaction" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="ProfileButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Profile" textFill="WHITE">
+            <Button fx:id="ProfileButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Profile" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="OptionsButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Options" textFill="WHITE">
+            <Button fx:id="OptionsButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Options" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="LogoutButton" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Logout" textFill="WHITE">
+            <Button fx:id="ContactButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Contact" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
+            <Button fx:id="LogoutButton" layoutX="10.0" layoutY="551.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="292.0" style="-fx-background-color: #3f2B63;" text="Logout" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
       <AnchorPane fx:id="ProfileAnchor" layoutX="289.0" layoutY="-2.0" prefHeight="608.0" prefWidth="608.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -480,33 +485,39 @@
                               <Insets top="50.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="NameField" disable="true" />
-                        <Label text="Lastname" />
-                        <TextField fx:id="LastNameField" disable="true" />
+                        <TextField fx:id="NameField" disable="true" onAction="#storeCustomerInfoButtonHandler" />
+                        <Label text="Lastname">
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding></Label>
+                        <TextField fx:id="LastNameField" disable="true" onAction="#storeCustomerInfoButtonHandler">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin></TextField>
                         <Label text="Birthday">
                            <padding>
                               <Insets top="10.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="BirthdayField" disable="true" editable="false" />
+                        <TextField fx:id="BirthdayField" disable="true" editable="false" onAction="#storeCustomerInfoButtonHandler" />
                         <Label text="Phone Number">
                            <padding>
                               <Insets top="10.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="PhoneNoField" disable="true" />
+                        <TextField fx:id="PhoneNoField" disable="true" onAction="#storeCustomerInfoButtonHandler" />
                         <Label text="Address">
                            <padding>
                               <Insets top="10.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="AddressField" disable="true" />
+                        <TextField fx:id="AddressField" disable="true" onAction="#storeCustomerInfoButtonHandler" />
                         <Label text="Email">
                            <padding>
                               <Insets top="10.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="EmailField" disable="true" />
+                        <TextField fx:id="EmailField" disable="true" onAction="#storeCustomerInfoButtonHandler" />
                      </children>
                   </VBox>
                </center>
@@ -555,6 +566,106 @@
                      </children>
                   </HBox>
                </bottom>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ContactAnchor" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label text="Contact">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="15.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Subject">
+                     <VBox.margin>
+                        <Insets left="15.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="ContactSubjectField">
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Text">
+                     <VBox.margin>
+                        <Insets left="15.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextArea fx:id="ContactTextArea" prefHeight="200.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" top="5.0" />
+                     </VBox.margin>
+                  </TextArea>
+                  <Label fx:id="ContactErrorLabel" prefHeight="27.0" prefWidth="573.0" textFill="RED">
+                     <VBox.margin>
+                        <Insets left="15.0" top="25.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="33.0" prefWidth="608.0">
+                     <children>
+                        <Button fx:id="SendBankMail" mnemonicParsing="false" onAction="#sendBankMail" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: #3f2B63;" text="Confirm" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="CancelBankMail" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancelBankMail" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: #3f2B63;" text="Cancel" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="WelcomeAnchorPane" layoutX="291.0" layoutY="-1.0" prefHeight="601.0" prefWidth="610.0">
+         <children>
+            <BorderPane layoutX="2.0" layoutY="4.0" prefHeight="599.0" prefWidth="606.0">
+               <top>
+                  <HBox prefHeight="163.0" prefWidth="606.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label text="Welcome">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="50.0" top="50.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="welcomeNameLabel">
+                           <HBox.margin>
+                              <Insets left="10.0" top="50.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </top>
+               <center>
+                  <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="lastLoginLabel">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="50.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </center>
             </BorderPane>
          </children>
       </AnchorPane>
