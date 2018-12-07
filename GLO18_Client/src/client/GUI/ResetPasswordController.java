@@ -61,16 +61,21 @@ public class ResetPasswordController implements Initializable {
     private void resetPasswordHandler(ActionEvent event) {
         String ID = "C" + UsernameField.getText();
         if (UsernameField.getText().isEmpty()) {
-            IDLabel.setText("Username field is empty");
+            IDLabel.setText("CPR field is empty");
 
-        } else if (logic.toProtocol17(ID).equalsIgnoreCase("true")) {
+        } else if (!ID.contains(";")) {
+            if (logic.toProtocol17(ID).equalsIgnoreCase("true")) {
 
-            IDLabel.setText("Password change");
+                IDLabel.setText("Password change");
 
-        } else {
-            IDLabel.setText("CPR does not exist");
+            } else {
+                IDLabel.setText("CPR does not exist");
 
+            }
+        } else{
+            IDLabel.setText("You may not use special characters");
         }
+
     }
 
     @FXML
