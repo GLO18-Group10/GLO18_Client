@@ -13,6 +13,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import client.Acquaintance.IGUI;
 import client.Acquaintance.ILogic;
+import java.io.IOException;
+
+import javafx.application.Platform;
 
 /**
  *
@@ -23,7 +26,8 @@ public class GUIrun extends Application implements IGUI {
     private static ILogic logic;
 
     private static IGUI guiRun;
-
+    private Stage mainStage;
+    
     @Override
     public void injectLogic(ILogic LogicLayer) {
         logic = LogicLayer;
@@ -44,7 +48,7 @@ public class GUIrun extends Application implements IGUI {
 
 
         Scene scene = new Scene(root);
-
+        
         stage.setResizable(true);
         stage.setScene(scene);
         stage.show();
@@ -56,12 +60,25 @@ public class GUIrun extends Application implements IGUI {
         guiRun = this;
         launch(args);
     }
-    
+     @Override
+    public void logout() {
+        if (logic.logout().equalsIgnoreCase("true")) {
+            try {
+                Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
+                Scene newScene = new Scene(nextView);
+                //Stage stage = (Stage) this.stage.getScene().getWindow();
+                mainStage.setScene(newScene);
+                mainStage.show();
+            } catch (IOException ex) {
+                System.out.println("Error; logoutButton(customer)");
+                ex.printStackTrace();
+            }
+        } else if (logic.logout().equalsIgnoreCase("false")) {
+            System.out.println("could not log out"); //this should bechanged to a label in the GUI
+        }
+    }
     /**
      * when the application stops, the user is logged out
      */
-    @Override
-    public void stop(){
-        logic.logout();
-    }
+ 
 }

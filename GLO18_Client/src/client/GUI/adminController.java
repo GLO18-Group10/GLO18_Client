@@ -96,6 +96,7 @@ public class adminController implements Initializable {
 
     @FXML
     private void CreateButtonHandler(ActionEvent event) {
+        logic.updateTimer();
         if (isEmptyOrContainsIllegalChar(textFields) || birthdayFieldDatePicker.getValue() == null || !isValid(CPRField.getText()) || !isValid(PhoneField.getText())) {
         } else {
             String ID = "C" + CPRField.getText();
@@ -124,6 +125,7 @@ public class adminController implements Initializable {
 
     @FXML
     private void logoutHandler(ActionEvent event) {
+        logic.updateTimer();
         if (logic.logout().equalsIgnoreCase("true")) {
             try {
                 Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
@@ -178,6 +180,7 @@ public class adminController implements Initializable {
 
     @FXML
     private void CloseCustomerAccount(ActionEvent event) {
+        logic.updateTimer();
         if (event.getSource() == Close_Button) {
             String response = logic.getAdmin().closeCustomerAccount((String) customerAccountsListView.getSelectionModel().getSelectedItem());
             activateIDLabel.setText("Deactivation: " + response);
@@ -187,6 +190,7 @@ public class adminController implements Initializable {
 
     @FXML
     private void openCustomerAccount(ActionEvent event) {
+       logic.updateTimer();
         if (event.getSource() == Open_Button) {
             String response = logic.getAdmin().openCustomerAccount((String) customerAccountsListView.getSelectionModel().getSelectedItem());
             activateIDLabel.setText("Activation: " + response);

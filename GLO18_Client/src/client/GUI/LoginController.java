@@ -40,6 +40,8 @@ public class LoginController implements Initializable {
     private double yOffset;
     IGUI gui;
     ILogic logic;
+    
+
 
     @FXML
     private Button ExitButton;
@@ -55,6 +57,8 @@ public class LoginController implements Initializable {
     private AnchorPane LoginParentPane;
     @FXML
     private AnchorPane LoginAnchorPane;
+
+   
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -84,6 +88,7 @@ public class LoginController implements Initializable {
                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         stage.setScene(newScene);
                         stage.show();
+                        logic.updateTimer();
                     } catch (IOException ex) {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -107,6 +112,7 @@ public class LoginController implements Initializable {
                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         stage.setScene(newScene);
                         stage.show();
+                        logic.updateTimer();
                     } catch (IOException ex) {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }

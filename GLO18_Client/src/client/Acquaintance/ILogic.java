@@ -50,4 +50,5 @@ public interface ILogic {
     public String openBankAccount();
     
     public String lastLogin();
+    public void updateTimer();
 }

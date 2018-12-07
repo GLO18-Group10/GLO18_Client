@@ -19,8 +19,8 @@ public class LogicFacade implements ILogic {
     private static ILink link;
     private ICustomer customer;
     private IAdmin admin;
-
     private MessageParser messageParser = new MessageParser(this);
+    private LogoutTimer timer = new LogoutTimer();
 
     @Override
     public void injectLink(ILink LinkLayer) {
@@ -30,6 +30,9 @@ public class LogicFacade implements ILogic {
     @Override
     public void startConnection() {
         link.startConnection();
+    }
+    public void updateTimer(){
+        timer.updateTimer();
     }
 
     @Override
@@ -44,6 +47,7 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String login(String ID, String password) {
+        this.timer = new LogoutTimer();
         sendMessage(messageParser.toProtocol00(ID, password));
         String message = receiveMessage();
 
@@ -56,6 +60,7 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String logout() {
+       this.timer.cancel();
         String message = "";
         if(customer != null && admin == null){
             message = messageParser.toProtocol18(customer.getID());
@@ -171,4 +176,6 @@ public class LogicFacade implements ILogic {
         sendMessage(messageParser.toProtocol04(customer.getID()));
         return receiveMessage();
     }
+
+    
 }

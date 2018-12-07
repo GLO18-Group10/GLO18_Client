@@ -14,7 +14,8 @@ public interface IGUI {
     public void injectLogic(ILogic LogicLayer);
 
     public void startApplication(String[] args);
-
+    
+    public void logout();
 //    void startConnection();
 //
 //    public String logout();
