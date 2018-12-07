@@ -59,12 +59,12 @@ public class ResetPasswordController implements Initializable {
 
     @FXML
     private void resetPasswordHandler(ActionEvent event) {
-        String ID = "C" + UsernameField.getText();
+        String ID = UsernameField.getText();
         if (UsernameField.getText().isEmpty()) {
             IDLabel.setText("CPR field is empty");
 
-        } else if (!ID.contains(";")) {
-            if (logic.toProtocol17(ID).equalsIgnoreCase("true")) {
+        } else if (!containsInvalidInput(ID)) {
+            if (logic.toProtocol17("C" + ID).equalsIgnoreCase("true")) {
 
                 IDLabel.setText("Password change");
 
@@ -76,6 +76,15 @@ public class ResetPasswordController implements Initializable {
             IDLabel.setText("You may not use special characters");
         }
 
+    }
+    private boolean containsInvalidInput(String stringToCheck) {
+        char[] charArrayToCheck = stringToCheck.toCharArray();
+        for (char c : charArrayToCheck) {
+            if (!Character.isDigit(c)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @FXML
