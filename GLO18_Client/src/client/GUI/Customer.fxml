@@ -316,7 +316,7 @@
                   </BorderPane>
                   <HBox fx:id="HBox" prefHeight="55.0" prefWidth="608.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="68.0" text="Reciever">
+                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="113.0" text="Reciever">
                            <font>
                               <Font size="16.0" />
                            </font>
