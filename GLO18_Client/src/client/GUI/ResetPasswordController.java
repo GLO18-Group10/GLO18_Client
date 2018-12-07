@@ -16,8 +16,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -41,6 +45,8 @@ public class ResetPasswordController implements Initializable {
     ArrayList<TextField> Fields;
     @FXML
     private Button passwordButton;
+    @FXML
+    private Label IDLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,14 +59,28 @@ public class ResetPasswordController implements Initializable {
 
     @FXML
     private void resetPasswordHandler(ActionEvent event) {
-        if (Fields.isEmpty()) {
-
-        }else {
-
         String ID = "C" + UsernameField.getText();
-       logic.toProtocol17(ID);
-       System.out.println("It worked?");
+        if (UsernameField.getText().isEmpty()) {
+            IDLabel.setText("Username field is empty");
+
+        } else if (logic.toProtocol17(ID).equalsIgnoreCase("true")) {
+
+            IDLabel.setText("Password change");
+
+        } else {
+            IDLabel.setText("CPR does not exist");
+
+        }
     }
-}
+
+    @FXML
+    private void backHandler(ActionEvent event) throws IOException {
+
+        Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Scene newScene = new Scene(nextView);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(newScene);
+        stage.show();
+    }
 
 }
