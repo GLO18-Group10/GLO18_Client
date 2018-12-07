@@ -31,6 +31,7 @@ public class LogicFacade implements ILogic {
     public void startConnection() {
         link.startConnection();
     }
+    @Override
     public void updateTimer(){
         timer.updateTimer();
     }
@@ -60,7 +61,7 @@ public class LogicFacade implements ILogic {
 
     @Override
     public String logout() {
-       this.timer.cancel();
+       //this.timer.cancel();
         String message = "";
         if(customer != null && admin == null){
             message = messageParser.toProtocol18(customer.getID());
@@ -182,5 +183,11 @@ public class LogicFacade implements ILogic {
         return receiveMessage();
     }
 
+    @Override
+    public void cancelTimer() {
+        timer.cancelTimer();
+    }
+    
+    
     
 }

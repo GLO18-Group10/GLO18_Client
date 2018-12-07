@@ -52,4 +52,5 @@ public interface ILogic {
     public String lastLogin();
     public void updateTimer();
     public long getimeRemaining();
+    public void cancelTimer();
 }

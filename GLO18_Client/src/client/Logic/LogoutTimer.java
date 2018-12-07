@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public class LogoutTimer extends Timer  {
     
     // Amount of time before logging the user out
-    private static long DELAY = 5*1000;
+    private static long DELAY = 20;
     ILogic logic;
     IGUI gui;
     private Stage mainStage;
@@ -31,8 +31,15 @@ public class LogoutTimer extends Timer  {
         public void run() {
             Platform.runLater(new Runnable() {
                 @Override
-                public void run() { 
+                public void run() {
                     
+                    if (DELAY > 0) {
+                        DELAY--;
+                    }
+                    else if (DELAY <= 0) {
+                        DELAY = 0;
+                        
+                    }
 
                      
                     
@@ -51,9 +58,15 @@ public class LogoutTimer extends Timer  {
     */
     public void updateTimer() {
         this.purge();
-        this.schedule(new LogoutTask(), 1000);
-   
+        
+        //this.schedule(new LogoutTask(), 1000);
+        this.scheduleAtFixedRate(new LogoutTask(), 1000, 1000);
+        
     }
+     public void cancelTimer(){
+         this.cancel();
+     
+     }
 }
 
 

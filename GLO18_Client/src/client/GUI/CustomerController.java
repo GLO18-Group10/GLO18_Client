@@ -58,6 +58,7 @@ public class CustomerController implements Initializable {
 
     IGUI gui;
     ILogic logic;
+    @FXML
     private Stage stage;
     @FXML
     private HBox HBox;
@@ -152,7 +153,6 @@ public class CustomerController implements Initializable {
     @FXML
     private PasswordField ConfirmPasswordField;
     @FXML
-
     private AnchorPane OptionAnchorPane;
 
     @FXML
@@ -203,7 +203,8 @@ public class CustomerController implements Initializable {
         movewatch.start();
 
     }
-
+    ActionEvent logoutevent;
+    
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
         logic.updateTimer();
@@ -244,7 +245,7 @@ public class CustomerController implements Initializable {
             ContactAnchor.toFront();
             ContactAnchor.setVisible(true);
         } else if (event.getSource() == LogoutButton) {
-            logoutButtonHandler();
+            logoutButtonHandler(event);
         } else if (event.getSource() == updateButton) {
             String accountID = AccountsDropdown.getValue();
             if (accountID != null) {
@@ -762,12 +763,13 @@ public class CustomerController implements Initializable {
                         @Override
                         public void run() {
                            
-                            System.out.println("test1");
+                            
                             System.out.println(logic.getimeRemaining());
                             if (logic.getimeRemaining() == 0) {
                                 System.out.println("test2");
-                                logoutButtonHandler(stage);
-                                logic.logout();
+                                logic.cancelTimer();
+                                
+                                
                                 
 
                             }
@@ -786,15 +788,18 @@ public class CustomerController implements Initializable {
     );
 
     @FXML
-    private void logoutButtonHandler() {
-        
+    private void logoutButtonHandler(ActionEvent event) {
+       if (event.getSource() == LogoutButton){ 
         if (logic.logout().equalsIgnoreCase("true")) {
+            logic.cancelTimer();
+            
                 try {
                     Parent nextView = FXMLLoader.load(getClass().getResource("login.fxml"));
                     Scene newScene = new Scene(nextView);
-//                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.setScene(newScene);
                     stage.show();
+               
                 } catch (IOException ex) {
                     System.out.println("Error; logoutButton(customer)");
                     ex.printStackTrace();
@@ -802,5 +807,8 @@ public class CustomerController implements Initializable {
             } else if (logic.logout().equalsIgnoreCase("false")) {
                 System.out.println("could not log out"); //this should bechanged to a label in the GUI
             }
+       }
+         
+    
     }
 }
