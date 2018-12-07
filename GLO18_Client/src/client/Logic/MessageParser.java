@@ -45,12 +45,12 @@ public class MessageParser {
         return "04;" + ID;
     }
 
-    public String toProtocol05(String senderID, String amount, String recieverID, String text, String customerID) {
-        return "05;" + senderID + ";" + amount + ";" + recieverID + ";" + text + ";" + customerID;
+    public String toProtocol05(String senderID, String amount, String recieverID, String text, String customerID, String category) {
+        return "05;" + senderID + ";" + amount + ";" + recieverID  + ";" + text + ";" + customerID + ";" + category;
     }
 
-    public String toProtocol06(String ID, String customerID) {
-        return "06;" + ID + ";" + customerID;
+    public String toProtocol06(String ID, String customerID, String category) {
+        return "06;" + ID + ";" + customerID + ";" + category;
     }
 
     public String toProtocol07(String ID, String name, String birthday, String phonenumber, String address, String email, String password, String adminID) {
@@ -67,6 +67,10 @@ public class MessageParser {
 
     public String toProtocol10(String adminID) {
         return "10;"+ adminID;
+    }
+    
+    public String toProtocol11(String accountNo, String category, String date){
+        return "11;" + accountNo + ";" + category + ";" + date;
     }
 
     public String toProtocol12(String ID, String customerID) {
