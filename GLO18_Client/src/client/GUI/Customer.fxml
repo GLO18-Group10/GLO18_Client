@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -18,7 +24,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="CustomerParentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CustomerController">
+<AnchorPane id="AnchorPane" fx:id="CustomerParentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.CustomerController">
          <children>
       <AnchorPane fx:id="NewTransferAnchorPane" layoutX="292.0" layoutY="-8.0" prefHeight="620.0" prefWidth="608.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -247,12 +253,12 @@
                                     </Label>
                                  </children>
                               </VBox>
-                              <Button fx:id="updateButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="87.0" text="Update">
+                              <Button fx:id="updateButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="75.0" text="Update">
                                  <HBox.margin>
                                     <Insets left="15.0" top="30.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="CreateBankAccountButton" mnemonicParsing="false" onAction="#openBankAccount" prefHeight="31.0" prefWidth="180.0" text="Create Bank Account">
+                              <Button fx:id="CreateBankAccountButton" mnemonicParsing="false" onAction="#openBankAccount" prefHeight="25.0" prefWidth="130.0" text="Create Bank Account">
                                  <HBox.margin>
                                     <Insets left="15.0" top="30.0" />
                                  </HBox.margin>
@@ -262,7 +268,7 @@
                                     <Font size="14.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="55.0" top="25.0" />
+                                    <Insets left="30.0" top="25.0" />
                                  </HBox.margin>
                               </Label>
                               <Label fx:id="AccountBalanceLabel" alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="86.0" text="0 DKK" textAlignment="RIGHT">
@@ -330,17 +336,20 @@
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
                         </Label>
                         <Label alignment="CENTER" prefHeight="55.0" prefWidth="142.0" text="        Amount">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="55.0" prefWidth="78.0" text="Category">
+                        <Label prefHeight="55.0" prefWidth="90.0" text="Category">
                            <font>
                               <Font size="16.0" />
                            </font></Label>
-                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="109.0" text="Text">
+                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="60.0" text="Text">
                            <font>
                               <Font size="16.0" />
                            </font>

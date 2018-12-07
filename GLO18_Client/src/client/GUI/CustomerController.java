@@ -53,7 +53,7 @@ import javafx.stage.Stage;
  * @author antonio
  */
 public class CustomerController implements Initializable {
-    
+
     IGUI gui;
     ILogic logic;
     @FXML
@@ -184,9 +184,11 @@ public class CustomerController implements Initializable {
     private Label welcomeNameLabel;
     @FXML
     private Label lastLoginLabel;
+
     public CustomerController() {
     }
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gui = GUIrun.getInstance();
@@ -200,22 +202,22 @@ public class CustomerController implements Initializable {
         CategoryChoiceBox.getItems().add("all");
         CategoryChoiceBox.setValue("Default Transaction");
         TransactionHistoryCategoryChoiceBox.getItems().addAll(CategoryChoiceBox.getItems());
-        welcomeNameLabel.setText(logic.getCustomer().getName().split(" ")[0] + "!");        
+        welcomeNameLabel.setText(logic.getCustomer().getName().split(" ")[0] + "!");
         lastLoginLabel.setText("Your last login was: " + logic.lastLogin());
         watch.setDaemon(true);
         watch.start();
         movewatch.setDaemon(true);
         movewatch.start();
     }
-    
+
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
-        
+
         if (event.getSource() == TransferButton) {
             clearPanes();
             NewTransferAnchorPane.toFront();
             NewTransferAnchorPane.setVisible(true);
-            
+
             if (TransactionBankIDChoiceBox.getItems().isEmpty()) {
                 String bankid[] = logic.getCustomer().getBankID().split(";");
                 for (int i = 0; i < bankid.length; i++) {
@@ -270,37 +272,47 @@ public class CustomerController implements Initializable {
                     getTransactionHistory();
                 }
             }
-            
-            
+
         }
     }
-    
+
     private void setAccountBalance() {
-        AccountBalanceLabel.setText(logic.getAccountBalance(AccountsDropdown.getValue()) + " DKK");
+        int amount = logic.getAccountBalance(AccountsDropdown.getValue());
+        StringBuilder sb = new StringBuilder();
+        sb.append(amount);
+        if (sb.length() == 2) {
+            sb.insert(0, "0,");
+        } else if (sb.length() == 1) {
+            sb.insert(0, "0,0");
+        } else {
+            sb.insert(sb.length() - 2, ",");
+        }
+        AccountBalanceLabel.setText(sb.toString() + " DKK");
     }
-    
+
     private void clearPanes() {
         NewTransferAnchorPane.setVisible(false);
         AccountsAnchorPane.setVisible(false);
         OptionAnchorPane.setVisible(false);
         ProfileAnchor.setVisible(false);
         clearContact();
-        ContactAnchor.setVisible(false);        
-        lastLoginLabel.setVisible(false);WelcomeAnchorPane.setVisible(false);
+        ContactAnchor.setVisible(false);
+        lastLoginLabel.setVisible(false);
+        WelcomeAnchorPane.setVisible(false);
     }
-    
+
     private void clearContact() {
         ContactSubjectField.clear();
         ContactTextArea.clear();
         ContactErrorLabel.setText("");
         CreateBankAccountSucceslabel.setText("");
-        
+
     }
-    
+
     private String storeCustomerInfo(String name, String phoneNo, String address, String email) {
         return logic.toProtocol03(name, phoneNo, address, email);
     }
-    
+
     @FXML
     private void storeCustomerInfoButtonHandler(javafx.event.ActionEvent event) {
         String firstName = NameField.getText();
@@ -330,7 +342,7 @@ public class CustomerController implements Initializable {
             SaveButton.setVisible(false);
         }
     }
-    
+
     @FXML
     private void EditEnableButtonHandler(javafx.event.ActionEvent event) {
         NameField.setDisable(false);
@@ -341,7 +353,7 @@ public class CustomerController implements Initializable {
         CancelEditButton.setVisible(true);
         SaveButton.setVisible(true);
     }
-    
+
     @FXML
     private void CancelEditButtonHandler(javafx.event.ActionEvent event) {
         CancelEditButton.setVisible(false);
@@ -353,7 +365,7 @@ public class CustomerController implements Initializable {
         EmailField.setDisable(true);
         RestoreInfoInFields();
     }
-    
+
     private void RestoreInfoInFields() {
         NameField.setText(logic.getCustomer().getName().split(" ")[0]);
         LastNameField.setText(logic.getCustomer().getName().split(" ")[1]);
@@ -361,7 +373,7 @@ public class CustomerController implements Initializable {
         AddressField.setText(logic.getCustomer().getAddress());
         EmailField.setText(logic.getCustomer().getEmail());
     }
-    
+
     @FXML
     private void proceedTransfer() {
         TransactionOverallMessageLabel.setText("");
@@ -376,8 +388,7 @@ public class CustomerController implements Initializable {
             AmountErrorLabel.setText("Please enter an amount in the amount textfield");
         } else if (AccountField.getText().trim().isEmpty() || RegField.getText().trim().isEmpty()) {
             AccountErrorLabel.setText("Please enter both the account number and regnumber");
-        } 
-        else if (bankID.equals(senderBankID)) {
+        } else if (bankID.equals(senderBankID)) {
             AccountErrorLabel.setText("You cannot send money to the same account");
         } else if (checkAmount(amount)) {
             AmountErrorLabel.setText("Please input a number");
@@ -401,7 +412,7 @@ public class CustomerController implements Initializable {
             }
         }
     }
-    
+
     @FXML
     private void CancelTransfer(ActionEvent event
     ) {
@@ -410,7 +421,7 @@ public class CustomerController implements Initializable {
         ConfirmPasswordField.setVisible(false);
         defreezeInputTransaction();
     }
-    
+
     @FXML
     private void transfer(ActionEvent event) {
         AmountErrorLabel.setText("");
@@ -458,7 +469,7 @@ public class CustomerController implements Initializable {
         String accountID = AccountsDropdown.getValue();
         TransactionHistoryListView.getItems().clear();
         String category = TransactionHistoryCategoryChoiceBox.getValue();
-        if(category != null && category.equals("all")){
+        if (category != null && category.equals("all")) {
             category = "null";
         }
         String data[] = logic.getTransactionHistory(accountID, category).split(";");
@@ -466,7 +477,7 @@ public class CustomerController implements Initializable {
             TransactionHistoryListView.getItems().add(data[i]);
         }
     }
-    
+
     private boolean containsInvalidInput(String stringToCheck) {
         char[] charArrayToCheck = stringToCheck.toCharArray();
         for (char c : charArrayToCheck) {
@@ -476,7 +487,7 @@ public class CustomerController implements Initializable {
         }
         return false;
     }
-    
+
     @FXML
     private void cleanInputFields(ActionEvent event) {
         AccountField.clear();
@@ -490,7 +501,7 @@ public class CustomerController implements Initializable {
         ConfirmPasswordField.setText("");
         CreateBankAccountSucceslabel.setText("");
     }
-    
+
     @FXML
     private void changePassword() {
         //Check for illegal characters and compare the two passwords
@@ -545,7 +556,7 @@ public class CustomerController implements Initializable {
         newPasswordField.clear();
         repeatPasswordField.clear();
     }
-    
+
     @FXML
     private void sendBankMail() {
         if (ContactSubjectField.getText().equalsIgnoreCase("")) {
@@ -562,39 +573,36 @@ public class CustomerController implements Initializable {
             ContactTextArea.clear();
         }
     }
-    
+
     @FXML
     private void cancelBankMail() {
         ContactSubjectField.clear();
         ContactTextArea.clear();
     }
-    
+
     @FXML
-    private void openBankAccount(){
+    private void openBankAccount() {
         System.out.println(AccountsDropdown.getItems().size());
 
         if (AccountsDropdown.getItems().size() == 10) {
             CreateBankAccountSucceslabel.setText("Max bank accounts");
-            
-        }
-        else {
 
-        String message = logic.openBankAccount();
-        CreateBankAccountSucceslabel.setText(message);
-        AccountsDropdown.getItems().clear();
-        if (AccountsDropdown.getItems().isEmpty()) {
+        } else {
+
+            String message = logic.openBankAccount();
+            CreateBankAccountSucceslabel.setText(message);
+            AccountsDropdown.getItems().clear();
+            if (AccountsDropdown.getItems().isEmpty()) {
 
                 String bankid[] = logic.getCustomer().getBankID().split(";");
                 for (int i = 0; i < bankid.length; i++) {
                     AccountsDropdown.getItems().addAll(bankid[i]);
-                   
+
                 }
             }
         }
-    }   
-            
+    }
 
-    
     private String makeInt(String text) {
         int commaPos = text.indexOf(",");
         if (commaPos == 0) {
@@ -618,9 +626,9 @@ public class CustomerController implements Initializable {
             return "Amount is too large. Please contact bank";
         }
         return text;
-        
+
     }
-    
+
     private boolean checkAmount(String amount) {
         char[] charArrayToCheck = amount.toCharArray();
         int commaCount = 0;
@@ -638,49 +646,47 @@ public class CustomerController implements Initializable {
         }
         return false;
     }
-    
+
     private void freezeInputTransaction() {
         AmountField.setEditable(false);
         AccountField.setEditable(false);
         RegField.setEditable(false);
         MessageArea.setEditable(false);
     }
-    
+
     private void defreezeInputTransaction() {
         AmountField.setEditable(true);
         AccountField.setEditable(true);
         RegField.setEditable(true);
         MessageArea.setEditable(true);
     }
-    
 
-     Thread watch = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                try{
-                        while (true) {                        
-                            Platform.runLater(new Runnable() {
+    Thread watch = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+                while (true) {
+                    Platform.runLater(new Runnable() {
 
-                                @Override
-                                public void run() {
-                                    Date date = new Date();
-                                    //dateFormat.getCalendar().ge
-                                    CustomerWatchLabel.setText(dateFormat.format(date));
-                                    
-                                    
-                                }
-                            });
-                            Thread.sleep(500);
-                    }
-                    } catch(InterruptedException ex){
-                        ex.printStackTrace();
-                        
-                    }
-                
+                        @Override
+                        public void run() {
+                            Date date = new Date();
+                            //dateFormat.getCalendar().ge
+                            CustomerWatchLabel.setText(dateFormat.format(date));
+
+                        }
+                    });
+                    Thread.sleep(500);
+                }
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+
             }
-        });
-     //MUST NOT BE DELETED
-   Paint paint = new Paint() {
+
+        }
+    });
+    //MUST NOT BE DELETED
+    Paint paint = new Paint() {
 
         @Override
         public PaintContext createContext(ColorModel cm, Rectangle rctngl, Rectangle2D rd, AffineTransform at, RenderingHints rh) {
@@ -693,58 +699,55 @@ public class CustomerController implements Initializable {
         }
     };
     boolean testwatch = true;
-    Thread movewatch = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                try{
-                    
-                        while (true) {                        
-                            Platform.runLater(new Runnable() {
-                            double xpos;
-                            
-                            
-                                @Override
-                                public void run() {
-                                    double furthestx = 292 - CustomerWatchLabel.getWidth();
-                                    
-                                    if (testwatch == false) {
-                                        xpos = CustomerWatchLabel.getLayoutX() - 1;
-                                        CustomerWatchLabel.setLayoutX(xpos);
-                                        
-                                        if (CustomerWatchLabel.getLayoutX() == 0) {
-                                            testwatch = true;
-                                            CustomerWatchLabel.setTextFill(javafx.scene.paint.Paint.valueOf(randomColor()));
-                                        }
-                                    }
-                                    else if (testwatch == true) {
-                                       
-                                       xpos = CustomerWatchLabel.getLayoutX() + 1;
-                                       CustomerWatchLabel.setLayoutX(xpos);
-                                       
-                                       if (furthestx <= CustomerWatchLabel.getLayoutX()) {
-                                            testwatch = false;
-                                            CustomerWatchLabel.setTextFill(javafx.scene.paint.Paint.valueOf(randomColor()));
-                                        }  
-                                        
-                                    }
-                                    
-                                    else
-                                    CustomerWatchLabel.setLayoutX(xpos);
-                                    
+    Thread movewatch = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+
+                while (true) {
+                    Platform.runLater(new Runnable() {
+                        double xpos;
+
+                        @Override
+                        public void run() {
+                            double furthestx = 292 - CustomerWatchLabel.getWidth();
+
+                            if (testwatch == false) {
+                                xpos = CustomerWatchLabel.getLayoutX() - 1;
+                                CustomerWatchLabel.setLayoutX(xpos);
+
+                                if (CustomerWatchLabel.getLayoutX() == 0) {
+                                    testwatch = true;
+                                    CustomerWatchLabel.setTextFill(javafx.scene.paint.Paint.valueOf(randomColor()));
                                 }
-                            });
-                            Thread.sleep(37);
-                    }
-                    } catch(InterruptedException ex){
-                        ex.printStackTrace();
-                        
-                    }
-                
+                            } else if (testwatch == true) {
+
+                                xpos = CustomerWatchLabel.getLayoutX() + 1;
+                                CustomerWatchLabel.setLayoutX(xpos);
+
+                                if (furthestx <= CustomerWatchLabel.getLayoutX()) {
+                                    testwatch = false;
+                                    CustomerWatchLabel.setTextFill(javafx.scene.paint.Paint.valueOf(randomColor()));
+                                }
+
+                            } else {
+                                CustomerWatchLabel.setLayoutX(xpos);
+                            }
+
+                        }
+                    });
+                    Thread.sleep(37);
+                }
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+
             }
-        });
-    
-    private String randomColor(){
-        
+
+        }
+    });
+
+    private String randomColor() {
+
         // create random object - reuse this as often as possible
         Random random = new Random();
 
@@ -755,10 +758,9 @@ public class CustomerController implements Initializable {
         String colorCode = String.format("#%06x", nextInt);
 
         return colorCode;
-    
+
     }
 
-   
     private void displayName() {
         String[] name = logic.getCustomer().getName().split(" ");
         String firstName = "";
@@ -768,7 +770,7 @@ public class CustomerController implements Initializable {
         NameField.setText(firstName);
         LastNameField.setText(logic.getCustomer().getName().split(" ")[name.length - 1]);
     }
-    
+
     private void getBankIDs() {
         if (AccountsDropdown.getItems().isEmpty()) {
             String bankid[] = logic.getCustomer().getBankID().split(";");
@@ -782,18 +784,16 @@ public class CustomerController implements Initializable {
     @FXML
     private void ChangeCategoryButtonHandler(ActionEvent event) {
         int i = TransactionHistoryListView.selectionModelProperty().get().getSelectedIndex();
-        if(i == -1 || TransactionHistoryCategoryChoiceBox.getValue() == null){
+        if (i == -1 || TransactionHistoryCategoryChoiceBox.getValue() == null) {
             ErrorLabelShowTransactionHistory.setText("Select transaction by clicking to change please. And please select a category");
-        }
-        else{
-        String category = TransactionHistoryCategoryChoiceBox.getValue();
-        String accountNo = AccountsDropdown.getValue();
-        String transaction = TransactionHistoryListView.getItems().get(i);
-        String transactionFixed = transaction.trim().replaceAll(" +", " ");
-        String[] date = transactionFixed.split(" ");
-        String dateToSend = date[2] + " " + date[3];
-        logic.changeTransactionCategory(accountNo, category, dateToSend);
+        } else {
+            String category = TransactionHistoryCategoryChoiceBox.getValue();
+            String accountNo = AccountsDropdown.getValue();
+            String transaction = TransactionHistoryListView.getItems().get(i);
+            String transactionFixed = transaction.trim().replaceAll(" +", " ");
+            String[] date = transactionFixed.split(" ");
+            String dateToSend = date[2] + " " + date[3];
+            logic.changeTransactionCategory(accountNo, category, dateToSend);
         }
     }
 }
-
